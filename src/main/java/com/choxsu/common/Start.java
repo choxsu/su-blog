@@ -3,7 +3,6 @@ package com.choxsu.common;
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
 import com.choxsu.common.entity.MapperKit;
-import com.choxsu.controller.IndexController;
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;
 import com.jfinal.json.MixedJsonFactory;
@@ -13,6 +12,8 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.template.Engine;
 import com.jfinal.template.source.ClassPathSourceFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 
@@ -26,6 +27,7 @@ public class Start extends JFinalConfig {
      */
     private static Prop p = PropKit.use("sblog_config_dev.txt")
             .appendIfExists("sblog_config_pro.txt");
+    private static final Logger logger = LoggerFactory.getLogger(Start.class);
 
     private WallFilter wallFilter;
 
@@ -85,6 +87,12 @@ public class Start extends JFinalConfig {
      * 抽取成独立的方法，例于 _Generator 中重用该方法，减少代码冗余
      */
     public static DruidPlugin getDruidPlugin() {
-        return new DruidPlugin(p.get("jdbcUrlClub"), p.get("userClub"), p.get("passwordClub").trim());
+        String url = p.get("jdbcUrl");
+        String user = p.get("user");
+        String password = p.get("password").trim();
+        logger.info("============================================================");
+        logger.info("url:{}\nuser:{}\npassword:{}",url,user,password);
+        logger.info("============================================================");
+        return new DruidPlugin(url, user, password);
     }
 }

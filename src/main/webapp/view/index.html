@@ -63,8 +63,10 @@
 						</form>
 					</div>
 					<div class="tags">
-						<a href='http://www.powerxing.com/tag/php/' class='tag-link-66 tag-link-position-1' title='11个话题' style='font-size: 18px;'>PHP</a>
-						<a href='http://www.powerxing.com/tag/%e6%8e%92%e5%ba%8f%e7%ae%97%e6%b3%95/' class='tag-link-17 tag-link-position-2' title='2个话题' style='font-size: 13.384615384615px;'>排序算法</a>
+						#for(r : tags)
+							<a href='/tags/#(r.id)' class='tag-link-66 tag-link-position-1' title='11个话题' style='font-size: 18px;'>#(r.name)</a>
+						#end
+						<!--<a href='http://www.powerxing.com/tag/%e6%8e%92%e5%ba%8f%e7%ae%97%e6%b3%95/' class='tag-link-17 tag-link-position-2' title='2个话题' style='font-size: 13.384615384615px;'>排序算法</a>
 						<a href='http://www.powerxing.com/tag/%e7%94%b5%e5%bd%b1%e5%8e%9f%e5%a3%b0/' class='tag-link-51 tag-link-position-3' title='2个话题' style='font-size: 13.384615384615px;'>电影原声</a>
 						<a href='http://www.powerxing.com/tag/app/' class='tag-link-23 tag-link-position-4' title='1个话题' style='font-size: 12px;'>APP</a>
 						<a href='http://www.powerxing.com/tag/%e6%95%b0%e6%8d%ae%e5%ba%93/' class='tag-link-18 tag-link-position-5' title='2个话题' style='font-size: 13.384615384615px;'>数据库</a>
@@ -93,7 +95,7 @@
 						<a href='http://www.powerxing.com/tag/%e6%95%88%e7%8e%87/' class='tag-link-16 tag-link-position-28' title='4个话题' style='font-size: 15.076923076923px;'>效率</a>
 						<a href='http://www.powerxing.com/tag/datepicker/' class='tag-link-62 tag-link-position-29' title='2个话题' style='font-size: 13.384615384615px;'>Datepicker</a>
 						<a href='http://www.powerxing.com/tag/%e9%92%a2%e7%90%b4%e6%9b%b2/' class='tag-link-43 tag-link-position-30' title='3个话题' style='font-size: 14.307692307692px;'>钢琴曲</a>
-					</div>
+					--></div>
 				</div>
 				
 				<div class="col-sm-9 site-main">

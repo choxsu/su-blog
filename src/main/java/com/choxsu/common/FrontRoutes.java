@@ -14,7 +14,7 @@
 
 package com.choxsu.common;
 
-import com.choxsu.controller.IndexController;
+import com.choxsu.index.IndexController;
 import com.jfinal.config.Routes;
 
 /**
