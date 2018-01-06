@@ -10,6 +10,7 @@ import com.jfinal.kit.Prop;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
+import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.template.Engine;
 import com.jfinal.template.source.ClassPathSourceFactory;
 import org.slf4j.Logger;
@@ -51,7 +52,9 @@ public class Start extends JFinalConfig {
     }
     @Override
     public void configEngine(Engine me) {
-
+        me.setDevMode(p.getBoolean("engineDevMode", false));
+        me.addSharedFunction("/view/common/layout.html");
+        me.addSharedFunction("/view/common/paginate.html");
     }
     @Override
     public void configPlugin(Plugins me) {
@@ -70,6 +73,8 @@ public class Start extends JFinalConfig {
         arp.getEngine().setSourceFactory(new ClassPathSourceFactory());
         arp.addSqlTemplate("/sql/all_sqls.sql");
         me.add(arp);
+
+        me.add(new EhCachePlugin());
 
 
     }

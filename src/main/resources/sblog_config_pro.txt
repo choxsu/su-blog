@@ -1,9 +1,0 @@
-### 开发模式
-devMode=false
-engineDevMode=false
-
-### 数据库连接信息
-jdbcUrl=jdbc:mysql://127.0.0.1:3306/sblog?characterEncoding=utf8&useSSL=false
-user=root
-password=root
-

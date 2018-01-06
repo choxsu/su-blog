@@ -1,0 +1,43 @@
+### 分页模板函数，三个参数含义分别为：当前页、总页数，分页前方的链接
+### 具体用法在 jfinal-club 中有很多
+#define paginate(currentPage, totalPage, link)
+
+#if(totalPage < 2 || currentPage > totalPage)
+	#return
+#end
+
+#setLocal(startPage = currentPage - 3)
+#if(startPage < 1)
+	#setLocal(startPage = 1)
+#end
+
+#setLocal(endPage = currentPage + 3)
+#if(endPage > totalPage)
+	#setLocal(endPage = totalPage)
+#end
+
+<nav class="navigation paging-navigation" role="navigation">
+	<div class='wp-pagenavi'>
+	#if(currentPage > 1)
+		<a class="nextpostslink" rel="next" href="#(link)#(currentPage - 1)#(append)">«</a>
+	#end
+	#if(currentPage - 3 > 1)
+		<a class="page larger" href="#(link)1#(append)">1</a>
+	#end
+	#for(i : [startPage..endPage])
+		#if(currentPage == i)
+			<a class="page larger" style="background: #1ABC9C;" href="javascript:void(0);">#(i)</a>
+		#else
+			<a class="page larger" href="#(link)#(i)#(append)">#(i)</a>
+		#end
+	#end
+	#if(currentPage + 3 < totalPage)
+        <a class="page larger" href="#(link)#(totalPage)#(append)">#(totalPage)</a>
+	#end
+	#if(currentPage < totalPage)
+        <a class="nextpostslink" rel="next" href="#(link)#(currentPage + 1)#(append)">»</a>
+	#end
+	</div>
+</nav>
+
+#end

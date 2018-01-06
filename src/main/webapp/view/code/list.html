@@ -1,17 +1,17 @@
-﻿#set(seoTitle="ChoxSu博客社区")
+#set(seoTitle="ChoxSu博客社区")
 #@layout()
 #define main()
 <header class="archive-header">
     <h1 class="archive-title">
-        HOME
-        <small>想看的都在首页</small>
+        Code
+        <small>各式各样的代码</small>
     </h1>
 </header>
-#for(r : blogs.list)
+#for(r : result.list)
 <article id="post-62"
          class="post-62 post type-post status-publish format-standard has-post-thumbnail sticky hentry category-notes tag-hadoop">
     <header class="entry-header">
-        <h2 class="entry-title"><a href="/#(r.category)/detail/#(r.id)" rel="bookmark">#(r.title)</a></h2>
+        <h2 class="entry-title"><a href="/code/detail/#(r.id)" rel="bookmark">#(r.title)</a></h2>
     </header>
 
     <div class="entry-content">
@@ -29,7 +29,7 @@
             </time>
             <span class="cats">
                     <i class="fa fa-folder-open-o"></i>
-                    <a href="/#(r.category)/" rel="category tag">#(r.category)</a>
+                    <a href="javascript:void(0);" rel="category tag">#(r.category)</a>
                 </span>
 
             <span class="tags">
@@ -53,7 +53,4 @@
 </article>
 #end
 <!-- #post-## -->
-
-<!-- 分页 -->
-#@paginate(blogs.pageNumber, blogs.totalPage, "/")
 #end

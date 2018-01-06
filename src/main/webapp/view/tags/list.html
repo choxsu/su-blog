@@ -1,13 +1,13 @@
-﻿#set(seoTitle="ChoxSu博客社区")
+#set(seoTitle="ChoxSu | Tag | search")
 #@layout()
 #define main()
 <header class="archive-header">
     <h1 class="archive-title">
-        HOME
-        <small>想看的都在首页</small>
+        TAGS
+        <small>【#(tag.name)】相关的内容</small>
     </h1>
 </header>
-#for(r : blogs.list)
+#for(r : result.list)
 <article id="post-62"
          class="post-62 post type-post status-publish format-standard has-post-thumbnail sticky hentry category-notes tag-hadoop">
     <header class="entry-header">
@@ -28,32 +28,33 @@
             <time datetime="#date(r.createAt, 'yyyy-MM-dd HH:mm')">#date(r.createAt, "yyyy-MM-dd HH:mm")
             </time>
             <span class="cats">
-                    <i class="fa fa-folder-open-o"></i>
-                    <a href="/#(r.category)/" rel="category tag">#(r.category)</a>
-                </span>
+                <i class="fa fa-folder-open-o"></i>
+                <a href="/#(r.category)/" rel="category tag">#(r.category)</a>
+            </span>
 
             <span class="tags">
-                    <i class="fa fa-tags"></i>
-                    <a href="/tag/#(r.tagId)" rel="tag">#(r.tagName)</a>
-                </span>
+                <i class="fa fa-tags"></i>
+                <a href="/tag/#(r.tagId)" rel="tag">#(r.tagName)</a>
+            </span>
 
             <span class="comments">
-                    <i class="fa fa-eye"></i>
-                    <b>#(r.clickCount)</b>
-                </span>
+                <i class="fa fa-eye"></i>
+                <b>#(r.clickCount)</b>
+            </span>
         </div>
         <!-- .entry-meta -->
     </footer>
 </article>
 #else
-<article class="post-62 post type-post status-publish format-standard has-post-thumbnail sticky hentry category-notes tag-hadoop">
+<article
+        class="post-62 post type-post status-publish format-standard has-post-thumbnail sticky hentry category-notes tag-hadoop">
     <div style="font-size: 18px;">
-        No information was querying
+        Not any information was querying
     </div>
 </article>
 #end
 <!-- #post-## -->
-
 <!-- 分页 -->
-#@paginate(blogs.pageNumber, blogs.totalPage, "/")
+#@paginate(result.pageNumber, result.totalPage, "/tags/"+tag.id+"?p=")
+
 #end

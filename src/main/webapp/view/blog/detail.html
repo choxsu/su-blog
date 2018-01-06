@@ -1,0 +1,45 @@
+﻿#set(seoTitle="ChoxSu博客社区")
+#@layout()
+#define main()
+<!-- .entry-header -->
+<article id="post-62"
+         class="post-62 post type-post status-publish format-standard has-post-thumbnail sticky hentry category-notes tag-hadoop">
+    <header class="entry-header">
+        <h2 class="entry-title"><a href="javascript:;" rel="bookmark">#(blog.title)</a></h2>
+        <div class="entry-meta">
+            <span class="date">
+                <i title="创建时间" class="fa fa-calendar"></i>
+                <time datetime="#date(blog.createAt, 'yyyy-MM-dd HH:mm')">#date(blog.createAt, 'yyyy-MM-dd HH:mm')</time>
+                <span class="updated">
+                    <span>(updated:</span>
+                    <time class="updated" datetime="#date(blog.updateAt, 'yyyy-MM-dd HH:mm')">#date(blog.updateAt, 'yyyy-MM-dd HH:mm')</time>)
+                </span>
+            </span>
+
+            <span class="cats">
+                <i title="分类"  class="fa fa-folder-open-o"></i>
+                <a href="javascript:void(0);" rel="category tag">#(blog.category)</a>
+            </span>
+
+            <span class="tags">
+                <i title="标签" class="fa fa-tags"></i>
+                <a href="/tag/#(blog.tagId)" rel="tag">#(blog.tagName)</a>
+            </span>
+            <span class="comments">
+                <i title="点击次数" class="fa fa-eye"></i> <b>#(blog.clickCount)</b>
+            </span>
+            <hr/>
+        </div>
+    </header>
+
+    <div class="entry-content">
+        <div class="row">
+            <div class="entry-preview col-md-12">
+                #(blog.content)
+            </div>
+        </div>
+    </div>
+
+</article>
+<!-- #post-## -->
+#end

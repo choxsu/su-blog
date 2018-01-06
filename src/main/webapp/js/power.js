@@ -258,11 +258,26 @@ jQuery(document).ready(function($){
 			/* 摘要中的继续阅读，向右对齐 */
 			$('.entry-preview').find('.more-link').parent().css({'text-align': 'right', 'margin-top': '-10px'});
 		},
+		selectCurrentNav: function () {
+            var url = location.pathname, navMenus = $("#menu-primary>li");
+            if (url == '/') {
+                navMenus.eq(0).addClass("current-path");
+            } else if (!url.indexOf('/blog/')) {
+                navMenus.eq(1).addClass("current-path");
+            } else if (!url.indexOf('/favorite/')) {
+                navMenus.eq(2).addClass("current-path");
+            } else if (!url.indexOf('/code/')) {
+                navMenus.eq(3).addClass("current-path");
+            } else if (!url.indexOf('/about/')) {
+                navMenus.eq(4).addClass("current-path");
+            }
+        },
 		init: function() {
 			// this.notifyForIE();
 			this.extraCss();
 			this.codePrettify();
 			this.addTongji();
+			this.selectCurrentNav();
 		}
 	};
 
@@ -328,7 +343,7 @@ jQuery(document).ready(function($){
 		},
 		/* 返回顶部 */
 		backToTop: function() {
-			$('body').append('<div class="back-to-top" id="back-to-top" title="嗖的就上去了！"><span><i class="fa fa-chevron-up"></i></span></div>');
+			$('body').append('<div class="back-to-top" id="back-to-top" title="返回顶部！"><span><i class="fa fa-chevron-up"></i></span></div>');
 			$(window).bind("scroll", function(){
 
 				// 获取网页文档对象滚动条的垂直偏移
@@ -356,22 +371,20 @@ jQuery(document).ready(function($){
 		/* 打赏作者 */
 		dashang: function() {
 			var html = '<div style="border-top: 1px dashed #DDD; padding: 10px 0 0; margin-top: 15px;">' +
-						'<p style="text-align: center;"><img src="http://www.powerxing.com/wp-content/themes/power/images/dashang-2.png"></p>' +
+						'<p style="text-align: center;"><img src=""></p>' +
 						'<p style="text-align: center;">文章很给力？微信扫一扫给作者打赏2元 :)<br/>' +
 						'<a href="http://www.powerxing.com/sponsor/" target="_blank" style="font-size: 13px;">~感谢赞助者~</a></p>' +
 						'</div>';
 			$('.entry-footer').prepend(html);
 		},
 		init: function() {
-			if ($('body').hasClass('single-post')) {
-				this.goToHash();
+			// this.goToHash();
 
-				this.bindFold();
+			this.bindFold();
 
-				this.ajaxCount();
-				this.backToTop();
-				this.dashang();
-			}
+			// this.ajaxCount();
+			this.backToTop();
+			// this.dashang();
 		}
 	};
 
@@ -384,7 +397,7 @@ jQuery(document).ready(function($){
 			}
 		},
 		init: function() {
-			// this.bigDataBook();
+			this.bigDataBook();
 		}
 	}
 
