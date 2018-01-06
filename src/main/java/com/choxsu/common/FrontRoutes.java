@@ -44,7 +44,7 @@ public class FrontRoutes extends Routes {
         add("/code", CodeController.class, "/code");
         add("/about", AboutController.class, "/about");
 
-        add("/tags", TagsController.class, "/tags");
+        add("/tag", TagsController.class, "/tags");
         add("/search", SearchController.class, "/search");
     }
 }

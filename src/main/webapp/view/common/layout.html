@@ -25,7 +25,7 @@
         <div class="col-sm-3 site-infos">
             <div class="site-avator"></div>
             <h1 class="site-title">
-                <a href="/" title="ChoxSu" rel="home">ChoxSu</a>
+                <a href="javascript:;" title="ChoxSu" rel="home">ChoxSu</a>
             </h1>
             <div class="site-description">JAVA Developer</div>
 
@@ -64,10 +64,10 @@
             <div class="tags">
                 #for(r : tags)
                 #if(r.name == "JAVA" || r.name == "Jfinal" )
-                <a href='/tags/#(r.id)' class='tag-link-#(for.index + 20) tag-link-position-#(for.index)' title='0个话题'
+                <a href='/tag/#(r.id)' class='tag-link-#(for.index + 20) tag-link-position-#(for.index)' title='0个话题'
                    style="font-size: 18px;">#(r.name)</a>
                 #else
-                <a href='/tags/#(r.id)' class='tag-link-#(for.index) tag-link-position-#(for.index)' title='0个话题'
+                <a href='/tag/#(r.id)' class='tag-link-#(for.index) tag-link-position-#(for.index)' title='0个话题'
                    style="font-size: 14px;">#(r.name)</a>
                 #end
                 #end
