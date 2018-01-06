@@ -64,10 +64,10 @@
             <div class="tags">
                 #for(r : tags)
                 #if(r.name == "JAVA" || r.name == "Jfinal" )
-                <a href='/tag/#(r.id)' class='tag-link-#(for.index + 20) tag-link-position-#(for.index)' title='0个话题'
+                <a href='/tag/#(r.id)' class='tag-link-#(for.index + 20) tag-link-position-#(for.index)' title='#(r.topicNum)个话题'
                    style="font-size: 18px;">#(r.name)</a>
                 #else
-                <a href='/tag/#(r.id)' class='tag-link-#(for.index) tag-link-position-#(for.index)' title='0个话题'
+                <a href='/tag/#(r.id)' class='tag-link-#(for.index) tag-link-position-#(for.index)' title='#(r.topicNum)个话题'
                    style="font-size: 14px;">#(r.name)</a>
                 #end
                 #end

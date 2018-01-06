@@ -50,12 +50,13 @@ public class IndexService {
 
     /**
      * 博客记录，列表字段处理
+     *
      * @param result
      */
     public void filedHandle(Page<Record> result) {
         result.getList().forEach(s -> {
             String category = s.getStr("category");
-            if (!Objects.equals(category, CategoryEnum.ABOUT.getName())){
+            if (!Objects.equals(category, CategoryEnum.ABOUT.getName())) {
                 s.set("content", JsoupFilter.getText(s.get("content"), 320));
             }
             Integer tagId = s.getInt("tagId");
@@ -96,5 +97,14 @@ public class IndexService {
         Record record = Db.findById("blog_category", categoryId);
         String name = record.getStr("name");
         s.set("categoryName", name);
+    }
+
+    public void addTopicNum(List<Record> tags) {
+        tags.forEach(record -> {
+            Integer tagId = record.getInt("id");
+            Record first = Db.findFirst("select count(0) as t from blog where tag_id = ?", tagId);
+            Long t = first.getLong("t");
+            record.set("topicNum", t);
+        });
     }
 }

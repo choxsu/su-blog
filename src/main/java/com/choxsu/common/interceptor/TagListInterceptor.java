@@ -24,6 +24,7 @@ public class TagListInterceptor implements Interceptor {
         inv.invoke();
 
         List<Record> tags = indexService.findBlogTags();
+        indexService.addTopicNum(tags);
         c.setAttr("tags", tags);
     }
 }
