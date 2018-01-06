@@ -34,7 +34,7 @@ public class Start extends JFinalConfig {
 
 
     public static void main(String[] args) {
-
+        System.out.println("=============");
         JFinal.start("src/main/webapp",8080,"/");
 
     }
@@ -47,17 +47,20 @@ public class Start extends JFinalConfig {
 
     @Override
     public void configRoute(Routes me) {
+        System.out.println("初始化路由");
         me.add(new FrontRoutes());
         me.add(new AdminRoutes());
     }
     @Override
     public void configEngine(Engine me) {
+        System.out.println("初始化模板引擎");
         me.setDevMode(p.getBoolean("engineDevMode", false));
         me.addSharedFunction("/view/common/layout.html");
         me.addSharedFunction("/view/common/paginate.html");
     }
     @Override
     public void configPlugin(Plugins me) {
+        System.out.println("初始化插件");
         DruidPlugin druidPlugin = getDruidPlugin();
         // 加强数据库安全
         wallFilter = new WallFilter();
@@ -80,11 +83,11 @@ public class Start extends JFinalConfig {
     }
     @Override
     public void configInterceptor(Interceptors me) {
-
+        System.out.println("初始化拦截器");
     }
     @Override
     public void configHandler(Handlers me) {
-
+        System.out.println("初始化handler");
     }
 
 

@@ -1,6 +1,5 @@
 package com.choxsu.search;
 
-import com.choxsu.common.BaseController;
 import com.choxsu.index.IndexService;
 import com.jfinal.kit.Kv;
 import com.jfinal.kit.StrKit;
@@ -20,7 +19,7 @@ public class SearchService {
 
     public Page<Record> search(Integer pageNumber, Integer pageSize, String keyword) {
         if (StrKit.isBlank(keyword)) {
-            return new Page<>();
+            return new Page<Record>();
         }
         Kv kv = Kv.create();
         kv.put("keyword", keyword);
@@ -35,10 +34,10 @@ public class SearchService {
             sqlPara = Db.getSqlPara("blog.searchList", kv);
             list = Db.find(sqlPara);
         } else {
-            list = new ArrayList<>();
+            list = new ArrayList<Record>();
         }
 
-        Page<Record> page = new Page<>(list, pageNumber, pageSize, (int) (t / pageSize), t.intValue());
+        Page<Record> page = new Page<Record>(list, pageNumber, pageSize, (int) (t / pageSize), t.intValue());
         IndexService.me.filedHandle(page);
         return page;
     }

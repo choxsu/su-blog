@@ -137,7 +137,7 @@ body.tag {
     border: 1px solid #eee;
 }
 .entry-preview {
-	padding-left: 0px;
+	padding-left: 16px;
 }
 .entry-preview h3 {
 	margin-top: 0;
