@@ -320,19 +320,7 @@ jQuery(document).ready(function($){
 
 		/* 显示访问量 */
 		ajaxCount: function() {
-			var siteUrl = 'http://www.powerxing.com/';
-			var postId = null;
-			var c = document.getElementsByTagName('body')[0].className;
-			if (c) postId = c.match(/postid-([\d]+)/)[1];
-			postId = parseInt(postId);
-			if (!postId) return false;
 
-			$.ajax({
-				url: siteUrl + "wp-content/plugins/ajax-hits-counter/increment-hits.rapid.php?post_id=" + postId + "&t=" + (parseInt(new Date().getTime())),
-				cache: false
-			}).done(function( data ) {
-				$( "#views" ).html( '<i class="fa fa-eye"></i> ' + data );
-			});
 		},
 		/* 返回顶部 */
 		backToTop: function() {
