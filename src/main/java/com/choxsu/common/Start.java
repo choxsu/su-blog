@@ -3,6 +3,7 @@ package com.choxsu.common;
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
 import com.choxsu.common.entity.MapperKit;
+import com.choxsu.common.interceptor.VisitorInterceptor;
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;
 import com.jfinal.json.MixedJsonFactory;
@@ -34,7 +35,6 @@ public class Start extends JFinalConfig {
 
 
     public static void main(String[] args) {
-        System.out.println("=============");
         JFinal.start("src/main/webapp",8080,"/");
 
     }
@@ -84,6 +84,7 @@ public class Start extends JFinalConfig {
     @Override
     public void configInterceptor(Interceptors me) {
         System.out.println("初始化拦截器");
+        me.add(new VisitorInterceptor());
     }
     @Override
     public void configHandler(Handlers me) {
