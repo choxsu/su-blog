@@ -20,18 +20,19 @@ public class VisitorInterceptor implements Interceptor {
         //将用户访问信息保存到数据库
         Controller c = inv.getController();
         HttpServletRequest request = c.getRequest();
-        System.out.println(request.getRequestURL().toString());
         String url = request.getRequestURL().toString();
         String ip = IpKit.getRealIp(request);
         String method = request.getMethod();
         String userAgent = request.getHeader("user-agent");
         Record record = new Record();
         record.set("ip", ip);
+        System.out.println("请求ip:"+ip);
         record.set("url", url);
         record.set("method",  method);
         record.set("client", userAgent);
         record.set("requestTime", new Date());
-        Db.save("visitor", record);
+        boolean b = Db.save("visitor", record);
+        System.out.println("保存后返回的结果：" + b);
         inv.invoke();
     }
 

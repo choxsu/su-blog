@@ -69,18 +69,11 @@ jQuery(document).ready(function($){
 		 * 添加百度统计
 		 */
 		addTongji: function() {
-			// var hm = document.createElement("script");
-			// hm.src = "//hm.baidu.com/hm.js?dc9170d69ef95909ca13d9b5f0c98c71";
-			// var s = document.getElementsByTagName("script")[0];
-			// s.parentNode.insertBefore(hm, s);
-            //
-			// var c = document.getElementsByTagName('body')[0].className;
-			// if (c && c.match(/postid-([\d]+)/)[0] == '62') {
-			// 	var cnzz = document.createElement("script");
-			// 	cnzz.src = "//s4.cnzz.com/z_stat.php?id=1258992124&web_id=1258992124";
-			// 	s = document.getElementsByTagName("script")[0];
-			// 	s.parentNode.insertBefore(cnzz, s);
-			// }
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62495b8b72cb64d79b969def710402ec";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+
 		},
 		/*
 		 * 代码高亮的工具栏
