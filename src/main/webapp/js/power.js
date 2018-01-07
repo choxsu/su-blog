@@ -354,7 +354,7 @@ jQuery(document).ready(function($){
 			var html = '<div style="border-top: 1px dashed #DDD; padding: 10px 0 0; margin-top: 15px;">' +
 						'<p style="text-align: center;"><img src=""></p>' +
 						'<p style="text-align: center;">文章很给力？微信扫一扫给作者打赏2元 :)<br/>' +
-						'<a href="http://www.powerxing.com/sponsor/" target="_blank" style="font-size: 13px;">~感谢赞助者~</a></p>' +
+						'<a href="http://b.styg.site/sponsor/" target="_blank" style="font-size: 13px;">~感谢赞助者~</a></p>' +
 						'</div>';
 			$('.entry-footer').prepend(html);
 		},
@@ -373,7 +373,7 @@ jQuery(document).ready(function($){
 		/* 显示大数据书籍的广告 */
 		bigDataBook: function() {
 			if ($('body').hasClass('postid-62') || $('body').hasClass('postid-63')) {
-				var html = '<div class="bigdata-book" style="margin-bottom:14px"><a href="http://dblab.xmu.edu.cn/post/bigdata/" title="大数据技术原理与应用" target="_blank"><img src="http://www.powerxing.com/other/bigdata-poster.png" alt="大数据技术原理与应用" style="border: solid 1px #3895CE !important"></a></div>';
+				var html = '<div class="bigdata-book" style="margin-bottom:14px"><a href="http://dblab.xmu.edu.cn/post/bigdata/" title="大数据技术原理与应用" target="_blank"><img src="http://b.styg.site/other/bigdata-poster.png" alt="大数据技术原理与应用" style="border: solid 1px #3895CE !important"></a></div>';
 				$('.entry-content').prepend(html);
 			}
 		},
