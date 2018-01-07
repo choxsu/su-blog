@@ -48,8 +48,8 @@ INSERT INTO `blog` VALUES (5, NULL, 'ActiveRecordPlugin', '<p>\r\n    在写分�
 -- ----------------------------
 -- Table structure for blog_account
 -- ----------------------------
-DROP TABLE IF EXISTS `blog_account`;
-CREATE TABLE `blog_account`  (
+DROP TABLE IF EXISTS `account`;
+CREATE TABLE `account`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `nickName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '昵称',
   `userName` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户名',
