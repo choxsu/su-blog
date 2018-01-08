@@ -26,16 +26,16 @@ import java.util.regex.Pattern;
  */
 public class DruidFilterHandler extends Handler {
 
-	private String contain;
+	private String regex;
 
-	public DruidFilterHandler(String contain) {
-		this.contain = contain;
+	public DruidFilterHandler(String regex) {
+		this.regex = regex;
 	}
 
 	@Override
 	public void handle(String target, HttpServletRequest request, HttpServletResponse response, boolean[] isHandled) {
-		System.out.println(target	);
-		Pattern pattern = Pattern.compile(contain);
+		assert regex != null;
+		Pattern pattern = Pattern.compile(regex);
 		if (pattern.matcher(target).find()){
 			return;
 		}

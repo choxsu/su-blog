@@ -13,6 +13,5 @@ import javax.servlet.annotation.WebServlet;
  * @date 2018/01/08 12:41
  */
 public class DruidServlet extends StatViewServlet {
-    private static final long serialVersionUID = 1L;
 
 }

@@ -72,11 +72,11 @@ public class DruidKit {
 
     /**
      * 获取过滤字段
-     * @param contain
+     * @param regex
      * @return
      */
-    public static Handler getFilterHandler(String contain) {
+    public static Handler getFilterHandler(String regex) {
 
-        return new DruidFilterHandler(contain);
+        return new DruidFilterHandler(regex);
     }
 }
