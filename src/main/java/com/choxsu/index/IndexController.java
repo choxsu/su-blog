@@ -17,7 +17,16 @@ public class IndexController extends BaseController {
     private static final IndexService indexService = Enhancer.enhance(IndexService.class);
 
     public void index() {
-        int page = getParaToInt(0, 1);
+        int page;
+
+        String p = getPara(0);
+
+        try {
+            page = Integer.parseInt(p);
+        }catch (Exception e){
+            page = 1;
+        }
+
         Page<Record> blogPage = indexService.findBlogs(page);
         setAttr("blogs", blogPage);
 

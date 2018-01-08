@@ -93,7 +93,7 @@ public class Start extends JFinalConfig {
     @Override
     public void configHandler(Handlers me) {
         System.out.println("初始化handler");
-        me.add(DruidKit.getFilterHandler("/assets/druid/"));
+        me.add(DruidKit.getFilterHandler("/druid"));
 
     }
 

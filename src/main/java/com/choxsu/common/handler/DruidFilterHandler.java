@@ -19,6 +19,7 @@ import com.jfinal.handler.Handler;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 /**
  * @author choxsu
@@ -33,7 +34,9 @@ public class DruidFilterHandler extends Handler {
 
 	@Override
 	public void handle(String target, HttpServletRequest request, HttpServletResponse response, boolean[] isHandled) {
-		if ("/druid/login.html".equals(target) || target.contains(contain)){
+		System.out.println(target	);
+		Pattern pattern = Pattern.compile(contain);
+		if (pattern.matcher(target).find()){
 			return;
 		}
 		next.handle(target, request, response, isHandled);

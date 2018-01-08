@@ -2,6 +2,7 @@ package com.choxsu.common.druid;
 
 import com.alibaba.druid.support.http.StatViewServlet;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 
@@ -13,6 +14,5 @@ import javax.servlet.annotation.WebServlet;
  */
 public class DruidServlet extends StatViewServlet {
     private static final long serialVersionUID = 1L;
-
 
 }
