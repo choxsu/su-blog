@@ -4,20 +4,22 @@ import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
 import com.choxsu.common.entity.MapperKit;
 import com.choxsu.common.interceptor.VisitorInterceptor;
+import com.choxsu.common.kit.DruidKit;
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;
+import com.jfinal.handler.Handler;
 import com.jfinal.json.MixedJsonFactory;
 import com.jfinal.kit.Prop;
 import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.template.Engine;
 import com.jfinal.template.source.ClassPathSourceFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
+import java.util.List;
 
 /**
  * @author choxsu
@@ -25,23 +27,23 @@ import java.sql.Connection;
 public class Start extends JFinalConfig {
 
     /**
-     *     先加载开发环境配置，再追加生产环境的少量配置覆盖掉开发环境配置
+     * 先加载开发环境配置，再追加生产环境的少量配置覆盖掉开发环境配置
      */
     private static Prop p = PropKit.use("sblog_config_dev.txt")
             .appendIfExists("sblog_config_pro.txt");
-    private static final Logger logger = LoggerFactory.getLogger(Start.class);
+    private static final Log logger = Log.getLog(Start.class);
 
     private WallFilter wallFilter;
 
 
     public static void main(String[] args) {
-        JFinal.start("src/main/webapp",8080,"/");
+        JFinal.start("src/main/webapp", 80, "/");
 
     }
 
     @Override
     public void configConstant(Constants me) {
-        me.setDevMode(p.getBoolean("devMode",false));
+        me.setDevMode(p.getBoolean("devMode", false));
         me.setJsonFactory(MixedJsonFactory.me());
     }
 
@@ -51,6 +53,7 @@ public class Start extends JFinalConfig {
         me.add(new FrontRoutes());
         me.add(new AdminRoutes());
     }
+
     @Override
     public void configEngine(Engine me) {
         System.out.println("初始化模板引擎");
@@ -58,6 +61,7 @@ public class Start extends JFinalConfig {
         me.addSharedFunction("/view/common/layout.html");
         me.addSharedFunction("/view/common/paginate.html");
     }
+
     @Override
     public void configPlugin(Plugins me) {
         System.out.println("初始化插件");
@@ -81,14 +85,18 @@ public class Start extends JFinalConfig {
 
 
     }
+
     @Override
     public void configInterceptor(Interceptors me) {
         System.out.println("初始化拦截器");
         me.add(new VisitorInterceptor());
     }
+
     @Override
     public void configHandler(Handlers me) {
         System.out.println("初始化handler");
+        me.add(DruidKit.getFilterHandler("/assets/druid/"));
+
     }
 
 
@@ -100,7 +108,7 @@ public class Start extends JFinalConfig {
         String user = p.get("user");
         String password = p.get("password").trim();
         logger.info("============================================================");
-        logger.info("url:{}\nuser:{}\npassword:{}",url,user,password);
+        logger.info("url:" + url + "\nuser:" + user + "\npassword:" + password);
         logger.info("============================================================");
         return new DruidPlugin(url, user, password);
     }
