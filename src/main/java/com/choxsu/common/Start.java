@@ -7,7 +7,6 @@ import com.choxsu.common.interceptor.VisitorInterceptor;
 import com.choxsu.common.kit.DruidKit;
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;
-import com.jfinal.handler.Handler;
 import com.jfinal.json.MixedJsonFactory;
 import com.jfinal.kit.Prop;
 import com.jfinal.kit.PropKit;
@@ -19,7 +18,6 @@ import com.jfinal.template.Engine;
 import com.jfinal.template.source.ClassPathSourceFactory;
 
 import java.sql.Connection;
-import java.util.List;
 
 /**
  * @author choxsu
@@ -37,7 +35,7 @@ public class Start extends JFinalConfig {
 
 
     public static void main(String[] args) {
-        JFinal.start("src/main/webapp", 80, "/");
+        JFinal.start("src/main/webapp", 8080, "/");
 
     }
 
