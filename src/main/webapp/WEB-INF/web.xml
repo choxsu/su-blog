@@ -31,7 +31,7 @@
         <!--忽略资源-->
         <init-param>
             <param-name>exclusions</param-name>
-            <param-value>*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/assets/druid/*</param-value>
+            <param-value>*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*</param-value>
         </init-param>
     </filter>
     <filter-mapping>
@@ -46,7 +46,7 @@
         <!--IP白名单(没有配置或者为空，则允许所有访问)-->
         <init-param>
             <param-name>allow</param-name>
-            <param-value>192.168.3.44,127.0.0.1</param-value>
+            <param-value>127.0.0.1</param-value>
         </init-param>
         <!--IP黑名单 (存在共同时，deny优先于allow)-->
         <init-param>
