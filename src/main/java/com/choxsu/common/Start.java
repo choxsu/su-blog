@@ -10,12 +10,13 @@ import com.jfinal.core.JFinal;
 import com.jfinal.json.MixedJsonFactory;
 import com.jfinal.kit.Prop;
 import com.jfinal.kit.PropKit;
-import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.template.Engine;
 import com.jfinal.template.source.ClassPathSourceFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 
@@ -24,12 +25,13 @@ import java.sql.Connection;
  */
 public class Start extends JFinalConfig {
 
+    private static final Logger logger = LoggerFactory.getLogger(Start.class);
+
     /**
      * 先加载开发环境配置，再追加生产环境的少量配置覆盖掉开发环境配置
      */
     private static Prop p = PropKit.use("sblog_config_dev.txt")
             .appendIfExists("sblog_config_pro.txt");
-    private static final Log logger = Log.getLog(Start.class);
 
     private WallFilter wallFilter;
 
@@ -58,6 +60,7 @@ public class Start extends JFinalConfig {
         me.setDevMode(p.getBoolean("engineDevMode", false));
         me.addSharedFunction("/view/common/layout.html");
         me.addSharedFunction("/view/common/paginate.html");
+        me.addSharedFunction("/view/common/cy.html");
     }
 
     @Override
@@ -106,7 +109,8 @@ public class Start extends JFinalConfig {
         String user = p.get("user");
         String password = p.get("password").trim();
         logger.info("============================================================");
-        logger.info("url:" + url + "\nuser:" + user + "\npassword:" + password);
+        logger.info("url:{};user:{};password:{}", url, user, password);
+        logger.info("============================================================");
         logger.info("============================================================");
         return new DruidPlugin(url, user, password);
     }
