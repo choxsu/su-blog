@@ -1,5 +1,5 @@
 ### 开发模式
-devMode=false
+devMode=true
 engineDevMode=true
 
 ### 数据库连接信息

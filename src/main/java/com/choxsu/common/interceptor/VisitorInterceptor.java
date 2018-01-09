@@ -6,6 +6,8 @@ import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -14,6 +16,8 @@ import java.util.Date;
  * @author choxsu
  */
 public class VisitorInterceptor implements Interceptor {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(VisitorInterceptor.class);
 
     @Override
     public void intercept(Invocation inv) {
@@ -26,13 +30,13 @@ public class VisitorInterceptor implements Interceptor {
         String userAgent = request.getHeader("user-agent");
         Record record = new Record();
         record.set("ip", ip);
-        System.out.println("请求ip:"+ip);
+        LOGGER.info("请求ip:{}", ip);
         record.set("url", url);
-        record.set("method",  method);
+        record.set("method", method);
         record.set("client", userAgent);
         record.set("requestTime", new Date());
         boolean b = Db.save("visitor", record);
-        System.out.println("保存后返回的结果：" + b);
+        LOGGER.info("保存后返回的结果：{}", b);
         inv.invoke();
     }
 

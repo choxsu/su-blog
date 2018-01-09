@@ -24,7 +24,10 @@ public class IndexService {
      * @return
      */
     public List<Record> findBlogTags() {
-        return Db.findByCache(EnCacheEnum.TAGS.getName(), EnCacheEnum.TAGS.getKey(), "SELECT id,name FROM blog_tag WHERE status = ?", 0);
+        String sql = "SELECT tag.id,tag.name,(SELECT count(0) FROM blog b WHERE tag_id = tag.id) as topicNum FROM blog_tag tag WHERE status = ?";
+
+        return Db.findByCache(EnCacheEnum.TAGS.getName(), EnCacheEnum.TAGS.getKey(), sql, 0);
+
     }
 
     /**
@@ -99,12 +102,4 @@ public class IndexService {
         s.set("categoryName", name);
     }
 
-    public void addTopicNum(List<Record> tags) {
-        tags.forEach(record -> {
-            Integer tagId = record.getInt("id");
-            Record first = Db.findFirst("select count(0) as t from blog where tag_id = ?", tagId);
-            Long t = first.getLong("t");
-            record.set("topicNum", t);
-        });
-    }
 }

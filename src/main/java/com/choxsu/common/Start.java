@@ -4,6 +4,7 @@ import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
 import com.choxsu.common.entity.MapperKit;
 import com.choxsu.common.interceptor.VisitorInterceptor;
+import com.choxsu.common.interceptor.WebStatInterceptor;
 import com.choxsu.common.kit.DruidKit;
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;
@@ -91,6 +92,7 @@ public class Start extends JFinalConfig {
     public void configInterceptor(Interceptors me) {
         System.out.println("初始化拦截器");
         me.add(new VisitorInterceptor());
+        me.add(new WebStatInterceptor("*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*"));
     }
 
     @Override
@@ -108,10 +110,6 @@ public class Start extends JFinalConfig {
         String url = p.get("jdbcUrl");
         String user = p.get("user");
         String password = p.get("password").trim();
-        logger.info("============================================================");
-        logger.info("url:{};user:{};password:{}", url, user, password);
-        logger.info("============================================================");
-        logger.info("============================================================");
         return new DruidPlugin(url, user, password);
     }
 }
