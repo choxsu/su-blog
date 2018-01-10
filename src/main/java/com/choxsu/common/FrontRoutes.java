@@ -47,4 +47,22 @@ public class FrontRoutes extends Routes {
         add("/tag", TagsController.class, "/tags");
         add("/search", SearchController.class, "/search");
     }
+
+    public static void main(String[] args) {
+        int a = 2;
+        int b = a--;
+        //++a  先做a+1再赋值,  比如a = 2 ; ++a , a=3; ++a=3
+        //a++  先赋值后再a+1,  比如a = 2 ; a++ , a=2; a++=3
+        //--a  先做a-1再赋值,  比如a = 2 ; --a , a=1; --a=1
+        //a--  先赋值和再a-1,  比如a = 2 ; a-- , a=2; a--=1
+        System.out.println(b);
+        System.out.println(a);
+        if (++a > 10){
+            System.out.println(a++);
+        }else {
+            String s = String.format("%d,%d", a--, a--);
+            System.out.println(s);
+        }
+        System.out.println(a);
+    }
 }
