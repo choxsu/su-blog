@@ -2,7 +2,7 @@ package com.choxsu.common;
 
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
-import com.choxsu.common.entity.MapperKit;
+import com.choxsu.common.entity._MappingKit;
 import com.choxsu.common.interceptor.VisitorInterceptor;
 import com.choxsu.common.interceptor.WebStatInterceptor;
 import com.choxsu.common.kit.DruidKit;
@@ -77,7 +77,7 @@ public class Start extends JFinalConfig {
         me.add(druidPlugin);
         ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
         arp.setTransactionLevel(Connection.TRANSACTION_READ_COMMITTED);
-        MapperKit.mapper(arp);
+        _MappingKit.mapping(arp);
         arp.setShowSql(p.getBoolean("devMode", false));
         arp.getEngine().setSourceFactory(new ClassPathSourceFactory());
         arp.addSqlTemplate("/sql/all_sqls.sql");
