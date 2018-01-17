@@ -11,8 +11,10 @@
     <modules>
         <module>pay</module>
         <module>oss</module>
-        <module>blog</module>
         <module>Kitting</module>
+        <module>kitting</module>
+        <module>pay</module>
+        <module>oss</module>
     </modules>
 
     <properties>
