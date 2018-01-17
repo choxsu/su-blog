@@ -32,7 +32,7 @@ import java.util.List;
  */
 public class MappingKitGenerator {
 	
-	protected String template = "/com/choxsu/common/go/mapping_kit_template.jf";
+	protected String template = "/jf/mapping_kit_template.jf";
 	
 	protected String mappingKitPackageName;
 	protected String mappingKitOutputDir;
@@ -69,9 +69,11 @@ public class MappingKitGenerator {
 	}
 	
 	public void generate(List<TableMeta> tableMetas) {
-		System.out.println("Generate MappingKit file ...");
-		System.out.println("MappingKit Output Dir: " + mappingKitOutputDir);
-		
+//		System.out.println("Generate MappingKit file ...");
+		System.out.println("开始成功 MappingKit 文件 ...");
+//		System.out.println("MappingKit Output Dir: " + mappingKitOutputDir);
+		System.out.println("MappingKit 输出目录: " + mappingKitOutputDir);
+
 		Engine engine = Engine.create("forMappingKit");
 		engine.setSourceFactory(new ClassPathSourceFactory());
 		engine.addSharedMethod(new StrKit());

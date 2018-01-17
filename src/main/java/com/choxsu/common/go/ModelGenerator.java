@@ -31,7 +31,7 @@ import java.util.List;
  */
 public class ModelGenerator {
 	
-	protected String template = "/com/choxsu/common/go/model_template.jf";
+	protected String template = "/jf/model_template.jf";
 	
 	protected String modelPackageName;
 	protected String baseModelPackageName;
@@ -72,9 +72,11 @@ public class ModelGenerator {
 	}
 	
 	public void generate(List<TableMeta> tableMetas) {
-		System.out.println("Generate model ...");
-		System.out.println("Model Output Dir: " + modelOutputDir);
-		
+//		System.out.println("Generate model ...");
+		System.out.println("开始生成 model ...");
+//		System.out.println("Model Output Dir: " + modelOutputDir);
+		System.out.println("Model 输出目录: " + modelOutputDir);
+
 		Engine engine = Engine.create("forModel");
 		engine.setSourceFactory(new ClassPathSourceFactory());
 		engine.addSharedMethod(new StrKit());

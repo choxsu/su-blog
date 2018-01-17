@@ -33,7 +33,7 @@ import java.util.Map;
  * Base model 生成器
  */
 public class BaseModelGenerator {
-	protected String template = "/com/choxsu/common/go/base_model_template.jf";
+	protected String template = "/jf/base_model_template.jf";
 	
 	protected String baseModelPackageName;
 	protected String baseModelOutputDir;
@@ -85,8 +85,9 @@ public class BaseModelGenerator {
 	}
 	
 	public void generate(List<TableMeta> tableMetas) {
-		System.out.println("Generate base model ...");
-		System.out.println("Base Model Output Dir: " + baseModelOutputDir);
+		System.out.println("开始生成 base model ...");
+//		System.out.println("Base Model Output Dir: " + baseModelOutputDir);
+		System.out.println("Base Model 输出目录: " + baseModelOutputDir);
 
 		Engine engine = Engine.create("forBaseModel");
 		engine.setSourceFactory(new ClassPathSourceFactory());

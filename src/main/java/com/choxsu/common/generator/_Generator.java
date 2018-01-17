@@ -15,7 +15,7 @@
 package com.choxsu.common.generator;
 
 import com.choxsu.common.Start;
-import com.choxsu.common.go.Generator;
+import com.choxsu.common.go.MyGenerator;
 import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.druid.DruidPlugin;
@@ -26,7 +26,7 @@ import javax.sql.DataSource;
  *
  * @author Administrator
  */
-public class EntityGenerator {
+public class _Generator {
 
     /**
      * 部分功能使用 Db + Record 模式实现，无需生成 model 的 table 在此配置
@@ -64,7 +64,7 @@ public class EntityGenerator {
         String modelOutputDir = baseModelOutputDir + "/..";
 
         // 创建生成器
-        Generator gen = new Generator(getDataSource(), baseModelPackageName, baseModelOutputDir, modelPackageName, modelOutputDir);
+        MyGenerator gen = new MyGenerator(getDataSource(), baseModelPackageName, baseModelOutputDir, modelPackageName, modelOutputDir);
 
         // 设置数据库方言
         gen.setDialect(new MysqlDialect());
@@ -75,11 +75,11 @@ public class EntityGenerator {
         /**
          * 设置 BaseModel 是否生成链式 setter 方法
          */
-        gen.setGenerateChainSetter(true);
+        gen.setGenerateChainSetter(false);
 
         //设置自定义表生成
 
-        gen.setMetaBuilder(new EntitysMetaBuilder(getDataSource()));
+        gen.setMetaBuilder(new _MetaBuilder(getDataSource()));
         // 添加不需要生成的表名
         for (String table : excludedTable) {
             gen.addExcludedTable(table);

@@ -16,7 +16,7 @@
 
 package com.choxsu.common.go;
 
-import com.choxsu.common.generator.EntitysMetaBuilder;
+import com.choxsu.common.generator._MetaBuilder;
 import com.jfinal.plugin.activerecord.dialect.Dialect;
 
 import javax.sql.DataSource;
@@ -32,7 +32,7 @@ import java.util.List;
  *   来创建自定义生成器，然后使用 Generator 的 setter 方法指定自定义生成器来生成
  * 6：生成模板文字属性全部为 protected 可见性，方便自定义 Generator 生成符合。。。。
  */
-public class Generator {
+public class MyGenerator {
 	
 	protected Dialect dialect = null;
 	protected MetaBuilder metaBuilder;
@@ -50,7 +50,7 @@ public class Generator {
 	 * @param modelPackageName model 包名
 	 * @param modelOutputDir model 输出目录
 	 */
-	public Generator(DataSource dataSource, String baseModelPackageName, String baseModelOutputDir, String modelPackageName, String modelOutputDir) {
+	public MyGenerator(DataSource dataSource, String baseModelPackageName, String baseModelOutputDir, String modelPackageName, String modelOutputDir) {
 		this(dataSource, new BaseModelGenerator(baseModelPackageName, baseModelOutputDir), new ModelGenerator(modelPackageName, baseModelPackageName, modelOutputDir));
 	}
 
@@ -60,11 +60,11 @@ public class Generator {
 	 * @param baseModelPackageName base model 包名
 	 * @param baseModelOutputDir base mode 输出目录
 	 */
-	public Generator(DataSource dataSource, String baseModelPackageName, String baseModelOutputDir) {
+	public MyGenerator(DataSource dataSource, String baseModelPackageName, String baseModelOutputDir) {
 		this(dataSource, new BaseModelGenerator(baseModelPackageName, baseModelOutputDir));
 	}
 
-	public Generator(DataSource dataSource, BaseModelGenerator baseModelGenerator) {
+	public MyGenerator(DataSource dataSource, BaseModelGenerator baseModelGenerator) {
 		if (dataSource == null) {
 			throw new IllegalArgumentException("dataSource can not be null.");
 		}
@@ -83,7 +83,7 @@ public class Generator {
 	 * 使用指定 BaseModelGenerator、ModelGenerator 构造 Generator
 	 * 生成 BaseModel、Model、MappingKit 三类文件，其中 MappingKit 输出目录与包名与 Model相同
 	 */
-	public Generator(DataSource dataSource, BaseModelGenerator baseModelGenerator, ModelGenerator modelGenerator) {
+	public MyGenerator(DataSource dataSource, BaseModelGenerator baseModelGenerator, ModelGenerator modelGenerator) {
 		if (dataSource == null) {
 			throw new IllegalArgumentException("dataSource can not be null.");
 		}
@@ -105,7 +105,7 @@ public class Generator {
 	 * 设置 MetaBuilder，便于扩展自定义 MetaBuilder
 	 * @param metaBuilder
 	 */
-	public void setMetaBuilder(EntitysMetaBuilder metaBuilder) {
+	public void setMetaBuilder(_MetaBuilder metaBuilder) {
 		if (metaBuilder != null) {
 			this.metaBuilder = metaBuilder;
 		}
@@ -280,8 +280,8 @@ public class Generator {
 			dataDictionaryGenerator.generate(tableMetas);
 		}
 		
-		long usedTime = (System.currentTimeMillis() - start) / 1000;
-		System.out.println("Generate complete in " + usedTime + " seconds.");
+		long usedTime = (System.currentTimeMillis() - start);
+		System.out.println("Generate complete in " + usedTime + " ms.");
 	}
 }
 
