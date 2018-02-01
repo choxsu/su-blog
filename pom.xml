@@ -47,7 +47,7 @@
                     <target>1.8</target>
                     <encoding>UTF-8</encoding>
                     <!-- java8 保留参数名编译参数 -->
-                    <!-- compilerArgument>-parameters</compilerArgument -->
+                     <!--<compilerArgument>-parameters</compilerArgument>-->
                 </configuration>
             </plugin>
 
