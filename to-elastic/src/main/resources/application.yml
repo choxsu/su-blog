@@ -1,0 +1,16 @@
+server:
+  port: 1013
+spring:
+  application:
+    name: elastic
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://127.0.0.1:3306/jfinal_club?characterEncoding=utf8&useSSL=false
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+elasticsearch:
+  host: 127.0.0.1:9300,127.0.0.1:9301
+  cluster:
+    name: choxsu
