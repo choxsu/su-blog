@@ -45,6 +45,20 @@ public class BaseController extends Controller {
         return result;
     }
 
+    /**
+     * 返回成功
+     * @param object 返回的结果对象
+     * @return Map
+     */
+    public Map<String, Object> respSuccess(String msg, Object object) {
+        Map<String, Object> result = getHashMap();
+        result.put("type", SUCCESS);
+        result.put("msg", msg);
+        result.put("data", object);
+        return result;
+    }
+
+
     public Map<String, Object> respFail() {
         Map<String, Object> result = getHashMap();
         result.put("type", FAILED);
