@@ -53,20 +53,6 @@ public class ActiveRecordPluginConfig {
         arp.addSqlTemplate("/sql/all_sqls.sql");
         // 必须手动调用start
         arp.start();
-        // test =========== begin //
-        {
-            Boolean value = Boolean.FALSE;
-            if (value != null){
-                System.out.println(value);
-            }
-        }
-        {
-            Boolean value = Boolean.TRUE;
-            if (value != null){
-                System.out.println(value);
-            }
-        }
-        // test =========== end //
         return arp;
     }
 
