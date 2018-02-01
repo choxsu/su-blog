@@ -1,0 +1,14 @@
+package com.choxsu.controller;
+
+import com.choxsu.common.BaseController;
+import com.jfinal.aop.Enhancer;
+
+/**
+ * @author chox su
+ */
+public class BlogController extends BaseController {
+
+    private static final BlogService BLOG_SERVICE = Enhancer.enhance(BlogService.class);
+
+
+}
