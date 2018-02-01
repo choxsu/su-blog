@@ -4,9 +4,9 @@ import com.choxsu.common.BaseController;
 
 /**
  * @author chox su
- * 表：#(tableMeta.remarks)
+ * 表：
  */
-public class #(tableMeta.modelName)Controller extends BaseController {
+public class BlogCategoryController extends BaseController {
 
 
 }

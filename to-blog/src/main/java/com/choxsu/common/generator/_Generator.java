@@ -21,6 +21,7 @@ import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.druid.DruidPlugin;
 
 import javax.sql.DataSource;
+
 /**
  * Model、BaseModel、_MappingKit 生成器
  *
@@ -63,8 +64,15 @@ public class _Generator {
         // model 文件保存路径 (MappingKit 与 DataDictionary 文件默认保存路径)
         String modelOutputDir = baseModelOutputDir + "/..";
 
+        String controllerGeneratorOutputDir = PathKit.getWebRootPath() + "/src/main/java/com/choxsu/controller";
+
         // 创建生成器
-        MyGenerator gen = new MyGenerator(getDataSource(), baseModelPackageName, baseModelOutputDir, modelPackageName, modelOutputDir);
+        MyGenerator gen = new MyGenerator(getDataSource(),
+                baseModelPackageName,
+                baseModelOutputDir,
+                modelPackageName,
+                modelOutputDir,
+                controllerGeneratorOutputDir);
 
         // 设置数据库方言
         gen.setDialect(new MysqlDialect());

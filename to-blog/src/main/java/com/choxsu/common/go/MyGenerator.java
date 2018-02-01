@@ -55,8 +55,16 @@ public class MyGenerator {
      * @param modelPackageName     model 包名
      * @param modelOutputDir       model 输出目录
      */
-    public MyGenerator(DataSource dataSource, String baseModelPackageName, String baseModelOutputDir, String modelPackageName, String modelOutputDir) {
-        this(dataSource, new BaseModelGenerator(baseModelPackageName, baseModelOutputDir), new ModelGenerator(modelPackageName, baseModelPackageName, modelOutputDir));
+    public MyGenerator(DataSource dataSource,
+                       String baseModelPackageName,
+                       String baseModelOutputDir,
+                       String modelPackageName,
+                       String modelOutputDir,
+                       String controllerGeneratorOutputDir) {
+        this(dataSource,
+                new BaseModelGenerator(baseModelPackageName, baseModelOutputDir),
+                new ModelGenerator(modelPackageName, baseModelPackageName, modelOutputDir),
+                new YcControllerGenerator(dataSource, controllerGeneratorOutputDir));
     }
 
     /**
@@ -89,7 +97,10 @@ public class MyGenerator {
      * 使用指定 BaseModelGenerator、ModelGenerator 构造 Generator
      * 生成 BaseModel、Model、MappingKit 三类文件，其中 MappingKit 输出目录与包名与 Model相同
      */
-    public MyGenerator(DataSource dataSource, BaseModelGenerator baseModelGenerator, ModelGenerator modelGenerator) {
+    public MyGenerator(DataSource dataSource,
+                       BaseModelGenerator baseModelGenerator,
+                       ModelGenerator modelGenerator,
+                       YcControllerGenerator ycControllerGenerator) {
         if (dataSource == null) {
             throw new IllegalArgumentException("dataSource can not be null.");
         }
@@ -105,6 +116,7 @@ public class MyGenerator {
         this.modelGenerator = modelGenerator;
         this.mappingKitGenerator = new MappingKitGenerator(modelGenerator.modelPackageName, modelGenerator.modelOutputDir);
         this.dataDictionaryGenerator = new DataDictionaryGenerator(dataSource, modelGenerator.modelOutputDir);
+        this.ycControllerGenerator = ycControllerGenerator;
     }
 
     /**
