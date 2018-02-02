@@ -31,6 +31,14 @@ public class BaseController extends Controller {
         return result;
     }
 
+    public Map<String, Object> respSuccess(String msg) {
+        Map<String, Object> result = getHashMap();
+        result.put("type", SUCCESS);
+        result.put("msg", msg);
+        result.put("data", "");
+        return result;
+    }
+
     /**
      * 返回成功
      *
@@ -47,6 +55,7 @@ public class BaseController extends Controller {
 
     /**
      * 返回成功
+     *
      * @param object 返回的结果对象
      * @return Map
      */
@@ -67,10 +76,17 @@ public class BaseController extends Controller {
         return result;
     }
 
+    public Map<String, Object> respFail(String msg) {
+        Map<String, Object> result = getHashMap();
+        result.put("type", FAILED);
+        result.put("msg", msg);
+        result.put("data", "");
+        return result;
+    }
 
     public Map<String, Object> respFail(Object object) {
         Map<String, Object> result = getHashMap();
-        result.put("type", 0);
+        result.put("type", FAILED);
         result.put("msg", FAILED_MSG);
         result.put("data", object);
         return result;
@@ -78,13 +94,13 @@ public class BaseController extends Controller {
 
     public Map<String, Object> respFail(String msg, Object object) {
         Map<String, Object> result = getHashMap();
-        result.put("type", 0);
+        result.put("type", FAILED);
         result.put("msg", msg);
         result.put("data", object);
         return result;
     }
 
     private Map<String, Object> getHashMap() {
-        return new HashMap<>();
+        return new HashMap<String, Object>();
     }
 }
