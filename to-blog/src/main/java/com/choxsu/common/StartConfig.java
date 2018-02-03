@@ -5,6 +5,7 @@ import com.alibaba.druid.wall.WallFilter;
 import com.choxsu.common.entity.MappingKit;
 import com.choxsu.common.interceptor.VisitorInterceptor;
 import com.choxsu.common.interceptor.WebStatInterceptor;
+import com.choxsu.admin.interceptor.ShiroInterceptor;
 import com.choxsu.common.kit.DruidKit;
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;
@@ -93,6 +94,7 @@ public class StartConfig extends JFinalConfig {
         System.out.println("初始化拦截器");
         me.add(new VisitorInterceptor());
         me.add(new WebStatInterceptor("*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*"));
+        me.add(new ShiroInterceptor());
     }
 
     @Override
