@@ -11,4 +11,5 @@ out/
 /.idea/modules.xml
 /.idea/vcs.xml
 /.idea/uiDesigner.xml
-/.idea/encodings.xml
+/.idea/encodings.
+/target/
