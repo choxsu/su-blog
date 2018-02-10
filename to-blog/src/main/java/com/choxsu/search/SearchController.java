@@ -1,7 +1,6 @@
 package com.choxsu.search;
 
 import com.choxsu.common.BaseController;
-import com.choxsu.tags.TagsService;
 import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
