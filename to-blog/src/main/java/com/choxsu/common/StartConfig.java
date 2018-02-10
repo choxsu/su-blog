@@ -39,26 +39,30 @@ public class StartConfig extends JFinalConfig {
 
 
     public static void main(String[] args) {
-        JFinal.start("to-blog/src/main/webapp", 80, "/");
-
+        logger.info("程序开始 启动中...");
+        logger.info("启动webAppDir:{}", "to-blog/src/main/webapp");
+        logger.info("启动端口：{}", 8080);
+        logger.info("上下文路径context:{}", "/");
+        JFinal.start("to-blog/src/main/webapp", 8080    , "/");
     }
 
     @Override
     public void configConstant(Constants me) {
+        logger.info("init constants");
         me.setDevMode(p.getBoolean("devMode", false));
         me.setJsonFactory(MixedJsonFactory.me());
     }
 
     @Override
     public void configRoute(Routes me) {
-        System.out.println("初始化路由");
+        logger.info("init route");
         me.add(new FrontRoutes());
         me.add(new AdminRoutes());
     }
 
     @Override
     public void configEngine(Engine me) {
-        System.out.println("初始化模板引擎");
+        logger.info("init config engine");
         me.setDevMode(p.getBoolean("engineDevMode", false));
         me.addSharedFunction("/view/common/layout.html");
         me.addSharedFunction("/view/common/paginate.html");
@@ -67,7 +71,7 @@ public class StartConfig extends JFinalConfig {
 
     @Override
     public void configPlugin(Plugins me) {
-        System.out.println("初始化插件");
+        logger.info("init plugins");
         DruidPlugin druidPlugin = getDruidPlugin();
         // 加强数据库安全
         wallFilter = new WallFilter();
@@ -91,7 +95,7 @@ public class StartConfig extends JFinalConfig {
 
     @Override
     public void configInterceptor(Interceptors me) {
-        System.out.println("初始化拦截器");
+        logger.info("init interceptor");
         me.add(new VisitorInterceptor());
         me.add(new WebStatInterceptor("*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*"));
         me.add(new ShiroInterceptor());
@@ -99,7 +103,7 @@ public class StartConfig extends JFinalConfig {
 
     @Override
     public void configHandler(Handlers me) {
-        System.out.println("初始化handler");
+        logger.info("init handler");
         me.add(DruidKit.getFilterHandler("/druid"));
 
     }
@@ -113,5 +117,17 @@ public class StartConfig extends JFinalConfig {
         String user = p.get("user");
         String password = p.get("password").trim();
         return new DruidPlugin(url, user, password);
+    }
+
+    @Override
+    public void afterJFinalStart() {
+        //TODO
+        logger.info("jfinal start after action(jfinal启动完成之后执行)");
+    }
+
+    @Override
+    public void beforeJFinalStop() {
+        //TODO
+        logger.info("jfinal start stop before(jfinal停止之前执行)");
     }
 }
