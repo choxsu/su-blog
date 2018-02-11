@@ -16,4 +16,11 @@ public class IndexAdminController extends BaseController {
         LogKit.info("后台首页权限");
         render("index.html");
     }
+
+    public static void main(String[] args) {
+        String cardNo = "0680001242";
+        System.out.println(cardNo.substring(0, 3));
+        System.out.println(cardNo.substring(0, 3).equals("680"));
+        System.out.println(cardNo.startsWith("680"));
+    }
 }
