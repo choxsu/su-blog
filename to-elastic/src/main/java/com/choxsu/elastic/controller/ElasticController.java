@@ -96,17 +96,10 @@ public class ElasticController {
     @RequestMapping(value = "/query", method = RequestMethod.GET)
     public Object query(String keyword, Integer page, Integer size) {
 
-        Person person = new Person();
-
-        person.setName(keyword);
-
-        person.setSex(keyword);
-
-        person.setIntroduce(keyword);
-        page = page == null ? 0 : page;
+        page = page == null ? 1 : page;
         size = size == null ? 20 : size;
 
-        Object obj = personService.queryPerson(person, page, size);
+        Object obj = personService.queryPerson(keyword, page, size);
 
         List<Person> list = JSONObject.parseArray(JSON.toJSONString(obj), Person.class);
         return RetKit.ok().set("data", list).set("msg", "查询成功！");

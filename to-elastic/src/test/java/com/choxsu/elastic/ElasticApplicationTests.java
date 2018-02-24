@@ -58,11 +58,7 @@ public class ElasticApplicationTests {
 
     @Test
     public void testQueryPerson() {
-        Person person = new Person();
-        person.setName("帅");
-        person.setIntroduce("人");
-//        person.setAge(27);
-        Object obj = personService.queryPerson(person, 0 , 20);
+        Object obj = personService.queryPerson("信息", 1 , 20);
         System.out.println(obj);
     }
 

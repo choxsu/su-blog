@@ -2,6 +2,7 @@ package com.choxsu.elastic.service;
 
 import com.choxsu.elastic.entity.Person;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
@@ -16,8 +17,8 @@ import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -118,44 +119,39 @@ public class PersonService {
         return response.getId();
     }
 
-    public Object queryPerson(Person person, int page, int size) {
+    public Object queryPerson(String keywords, int page, int size) {
         List<Map<String, Object>> result = new ArrayList<>();
         try {
             BoolQueryBuilder boolBuilder = QueryBuilders.boolQuery();
-            if (person.getName() != null) {
+            if (StringUtils.isNoneBlank(keywords)) {
 //                boolBuilder.must(QueryBuilders.matchQuery("name", person.getName()));
-                boolBuilder.should(QueryBuilders.matchQuery("name", person.getName()));
-            }
-            if (person.getIntroduce() != null) {
-//                boolBuilder.must(QueryBuilders.matchQuery("introduce", person.getIntroduce()));
-                boolBuilder.should(QueryBuilders.matchQuery("introduce", person.getIntroduce()));
-            }
-            if (person.getSex() != null) {
-                boolBuilder.should(QueryBuilders.matchQuery("sex", person.getSex()));
+                boolBuilder.should(QueryBuilders.matchQuery("name", keywords));
+                boolBuilder.should(QueryBuilders.matchQuery("sex", keywords));
+                boolBuilder.should(QueryBuilders.matchQuery("introduce", keywords));
             }
             //range 查询范围，大于age,小于age+10
-            if (person.getAge() != null && person.getAge() > 0) {
-                RangeQueryBuilder rangeQuery = QueryBuilders.rangeQuery("age");
-                rangeQuery.from(person.getAge());
-                rangeQuery.to(person.getAge() + 10);
-                boolBuilder.filter(rangeQuery);
-            }
+//            if (person.getAge() != null && person.getAge() > 0) {
+//                RangeQueryBuilder rangeQuery = QueryBuilders.rangeQuery("age");
+//                rangeQuery.from(person.getAge());
+//                rangeQuery.to(person.getAge() + 10);
+//                boolBuilder.filter(rangeQuery);
+//            }
             SearchRequestBuilder builder = transportClient.prepareSearch(index)
                     .setTypes(type)
                     .setSearchType(SearchType.QUERY_THEN_FETCH)
                     .setQuery(boolBuilder)
-                    .setScroll(TimeValue.timeValueMinutes(1))
-                    .setTimeout(TimeValue.timeValueMinutes(10))
-//                    .setFrom(page)
+                    .setTimeout(TimeValue.timeValueMinutes(1))
+                    .setFrom((page - 1) * size)
                     .setSize(size);
             // 高亮
-            //HighlightBuilder hBuilder = new HighlightBuilder();
-            //hBuilder.preTags("<h2>");
-            //hBuilder.postTags("</h2>");
-            //hBuilder.field("question");
+//            HighlightBuilder hBuilder = new HighlightBuilder();
+//            hBuilder.preTags("<h2 style='color:red;'>");
+//            hBuilder.postTags("</h2>");
+//            hBuilder.field("introduce");
             //高亮的字段
-            //builder.highlighter(hBuilder);
-            log.info(String.valueOf(builder));
+//            builder.highlighter(hBuilder);
+
+            log.info("builder info:{}", String.valueOf(builder));
             SearchResponse response = builder.get();
             SearchHits hits = response.getHits();
 

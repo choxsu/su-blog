@@ -13,4 +13,4 @@ spring:
 elasticsearch:
   host: 127.0.0.1:9300,127.0.0.1:9301
   cluster:
-    name: choxsu
+    name: choxsu-cs
