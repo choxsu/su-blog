@@ -4,19 +4,31 @@ import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexRequestBuilder;
 import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.action.search.SearchRequestBuilder;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.unit.TimeValue;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHits;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
  * @author chox su
  * @date 2017/12/23 15:10
  */
+@Slf4j
 @Service
 public class StoreService {
 
@@ -48,5 +60,40 @@ public class StoreService {
             source.put("_id", response.getId());
         }
         return response;
+    }
+
+    public Object queryStoreList(String keywords, Integer page, Integer size) {
+
+        List<Map<String, Object>> result = new ArrayList<>();
+        try {
+            BoolQueryBuilder boolBuilder = QueryBuilders.boolQuery();
+            if (StringUtils.isNoneBlank(keywords)) {
+                boolBuilder.should(QueryBuilders.matchQuery("store_name", keywords));
+                boolBuilder.should(QueryBuilders.matchQuery("detail", keywords));
+                boolBuilder.should(QueryBuilders.matchQuery("address", keywords));
+            }
+            SearchRequestBuilder builder = client.prepareSearch("store_list")
+                    .setTypes("jdbc")
+                    .setSearchType(SearchType.QUERY_THEN_FETCH)
+                    .setQuery(boolBuilder)
+                    .setTimeout(TimeValue.timeValueMinutes(1))
+                    .setFrom((page - 1) * size)
+                    .setSize(size);
+            log.info("builder info:{}", String.valueOf(builder));
+            SearchResponse response = builder.get();
+            SearchHits hits = response.getHits();
+
+            hits.forEach((s) -> {
+                Map<String, Object> sourceAsMap = s.getSourceAsMap();
+                sourceAsMap.put("id", s.getId());
+                result.add(sourceAsMap);
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error(e.getMessage(), e);
+            return null;
+        }
+        return result;
     }
 }

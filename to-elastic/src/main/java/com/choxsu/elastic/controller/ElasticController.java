@@ -13,6 +13,7 @@ import com.jfinal.plugin.activerecord.Record;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -107,13 +108,25 @@ public class ElasticController {
 
     @ApiOperation(value = "activePlugin查询")
     @RequestMapping(value = "/activePlugin", method = RequestMethod.GET)
-    public Object activePlugin(){
+    public Object activePlugin() {
         String save = storeService.save();
-        System.out.println("id:"+save);
+        System.out.println("id:" + save);
 
         Object o = storeService.find(save);
 
-        return Ret.ok().set("data",o).set("msg", "查询成功");
+        return Ret.ok().set("data", o).set("msg", "查询成功");
+    }
+
+    @ApiOperation(value = "storeList查询")
+    @GetMapping(value = "/storeList")
+    public Object storeList(Integer page, Integer size, String keywords) {
+        page = page == null ? 1 : page;
+        size = size == null ? 100 : size;
+
+        Object obj = storeService.queryStoreList(keywords, page, size);
+
+        List<Person> list = JSONObject.parseArray(JSON.toJSONString(obj), Person.class);
+        return RetKit.ok().set("data", list).set("msg", "查询成功！");
     }
 
 
