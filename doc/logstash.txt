@@ -1,0 +1,140 @@
+GET /store_list/
+
+DELETE /store_list
+
+PUT /store_list
+{
+  "settings": {
+    "number_of_shards": 3,
+    "number_of_replicas": 1
+  },
+  "mappings": {
+    "jdbc": {
+      "properties": {
+        "@timestamp": {
+          "type": "date"
+        },
+        "@version": {
+          "type": "keyword"
+        },
+        "store_id": {
+          "type": "long"
+        },
+        "store_name": {
+          "type": "keyword"
+        },
+        "uid": {
+          "type": "text"
+        },
+        "telephone": {
+          "type": "text"
+        },
+        "street_id": {
+          "type": "text"
+        },
+        "detail": {
+          "type": "keyword"
+        },
+        "address": {
+          "type": "keyword"
+        },
+        "store_created": {
+          "type": "date"
+        },
+        "store_updated": {
+          "type": "date"
+        },
+        "detail_id": {
+          "type": "long"
+        },
+        "type_name": {
+          "type": "text"
+        },
+        "tag": {
+          "type": "keyword"
+        },
+        "overall_rating": {
+          "type": "text"
+        },
+        "navi_location_lng": {
+          "type": "double"
+        },
+        "navi_location_lat": {
+          "type": "double"
+        },
+        "detail_url": {
+          "type": "text"
+        },
+        "comment_num": {
+          "type": "integer"
+        },
+        "detail_created": {
+          "type": "date"
+        },
+        "detail_updated": {
+          "type": "date"
+        },
+        "location_id": {
+          "type": "long"
+        },
+        "lng": {
+          "type": "double"
+        },
+        "lat": {
+          "type": "double"
+        }
+      }
+    }
+  }
+}
+
+
+
+DELETE /store_st
+
+PUT /store_st
+{
+  "settings": {
+    "number_of_shards": 3,
+    "number_of_replicas": 1
+  },
+  "mappings": {
+    "jdbc": {
+      "properties": {
+        "@timestamp": {
+          "type": "date"
+        },
+        "@version": {
+          "type": "keyword"
+        },
+        "id": {
+          "type": "long"
+        },
+        "name": {
+          "type": "keyword"
+        },
+        "uid": {
+          "type": "text"
+        },
+        "telephone": {
+          "type": "text"
+        },
+        "street_id": {
+          "type": "text"
+        },
+        "detail": {
+          "type": "keyword"
+        },
+        "address": {
+          "type": "keyword"
+        },
+        "created": {
+          "type": "date"
+        },
+        "updated": {
+          "type": "date"
+        }
+      }
+    }
+  }
+}
