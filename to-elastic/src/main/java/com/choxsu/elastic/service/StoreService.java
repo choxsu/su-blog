@@ -1,6 +1,5 @@
 package com.choxsu.elastic.service;
 
-import com.choxsu.elastic.util.PgBean;
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
@@ -89,9 +88,8 @@ public class StoreService {
                 sourceAsMap.put("id", s.getId());
                 result.add(sourceAsMap);
             });
-            //List<T> list, int pageNumber, int pageSize, int totalPage, int totalRow
             int totalHits = ((int) hits.totalHits);
-            return PgBean.getPage(result, page, size, totalHits);// new Page<Map<String, Object>>(result, page, size, (totalHits + size - 1) / size, totalHits);
+            return new Page<Map<String, Object>>(result, page, size, (totalHits + size - 1) / size, totalHits);
 
         } catch (Exception e) {
             //e.printStackTrace();
