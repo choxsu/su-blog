@@ -1,13 +1,14 @@
 package com.choxsu.elastic.service;
 
+import com.choxsu.elastic.util.PgBean;
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.get.GetResponse;
-import org.elasticsearch.action.index.IndexRequestBuilder;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
@@ -62,14 +63,14 @@ public class StoreService {
         return response;
     }
 
-    public Object queryStoreList(String keywords, Integer page, Integer size) {
+    public Page queryStoreList(String keywords, Integer page, Integer size) {
 
         List<Map<String, Object>> result = new ArrayList<>();
         try {
             BoolQueryBuilder boolBuilder = QueryBuilders.boolQuery();
             if (StringUtils.isNoneBlank(keywords)) {
                 boolBuilder.should(QueryBuilders.matchQuery("store_name", keywords));
-                boolBuilder.should(QueryBuilders.matchQuery("detail", keywords));
+                boolBuilder.should(QueryBuilders.matchQuery("tag", keywords));
                 boolBuilder.should(QueryBuilders.matchQuery("address", keywords));
             }
             SearchRequestBuilder builder = client.prepareSearch("store_list")
@@ -88,12 +89,14 @@ public class StoreService {
                 sourceAsMap.put("id", s.getId());
                 result.add(sourceAsMap);
             });
+            //List<T> list, int pageNumber, int pageSize, int totalPage, int totalRow
+            int totalHits = ((int) hits.totalHits);
+            return PgBean.getPage(result, page, size, totalHits);// new Page<Map<String, Object>>(result, page, size, (totalHits + size - 1) / size, totalHits);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             log.error(e.getMessage(), e);
             return null;
         }
-        return result;
     }
 }

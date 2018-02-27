@@ -9,6 +9,7 @@ import com.choxsu.elastic.util.RetKit;
 import com.jfinal.aop.Enhancer;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author chox su
@@ -122,11 +124,8 @@ public class ElasticController {
     public Object storeList(Integer page, Integer size, String keywords) {
         page = page == null ? 1 : page;
         size = size == null ? 100 : size;
-
-        Object obj = storeService.queryStoreList(keywords, page, size);
-
-        List<Person> list = JSONObject.parseArray(JSON.toJSONString(obj), Person.class);
-        return RetKit.ok().set("data", list).set("msg", "查询成功！");
+        Page<Map<String, Object>> mapPage = storeService.queryStoreList(keywords, page, size);
+        return RetKit.ok().set("data", mapPage).set("msg", "查询成功！");
     }
 
 
