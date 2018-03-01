@@ -1,5 +1,7 @@
-package com.choxsu.elastic.service;
+package com.choxsu.elastic.service.impl;
 
+import com.choxsu.elastic.service.IStoreService;
+import com.choxsu.elastic.util.PgBean;
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
@@ -12,14 +14,14 @@ import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
-import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.client.Client;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHits;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -29,13 +31,14 @@ import java.util.Map;
  * @date 2017/12/23 15:10
  */
 @Slf4j
-@Service
-public class StoreService {
+@Service("storeService")
+public class StoreService implements IStoreService {
 
-    @Autowired
-    private TransportClient client;
+    @Resource(name = "transportClient")
+    private Client client;
 
     @Before(Tx.class)
+    @Override
     public String save() {
         Record record = new Record();
         final String[] id = new String[1];
@@ -53,6 +56,7 @@ public class StoreService {
         return id[0];
     }
 
+    @Override
     public Object find(String id) {
         GetResponse response = client.prepareGet("choxsu", "store", id).get();
         Map<String, Object> source = response.getSource();
@@ -62,7 +66,8 @@ public class StoreService {
         return response;
     }
 
-    public Page queryStoreList(String keywords, Integer page, Integer size) {
+    @Override
+    public Page<Map<String, Object>> queryStoreList(String keywords, Integer page, Integer size) {
 
         List<Map<String, Object>> result = new ArrayList<>();
         try {
@@ -89,10 +94,9 @@ public class StoreService {
                 result.add(sourceAsMap);
             });
             int totalHits = ((int) hits.totalHits);
-            return new Page<Map<String, Object>>(result, page, size, (totalHits + size - 1) / size, totalHits);
+            return PgBean.getPage(result, page, size, totalHits);
 
         } catch (Exception e) {
-            //e.printStackTrace();
             log.error(e.getMessage(), e);
             return null;
         }
