@@ -16,7 +16,7 @@ import java.net.UnknownHostException;
  * @author chox su
  * @date 2018/03/02 10:03
  */
-public final class CommonUtil {
+public class CommonUtil {
 
     private static CommonUtil commonUtil = null;
 
