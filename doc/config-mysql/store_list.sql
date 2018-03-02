@@ -28,4 +28,5 @@ FROM
 WHERE
 	st.id = sd.store_id 
 	AND st.id = sl.store_id
-	AND st.updated > date_add(:sql_last_value, interval 8 hour)
+  LIMIT 1
+	-- AND st.updated > date_add(:sql_last_value, interval 8 hour)
