@@ -27,15 +27,48 @@ public class HomeController extends BaseController {
         int page = getParaToInt("page", 1);
         int size = getParaToInt("size", 15);
         Page<Map<String, Object>> pageResult = null;
-//        try {
-//            TransportClient client = commonUtil.getClient();
+        //no do thing
+        pageResult = PgBeanKit.getPage(page, size);
+        long end = System.currentTimeMillis();
+        System.out.println("===========================处理业务结束：" + end + "===========================");
+        System.out.println("===========================用时：" + (end - begin) + "ms ===========================");
+        renderJson(respSuccess("查询成功", pageResult));
+    }
+
+    /**
+     * 单例模式 暂时不用
+     */
+    public void singleMode() {
+        long begin = System.currentTimeMillis();
+        System.out.println("===========================处理业务开始：" + begin + "=================================");
+        int page = getParaToInt("page", 1);
+        int size = getParaToInt("size", 15);
+        Page<Map<String, Object>> pageResult = null;
+        try {
+            TransportClient client = commonUtil.getClient();
+            pageResult = PgBeanKit.getPage(page, size);
+        } catch (UnknownHostException e) {
+            log.error(e.getMessage(), e);
+            renderJson(respFail(e.getMessage()));
+            return;
+        }
+        long end = System.currentTimeMillis();
+        System.out.println("===========================处理业务结束：" + end + "===========================");
+        System.out.println("===========================用时：" + (end - begin) + "ms ===========================");
+        renderJson(respSuccess("查询成功", pageResult));
+    }
+
+    /**
+     * 插件模式
+     */
+    public void pluginMode() {
+        long begin = System.currentTimeMillis();
+        System.out.println("===========================处理业务开始：" + begin + "=================================");
+        int page = getParaToInt("page", 1);
+        int size = getParaToInt("size", 15);
+        Page<Map<String, Object>> pageResult = null;
         TransportClient client = EsPlugin.getClient();
         pageResult = PgBeanKit.getPage(page, size);
-//        } catch (UnknownHostException e) {
-//            log.error(e.getMessage(), e);
-//            renderJson(respFail(e.getMessage()));
-//            return;
-//        }
         long end = System.currentTimeMillis();
         System.out.println("===========================处理业务结束：" + end + "===========================");
         System.out.println("===========================用时：" + (end - begin) + "ms ===========================");
