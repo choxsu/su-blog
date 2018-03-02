@@ -58,6 +58,7 @@ public class StartConfig extends JFinalConfig {
         logger.info("init route");
         me.add(new FrontRoutes());
         me.add(new AdminRoutes());
+        me.add(new ApiRoutes());
     }
 
     @Override

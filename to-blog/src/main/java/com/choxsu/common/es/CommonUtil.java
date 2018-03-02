@@ -16,11 +16,11 @@ import java.net.UnknownHostException;
  * @author chox su
  * @date 2018/03/02 10:03
  */
-public class CommonUtil {
+public final class CommonUtil {
 
     private static CommonUtil commonUtil = null;
 
-    private TransportClient client = null;
+    private static TransportClient client = null;
 
     private static Prop p = PropKit.use("sblog_config_dev.txt")
             .appendIfExists("sblog_config_pro.txt");
@@ -42,7 +42,7 @@ public class CommonUtil {
      * @return TransportClient
      * @throws UnknownHostException host not find exception
      */
-    private TransportClient getClient() throws UnknownHostException {
+    public TransportClient getClient() throws UnknownHostException {
         if (client != null) {
             return client;
         }
