@@ -5,7 +5,7 @@ import com.alibaba.druid.wall.WallFilter;
 import com.choxsu.common.entity.MappingKit;
 import com.choxsu.common.interceptor.VisitorInterceptor;
 import com.choxsu.common.interceptor.WebStatInterceptor;
-import com.choxsu.admin.interceptor.ShiroInterceptor;
+import com.choxsu.web.admin.common.interceptor.ShiroInterceptor;
 import com.choxsu.common.kit.DruidKit;
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;

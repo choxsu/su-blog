@@ -1,7 +1,7 @@
 package com.choxsu.common;
 
-import com.choxsu.admin.controller.IndexAdminController;
-import com.choxsu.admin.interceptor.AdminAuthInterceptor;
+import com.choxsu.web.admin.controller.IndexAdminController;
+import com.choxsu.web.admin.common.interceptor.AdminAuthInterceptor;
 import com.jfinal.config.Routes;
 
 /**

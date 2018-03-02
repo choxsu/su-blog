@@ -14,14 +14,14 @@
 
 package com.choxsu.common;
 
-import com.choxsu.about.AboutController;
-import com.choxsu.blog.BlogController;
-import com.choxsu.code.CodeController;
+import com.choxsu.web.front.about.AboutController;
+import com.choxsu.web.front.blog.BlogController;
+import com.choxsu.web.front.code.CodeController;
 import com.choxsu.common.interceptor.TagListInterceptor;
-import com.choxsu.favorite.FavoriteController;
-import com.choxsu.index.IndexController;
-import com.choxsu.search.SearchController;
-import com.choxsu.tags.TagsController;
+import com.choxsu.web.front.favorite.FavoriteController;
+import com.choxsu.web.front.index.IndexController;
+import com.choxsu.web.front.search.SearchController;
+import com.choxsu.web.front.tags.TagsController;
 import com.jfinal.config.Routes;
 
 /**

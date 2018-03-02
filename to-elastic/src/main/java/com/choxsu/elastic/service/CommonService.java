@@ -29,7 +29,7 @@ public class CommonService {
     }
 
     public static void main(String[] args) {
-        final List list = new ArrayList();
+        final List<Integer> list = new ArrayList<>();
         for (int i = 1; i <= 5000; i++) {
             list.add(i);
         }
@@ -37,12 +37,8 @@ public class CommonService {
         long begin = System.currentTimeMillis();
         System.out.println("开始：" + begin);
 
-//        list.forEach(o -> System.out.println(o));
-//        for (Object o : list) {
-//            System.out.println(o);
-//        }
-        for (int i = 0,length = list.size(); i < length; i++) {
-            System.out.println(list.get(i));
+        for (Integer aList : list) {
+            System.out.println(aList);
         }
 
         long end = System.currentTimeMillis();
@@ -50,6 +46,5 @@ public class CommonService {
         long use = end - begin;
         System.out.println("用时：" + use + "ms");
 
-        new Thread().start();
     }
 }

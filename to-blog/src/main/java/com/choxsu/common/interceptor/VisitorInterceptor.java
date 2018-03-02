@@ -5,8 +5,6 @@ import com.choxsu.common.kit.IpKit;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
-import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.Record;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

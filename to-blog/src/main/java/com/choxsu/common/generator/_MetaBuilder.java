@@ -1,12 +1,9 @@
 package com.choxsu.common.generator;
 
 
-import com.choxsu.common.go.ColumnMeta;
 import com.choxsu.common.go.MetaBuilder;
-import com.choxsu.common.go.TableMeta;
 
 import javax.sql.DataSource;
-import java.sql.*;
 import java.util.Arrays;
 
 /**

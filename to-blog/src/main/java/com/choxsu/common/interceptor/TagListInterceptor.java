@@ -1,6 +1,6 @@
 package com.choxsu.common.interceptor;
 
-import com.choxsu.index.IndexService;
+import com.choxsu.web.front.index.IndexService;
 import com.jfinal.aop.Enhancer;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
