@@ -56,9 +56,7 @@ public class EsPlugin implements IPlugin {
             for (String node : nodes) {
                 if (node.length() > 0) {
                     String[] hostPort = node.split(":");
-                    InetAddress inetAddress = null;
-                    inetAddress = InetAddress.getByName(hostPort[0]);
-
+                    InetAddress inetAddress = InetAddress.getByName(hostPort[0]);
                     int port = Integer.parseInt(hostPort[1]);
                     client.addTransportAddress(new TransportAddress(inetAddress, port));
                 }
