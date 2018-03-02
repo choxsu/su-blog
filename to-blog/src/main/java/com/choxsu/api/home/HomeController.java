@@ -2,6 +2,7 @@ package com.choxsu.api.home;
 
 import com.choxsu.common.BaseController;
 import com.choxsu.common.es.CommonUtil;
+import com.choxsu.common.es.EsPlugin;
 import com.choxsu.common.kit.PgBeanKit;
 import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Page;
@@ -26,14 +27,15 @@ public class HomeController extends BaseController {
         int page = getParaToInt("page", 1);
         int size = getParaToInt("size", 15);
         Page<Map<String, Object>> pageResult = null;
-        try {
-            TransportClient client = commonUtil.getClient();
-            pageResult = PgBeanKit.getPage(page, size);
-        } catch (UnknownHostException e) {
-            log.error(e.getMessage(), e);
-            renderJson(respFail(e.getMessage()));
-            return;
-        }
+//        try {
+//            TransportClient client = commonUtil.getClient();
+        TransportClient client = EsPlugin.getClient();
+        pageResult = PgBeanKit.getPage(page, size);
+//        } catch (UnknownHostException e) {
+//            log.error(e.getMessage(), e);
+//            renderJson(respFail(e.getMessage()));
+//            return;
+//        }
         long end = System.currentTimeMillis();
         System.out.println("===========================处理业务结束：" + end + "===========================");
         System.out.println("===========================用时：" + (end - begin) + "ms ===========================");

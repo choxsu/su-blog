@@ -3,6 +3,8 @@ package com.choxsu.common;
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
 import com.choxsu.common.entity.MappingKit;
+import com.choxsu.common.es.CommonUtil;
+import com.choxsu.common.es.EsPlugin;
 import com.choxsu.common.interceptor.VisitorInterceptor;
 import com.choxsu.common.interceptor.WebStatInterceptor;
 import com.choxsu.web.admin.common.interceptor.ShiroInterceptor;
@@ -43,7 +45,7 @@ public class StartConfig extends JFinalConfig {
         logger.info("启动webAppDir:{}", "to-blog/src/main/webapp");
         logger.info("启动端口：{}", 8080);
         logger.info("上下文路径context:{}", "/");
-        JFinal.start("to-blog/src/main/webapp", 8080    , "/");
+        JFinal.start("to-blog/src/main/webapp", 8080, "/");
     }
 
     @Override
@@ -89,6 +91,7 @@ public class StartConfig extends JFinalConfig {
         arp.addSqlTemplate("/sql/all_sqls.sql");
         me.add(arp);
 
+        me.add(new EsPlugin(p.get("elasticsearch_hosts"), p.get("cluster_name", "choxsu-cs")));
         me.add(new EhCachePlugin());
 
 
