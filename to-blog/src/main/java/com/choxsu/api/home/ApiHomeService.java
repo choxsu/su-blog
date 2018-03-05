@@ -23,7 +23,7 @@ import java.util.Map;
  * @date 2018/03/02 11:33
  */
 @Slf4j
-public class HomeService {
+public class ApiHomeService {
 
     private TransportClient client = EsPlugin.getClient();
 
