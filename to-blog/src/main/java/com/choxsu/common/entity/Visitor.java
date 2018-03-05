@@ -7,5 +7,4 @@ import com.choxsu.common.entity.base.BaseVisitor;
  */
 @SuppressWarnings("serial")
 public class Visitor extends BaseVisitor<Visitor> {
-	public static final Visitor dao = new Visitor().dao();
 }

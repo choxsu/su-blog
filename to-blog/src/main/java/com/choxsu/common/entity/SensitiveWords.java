@@ -7,5 +7,4 @@ import com.choxsu.common.entity.base.BaseSensitiveWords;
  */
 @SuppressWarnings("serial")
 public class SensitiveWords extends BaseSensitiveWords<SensitiveWords> {
-	public static final SensitiveWords dao = new SensitiveWords().dao();
 }

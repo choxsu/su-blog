@@ -101,4 +101,21 @@ public class BaseController extends Controller {
     private Map<String, Object> getHashMap() {
         return new HashMap<String, Object>();
     }
+
+
+    public Map<String, Object> getSuccessApiResult(String msg, Object object){
+        Map<String, Object> result = getHashMap();
+        result.put("success", true);
+        result.put("msg", msg);
+        result.put("data", object);
+        return result;
+    }
+
+    public Map<String, Object> getFailApiResult(String msg, Object object){
+        Map<String, Object> result = getHashMap();
+        result.put("success", false);
+        result.put("msg", msg);
+        result.put("data", object);
+        return result;
+    }
 }

@@ -1,5 +1,11 @@
+#include("")
+
 ### blog
+
 #namespace("blog")
+
+  #include("blog.sql")
+
   #sql("searchCount")
     SELECT
       COUNT(0) as t

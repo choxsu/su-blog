@@ -7,5 +7,4 @@ import com.choxsu.common.entity.base.BaseBlogTag;
  */
 @SuppressWarnings("serial")
 public class BlogTag extends BaseBlogTag<BlogTag> {
-	public static final BlogTag dao = new BlogTag().dao();
 }

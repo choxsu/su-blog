@@ -8,5 +8,6 @@ import com.choxsu.common.entity.base.BaseBlog;
  */
 @SuppressWarnings("serial")
 public class Blog extends BaseBlog<Blog> {
-	public static final Blog dao = new Blog().dao();
+
+    public static final String defaultTag = "blog";
 }

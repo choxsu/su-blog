@@ -7,5 +7,4 @@ import com.choxsu.common.entity.base.BaseBlogCategory;
  */
 @SuppressWarnings("serial")
 public class BlogCategory extends BaseBlogCategory<BlogCategory> {
-	public static final BlogCategory dao = new BlogCategory().dao();
 }

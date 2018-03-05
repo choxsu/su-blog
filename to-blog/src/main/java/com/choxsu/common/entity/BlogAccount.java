@@ -7,5 +7,4 @@ import com.choxsu.common.entity.base.BaseBlogAccount;
  */
 @SuppressWarnings("serial")
 public class BlogAccount extends BaseBlogAccount<BlogAccount> {
-	public static final BlogAccount dao = new BlogAccount().dao();
 }
