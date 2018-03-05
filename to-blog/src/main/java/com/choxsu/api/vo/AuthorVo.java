@@ -1,4 +1,4 @@
-package com.choxsu.api.entity;
+package com.choxsu.api.vo;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +9,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class Author {
+public class AuthorVo {
 
     private String loginname;
 

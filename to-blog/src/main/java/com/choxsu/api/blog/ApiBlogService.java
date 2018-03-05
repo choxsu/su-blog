@@ -1,10 +1,14 @@
 package com.choxsu.api.blog;
 
-import com.choxsu.api.entity.Author;
+import com.choxsu.api.vo.AuthorVo;
+import com.choxsu.api.vo.BlogDetailVo;
 import com.choxsu.api.vo.BlogListVo;
+import com.choxsu.api.vo.RepliesVo;
 import com.choxsu.common.entity.Blog;
 import com.choxsu.common.entity.BlogTag;
 import com.jfinal.aop.Before;
+import com.jfinal.kit.Kv;
+import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.SqlPara;
 import com.jfinal.plugin.activerecord.tx.Tx;
@@ -22,20 +26,27 @@ public class ApiBlogService {
     private static final Blog blogDao = new Blog().dao();
     private static final BlogTag blogTabDao = new BlogTag().dao();
 
+    private static final String headerImgUrl = "http://b.styg.site/images/100.jpg";
+    private static final String authorName = "ChoxSu";
     /**
      * 首页博客list
      *
-     * @param tab   分类tab
-     * @param page  当前页
-     * @param size  每页条数
+     * @param tab  分类tab
+     * @param page 当前页
+     * @param size 每页条数
      */
     public List<BlogListVo> list(String tab, Integer page, Integer size) {
         List<BlogListVo> blogListVos = new ArrayList<>();
-        SqlPara sqlPara = blogDao.getSqlPara("blog.paginate");
+        Kv kv = Kv.create();
+        if (!StrKit.isBlank(tab) && !tab.equals("all")) {
+            kv.set("category = ", tab);
+        }
+        SqlPara sqlPara = blogDao.getSqlPara("blog.paginate", Kv.by("cond", kv));
         Page<Blog> projectPage = blogDao.paginate(page, size, sqlPara);
         List<Blog> list = projectPage.getList();
-        BlogListVo blogListVo = null;
-        Author author = null;
+        BlogListVo blogListVo;
+        AuthorVo authorVo;
+        boolean top = false;
         for (Blog blog : list) {
             blogListVo = new BlogListVo();
             blogListVo.setAuthor_id(1);
@@ -44,16 +55,19 @@ public class ApiBlogService {
             blogListVo.setGood(true);
             blogListVo.setId(blog.getId());
             blogListVo.setLast_reply_at(blog.getUpdateAt());
-            blogListVo.setTab(getTabName(blog.getTagId()));
+            blogListVo.setTab(blog.getCategory());
             blogListVo.setTitle(blog.getTitle());
-            blogListVo.setTop(true);
+            if (getTabName(blog.getTagId()).equals(Blog.defaultTag)){
+                top = true;
+            }
+            blogListVo.setTop(top);
             blogListVo.setVisit_count(blog.getClickCount());
             blogListVo.setReply_count(0);
 
-            author = new Author();
-            author.setAvatar_url("https://avatars1.githubusercontent.com/u/227713?v=3&s=120");
-            author.setLoginname("ChoxSu");
-            blogListVo.setAuthor(author);
+            authorVo = new AuthorVo();
+            authorVo.setAvatar_url(headerImgUrl);
+            authorVo.setLoginname(authorName);
+            blogListVo.setAuthor(authorVo);
             blogListVos.add(blogListVo);
         }
         return blogListVos;
@@ -61,18 +75,59 @@ public class ApiBlogService {
 
     /**
      * 获取标签名字
+     *
      * @param tabId 标签id
-     * @return String 默认返回blog
+     * @return String 默认返回Java
      */
-    private synchronized String getTabName(Integer tabId){
-        if (tabId == null){
+    private synchronized String getTabName(Integer tabId) {
+        if (tabId == null) {
             return Blog.defaultTag;
         }
         BlogTag tag = blogTabDao.findById(tabId);
-        if (tag == null){
+        if (tag == null) {
             return Blog.defaultTag;
         }
         return tag.getName();
     }
 
+    /**
+     * 详情
+     *
+     * @param id 博客id
+     * @return
+     */
+    public BlogListVo detail(Integer id) {
+        BlogDetailVo blogDetailVo = new BlogDetailVo();
+        boolean top = false;
+        Blog blog = blogDao.findById(id);
+        if (blog == null){
+            return null;
+        }
+        //继承父类
+        blogDetailVo.setAuthor_id(1);
+        blogDetailVo.setContent(blog.getContent());
+        blogDetailVo.setCreate_at(blog.getCreateAt());
+        blogDetailVo.setGood(true);
+        blogDetailVo.setId(blog.getId());
+        blogDetailVo.setLast_reply_at(blog.getUpdateAt());
+        blogDetailVo.setTab(blog.getCategory());
+        blogDetailVo.setTitle(blog.getTitle());
+        if (getTabName(blog.getTagId()).equals(Blog.defaultTag)){
+            top = true;
+        }
+        blogDetailVo.setTop(top);
+        blogDetailVo.setVisit_count(blog.getClickCount());
+        blogDetailVo.setReply_count(0);
+
+        AuthorVo authorVo = new AuthorVo();
+        authorVo.setAvatar_url(headerImgUrl);
+        authorVo.setLoginname(authorName);
+        blogDetailVo.setAuthor(authorVo);
+        //处理自己的属性
+        List<RepliesVo> replies = new ArrayList<>();
+        blogDetailVo.setReplies(replies);
+        blogDetailVo.set_collect(true);
+
+        return blogDetailVo;
+    }
 }

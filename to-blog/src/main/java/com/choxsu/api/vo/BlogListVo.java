@@ -1,6 +1,5 @@
 package com.choxsu.api.vo;
 
-import com.choxsu.api.entity.Author;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,5 +35,5 @@ public class BlogListVo {
 
     private Date create_at;
 
-    private Author author;
+    private AuthorVo author;
 }

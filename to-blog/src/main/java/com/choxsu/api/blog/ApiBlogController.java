@@ -25,9 +25,17 @@ public class ApiBlogController extends BaseController {
         Integer page = getParaToInt("page", 1);
         Integer size = getParaToInt("size", 20);
         String tab = getPara("tab");
-        log.info("tab:{}", tab);
+        log.info("tab==>{}", tab);
         List<BlogListVo> list = apiBlogService.list(tab, page, size);
         renderJson(getSuccessApiResult("查询成功", list));
+    }
+    /**
+     * 博客detail
+     */
+    public void index() {
+        Integer id = getParaToInt();
+        BlogListVo blogListVo = apiBlogService.detail(id);
+        renderJson(getSuccessApiResult("查询成功", blogListVo));
     }
 
 }
