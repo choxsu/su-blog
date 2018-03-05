@@ -10,4 +10,4 @@ password=root
 
 ### ES配置信息
 elasticsearch_hosts=127.0.0.1:9300,127.0.0.1:9301
-cluster_name=choxsu-cs
+cluster_name=choxsu-es
