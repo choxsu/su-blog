@@ -9,5 +9,5 @@ import com.choxsu.common.entity.base.BaseBlog;
 @SuppressWarnings("serial")
 public class Blog extends BaseBlog<Blog> {
 
-    public static final String defaultTag = "blog";
+    public static final String defaultTag = "Java";
 }

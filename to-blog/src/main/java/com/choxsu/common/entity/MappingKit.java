@@ -13,11 +13,12 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
  * }
  * </pre>
  */
+
 public class MappingKit {
-	
 	public static void mapping(ActiveRecordPlugin arp) {
+		arp.addMapping("account", "id", BlogAccount.class);
+
 		arp.addMapping("blog", "id", Blog.class);
-		arp.addMapping("blog_account", "id", BlogAccount.class);
 		arp.addMapping("blog_category", "id", BlogCategory.class);
 		arp.addMapping("blog_tag", "id", BlogTag.class);
 		arp.addMapping("sensitive_words", "id", SensitiveWords.class);
