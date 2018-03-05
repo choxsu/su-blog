@@ -94,6 +94,23 @@
             <artifactId>log4j-core</artifactId>
             <version>2.10.0</version>
         </dependency>
+
+        <!--
+            加入下面连个dependency 避免启动出现报错
+            ERROR StatusLogger No log4j2 configuration file found. Using default configuration:
+            logging only errors to the console. Set system property 'log4j2.debug' to show Log4j2 internal initialization logging.
+        -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.7</version>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
