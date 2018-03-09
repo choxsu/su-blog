@@ -27,13 +27,6 @@ public class VisitorInterceptor implements Interceptor {
         String ip = IpKit.getRealIp(request);
         String method = request.getMethod();
         String userAgent = request.getHeader("user-agent");
-//        Record record = new Record();
-//        record.set("ip", ip);
-//        record.set("url", url);
-//        record.set("method", method);
-//        record.set("client", userAgent);
-//        record.set("requestTime", new Date());
-//        boolean b = Db.save("visitor", record);
         LOGGER.info("请求ip:{}", ip);
 
         Visitor visitor = new Visitor();

@@ -102,7 +102,7 @@ public class StartConfig extends JFinalConfig {
         logger.info("init interceptor");
         me.add(new VisitorInterceptor());
         me.add(new WebStatInterceptor("*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*"));
-        me.add(new ShiroInterceptor());
+//        me.add(new ShiroInterceptor());
     }
 
     @Override

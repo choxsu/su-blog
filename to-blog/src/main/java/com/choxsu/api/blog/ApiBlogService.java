@@ -94,7 +94,7 @@ public class ApiBlogService {
      * 详情
      *
      * @param id 博客id
-     * @return
+     * @return BlogListVo
      */
     public BlogListVo detail(Integer id) {
         BlogDetailVo blogDetailVo = new BlogDetailVo();
