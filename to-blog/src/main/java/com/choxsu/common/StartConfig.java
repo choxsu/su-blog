@@ -3,11 +3,9 @@ package com.choxsu.common;
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
 import com.choxsu.common.entity.MappingKit;
-import com.choxsu.common.es.CommonUtil;
 import com.choxsu.common.es.EsPlugin;
 import com.choxsu.common.interceptor.VisitorInterceptor;
 import com.choxsu.common.interceptor.WebStatInterceptor;
-import com.choxsu.web.admin.common.interceptor.ShiroInterceptor;
 import com.choxsu.common.kit.DruidKit;
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;
@@ -19,6 +17,8 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.template.Engine;
 import com.jfinal.template.source.ClassPathSourceFactory;
+import net.dreamlu.event.EventPlugin;
+import net.dreamlu.event.support.DuangBeanFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,6 +38,7 @@ public class StartConfig extends JFinalConfig {
             .appendIfExists("sblog_config_pro.txt");
 
     private WallFilter wallFilter;
+    private Routes routes;
 
 
     public static void main(String[] args) {
@@ -57,10 +58,13 @@ public class StartConfig extends JFinalConfig {
 
     @Override
     public void configRoute(Routes me) {
+
         logger.info("init route");
         me.add(new FrontRoutes());
         me.add(new AdminRoutes());
         me.add(new ApiRoutes());
+        me.add(new TestRoutes());
+        this.routes = me;
     }
 
     @Override
@@ -93,8 +97,29 @@ public class StartConfig extends JFinalConfig {
 
         me.add(new EsPlugin(p.get("elasticsearch_hosts"), p.get("cluster_name", "choxsu-cs")));
         me.add(new EhCachePlugin());
+        me.add(getInitEventPlugin());
 
 
+    }
+
+    /**
+     * 获取初始化事件驱动插件
+     *
+     * @return EventPlugin
+     */
+    private EventPlugin getInitEventPlugin() {
+        // 初始化插件
+        EventPlugin plugin = new EventPlugin();
+        // 设置为异步，默认同步，或者使用`threadPool(ExecutorService executorService)`自定义线程池。
+        plugin.async();
+        // 设置扫描jar包，默认不扫描
+        plugin.scanJar();
+        // 设置监听器默认包，多个包名使用;分割，默认全扫描
+        plugin.scanPackage("com.choxsu");
+        // bean工厂，默认为DefaultBeanFactory，可实现IBeanFactory自定义扩展
+        // 对于将@EventListener写在不含无参构造器的类需要使用`ObjenesisBeanFactory`
+        plugin.beanFactory(new DuangBeanFactory());
+        return plugin;
     }
 
     @Override
