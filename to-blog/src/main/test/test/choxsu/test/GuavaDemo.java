@@ -1,11 +1,15 @@
 package test.choxsu.test;
 
 import com.google.common.base.Optional;
+import com.google.common.eventbus.AllowConcurrentEvents;
+import com.google.common.eventbus.AsyncEventBus;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import org.junit.Test;
 
 import javax.swing.event.ChangeEvent;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 
 /**
@@ -63,6 +67,7 @@ public class GuavaDemo {
         public void listen(OrderEvent event) {
             System.out.println("hello2 receive2 msg:" + event.getMessage());
         }
+
         @Subscribe
         public void listen(String event) {
             System.out.println("hello2 receive2 msg:" + event);
@@ -73,7 +78,6 @@ public class GuavaDemo {
     public void test1() {
         //Creates a new EventBus with the given identifier.
         EventBus eventBus = new EventBus("choxsu");
-
         //register all subscriber
         eventBus.register(new HelloEventListener());
         eventBus.register(new Hello2EventListener());
@@ -87,6 +91,47 @@ public class GuavaDemo {
 
         eventBus.post(1);
         eventBus.post(12);
+    }
+
+    private final Object lock = new Object();
+
+    class AsyncRegisterEvent {
+
+        @Subscribe
+//        @AllowConcurrentEvents
+        public void listen(String event) {
+
+            System.out.println("event:" + event);
+            synchronized (lock) {
+                for (int i = 0; i < 100; i++) {
+                    System.out.println("i:" + i);
+                }
+            }
+            System.out.println("说好的十万次呢");
+            System.out.println("end");
+        }
+
+    }
+
+    class AsyncRegisterEvent2 {
+
+        @Subscribe
+        @AllowConcurrentEvents
+        public void listen(Integer event) {
+            System.out.println("Integer:" + event);
+        }
+    }
+
+    @Test
+    public void test2() {
+//        EventBus asyncEventBus = new EventBus("choxsu");
+        AsyncEventBus asyncEventBus = new AsyncEventBus("choxsu1", Executors.newSingleThreadExecutor());
+        asyncEventBus.register(new AsyncRegisterEvent());
+//        asyncEventBus.register(new AsyncRegisterEvent2());+·
+        asyncEventBus.post("掉包了");
+//        asyncEventBus.post(20152);
+        System.out.println("测试异步，发送成功");
+
     }
 
 

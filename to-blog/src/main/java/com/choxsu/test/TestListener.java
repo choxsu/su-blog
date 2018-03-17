@@ -13,7 +13,7 @@ public class TestListener {
     public void test1(ApplicationEvent event) {
         Object xx = event.getSource();
         System.out.println(Thread.currentThread().getName() + " " + this.getClass() + " " + "\tsource:" + xx);
-        for (int i = 0; i < 5000; i++) {
+        for (int i = 0; i < 100000; i++) {
             System.out.println("i:"+i);
         }
     }
