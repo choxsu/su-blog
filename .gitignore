@@ -13,3 +13,12 @@ out/
 /.idea/uiDesigner.xml
 /.idea/encodings.
 /target/
+*.class
+s-blog.log
+to-blog/src/main/java/com/choxsu/api/entity/
+to-blog/target/
+to-elastic/target/
+to-jfinal/target/generated-sources/
+to-morning/target/
+to-oss/target/
+to-pay/target/
