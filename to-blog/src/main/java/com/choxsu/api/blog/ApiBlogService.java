@@ -26,7 +26,7 @@ public class ApiBlogService {
     private static final Blog blogDao = new Blog().dao();
     private static final BlogTag blogTabDao = new BlogTag().dao();
 
-    private static final String headerImgUrl = "http://b.styg.site/images/100.jpg";
+    private static final String headerImgUrl = "https://blog.styg.site/images/100.jpg";
     private static final String authorName = "ChoxSu";
     /**
      * 首页博客list
