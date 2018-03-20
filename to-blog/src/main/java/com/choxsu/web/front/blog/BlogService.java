@@ -24,6 +24,9 @@ public class BlogService {
         sb.append("FROM blog WHERE id = ? ");
         String sql = sb.toString();
         Record blog = Db.findFirst(sql, id);
+        if (blog == null){
+            return null;
+        }
         Integer tagId = blog.getInt("tagId");
         if (tagId != null && tagId > 0) {
             indexService.doTagNameSet(blog, tagId);

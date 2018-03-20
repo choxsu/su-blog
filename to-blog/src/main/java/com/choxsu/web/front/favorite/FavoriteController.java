@@ -25,6 +25,10 @@ public class FavoriteController extends BaseController {
     public void detail() {
         Integer id = getParaToInt();
         Record record = BLOG_SERVICE.findBlog(id);
+        if (record == null){
+            renderError(404);
+            return;
+        }
         setAttr("blog", record);
         render("detail.html");
     }
