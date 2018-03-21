@@ -27,6 +27,11 @@
                 <a href="javascript:;" title="ChoxSu" rel="home">ChoxSu</a>
             </h1>
             <div class="site-description">JAVA Developer</div>
+            <div class="site-description">
+                <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=03486a49e3f0abd340b9c1a32297a55d2aadf24f679b5ab27cca22eee9e04f31">
+                    <img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="开发工具共享" title="开发工具共享">
+                </a>
+            </div>
 
             <nav class="main-navigation" role="navigation">
                 <div class="menu-primary-container">
@@ -55,7 +60,8 @@
                 <form role="search" method="get" class="search-form" action="/search">
                     <label>
                         <span class="screen-reader-text">搜索：</span>
-                        <input type="search" class="search-field" placeholder="搜索&hellip;" value="#(keyword)" name="keyword"/>
+                        <input type="search" class="search-field" placeholder="搜索&hellip;" value="#(keyword)"
+                               name="keyword"/>
                     </label>
                     <input type="submit" class="search-submit" value="搜索"/>
                 </form>
@@ -63,10 +69,12 @@
             <div class="tags">
                 #for(r : tags)
                 #if(r.name == "JAVA" || r.name == "Jfinal" )
-                <a href='/tag/#(r.id)' class='tag-link-#(for.index + 20) tag-link-position-#(for.index)' title='#(r.topicNum)个话题'
+                <a href='/tag/#(r.id)' class='tag-link-#(for.index + 20) tag-link-position-#(for.index)'
+                   title='#(r.topicNum)个话题'
                    style="font-size: 18px;">#(r.name)</a>
                 #else
-                <a href='/tag/#(r.id)' class='tag-link-#(for.index) tag-link-position-#(for.index)' title='#(r.topicNum)个话题'
+                <a href='/tag/#(r.id)' class='tag-link-#(for.index) tag-link-position-#(for.index)'
+                   title='#(r.topicNum)个话题'
                    style="font-size: 14px;">#(r.name)</a>
                 #end
                 #end
@@ -78,10 +86,10 @@
     </div>
     <!-- .row -->
     <!--<div class="row">-->
-        <!--<div class="col-sm-3"></div>-->
-        <!--<div class="col-sm-9 site-footer">-->
-            <!--&copy; 2018 <a href="http://www.styg.site">ChoxSu</a>-->
-        <!--</div>-->
+    <!--<div class="col-sm-3"></div>-->
+    <!--<div class="col-sm-9 site-footer">-->
+    <!--&copy; 2018 <a href="http://www.styg.site">ChoxSu</a>-->
+    <!--</div>-->
     <!--</div>-->
 </div>
 <!-- .container -->
