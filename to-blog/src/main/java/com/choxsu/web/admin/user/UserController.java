@@ -49,8 +49,7 @@ public class UserController extends BaseProjectController {
 			sql.append(" order by ").append(orderBy);
 		}
 		
-		Page<SysUser> page = SysUser.dao.paginate(getPaginator(), "select t.*,d.name as departname ", sql.toString()
-				.toString());
+		Page<SysUser> page = SysUser.dao.paginate(getPaginator(), "select t.*,d.name as departname ", sql.toString());
 		// 下拉框
 		setAttr("departSelect", new DepartmentSvc().selectDepart(model.getInt("departid")));
 
