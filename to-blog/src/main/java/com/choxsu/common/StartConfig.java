@@ -38,7 +38,6 @@ public class StartConfig extends JFinalConfig {
             .appendIfExists("sblog_config_pro.txt");
 
     private WallFilter wallFilter;
-    private Routes routes;
 
 
     public static void main(String[] args) {
@@ -64,7 +63,6 @@ public class StartConfig extends JFinalConfig {
         me.add(new AdminRoutes());
         me.add(new ApiRoutes());
         me.add(new TestRoutes());
-        this.routes = me;
     }
 
     @Override
