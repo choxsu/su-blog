@@ -6,9 +6,9 @@
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
-    <listener>
+   <!-- <listener>
         <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
-    </listener>
+    </listener>-->
 
     <filter>
         <filter-name>sblog</filter-name>
