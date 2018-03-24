@@ -41,8 +41,8 @@ public class MyGenerator {
     protected MappingKitGenerator mappingKitGenerator;
     protected DataDictionaryGenerator dataDictionaryGenerator;
     protected boolean generateDataDictionary = false;
-    protected boolean generateController = true;
-    protected boolean generateService = true;
+    protected boolean generateController = false;
+    protected boolean generateService = false;
     protected YcControllerGenerator ycControllerGenerator;
     protected YcServiceGenerator ycServiceGenerator;
 
