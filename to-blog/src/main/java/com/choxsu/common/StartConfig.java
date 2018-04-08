@@ -53,6 +53,7 @@ public class StartConfig extends JFinalConfig {
         logger.info("init constants");
         me.setDevMode(p.getBoolean("devMode", false));
         me.setJsonFactory(MixedJsonFactory.me());
+        me.setI18nDefaultBaseName("i18n");
     }
 
     @Override

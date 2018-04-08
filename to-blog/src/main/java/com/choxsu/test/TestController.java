@@ -17,6 +17,8 @@ public class TestController extends BaseController {
 
         System.out.println("用时："+(System.currentTimeMillis() - begin) + "ms");
 
+
+
         renderJson(respSuccess("事件发送成功"));
     }
 }
