@@ -124,6 +124,16 @@
             <artifactId>lombok</artifactId>
             <version>1.16.20</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+        </dependency>
+
+        <dependency><!-- spring boot aop starter依赖 -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
