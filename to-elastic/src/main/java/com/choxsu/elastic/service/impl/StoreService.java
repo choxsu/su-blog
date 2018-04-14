@@ -89,11 +89,11 @@ public class StoreService implements IStoreService {
             SearchHits hits = response.getHits();
 
             hits.forEach((s) -> {
-                Map<String, Object> sourceAsMap = s.getSourceAsMap();
+                Map<String, Object> sourceAsMap = s.sourceAsMap();
                 sourceAsMap.put("id", s.getId());
                 result.add(sourceAsMap);
             });
-            int totalHits = ((int) hits.totalHits);
+            int totalHits = ((int) hits.totalHits());
             return PgBean.getPage(result, page, size, totalHits);
 
         } catch (Exception e) {

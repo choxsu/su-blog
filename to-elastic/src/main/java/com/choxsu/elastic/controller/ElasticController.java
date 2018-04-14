@@ -38,7 +38,6 @@ public class ElasticController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public Object save(String name, Integer age, String sex, String introduce, Date birthday) {
 
-
         return null;
     }
 

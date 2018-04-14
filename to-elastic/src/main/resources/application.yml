@@ -10,8 +10,9 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+
+
 elasticsearch:
-  host: 127.0.0.1:9300,127.0.0.1:9301
-  cluster:
-    #name: choxsu  # 9201
-    name: choxsu-cs # 9200
+  clusterName: choxsu
+  # 多个节点使用，分割 eg==> 127.0.0.1:9300,127.0.0.1:9301
+  hostNode: 127.0.0.1:9300
