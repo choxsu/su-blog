@@ -1,4 +1,4 @@
-package com.choxsu.common;
+package com.choxsu.common.base;
 
 import com.jfinal.core.Controller;
 

@@ -12,7 +12,7 @@
  * 首次的尝试扼杀在了摇篮之中
  */
 
-package com.choxsu.common;
+package com.choxsu.common.routes;
 
 import com.choxsu.web.front.about.AboutController;
 import com.choxsu.web.front.blog.BlogController;

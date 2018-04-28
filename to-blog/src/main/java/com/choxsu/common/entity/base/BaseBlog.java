@@ -1,12 +1,13 @@
 package com.choxsu.common.entity.base;
 
+import com.choxsu.common.base.BaseModel;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.IBean;
 /**
  * @author choxsu, do not modify this file.
  */
 @SuppressWarnings("serial")
-public abstract class BaseBlog<M extends BaseBlog<M>> extends Model<M> implements IBean {
+public abstract class BaseBlog<M extends BaseBlog<M>> extends BaseModel<M> implements IBean {
 
     /**
      * 主键id

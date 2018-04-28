@@ -1,4 +1,4 @@
-package com.choxsu.common;
+package com.choxsu.common.routes;
 
 import com.choxsu.test.TestController;
 import com.jfinal.config.Routes;

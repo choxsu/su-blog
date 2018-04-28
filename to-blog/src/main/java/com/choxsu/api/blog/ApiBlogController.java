@@ -1,13 +1,12 @@
 package com.choxsu.api.blog;
 
 import com.choxsu.api.vo.BlogListVo;
-import com.choxsu.common.BaseController;
+import com.choxsu.common.base.BaseController;
+import com.choxsu.common.entity.Blog;
 import com.jfinal.aop.Enhancer;
-import com.jfinal.kit.Kv;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author chox su
@@ -37,5 +36,17 @@ public class ApiBlogController extends BaseController {
         BlogListVo blogListVo = apiBlogService.detail(id);
         renderJson(getSuccessApiResult("查询成功", blogListVo));
     }
+
+
+    /**
+     * 博客detail
+     */
+    public void test() {
+        List<Blog> blog = apiBlogService.test();
+        renderJson(getSuccessApiResult("查询成功", blog));
+    }
+
+
+
 
 }

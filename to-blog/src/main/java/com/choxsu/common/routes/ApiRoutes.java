@@ -1,4 +1,4 @@
-package com.choxsu.common;
+package com.choxsu.common.routes;
 
 import com.choxsu.api.blog.ApiBlogController;
 import com.choxsu.api.home.ApiHomeController;

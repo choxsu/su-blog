@@ -2,11 +2,16 @@ package com.choxsu.common;
 
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
+import com.choxsu.common.base.dialect.BaseMysqlDialect;
 import com.choxsu.common.entity.MappingKit;
 import com.choxsu.common.es.EsPlugin;
 import com.choxsu.common.interceptor.VisitorInterceptor;
 import com.choxsu.common.interceptor.WebStatInterceptor;
 import com.choxsu.common.kit.DruidKit;
+import com.choxsu.common.routes.AdminRoutes;
+import com.choxsu.common.routes.ApiRoutes;
+import com.choxsu.common.routes.FrontRoutes;
+import com.choxsu.common.routes.TestRoutes;
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;
 import com.jfinal.json.MixedJsonFactory;
@@ -87,6 +92,9 @@ public class StartConfig extends JFinalConfig {
         druidPlugin.addFilter(new StatFilter());
         me.add(druidPlugin);
         ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
+
+        arp.setDialect(new BaseMysqlDialect());
+
         arp.setTransactionLevel(Connection.TRANSACTION_READ_COMMITTED);
         MappingKit.mapping(arp);
         arp.setShowSql(p.getBoolean("devMode", false));

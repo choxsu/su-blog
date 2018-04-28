@@ -1,6 +1,6 @@
 package com.choxsu.web.front.index;
 
-import com.choxsu.common.BaseController;
+import com.choxsu.common.base.BaseController;
 import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;

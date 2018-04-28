@@ -1,6 +1,6 @@
 package com.choxsu.api.home;
 
-import com.choxsu.common.BaseController;
+import com.choxsu.common.base.BaseController;
 import com.choxsu.common.es.EsPlugin;
 import com.choxsu.common.kit.PgBeanKit;
 import com.jfinal.aop.Enhancer;

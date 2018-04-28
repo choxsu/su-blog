@@ -1,7 +1,7 @@
 package com.choxsu.web.front.favorite;
 
 import com.choxsu.web.front.blog.BlogService;
-import com.choxsu.common.BaseController;
+import com.choxsu.common.base.BaseController;
 import com.choxsu.common.constant.CategoryEnum;
 import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Page;

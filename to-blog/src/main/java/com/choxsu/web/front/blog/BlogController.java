@@ -1,6 +1,6 @@
 package com.choxsu.web.front.blog;
 
-import com.choxsu.common.BaseController;
+import com.choxsu.common.base.BaseController;
 import com.choxsu.common.constant.CategoryEnum;
 import com.jfinal.aop.Enhancer;
 import com.jfinal.plugin.activerecord.Page;

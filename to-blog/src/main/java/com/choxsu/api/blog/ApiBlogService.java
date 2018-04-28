@@ -4,6 +4,9 @@ import com.choxsu.api.vo.AuthorVo;
 import com.choxsu.api.vo.BlogDetailVo;
 import com.choxsu.api.vo.BlogListVo;
 import com.choxsu.api.vo.RepliesVo;
+import com.choxsu.common.base.BaseService;
+import com.choxsu.common.base.db.Column;
+import com.choxsu.common.base.db.Columns;
 import com.choxsu.common.entity.Blog;
 import com.choxsu.common.entity.BlogTag;
 import com.jfinal.aop.Before;
@@ -21,7 +24,7 @@ import java.util.List;
  * @date 2018/03/02 10:22
  */
 @Before(Tx.class)
-public class ApiBlogService {
+public class ApiBlogService extends BaseService<Blog> {
 
     private static final Blog blogDao = new Blog().dao();
     private static final BlogTag blogTabDao = new BlogTag().dao();
@@ -41,8 +44,8 @@ public class ApiBlogService {
         if (!StrKit.isBlank(tab) && !tab.equals("all")) {
             kv.set("category = ", tab);
         }
-        SqlPara sqlPara = blogDao.getSqlPara("blog.paginate", Kv.by("cond", kv));
-        Page<Blog> projectPage = blogDao.paginate(page, size, sqlPara);
+        SqlPara sqlPara = DAO.getSqlPara("blog.paginate", Kv.by("cond", kv));
+        Page<Blog> projectPage = DAO.paginate(page, size, sqlPara);
         List<Blog> list = projectPage.getList();
         BlogListVo blogListVo;
         AuthorVo authorVo;
@@ -129,5 +132,11 @@ public class ApiBlogService {
         blogDetailVo.set_collect(true);
 
         return blogDetailVo;
+    }
+
+
+    public List<Blog> test() {
+        List<Blog> blogs = DAO.findAll();
+        return blogs;
     }
 }

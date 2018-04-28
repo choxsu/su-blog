@@ -1,4 +1,4 @@
-package com.choxsu.common;
+package com.choxsu.common.routes;
 
 import com.choxsu.web.admin.controller.IndexAdminController;
 import com.choxsu.web.admin.common.interceptor.AdminAuthInterceptor;

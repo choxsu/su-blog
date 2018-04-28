@@ -1,6 +1,6 @@
 package com.choxsu.web.admin.controller;
 
-import com.choxsu.common.BaseController;
+import com.choxsu.common.base.BaseController;
 import com.jfinal.kit.LogKit;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
