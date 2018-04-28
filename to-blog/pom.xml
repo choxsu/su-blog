@@ -14,19 +14,10 @@
     <url>http://maven.apache.org</url>
 
     <repositories>
-        <repository>
-            <id>sonatype-nexus-snapshots</id>
-            <name>Sonatype Nexus Snapshots</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>daily</updatePolicy>
-            </snapshots>
-        </repository>
+
     </repositories>
+
+
     <dependencies>
 
         <!--
@@ -39,7 +30,7 @@
         <dependency>
             <groupId>com.jfinal</groupId>
             <artifactId>jfinal</artifactId>
-            <version>3.4-SNAPSHOT</version>
+            <version>3.4</version>
         </dependency>
 
 
