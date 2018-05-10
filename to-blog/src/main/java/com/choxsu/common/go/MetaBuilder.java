@@ -85,6 +85,7 @@ public class MetaBuilder {
             List<TableMeta> ret = new ArrayList<TableMeta>();
             buildTableNames(ret);
             for (TableMeta tableMeta : ret) {
+                buildTableRemarks(tableMeta);
                 buildPrimaryKey(tableMeta);
                 buildColumnMetas(tableMeta);
                 buildColumnRemarks(tableMeta);
@@ -189,19 +190,48 @@ public class MetaBuilder {
                 continue;
             }
             if (isSkipTable(tableName)) {
-                System.out.println("Skip table :" + tableName);
                 continue;
             }
 
             TableMeta tableMeta = new TableMeta();
             tableMeta.name = tableName;
-            tableMeta.remarks = rs.getString("REMARKS");
 
             tableMeta.modelName = buildModelName(tableName);
             tableMeta.baseModelName = buildBaseModelName(tableMeta.modelName);
             ret.add(tableMeta);
         }
+
         rs.close();
+    }
+
+    /**
+     * 组装表注释
+     *
+     * @param tableMeta
+     * @throws SQLException
+     */
+    protected void buildTableRemarks(TableMeta tableMeta) throws SQLException {
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("SHOW CREATE TABLE " + tableMeta.name);
+        while (rs != null && rs.next()) {
+            String create = rs.getString(2);
+            String comment = parse(create);
+            System.out.println(tableMeta.name + ":" + comment);
+            tableMeta.remarks = comment;
+        }
+        rs.close();
+        stmt.close();
+    }
+
+    private static String parse(String all) {
+        String comment;
+        int index = all.indexOf("COMMENT='");
+        if (index < 0) {
+            return "";
+        }
+        comment = all.substring(index + 9);
+        comment = comment.substring(0, comment.length() - 1);
+        return comment;
     }
 
     protected void buildPrimaryKey(TableMeta tableMeta) throws SQLException {
@@ -279,7 +309,7 @@ public class MetaBuilder {
 
             // 构造字段对应的属性名 attrName
             cm.attrName = buildAttrName(cm.name);
-
+//            cm.remarks =
             tableMeta.columnMetas.add(cm);
         }
 

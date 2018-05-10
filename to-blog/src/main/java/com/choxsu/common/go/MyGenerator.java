@@ -60,11 +60,14 @@ public class MyGenerator {
                        String baseModelOutputDir,
                        String modelPackageName,
                        String modelOutputDir,
-                       String controllerGeneratorOutputDir) {
+                       String controllerGeneratorOutputDir,
+                       String serviceGeneratorOutputDir) {
         this(dataSource,
                 new BaseModelGenerator(baseModelPackageName, baseModelOutputDir),
                 new ModelGenerator(modelPackageName, baseModelPackageName, modelOutputDir),
                 new YcControllerGenerator(dataSource, controllerGeneratorOutputDir));
+        this.ycServiceGenerator = new YcServiceGenerator(dataSource, serviceGeneratorOutputDir);
+
     }
 
     /**
