@@ -1,9 +1,43 @@
-package com.choxsu.web.service;
+package com.choxsu.service;
+
+import org.springframework.stereotype.Service;
+import com.zgxl.draw.pojo.*;
 
 /**
  * @author chox su
+ * 表: #(tableMeta.name)(#(tableMeta.remarks))
  */
+@Service
 public class #(tableMeta.modelName)Service {
+
+    private static final #(tableMeta.modelName) #(firstCharToLowerCase(tableMeta.modelName))Dao = new #(tableMeta.modelName)().dao();
+
+    /**
+     * 保存
+     */
+    public boolean save(#(tableMeta.modelName) #(firstCharToLowerCase(tableMeta.modelName))){
+        return #(firstCharToLowerCase(tableMeta.modelName)).save();
+    }
+    /**
+     * 更新
+     */
+    public boolean update(#(tableMeta.modelName) #(firstCharToLowerCase(tableMeta.modelName))){
+        return #(firstCharToLowerCase(tableMeta.modelName)).update();
+    }
+
+     /**
+      * 通过主键查找
+      */
+    public #(tableMeta.modelName) findOne(Integer id){
+        return #(firstCharToLowerCase(tableMeta.modelName))Dao.findById(id);
+    }
+
+     /**
+      * 通过主键删除
+      */
+    private boolean deleteById(Integer id){
+        return #(firstCharToLowerCase(tableMeta.modelName))Dao.deleteById(id);
+    }
 
 
 }
