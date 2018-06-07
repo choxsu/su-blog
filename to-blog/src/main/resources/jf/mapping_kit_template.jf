@@ -20,7 +20,7 @@ public class #(mappingKitClassName) {
 		#if (tableMeta.primaryKey.contains(","))
 		// Composite Primary Key order: #(tableMeta.primaryKey)
 		#end
-		arp.addMapping("#(tableMeta.name)", "#(tableMeta.primaryKey)", #(tableMeta.modelName).class);
+		arp.addMapping(#(tableMeta.modelName).tableName, "#(tableMeta.primaryKey)", #(tableMeta.modelName).class);
 	#end
 	}
 }
