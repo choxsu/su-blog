@@ -4,6 +4,8 @@ import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.IBean;
 /**
  * @author choxsu, do not modify this file.
+ * table: #(tableMeta.name)
+ * remarks: #(tableMeta.remarks)
  */
 #if (generateChainSetter)
 @SuppressWarnings({"serial", "unchecked"})
@@ -11,6 +13,8 @@ import com.jfinal.plugin.activerecord.IBean;
 @SuppressWarnings("serial")
 #end
 public abstract class #(tableMeta.baseModelName)<M extends #(tableMeta.baseModelName)<M>> extends Model<M> implements IBean {
+
+    public static final String tableName = "#(tableMeta.name)";
 
 #for(cm : tableMeta.columnMetas)
     #set(argName = javaKeyword.contains(cm.attrName) ? '_' + cm.attrName : cm.attrName)
