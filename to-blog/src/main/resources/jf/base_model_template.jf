@@ -2,6 +2,7 @@ package #(baseModelPackageName);
 
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.IBean;
+import com.choxsu.common.generator.BaseModel;
 /**
  * @author choxsu, do not modify this file.
  * table: #(tableMeta.name)
@@ -12,7 +13,7 @@ import com.jfinal.plugin.activerecord.IBean;
 #else
 @SuppressWarnings("serial")
 #end
-public abstract class #(tableMeta.baseModelName)<M extends #(tableMeta.baseModelName)<M>> extends Model<M> implements IBean {
+public abstract class #(tableMeta.baseModelName)<M extends #(tableMeta.baseModelName)<M>> extends BaseModel<M> {
 
     public static final String tableName = "#(tableMeta.name)";
 
@@ -28,6 +29,9 @@ public abstract class #(tableMeta.baseModelName)<M extends #(tableMeta.baseModel
 #for(cm : tableMeta.columnMetas)
 
 	#set(argName = javaKeyword.contains(cm.attrName) ? '_' + cm.attrName : cm.attrName)
+    /**
+     * #(cm.remarks == "" ? "该字段暂无注释" : "set" + cm.remarks)
+     */
 	public #(b ? 'M' : 'void') set#(firstCharToUpperCase(cm.attrName))(#(cm.javaType) #(argName)) {
 		set(this.#(argName), #(argName));
 		#if (b)
@@ -39,7 +43,9 @@ public abstract class #(tableMeta.baseModelName)<M extends #(tableMeta.baseModel
 	#if (isBlank(getterOfModel))
 		#set(getterOfModel = 'get')
 	#end
-
+    /**
+     * #(cm.remarks == "" ? "该字段暂无注释" : "get" + cm.remarks)
+     */
 	public #(cm.javaType) get#(firstCharToUpperCase(cm.attrName))() {
 		return #(getterOfModel)(#(argName));
 	}
