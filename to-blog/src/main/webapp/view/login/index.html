@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="login_fields__submit">
-                <input type="button" value="登录">
+                <input type="submit" value="登录">
             </div>
         </div>
     </form>
@@ -64,6 +64,8 @@
 
 
 <script type="text/javascript" src="/assets/login_reg/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="/assets/jquery_form/jquery.form.min.js"></script>
+<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
 <link href="/assets/login_reg/layui/css/layui.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/assets/login_reg/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/assets/login_reg/js/stopExecutionOnTimeout.js"></script>
@@ -137,9 +139,6 @@
 </body>
 </html>
 
-<script type="text/javascript" src="/assets/jquery_form/jquery.form.min.js"></script>
-<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
-
 <script type="text/javascript">
     $(document).ready(function () {
         $("#login_form").ajaxForm({
@@ -172,14 +171,14 @@
 
                 // Validator 层验证失败
                 if (ret.userNameMsg) {
-                    $("#userNameMsg").text(ret.userNameMsg);
+                    layer.msg(ret.userNameMsg);
                 }
                 if (ret.passwordMsg) {
-                    $("#passwordMsg").text(ret.passwordMsg);
+                    layer.msg(ret.passwordMsg);
                 }
                 if (ret.captchaMsg) {
+                    layer.msg(ret.captchaMsg);
                     updateCaptcha();    // captcha 被验证过以后会立即失效，更新之
-                    $("#captchaMsg").text(ret.captchaMsg);
                 }
             }
             , error: function (ret) {
