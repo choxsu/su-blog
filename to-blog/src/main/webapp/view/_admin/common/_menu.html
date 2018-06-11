@@ -1,0 +1,53 @@
+<a class="jfa-main-menu" href="/admin" home="true">
+    <i class="left-icon fa fa-dashboard"></i>
+    首页
+</a>
+
+
+<a class="jfa-main-menu" home="false">
+    <i class="left-icon fa fa-file-o"></i>
+    内容管理
+    <i class="right-icon fa fa-angle-down fa-lg"></i>
+</a>
+<ul class="jfa-sub-menu">
+
+    <li><a href="/admin/column">栏目管理</a></li>
+
+    <li><a href="/admin/tutor">导师管理</a></li>
+
+    #permission("/admin/project")
+    <li><a href="/admin/project">项目管理</a></li>
+    #end
+
+    #permission("/admin/share")
+    <li><a href="/admin/share">分享管理</a></li>
+    #end
+
+    #permission("/admin/feedback")
+    <li><a href="/admin/feedback">反馈管理</a></li>
+    #end
+</ul>
+
+
+<a class="jfa-main-menu" home="false">
+    <i class="left-icon fa fa-user-o"></i>
+    权限系统
+    <i class="right-icon fa fa-angle-down fa-lg"></i>
+</a>
+
+### #role("权限管理员", "CEO", "CTO")
+<ul class="jfa-sub-menu">
+    ### #permission("/admin/account")
+    <li><a href="/admin/account">账户管理</a></li>
+    ### #end
+
+    ### #permission("/admin/role")
+    <li><a href="/admin/role">角色管理</a></li>
+    ### #end
+
+    ### #permission("/admin/permission")
+    <li><a href="/admin/permission">权限管理</a></li>
+    ### #end
+</ul>
+### #end
+

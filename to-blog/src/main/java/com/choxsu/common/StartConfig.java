@@ -3,11 +3,12 @@ package com.choxsu.common;
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
 import com.choxsu._admin.common.AdminRoutes;
+import com.choxsu._admin.permission.PermissionDirective;
+import com.choxsu._admin.role.RoleDirective;
 import com.choxsu.common.base.dialect.BaseMysqlDialect;
 import com.choxsu.common.entity._MappingKit;
 import com.choxsu.common.es.EsPlugin;
 import com.choxsu.common.interceptor.VisitorInterceptor;
-import com.choxsu.common.interceptor.WebStatInterceptor;
 import com.choxsu.common.kit.DruidKit;
 import com.choxsu.common.routes.ApiRoutes;
 import com.choxsu.common.routes.FrontRoutes;
@@ -19,6 +20,7 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
+import com.jfinal.render.RenderManager;
 import com.jfinal.template.Engine;
 import com.jfinal.template.source.ClassPathSourceFactory;
 import net.dreamlu.event.EventPlugin;
@@ -35,6 +37,10 @@ public class StartConfig extends JFinalConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(StartConfig.class);
 
+
+    private Engine engine = null;
+    private Constants constants = null;
+    RenderManager me = RenderManager.me();
     /**
      * 先加载开发环境配置，再追加生产环境的少量配置覆盖掉开发环境配置
      */
@@ -50,10 +56,12 @@ public class StartConfig extends JFinalConfig {
 
     @Override
     public void configConstant(Constants me) {
+        this.constants = me;
         logger.info("init constants");
         me.setDevMode(p.getBoolean("devMode", false));
         me.setJsonFactory(MixedJsonFactory.me());
         me.setI18nDefaultBaseName("i18n");
+
     }
 
     @Override
@@ -67,11 +75,20 @@ public class StartConfig extends JFinalConfig {
 
     @Override
     public void configEngine(Engine me) {
+        this.engine = me;
         logger.info("init config engine");
         me.setDevMode(p.getBoolean("engineDevMode", false));
         me.addSharedFunction("/view/common/layout.html");
         me.addSharedFunction("/view/common/paginate.html");
         me.addSharedFunction("/view/common/cy.html");
+
+        me.addDirective("role", RoleDirective.class);
+        me.addDirective("permission", PermissionDirective.class);
+        me.addDirective("perm", PermissionDirective.class);        // 配置一个别名指令
+
+
+        me.addSharedFunction("/view/_admin/common/__admin_layout.html");
+        me.addSharedFunction("/view/_admin/common/_admin_paginate.html");
     }
 
     @Override
@@ -126,8 +143,6 @@ public class StartConfig extends JFinalConfig {
     public void configInterceptor(Interceptors me) {
         logger.info("init interceptor");
         me.add(new VisitorInterceptor());
-        me.add(new WebStatInterceptor("*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*"));
-//        me.add(new ShiroInterceptor());
     }
 
     @Override

@@ -8,7 +8,7 @@
 	而 account_role、role_permission 建立这三张主表间的关联
 
 
-1：权限管理模块对左侧菜单进行管理，可以参考 "/_view/_admin/common/_menu.html"
+1：权限管理模块对左侧菜单进行管理，可以参考 "/view/_admin/common/_menu.html"
    中的  #role("权限管理员", "CEO", "CTO") 用法，只需要先用这种式方式预先
    安排好哪些角色可以访问哪些菜单，然后就可以通过为 account 配置 role 的方式
    来配置菜单权限了，这种模式比通过再创建 menu 表要简单方便
@@ -16,7 +16,7 @@
    此外，也可以通过 #permission(...) 更细粒度的控制每一个菜单，一般用 #role 指令即可
 
 
-2：权限管理模块对界面操作按钮之类的组件细粒度的控制可以参考 "/_view/_admin/project/index.html"
+2：权限管理模块对界面操作按钮之类的组件细粒度的控制可以参考 "/view/_admin/project/index.html"
    中的 #permission("/admin/project/delete") 用法，只需要先用这种方式预先
    安排好哪些权限用于控制访问哪些按钮或组件，然后就可以通过为 account 配置权限的
    方式来细粒度控制按纽、组件了

@@ -16,7 +16,7 @@ import com.jfinal.template.stat.Scope;
  * 界面上的权限控制功能
  * 用来控制界面上的菜单、按钮等等元素的显示
  * <p>
- * 使用示例见模板文件： /_view/_admin/project/index.html 或者 /_view/_admin/permission/index.html
+ * 使用示例见模板文件： /view/_admin/project/index.html 或者 /view/_admin/permission/index.html
  * #permission("/admin/project/edit")
  * <a href="/admin/project/edit?id=#(x.id)">
  * <i class="fa fa-pencil" title="修改"></i>

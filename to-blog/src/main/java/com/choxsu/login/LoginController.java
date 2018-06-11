@@ -14,7 +14,9 @@
 
 package com.choxsu.login;
 
+import com.choxsu.common.interceptor.TagListInterceptor;
 import com.choxsu.common.kit.IpKit;
+import com.choxsu.common.render.MyCaptchaRender;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
 import com.jfinal.core.ActionKey;
@@ -24,6 +26,7 @@ import com.jfinal.kit.Ret;
 /**
  * 登录控制器
  */
+@Clear(TagListInterceptor.class)
 public class LoginController extends Controller {
 
 	LoginService srv = LoginService.me;
@@ -100,8 +103,11 @@ public class LoginController extends Controller {
 		renderJson(ret);
 	}
 
+	/**
+	 * 获取验证码
+	 */
 	public void captcha() {
-		renderCaptcha();
+		render(new MyCaptchaRender());
 	}
 }
 

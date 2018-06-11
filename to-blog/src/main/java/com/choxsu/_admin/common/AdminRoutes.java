@@ -38,7 +38,7 @@ public class AdminRoutes extends Routes {
         addInterceptor(new AdminAuthInterceptor());
         addInterceptor(new PjaxInterceptor());
 
-        setBaseViewPath("/_view/_admin");
+        setBaseViewPath("/view/_admin");
 
         add("/admin", IndexAdminController.class, "/index");
         add("/admin/account", AccountAdminController.class, "/account");

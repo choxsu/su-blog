@@ -16,6 +16,7 @@ package com.choxsu._admin.index;
 
 
 import com.choxsu.common.base.BaseController;
+import com.jfinal.aop.Clear;
 
 /**
  * 后台管理首页
@@ -26,9 +27,6 @@ public class IndexAdminController extends BaseController {
 
 	public void index() {
 		setAttr("accountProfile", srv.getAccountProfile());
-		setAttr("projectProfile", srv.getProjectProfile());
-		setAttr("shareProfile", srv.getShareProfile());
-		setAttr("feedbackProfile", srv.getFeedbackProfile());
 		setAttr("permissionProfile", srv.getPermissionProfile());
 
 		render("index.html");

@@ -15,6 +15,7 @@
 package com.choxsu.common.routes;
 
 import com.choxsu.login.LoginController;
+import com.choxsu.reg.RegController;
 import com.choxsu.web.front.about.AboutController;
 import com.choxsu.web.front.blog.BlogController;
 import com.choxsu.web.front.code.CodeController;
@@ -52,7 +53,8 @@ public class FrontRoutes extends Routes {
     }
 
     private void accountRoutes() {
-        add("/login", LoginController.class, "/");
+        add("/login", LoginController.class, "/login");
+        add("/reg", RegController.class, "/reg");
     }
 
     public static void main(String[] args) {
