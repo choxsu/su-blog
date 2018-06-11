@@ -38,9 +38,6 @@ public class StartConfig extends JFinalConfig {
     private static final Logger logger = LoggerFactory.getLogger(StartConfig.class);
 
 
-    private Engine engine = null;
-    private Constants constants = null;
-    RenderManager me = RenderManager.me();
     /**
      * 先加载开发环境配置，再追加生产环境的少量配置覆盖掉开发环境配置
      */
@@ -56,7 +53,6 @@ public class StartConfig extends JFinalConfig {
 
     @Override
     public void configConstant(Constants me) {
-        this.constants = me;
         logger.info("init constants");
         me.setDevMode(p.getBoolean("devMode", false));
         me.setJsonFactory(MixedJsonFactory.me());
@@ -75,7 +71,6 @@ public class StartConfig extends JFinalConfig {
 
     @Override
     public void configEngine(Engine me) {
-        this.engine = me;
         logger.info("init config engine");
         me.setDevMode(p.getBoolean("engineDevMode", false));
         me.addSharedFunction("/view/common/layout.html");
