@@ -52,8 +52,7 @@ public class LoginController extends Controller {
 			int maxAgeInSeconds = ret.getInt("maxAgeInSeconds");
 			setCookie(LoginService.sessionIdName, sessionId, maxAgeInSeconds, true);
 			setAttr(LoginService.loginAccountCacheName, ret.get(LoginService.loginAccountCacheName));
-
-			ret.set("returnUrl", getPara("returnUrl", "/"));    // 如果 returnUrl 存在则跳过去，否则跳去首页
+			ret.set("returnUrl", getPara("returnUrl", "/admin"));    // 如果 returnUrl 存在则跳过去，否则跳去首页
 		}
 		renderJson(ret);
 	}

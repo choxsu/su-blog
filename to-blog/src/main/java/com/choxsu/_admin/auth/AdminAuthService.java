@@ -14,6 +14,7 @@ public class AdminAuthService {
 	 * 是否为超级管理员，role.id 值为 1 的为超级管理员
 	 */
 	public boolean isSuperAdmin(int accountId) {
+
 		SqlPara sp = Db.getSqlPara("admin.auth.isSuperAdmin", accountId);
 		Integer ret = Db.queryInt(sp.getSql(), sp.getPara());
 		return ret != null;

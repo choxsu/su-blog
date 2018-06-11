@@ -8,6 +8,7 @@ import com.choxsu._admin.role.RoleDirective;
 import com.choxsu.common.base.dialect.BaseMysqlDialect;
 import com.choxsu.common.entity._MappingKit;
 import com.choxsu.common.es.EsPlugin;
+import com.choxsu.common.interceptor.LoginSessionInterceptor;
 import com.choxsu.common.interceptor.VisitorInterceptor;
 import com.choxsu.common.kit.DruidKit;
 import com.choxsu.common.routes.ApiRoutes;
@@ -137,6 +138,7 @@ public class StartConfig extends JFinalConfig {
     @Override
     public void configInterceptor(Interceptors me) {
         logger.info("init interceptor");
+        me.add(new LoginSessionInterceptor());
         me.add(new VisitorInterceptor());
     }
 
