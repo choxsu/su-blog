@@ -13,7 +13,7 @@ import com.choxsu.common.generator.BaseModel;
 #else
 @SuppressWarnings("serial")
 #end
-public abstract class #(tableMeta.baseModelName)<M extends #(tableMeta.baseModelName)<M>> extends BaseModel<M> {
+public abstract class #(tableMeta.baseModelName)<M extends #(tableMeta.baseModelName)<M>> extends Model<M> {
 
     public static final String tableName = "#(tableMeta.name)";
 

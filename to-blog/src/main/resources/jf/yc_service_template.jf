@@ -1,7 +1,7 @@
 package com.choxsu.service;
 
 import org.springframework.stereotype.Service;
-import com.zgxl.draw.pojo.*;
+import com.choxsu.common.entity.*;
 
 /**
  * @author chox su
