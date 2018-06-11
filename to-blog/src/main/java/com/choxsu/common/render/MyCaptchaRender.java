@@ -42,7 +42,7 @@ public class MyCaptchaRender extends CaptchaRender {
             drawGraphic(captcha.getValue(), image);
 
             sos = response.getOutputStream();
-            ImageIO.write(image, "jpeg", sos);
+            ImageIO.write(image, "png", sos);
         } catch (IOException e) {
             if (getDevMode()) {
                 throw new RenderException(e);
@@ -66,26 +66,27 @@ public class MyCaptchaRender extends CaptchaRender {
         Graphics2D g = image.createGraphics();
         //设置透明  start
        /* image = g.getDeviceConfiguration().createCompatibleImage(image.getWidth(), image.getHeight(), Transparency.TRANSLUCENT);
-        g = image.createGraphics();*/
-        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, 0.0f));
-        // 设定背景色
+        g = image.createGraphics();
+        Image from = image.getScaledInstance(image.getWidth(), image.getHeight(), BufferedImage.SCALE_AREA_AVERAGING);
+        g.drawImage(from, 0, 0, null);*/
         g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
         // 图形抗锯齿
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         // 字体抗锯齿
         g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g.setColor(new Color(255, 0, 0));
+        // 设定背景色
+        g.setColor(getRandColor(120, 200));
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
         //绘制小字符背景
         Color color = null;
-      /*  for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 20; i++) {
             color = getRandColor(120, 200);
             g.setColor(color);
             String rand = String.valueOf(charArray[random.nextInt(charArray.length)]);
             g.drawString(rand, random.nextInt(WIDTH), random.nextInt(HEIGHT));
             color = null;
-        }*/
+        }
 
         //设定字体
         g.setFont(RANDOM_FONT[random.nextInt(RANDOM_FONT.length)]);
