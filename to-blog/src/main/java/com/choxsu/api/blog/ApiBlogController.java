@@ -46,6 +46,14 @@ public class ApiBlogController extends BaseController {
         renderJson(getSuccessApiResult("查询成功", blog));
     }
 
+    /**
+     * 博客detail1
+     */
+    public void tests() {
+        List<Blog> blog = apiBlogService.test();
+        renderJson(getSuccessApiResult("查询成功", blog));
+    }
+
 
 
 
