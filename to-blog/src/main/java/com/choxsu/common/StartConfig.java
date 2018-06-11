@@ -2,13 +2,13 @@ package com.choxsu.common;
 
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
+import com.choxsu._admin.common.AdminRoutes;
 import com.choxsu.common.base.dialect.BaseMysqlDialect;
 import com.choxsu.common.entity._MappingKit;
 import com.choxsu.common.es.EsPlugin;
 import com.choxsu.common.interceptor.VisitorInterceptor;
 import com.choxsu.common.interceptor.WebStatInterceptor;
 import com.choxsu.common.kit.DruidKit;
-import com.choxsu.common.routes.AdminRoutes;
 import com.choxsu.common.routes.ApiRoutes;
 import com.choxsu.common.routes.FrontRoutes;
 import com.jfinal.config.*;
@@ -68,7 +68,7 @@ public class StartConfig extends JFinalConfig {
     @Override
     public void configEngine(Engine me) {
         logger.info("init config engine");
-        me.setDevMode(p.getBoolean("engineDevMode", true));
+        me.setDevMode(p.getBoolean("engineDevMode", false));
         me.addSharedFunction("/view/common/layout.html");
         me.addSharedFunction("/view/common/paginate.html");
         me.addSharedFunction("/view/common/cy.html");
