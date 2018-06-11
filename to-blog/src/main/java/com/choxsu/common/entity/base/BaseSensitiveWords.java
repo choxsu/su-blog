@@ -1,67 +1,92 @@
 package com.choxsu.common.entity.base;
 
+
 import com.jfinal.plugin.activerecord.Model;
-import com.jfinal.plugin.activerecord.IBean;
+
 /**
  * @author choxsu, do not modify this file.
+ * table: sensitive_words
+ * remarks: 
  */
 @SuppressWarnings("serial")
-public abstract class BaseSensitiveWords<M extends BaseSensitiveWords<M>> extends Model<M> implements IBean {
+public abstract class BaseSensitiveWords<M extends BaseSensitiveWords<M>> extends Model<M> {
+
+    public static final String tableName = "sensitive_words";
 
     /**
      * 该字段暂无注释
      */
-    private java.lang.String id = "id";
+    private String id = "id";
     /**
      * 该字段暂无注释
      */
-    private java.lang.String word = "word";
+    private String word = "word";
     /**
      * 该字段暂无注释
      */
-    private java.lang.String status = "status";
+    private String status = "status";
     /**
      * 该字段暂无注释
      */
-    private java.lang.String wordPinyin = "word_pinyin";
+    private String wordPinyin = "word_pinyin";
 
 
-	public void setId(java.lang.Integer id) {
+    /**
+     * 该字段暂无注释
+     */
+	public void setId(Integer id) {
 		set(this.id, id);
 	}
-	
 
-	public java.lang.Integer getId() {
+    /**
+     * 该字段暂无注释
+     */
+	public Integer getId() {
 		return getInt(id);
 	}
 
 
-	public void setWord(java.lang.String word) {
+    /**
+     * 该字段暂无注释
+     */
+	public void setWord(String word) {
 		set(this.word, word);
 	}
-	
 
-	public java.lang.String getWord() {
+    /**
+     * 该字段暂无注释
+     */
+	public String getWord() {
 		return getStr(word);
 	}
 
 
-	public void setStatus(java.lang.Integer status) {
+    /**
+     * 该字段暂无注释
+     */
+	public void setStatus(Integer status) {
 		set(this.status, status);
 	}
-	
 
-	public java.lang.Integer getStatus() {
+    /**
+     * 该字段暂无注释
+     */
+	public Integer getStatus() {
 		return getInt(status);
 	}
 
 
-	public void setWordPinyin(java.lang.String wordPinyin) {
+    /**
+     * 该字段暂无注释
+     */
+	public void setWordPinyin(String wordPinyin) {
 		set(this.wordPinyin, wordPinyin);
 	}
-	
 
-	public java.lang.String getWordPinyin() {
+    /**
+     * 该字段暂无注释
+     */
+	public String getWordPinyin() {
 		return getStr(wordPinyin);
 	}
 

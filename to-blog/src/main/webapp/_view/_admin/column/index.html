@@ -1,0 +1,128 @@
+#@adminLayout()
+
+#define main()
+
+<style>
+
+	.ztree-style{
+
+	}
+
+
+</style>
+
+
+<script type="text/javascript" src="/assets/ztree-v3/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="/assets/ztree-v3/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="/assets/ztree-v3/js/jquery.ztree.exedit.js"></script>
+
+<SCRIPT type="text/javascript">
+    var setting = {	};
+    var zNodes =[
+        { name:"父节点1 - 展开", open:true,
+            children: [
+                { name:"父节点11 - 折叠",
+                    children: [
+                        { name:"叶子节点111"},
+                        { name:"叶子节点112"},
+                        { name:"叶子节点113"},
+                        { name:"叶子节点114"}
+                    ]},
+                { name:"父节点12 - 折叠",
+                    children: [
+                        { name:"叶子节点121"},
+                        { name:"叶子节点122"},
+                        { name:"叶子节点123"},
+                        { name:"叶子节点124"}
+                    ]},
+                { name:"父节点13 - 没有子节点", isParent:true}
+            ]},
+        { name:"父节点2 - 折叠",
+            children: [
+                { name:"父节点21 - 展开", open:true,
+                    children: [
+                        { name:"叶子节点211"},
+                        { name:"叶子节点212"},
+                        { name:"叶子节点213"},
+                        { name:"叶子节点214"}
+                    ]},
+                { name:"父节点22 - 折叠",
+                    children: [
+                        { name:"叶子节点221"},
+                        { name:"叶子节点222"},
+                        { name:"叶子节点223"},
+                        { name:"叶子节点224"}
+                    ]},
+                { name:"父节点23 - 折叠",
+                    children: [
+                        { name:"叶子节点231"},
+                        { name:"叶子节点232"},
+                        { name:"叶子节点233"},
+                        { name:"叶子节点234"}
+                    ]}
+            ]},
+        { name:"父节点3 - 没有子节点", isParent:true}
+
+    ];
+
+    $(document).ready(function(){
+        // $.fn.zTree.init($("#jfa-column"), setting, zNodes);
+    });
+</SCRIPT>
+<div class="jfa-header-box" id="jfa-header-box">
+	<div class="jfa-crumbs" id="jfa-crumbs">
+		内容管理 > 栏目管理
+	</div>
+	<div class="jfa-search-box"></div>
+	#include("/_view/_admin/common/_header_right.html")
+</div>
+
+### 内容区域
+<div class="jfa-content-box" id="jfa-content-box">
+
+	<div class="ztree-style" id="jfa-column"></div>
+
+	<div class=""  id="jfa-content">
+
+
+		<div class="jfa-toolbar">
+			<a class="btn btn-primary" href="JavaScript:;">创建</a>
+			<a class="btn btn-primary" href="JavaScript:;">测试</a>
+		</div>
+
+		<div class="jfa-table-box margin-top-30">
+			<!--<table class="table table-bordered table-hover margin-bottom-10">
+				<thead>
+				<tr>
+					<th>id</th>
+					<th>actionKey</th>
+					<th>controller</th>
+					<th>备注</th>
+					<th>操作</th>
+				</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>-->
+
+			<div>
+				### #@adminPaginate(permissionPage.pageNumber, permissionPage.totalPage, "/admin/permission?p=")
+			</div>
+		</div>
+
+	</div><!-- END OF jfa-content -->
+</div><!-- END OF jfa-content-box -->
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".jfa-toolbar").on("click", "a[data-toolbar]", synchronizePermission);
+	});
+
+	function synchronizePermission(event) {
+		event.preventDefault();
+		var action = $(this).attr("data-action");
+		ajaxAction(action);
+	}
+</script>
+#end
+

@@ -1,8 +1,7 @@
 package com.choxsu.test;
 
-import com.choxsu.common.BaseController;
+import com.choxsu.common.base.BaseController;
 import net.dreamlu.event.EventKit;
-import net.dreamlu.event.core.ApplicationEvent;
 
 /**
  * @author chox su

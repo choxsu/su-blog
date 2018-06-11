@@ -1,194 +1,262 @@
 package com.choxsu.common.entity.base;
 
-import com.choxsu.common.base.BaseModel;
 import com.jfinal.plugin.activerecord.Model;
-import com.jfinal.plugin.activerecord.IBean;
+
 /**
  * @author choxsu, do not modify this file.
+ * table: blog
+ * remarks: 
  */
 @SuppressWarnings("serial")
-public abstract class BaseBlog<M extends BaseBlog<M>> extends BaseModel<M> implements IBean {
+public abstract class BaseBlog<M extends Model<M>> extends Model<M> {
+
+    public static final String tableName = "blog";
 
     /**
      * 主键id
      */
-    private java.lang.String id = "id";
+    private String id = "id";
     /**
      * 博客主id
      */
-    private java.lang.String accountId = "accountId";
+    private String accountId = "accountId";
     /**
      * 标题
      */
-    private java.lang.String title = "title";
+    private String title = "title";
     /**
      * 内容
      */
-    private java.lang.String content = "content";
+    private String content = "content";
     /**
      * 创建时间
      */
-    private java.lang.String createAt = "createAt";
+    private String createAt = "createAt";
     /**
      * 修改时间
      */
-    private java.lang.String updateAt = "updateAt";
+    private String updateAt = "updateAt";
     /**
      * 点击次数
      */
-    private java.lang.String clickCount = "clickCount";
+    private String clickCount = "clickCount";
     /**
      * 喜欢次数
      */
-    private java.lang.String likeCount = "likeCount";
+    private String likeCount = "likeCount";
     /**
      * 收藏次数
      */
-    private java.lang.String favoriteCount = "favoriteCount";
+    private String favoriteCount = "favoriteCount";
     /**
      * 类型 note（笔记）favorite(收藏）code(代码）about(关于）
      */
-    private java.lang.String category = "category";
+    private String category = "category";
     /**
      * 是否删除 0否1是
      */
-    private java.lang.String isDelete = "isDelete";
+    private String isDelete = "isDelete";
     /**
      * tag_id
      */
-    private java.lang.String tagId = "tag_id";
+    private String tagId = "tag_id";
     /**
      * 代码分类id，如果category为code时候，这个值才会生效
      */
-    private java.lang.String categoryId = "category_id";
+    private String categoryId = "category_id";
 
 
-	public void setId(java.lang.Integer id) {
+    /**
+     * set主键id
+     */
+	public void setId(Integer id) {
 		set(this.id, id);
 	}
-	
 
-	public java.lang.Integer getId() {
+    /**
+     * get主键id
+     */
+	public Integer getId() {
 		return getInt(id);
 	}
 
 
-	public void setAccountId(java.lang.Integer accountId) {
+    /**
+     * set博客主id
+     */
+	public void setAccountId(Integer accountId) {
 		set(this.accountId, accountId);
 	}
-	
 
-	public java.lang.Integer getAccountId() {
+    /**
+     * get博客主id
+     */
+	public Integer getAccountId() {
 		return getInt(accountId);
 	}
 
 
-	public void setTitle(java.lang.String title) {
+    /**
+     * set标题
+     */
+	public void setTitle(String title) {
 		set(this.title, title);
 	}
-	
 
-	public java.lang.String getTitle() {
+    /**
+     * get标题
+     */
+	public String getTitle() {
 		return getStr(title);
 	}
 
 
-	public void setContent(java.lang.String content) {
+    /**
+     * set内容
+     */
+	public void setContent(String content) {
 		set(this.content, content);
 	}
-	
 
-	public java.lang.String getContent() {
+    /**
+     * get内容
+     */
+	public String getContent() {
 		return getStr(content);
 	}
 
 
+    /**
+     * set创建时间
+     */
 	public void setCreateAt(java.util.Date createAt) {
 		set(this.createAt, createAt);
 	}
-	
 
+    /**
+     * get创建时间
+     */
 	public java.util.Date getCreateAt() {
 		return get(createAt);
 	}
 
 
+    /**
+     * set修改时间
+     */
 	public void setUpdateAt(java.util.Date updateAt) {
 		set(this.updateAt, updateAt);
 	}
-	
 
+    /**
+     * get修改时间
+     */
 	public java.util.Date getUpdateAt() {
 		return get(updateAt);
 	}
 
 
-	public void setClickCount(java.lang.Integer clickCount) {
+    /**
+     * set点击次数
+     */
+	public void setClickCount(Integer clickCount) {
 		set(this.clickCount, clickCount);
 	}
-	
 
-	public java.lang.Integer getClickCount() {
+    /**
+     * get点击次数
+     */
+	public Integer getClickCount() {
 		return getInt(clickCount);
 	}
 
 
-	public void setLikeCount(java.lang.Integer likeCount) {
+    /**
+     * set喜欢次数
+     */
+	public void setLikeCount(Integer likeCount) {
 		set(this.likeCount, likeCount);
 	}
-	
 
-	public java.lang.Integer getLikeCount() {
+    /**
+     * get喜欢次数
+     */
+	public Integer getLikeCount() {
 		return getInt(likeCount);
 	}
 
 
-	public void setFavoriteCount(java.lang.Integer favoriteCount) {
+    /**
+     * set收藏次数
+     */
+	public void setFavoriteCount(Integer favoriteCount) {
 		set(this.favoriteCount, favoriteCount);
 	}
-	
 
-	public java.lang.Integer getFavoriteCount() {
+    /**
+     * get收藏次数
+     */
+	public Integer getFavoriteCount() {
 		return getInt(favoriteCount);
 	}
 
 
-	public void setCategory(java.lang.String category) {
+    /**
+     * set类型 note（笔记）favorite(收藏）code(代码）about(关于）
+     */
+	public void setCategory(String category) {
 		set(this.category, category);
 	}
-	
 
-	public java.lang.String getCategory() {
+    /**
+     * get类型 note（笔记）favorite(收藏）code(代码）about(关于）
+     */
+	public String getCategory() {
 		return getStr(category);
 	}
 
 
-	public void setIsDelete(java.lang.Integer isDelete) {
+    /**
+     * set是否删除 0否1是
+     */
+	public void setIsDelete(Integer isDelete) {
 		set(this.isDelete, isDelete);
 	}
-	
 
-	public java.lang.Integer getIsDelete() {
+    /**
+     * get是否删除 0否1是
+     */
+	public Integer getIsDelete() {
 		return getInt(isDelete);
 	}
 
 
-	public void setTagId(java.lang.Integer tagId) {
+    /**
+     * settag_id
+     */
+	public void setTagId(Integer tagId) {
 		set(this.tagId, tagId);
 	}
-	
 
-	public java.lang.Integer getTagId() {
+    /**
+     * gettag_id
+     */
+	public Integer getTagId() {
 		return getInt(tagId);
 	}
 
 
-	public void setCategoryId(java.lang.Integer categoryId) {
+    /**
+     * set代码分类id，如果category为code时候，这个值才会生效
+     */
+	public void setCategoryId(Integer categoryId) {
 		set(this.categoryId, categoryId);
 	}
-	
 
-	public java.lang.Integer getCategoryId() {
+    /**
+     * get代码分类id，如果category为code时候，这个值才会生效
+     */
+	public Integer getCategoryId() {
 		return getInt(categoryId);
 	}
 

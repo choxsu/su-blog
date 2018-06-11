@@ -3,7 +3,7 @@ package com.choxsu.common;
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
 import com.choxsu.common.base.dialect.BaseMysqlDialect;
-import com.choxsu.common.entity.MappingKit;
+import com.choxsu.common.entity._MappingKit;
 import com.choxsu.common.es.EsPlugin;
 import com.choxsu.common.interceptor.VisitorInterceptor;
 import com.choxsu.common.interceptor.WebStatInterceptor;
@@ -11,7 +11,6 @@ import com.choxsu.common.kit.DruidKit;
 import com.choxsu.common.routes.AdminRoutes;
 import com.choxsu.common.routes.ApiRoutes;
 import com.choxsu.common.routes.FrontRoutes;
-import com.choxsu.common.routes.TestRoutes;
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;
 import com.jfinal.json.MixedJsonFactory;
@@ -46,10 +45,6 @@ public class StartConfig extends JFinalConfig {
 
 
     public static void main(String[] args) {
-        logger.info("程序开始 启动中...");
-        logger.info("启动webAppDir:{}", "to-blog/src/main/webapp");
-        logger.info("启动端口：{}", 8080);
-        logger.info("上下文路径context:{}", "/");
         JFinal.start("to-blog/src/main/webapp", 8080, "/");
     }
 
@@ -68,13 +63,12 @@ public class StartConfig extends JFinalConfig {
         me.add(new FrontRoutes());
         me.add(new AdminRoutes());
         me.add(new ApiRoutes());
-        me.add(new TestRoutes());
     }
 
     @Override
     public void configEngine(Engine me) {
         logger.info("init config engine");
-        me.setDevMode(p.getBoolean("engineDevMode", false));
+        me.setDevMode(p.getBoolean("engineDevMode", true));
         me.addSharedFunction("/view/common/layout.html");
         me.addSharedFunction("/view/common/paginate.html");
         me.addSharedFunction("/view/common/cy.html");
@@ -96,12 +90,11 @@ public class StartConfig extends JFinalConfig {
         arp.setDialect(new BaseMysqlDialect());
 
         arp.setTransactionLevel(Connection.TRANSACTION_READ_COMMITTED);
-        MappingKit.mapping(arp);
+        _MappingKit.mapping(arp);
         arp.setShowSql(p.getBoolean("devMode", false));
         arp.getEngine().setSourceFactory(new ClassPathSourceFactory());
         arp.addSqlTemplate("/sql/all_sqls.sql");
         me.add(arp);
-
         me.add(new EsPlugin(p.get("elasticsearch_hosts"), p.get("cluster_name", "choxsu-cs")));
         me.add(new EhCachePlugin());
         me.add(getInitEventPlugin());

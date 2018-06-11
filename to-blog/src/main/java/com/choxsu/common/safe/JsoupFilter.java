@@ -14,6 +14,7 @@
 
 package com.choxsu.common.safe;
 
+import com.choxsu.common.entity.Account;
 import com.jfinal.plugin.activerecord.Model;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -224,6 +225,16 @@ public class JsoupFilter {
             return image != null ? image.attr("src") : null;
         } else {
             return null;
+        }
+    }
+
+    /**
+     * 过滤 Account 中的 nickName，过滤为纯 text
+     */
+    public static void filterAccountNickName(Account account) {
+        String nickName = account.getNickName();
+        if (nickName != null) {
+            account.setNickName(getText(nickName));
         }
     }
 }

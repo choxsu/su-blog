@@ -1,94 +1,129 @@
 package com.choxsu.common.entity.base;
 
+
 import com.jfinal.plugin.activerecord.Model;
-import com.jfinal.plugin.activerecord.IBean;
+
 /**
  * @author choxsu, do not modify this file.
+ * table: visitor
+ * remarks: 
  */
 @SuppressWarnings("serial")
-public abstract class BaseVisitor<M extends BaseVisitor<M>> extends Model<M> implements IBean {
+public abstract class BaseVisitor<M extends BaseVisitor<M>> extends Model<M> {
+
+    public static final String tableName = "visitor";
 
     /**
      * 主键id
      */
-    private java.lang.String id = "id";
+    private String id = "id";
     /**
      * 请求的IP地址
      */
-    private java.lang.String ip = "ip";
+    private String ip = "ip";
     /**
      * 请求的页面路径
      */
-    private java.lang.String url = "url";
+    private String url = "url";
     /**
      * 请求方法
      */
-    private java.lang.String method = "method";
+    private String method = "method";
     /**
      * 请求的客户端
      */
-    private java.lang.String client = "client";
+    private String client = "client";
     /**
      * 请求时间
      */
-    private java.lang.String requestTime = "requestTime";
+    private String requestTime = "requestTime";
 
 
-	public void setId(java.lang.Integer id) {
+    /**
+     * set主键id
+     */
+	public void setId(Integer id) {
 		set(this.id, id);
 	}
-	
 
-	public java.lang.Integer getId() {
+    /**
+     * get主键id
+     */
+	public Integer getId() {
 		return getInt(id);
 	}
 
 
-	public void setIp(java.lang.String ip) {
+    /**
+     * set请求的IP地址
+     */
+	public void setIp(String ip) {
 		set(this.ip, ip);
 	}
-	
 
-	public java.lang.String getIp() {
+    /**
+     * get请求的IP地址
+     */
+	public String getIp() {
 		return getStr(ip);
 	}
 
 
-	public void setUrl(java.lang.String url) {
+    /**
+     * set请求的页面路径
+     */
+	public void setUrl(String url) {
 		set(this.url, url);
 	}
-	
 
-	public java.lang.String getUrl() {
+    /**
+     * get请求的页面路径
+     */
+	public String getUrl() {
 		return getStr(url);
 	}
 
 
-	public void setMethod(java.lang.String method) {
+    /**
+     * set请求方法
+     */
+	public void setMethod(String method) {
 		set(this.method, method);
 	}
-	
 
-	public java.lang.String getMethod() {
+    /**
+     * get请求方法
+     */
+	public String getMethod() {
 		return getStr(method);
 	}
 
 
-	public void setClient(java.lang.String client) {
+    /**
+     * set请求的客户端
+     */
+	public void setClient(String client) {
 		set(this.client, client);
 	}
-	
 
-	public java.lang.String getClient() {
+    /**
+     * get请求的客户端
+     */
+	public String getClient() {
 		return getStr(client);
 	}
 
 
+    /**
+     * set请求时间
+     */
 	public void setRequestTime(java.util.Date requestTime) {
 		set(this.requestTime, requestTime);
 	}
 	
-
+    /**
+     * get请求时间
+     */
 	public java.util.Date getRequestTime() {
 		return get(requestTime);
 	}

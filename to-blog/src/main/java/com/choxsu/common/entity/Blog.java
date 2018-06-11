@@ -1,6 +1,5 @@
 package com.choxsu.common.entity;
 
-
 import com.choxsu.common.entity.base.BaseBlog;
 
 /**
@@ -10,4 +9,6 @@ import com.choxsu.common.entity.base.BaseBlog;
 public class Blog extends BaseBlog<Blog> {
 
     public static final String defaultTag = "Java";
+
+
 }

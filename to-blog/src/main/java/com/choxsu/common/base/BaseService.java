@@ -4,7 +4,6 @@ import com.choxsu.common.kit.ClassKits;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Page;
-import org.apache.commons.lang3.ArrayUtils;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -13,10 +12,9 @@ import java.util.List;
 /**
  * @author choxsu
  */
-public class BaseService<M extends BaseModel<M>> {
+public class BaseService<M extends Model<M>> {
 
     public M DAO;
-
 
     public BaseService() {
         Class<M> modelClass = null;
@@ -25,14 +23,12 @@ public class BaseService<M extends BaseModel<M>> {
             Type[] p = ((ParameterizedType) t).getActualTypeArguments();
             modelClass = (Class<M>) p[0];
         }
-
         if (modelClass == null) {
             throw new RuntimeException("can not get parameterizedType in BaseService");
         }
 
         DAO = ClassKits.newInstance(modelClass).dao();
     }
-
 
     public M getDao() {
         return DAO;
@@ -55,7 +51,9 @@ public class BaseService<M extends BaseModel<M>> {
      * @return
      */
     public List<M> findAll() {
-        return DAO.findAll();
+
+
+        return null;
     }
 
     /**
@@ -65,8 +63,8 @@ public class BaseService<M extends BaseModel<M>> {
      * @return
      */
     public boolean deleteById(Object id) {
-        BaseModel model = findById(id);
-        return model == null ? false : model.delete();
+        M m = findById(id);
+        return m == null ? false : m.delete();
     }
 
     /**
@@ -96,7 +94,7 @@ public class BaseService<M extends BaseModel<M>> {
      * @return
      */
     public boolean saveOrUpdate(M model) {
-        return model.saveOrUpdate();
+        return true;
     }
 
 
@@ -190,18 +188,18 @@ public class BaseService<M extends BaseModel<M>> {
      * @param attrs
      */
     public void join(Model model, String joinOnField, String[] attrs) {
-        if (model == null)
+       /* if (model == null)
             return;
         String id = model.getStr(joinOnField);
         if (id == null) {
             return;
         }
-        BaseModel m = findById(id);
+        M m = findById(id);
         if (m != null) {
             m = m.copy();
             m.keep(attrs);
             model.put(StrKit.firstCharToLowerCase(m.getClass().getSimpleName()), m);
-        }
+        }*/
     }
 
 
@@ -235,18 +233,18 @@ public class BaseService<M extends BaseModel<M>> {
      * @param attrs
      */
     public void join(Model model, String joinOnField, String joinName, String[] attrs) {
-        if (model == null)
+       /* if (model == null)
             return;
         String id = model.getStr(joinOnField);
         if (id == null) {
             return;
         }
-        BaseModel m = findById(id);
+        M m = findById(id);
         if (m != null) {
             m = m.copy();
             m.keep(attrs);
             model.put(joinName, m);
-        }
+        }*/
 
     }
 

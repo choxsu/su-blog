@@ -5,8 +5,6 @@ import com.choxsu.api.vo.BlogDetailVo;
 import com.choxsu.api.vo.BlogListVo;
 import com.choxsu.api.vo.RepliesVo;
 import com.choxsu.common.base.BaseService;
-import com.choxsu.common.base.db.Column;
-import com.choxsu.common.base.db.Columns;
 import com.choxsu.common.entity.Blog;
 import com.choxsu.common.entity.BlogTag;
 import com.jfinal.aop.Before;
@@ -136,7 +134,6 @@ public class ApiBlogService extends BaseService<Blog> {
 
 
     public List<Blog> test() {
-        List<Blog> blogs = DAO.findAll();
-        return blogs;
+        return null;
     }
 }

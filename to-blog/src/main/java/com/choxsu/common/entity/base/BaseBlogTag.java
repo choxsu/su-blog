@@ -1,53 +1,73 @@
 package com.choxsu.common.entity.base;
 
+
 import com.jfinal.plugin.activerecord.Model;
-import com.jfinal.plugin.activerecord.IBean;
+
 /**
  * @author choxsu, do not modify this file.
+ * table: blog_tag
+ * remarks: 标签表
  */
 @SuppressWarnings("serial")
-public abstract class BaseBlogTag<M extends BaseBlogTag<M>> extends Model<M> implements IBean {
+public abstract class BaseBlogTag<M extends BaseBlogTag<M>> extends Model<M> {
+
+    public static final String tableName = "blog_tag";
 
     /**
      * 主键id
      */
-    private java.lang.String id = "id";
+    private String id = "id";
     /**
      * 名称
      */
-    private java.lang.String name = "name";
+    private String name = "name";
     /**
      * 是否有效；0是1否
      */
-    private java.lang.String status = "status";
+    private String status = "status";
 
 
-	public void setId(java.lang.Integer id) {
+    /**
+     * set主键id
+     */
+	public void setId(Integer id) {
 		set(this.id, id);
 	}
-	
 
-	public java.lang.Integer getId() {
+    /**
+     * get主键id
+     */
+	public Integer getId() {
 		return getInt(id);
 	}
 
 
-	public void setName(java.lang.String name) {
+    /**
+     * set名称
+     */
+	public void setName(String name) {
 		set(this.name, name);
 	}
-	
 
-	public java.lang.String getName() {
+    /**
+     * get名称
+     */
+	public String getName() {
 		return getStr(name);
 	}
 
 
-	public void setStatus(java.lang.Integer status) {
+    /**
+     * set是否有效；0是1否
+     */
+	public void setStatus(Integer status) {
 		set(this.status, status);
 	}
-	
 
-	public java.lang.Integer getStatus() {
+    /**
+     * get是否有效；0是1否
+     */
+	public Integer getStatus() {
 		return getInt(status);
 	}
 

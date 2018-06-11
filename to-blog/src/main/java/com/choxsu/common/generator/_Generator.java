@@ -14,7 +14,6 @@
 
 package com.choxsu.common.generator;
 
-import com.choxsu.common.StartConfig;
 import com.choxsu.common.go.MyGenerator;
 import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
@@ -41,30 +40,31 @@ public class _Generator {
      * 重用 JFinalClubConfig 中的数据源配置，避免冗余配置
      */
     public static DataSource getDataSource() {
-//        String url = "jdbc:mysql://192.168.3.45:3306/xilian168?characterEncoding=utf8&useSSL=false";
-//        String username = "root";
-//        String pwd = "xl168";
-//        DruidPlugin druidPlugin = new DruidPlugin(url, username, pwd);
-        DruidPlugin druidPlugin = StartConfig.getDruidPlugin();
+        String url = "jdbc:mysql://127.0.0.1:3306/sblog?characterEncoding=utf8&useSSL=false&autoReconnect=true&failOverReadOnly=false";
+        String username = "root";
+        String pwd = "root";
+        DruidPlugin druidPlugin = new DruidPlugin(url, username, pwd);
+//        DruidPlugin druidPlugin = StartConfig.getDruidPlugin();
         druidPlugin.start();
         return druidPlugin.getDataSource();
     }
 
     public static void main(String[] args) {
         // base model 所使用的包名
-        String baseModelPackageName = "com.choxsu.common.entity.base";
+        String baseModelPackageName = "com.choxsu.common.generator.entity.base";
         // base model 文件保存路径
         String baseModelOutputDir = PathKit.getWebRootPath()
-                + "/src/main/java/com/choxsu/common/entity/base";
+                + "/src/main/java/com/choxsu/common/generator/entity/base";
 
         System.out.println("输出路径：" + baseModelOutputDir);
 
         // model 所使用的包名 (MappingKit 默认使用的包名)
-        String modelPackageName = "com.choxsu.common.entity";
+        String modelPackageName = "com.choxsu.common.generator.entity";
         // model 文件保存路径 (MappingKit 与 DataDictionary 文件默认保存路径)
         String modelOutputDir = baseModelOutputDir + "/..";
 
         String controllerGeneratorOutputDir = PathKit.getWebRootPath() + "/src/main/java/com/choxsu/controller";
+        String serviceGeneratorOutputDir = PathKit.getWebRootPath() + "/src/main/java/com/choxsu/service";
 
         // 创建生成器
         MyGenerator gen = new MyGenerator(getDataSource(),
@@ -72,13 +72,17 @@ public class _Generator {
                 baseModelOutputDir,
                 modelPackageName,
                 modelOutputDir,
-                controllerGeneratorOutputDir);
+                controllerGeneratorOutputDir,
+                serviceGeneratorOutputDir);
+
+
+        gen.setGenerateService(true);
 
         // 设置数据库方言
         gen.setDialect(new MysqlDialect());
 
         //设置Mapping生成的文文件名
-        gen.setMappingKitClassName("MappingKit");
+        gen.setMappingKitClassName("_MappingKit");
 
         /**
          * 设置 BaseModel 是否生成链式 setter 方法
@@ -93,11 +97,14 @@ public class _Generator {
             gen.addExcludedTable(table);
         }
         // 设置是否在 Model 中生成 dao 对象
-        gen.setGenerateDaoInModel(true);
+        gen.setGenerateDaoInModel(false);
         // 设置是否生成字典文件
         gen.setGenerateDataDictionary(false);
+
+        //是否生成service
+        gen.setGenerateService(true);
         // 设置需要被移除的表名前缀用于生成modelName。例如表名 "osc_user"，移除前缀 "osc_"后生成的model名为 "User"而非 OscUser
-        // gernerator.setRemovedTableNamePrefixes("t_")
+//        gen.setRemovedTableNamePrefixes("sm_");
         // 生成
         gen.generate();
     }
