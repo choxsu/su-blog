@@ -71,7 +71,6 @@
 <script type="text/javascript" src="/assets/login_reg/js/stopExecutionOnTimeout.js"></script>
 <script src="/assets/login_reg/layui/layui.js" type="text/javascript"></script>
 <script src="/assets/login_reg/js/Particleground.js" type="text/javascript"></script>
-<script src="/assets/login_reg/js/Treatment.js" type="text/javascript"></script>
 <script src="/assets/login_reg/js/jquery.mockjax.js" type="text/javascript"></script>
 <script src="/assets/login_reg/js/controlLogin.js" type="text/javascript"></script>
 
@@ -140,7 +139,7 @@
 </html>
 
 <script type="text/javascript">
-    $(document).ready(function () {
+   $(document).ready(function () {
         $("#login_form").ajaxForm({
             dataType: "json"
             , beforeSubmit: function (formData, jqForm, options) {       // 表单提交之前回调
@@ -149,6 +148,25 @@
             , success: function (ret) {
                 // 业务层验证成功
                 if (ret.state == "ok") {
+
+                    //认证中..
+                    fullscreen();
+                    $('.login').addClass('test'); //倾斜特效
+                    setTimeout(function () {
+                        $('.login').addClass('testtwo'); //平移特效
+                    }, 300);
+                    setTimeout(function () {
+                        $('.authent').show().animate({ right: -320 }, {
+                            easing: 'easeOutQuint',
+                            duration: 600,
+                            queue: false
+                        });
+                        $('.authent').animate({ opacity: 1 }, {
+                            duration: 200,
+                            queue: false
+                        }).addClass('visible');
+                    }, 500);
+
                     location.href = ret.returnUrl;
                     return;
                 }
@@ -192,6 +210,19 @@
         $(".J_codeimg").attr("src", "/login/captcha?v=" + Math.random());
         $("#captchaInput").val("");
     }
+
+   var fullscreen = function () {
+       elem = document.body;
+       if (elem.webkitRequestFullScreen) {
+           elem.webkitRequestFullScreen();
+       } else if (elem.mozRequestFullScreen) {
+           elem.mozRequestFullScreen();
+       } else if (elem.requestFullScreen) {
+           elem.requestFullscreen();
+       } else {
+           //浏览器不支持全屏API或已被禁用
+       }
+   }
 
 
 </script>
