@@ -11,23 +11,18 @@
 </a>
 <ul class="jfa-sub-menu">
 
-    <li><a href="/admin/column">栏目管理</a></li>
-
-    <li><a href="/admin/tutor">导师管理</a></li>
-
-    #permission("/admin/project")
-    <li><a href="/admin/project">项目管理</a></li>
+    #permission("/admin/blog")
+    <li><a href="/admin/blog">博客管理</a></li>
     #end
 
-    #permission("/admin/share")
-    <li><a href="/admin/share">分享管理</a></li>
+    #permission("/admin/blog/category")
+    <li><a href="/admin/blog/category">分类管理</a></li>
     #end
 
-    #permission("/admin/feedback")
-    <li><a href="/admin/feedback">反馈管理</a></li>
+    #permission("/admin/blog/tag")
+    <li><a href="/admin/blog/tag">标签管理</a></li>
     #end
 </ul>
-
 
 <a class="jfa-main-menu" home="false">
     <i class="left-icon fa fa-user-o"></i>

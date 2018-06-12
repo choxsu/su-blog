@@ -11,4 +11,6 @@ public class Blog extends BaseBlog<Blog> {
     public static final String defaultTag = "Java";
 
 
+
+
 }

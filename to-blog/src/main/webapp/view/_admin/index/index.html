@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-            ### #permission("/admin/account")
+            #permission("/admin/account")
             <div class="col-md-6 col-sm-6 col-right">
                 <div class="jfa-content">
                     <div class="profile-title">#(accountProfile.title)</div>
@@ -34,46 +34,46 @@
                     </div>
                 </div>
             </div>
-            ### #end
+            #end
         </div>
 
         <div class="row">
-            ### #permission("/admin/project")
+            #permission("/admin/blog")
             <div class="col-md-6 col-sm-6 col-left">
                 <div class="jfa-content">
-                    <div class="profile-title">#(projectProfile.title)</div>
+                    <div class="profile-title">#(blogProfile.title??)</div>
                     <div class="profile-num">
-                        <a href="/admin/project">#(projectProfile.total)</a>
+                        <a href="/admin/blog">#(blogProfile.total??)</a>
                     </div>
                 </div>
             </div>
-            ### #end
+            #end
 
-            ### #permission("/admin/share")
+            #permission("/admin/blog/category")
             <div class="col-md-6 col-sm-6 col-right">
                 <div class="jfa-content">
-                    <div class="profile-title">#(shareProfile.title)</div>
+                    <div class="profile-title">#(blogCategoryProfile.title??)</div>
                     <div class="profile-num">
-                        <a href="/admin/share">#(shareProfile.total)</a>
+                        <a href="/admin/blog/category">#(blogCategoryProfile.total??)</a>
                     </div>
                 </div>
             </div>
-            ### #end
+            #end
         </div>
 
         <div class="row">
-            ### #permission("/admin/feedback")
+            #permission("/admin/blog/tag")
             <div class="col-md-6 col-sm-6 col-left">
                 <div class="jfa-content">
-                    <div class="profile-title">#(feedbackProfile.title)</div>
+                    <div class="profile-title">#(blogTagProfile.title??)</div>
                     <div class="profile-num">
-                        <a href="/admin/feedback">#(feedbackProfile.total)</a>
+                        <a href="/admin/blog/tag">#(blogTagProfile.total??)</a>
                     </div>
                 </div>
             </div>
-            ### #end
+            #end
 
-            ### #permission("/admin/permission")
+            #permission("/admin/permission")
             <div class="col-md-6 col-sm-6 col-right">
                 <div class="jfa-content">
                     <div class="profile-title">#(permissionProfile.title)</div>
@@ -82,7 +82,18 @@
                     </div>
                 </div>
             </div>
-            ### #end
+            #end
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-left">
+                <div class="jfa-content">
+                    <div class="profile-title">#(visitorProfile.title??)</div>
+                    <div class="profile-num">
+                        <a href="/admin/visitor">#(visitorProfile.total??)</a>
+                    </div>
+                </div>
+            </div>
         </div>
 
 

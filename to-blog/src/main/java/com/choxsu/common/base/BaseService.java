@@ -1,5 +1,6 @@
 package com.choxsu.common.base;
 
+import com.choxsu.common.entity.BlogCategory;
 import com.choxsu.common.kit.ClassKits;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Model;
@@ -50,10 +51,9 @@ public class BaseService<M extends Model<M>> {
      *
      * @return
      */
-    public List<M> findAll() {
-
-
-        return null;
+    public List<M> findAll(String tableName) {
+        String sql = "select * from " + tableName;
+        return DAO.find(sql);
     }
 
     /**
