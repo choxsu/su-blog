@@ -38,7 +38,7 @@
 				#for(x : blogPage.getList())
 				<tr>
 					<th scope="row">#(x.id)</th>
-					<td>#(x.title)</td>
+					<td><a href="/#(x.category)/detail/#(x.id)" target="_blank">#(x.title)</a></td>
 					<td>#date(x.createAt)</td>
 					<td>#(x.category)</td>
 					<td>#(x.tagName??)</td>
