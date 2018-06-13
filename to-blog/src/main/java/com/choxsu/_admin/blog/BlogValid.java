@@ -18,11 +18,8 @@ public class BlogValid extends Validator {
         }
 
         validateRequired("blog.title", "msg", "标题不能为空");
-        String nickName = c.getPara("blog.title").trim();
-        if (nickName.contains("@") || nickName.contains("＠")) { // 全角半角都要判断
-            addError("msg", "标题不能包含 \"@\" 字符");
-        }
-        if (nickName.contains(" ") || nickName.contains("　")) {
+        String title = c.getPara("blog.title").trim();
+        if (title.contains(" ") || title.contains("　")) {
             addError("msg", "标题不能包含空格");
         }
         validateString("blog.title", 1, 19, "msg", "标题不能超过19个字");
