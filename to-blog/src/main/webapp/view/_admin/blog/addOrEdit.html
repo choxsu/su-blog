@@ -15,11 +15,15 @@
 <div class="jfa-content-box" id="jfa-content-box">
     <div class="jfa-content" id="jfa-content">
 
-        <form class="form-horizontal margin-top-30" id="myArticleForm" action="/admin/blog/save" method="post">
+        <form class="form-horizontal margin-top-30" id="myArticleForm"
+              action="#(blog.id?? == null ? '/admin/blog/save' : '/admin/blog/update')"
+              method="post">
+            <input type="hidden" name="blog.id" value="#(blog.id??)"/>
             <div class="form-group">
                 <label class="col-sm-2 control-label">标题</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" placeholder="请输入标题" name="blog.title">
+                    <input type="text" class="form-control"
+                           placeholder="请输入标题" name="blog.title" value="#(blog.title??)">
                 </div>
             </div>
             <div class="form-group">
@@ -28,7 +32,11 @@
                     <select name="blog.category" class="form-control">
                         <option value="">请选择</option>
                         #for(x:categoryList)
-                        <option value="#(x.name)">#(x.name)</option>
+                            #if(x.name == blog.category??)
+                            <option value="#(x.name)" selected>#(x.name)</option>
+                            #else
+                            <option value="#(x.name)">#(x.name)</option>
+                            #end
                         #end
                     </select>
                 </div>
@@ -39,7 +47,11 @@
                     <select name="blog.tag_id" class="form-control">
                         <option value="">请选择</option>
                         #for(x:tagList)
+                        #if(x.id == blog.tag_id??)
+                        <option value="#(x.id)" selected>#(x.name)</option>
+                        #else
                         <option value="#(x.id)">#(x.name)</option>
+                        #end
                         #end
                     </select>
                 </div>
@@ -47,7 +59,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">正文</label>
                 <div class="col-sm-5" id="md" style="min-height: 500px;">
-                    <textarea name="blog.content" style="display:none;"> </textarea>
+                    <textarea name="blog.content" style="display:none;">#(blog.content??) </textarea>
                 </div>
             </div>
 
@@ -82,15 +94,19 @@
 </style>
 <script src="/assets/editor_md/editormd.js"></script>
 <script type="text/javascript">
+
+    var content = $("textarea[name = 'blog.content']").text();
+    if (content == undefined || content == null || content == "")
+        content = null;
     $(function () {
         var editor = editormd("md", {
             width: "80%",
-            markdown: null,
+            markdown: content,
             path: '/assets/editor_md/lib/',
             toolbarIcons: function () {
                 return ["undo", "redo", "|", "bold", "hr", "|", "h1", "h2", "h3", "h4", "h5", "h6", "italic",
-                    "quote", "uppercase", "list-ul", "list-ol", "hr", "image","code","code-block",
-                    "table", "datetime", "html-entities","pagebreak","search","image",
+                    "quote", "uppercase", "list-ul", "list-ol", "hr", "image", "code", "code-block",
+                    "table", "datetime", "html-entities", "pagebreak", "search", "image",
                     "||", "watch", "preview"]
             },
             tex: true,                   // 开启科学公式TeX语言支持，默认关闭
@@ -102,7 +118,7 @@
             imageUploadURL: "",
             crossDomainUpload: true,
             uploadCallbackURL: "",
-            autoHeight: false
+            autoHeight: true
             /*
              跨域时，上传的图片服务器后台只需要返回一个跳转 URL 并跳转到原页面同域下的 callback 页面，结构如下：
              {

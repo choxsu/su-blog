@@ -18,13 +18,9 @@ public class BlogValid extends Validator {
         }
 
         validateRequired("blog.title", "msg", "标题不能为空");
-        String title = c.getPara("blog.title").trim();
-        if (title.contains(" ") || title.contains("　")) {
-            addError("msg", "标题不能包含空格");
-        }
-        validateString("blog.title", 1, 19, "msg", "标题不能超过19个字");
+        validateString("blog.title", 1, 60, "msg", "标题不能超过60个字");
 
-        validateRequired("blog.category_id", "msg", "请选择分类");
+        validateRequired("blog.category", "msg", "请选择分类");
         validateRequired("blog.tag_id", "msg", "请选择标签");
 
         validateString("blog.content", 10, 100000,  "msg", "内容最少10个字");

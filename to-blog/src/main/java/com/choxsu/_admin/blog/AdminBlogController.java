@@ -37,7 +37,7 @@ public class AdminBlogController extends BaseController {
 
     public void add() {
         commonInfo();
-        render("add.html");
+        render("addOrEdit.html");
     }
 
     private void commonInfo() {
@@ -65,7 +65,8 @@ public class AdminBlogController extends BaseController {
 
     public void edit() {
         commonInfo();
-        render("edit.html");
+        setAttr("blog", adminBlogService.DAO.findById(getParaToInt("id")));
+        render("addOrEdit.html");
     }
 
     @Before(BlogValid.class)
