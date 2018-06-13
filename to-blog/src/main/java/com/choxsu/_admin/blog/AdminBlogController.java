@@ -1,10 +1,22 @@
 package com.choxsu._admin.blog;
 
+import com.choxsu._admin.account.AccountAdminService;
 import com.choxsu._admin.blog.category.AdminCategoryService;
+import com.choxsu._admin.blog.tag.AdminTagService;
 import com.choxsu.common.base.BaseController;
+import com.choxsu.common.constant.CategoryEnum;
+import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.Blog;
 import com.choxsu.common.entity.BlogCategory;
+import com.choxsu.common.entity.BlogTag;
+import com.choxsu.service.AccountService;
+import com.jfinal.aop.Before;
+import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Page;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author chox su
@@ -14,7 +26,7 @@ public class AdminBlogController extends BaseController {
 
     AdminBlogService adminBlogService = AdminBlogService.me;
 
-    AdminCategoryService categoryService = AdminCategoryService.me;
+    AdminTagService tagService = AdminTagService.me;
 
     public void index() {
 
@@ -24,24 +36,52 @@ public class AdminBlogController extends BaseController {
     }
 
     public void add() {
-        setAttr("categoryList", categoryService.findAll(BlogCategory.tableName));
+        commonInfo();
         render("add.html");
     }
 
-    public void save() {
+    private void commonInfo() {
+        CategoryEnum[] values = CategoryEnum.values();
+        List<BlogCategory> list = new ArrayList<>();
+        BlogCategory blogCategory;
+        for (CategoryEnum value : values) {
+            blogCategory = new BlogCategory();
+            blogCategory.setName(value.getName());
+            list.add(blogCategory);
+        }
+        setAttr("categoryList", list);
+        setAttr("tagList", tagService.findAll(BlogTag.tableName));
+    }
 
+    @Before(BlogValid.class)
+    public void save() {
+        Blog blog = getModel(Blog.class, "blog");
+        blog.setAccountId(getLoginAccountId());
+        blog.setUpdateAt(new Date());
+        blog.setCreateAt(new Date());
+        blog.save();
+        renderJson(Ret.ok());
     }
 
     public void edit() {
+        commonInfo();
         render("edit.html");
     }
 
+    @Before(BlogValid.class)
     public void update() {
 
+        Blog blog = getModel(Blog.class, "blog");
+        blog.setAccountId(getLoginAccountId());
+        blog.setCreateAt(new Date());
+        blog.update();
+        renderJson(Ret.ok());
     }
 
     public void delete() {
-
+        Integer id = getParaToInt("id");
+        adminBlogService.DAO.deleteById(id);
+        renderJson(Ret.ok().set("msg", "删除成功！"));
     }
 
 }
