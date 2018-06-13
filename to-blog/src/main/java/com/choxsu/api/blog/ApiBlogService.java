@@ -136,4 +136,9 @@ public class ApiBlogService extends BaseService<Blog> {
     public List<Blog> test() {
         return null;
     }
+
+    @Override
+    public String getTableName() {
+        return Blog.tableName;
+    }
 }

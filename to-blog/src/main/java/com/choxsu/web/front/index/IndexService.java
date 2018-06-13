@@ -1,6 +1,5 @@
 package com.choxsu.web.front.index;
 
-import com.choxsu.common.base.BaseService;
 import com.choxsu.common.constant.CategoryEnum;
 import com.choxsu.common.constant.EnCacheEnum;
 import com.choxsu.common.safe.JsoupFilter;

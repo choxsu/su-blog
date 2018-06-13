@@ -17,7 +17,6 @@ package com.choxsu._admin.common;
 import com.choxsu._admin.account.AccountAdminController;
 import com.choxsu._admin.auth.AdminAuthInterceptor;
 import com.choxsu._admin.blog.AdminBlogController;
-import com.choxsu._admin.blog.category.AdminCategoryController;
 import com.choxsu._admin.blog.tag.AdminTagController;
 import com.choxsu._admin.index.IndexAdminController;
 import com.choxsu._admin.permission.PermissionAdminController;
@@ -45,9 +44,7 @@ public class AdminRoutes extends Routes {
         add("/admin", IndexAdminController.class, "/index");
 
         add("/admin/blog", AdminBlogController.class, "/blog");
-        add("/admin/blog/category", AdminCategoryController.class, "/category");
         add("/admin/blog/tag", AdminTagController.class, "/tag");
-
 
 
         add("/admin/account", AccountAdminController.class, "/account");

@@ -22,4 +22,9 @@ public class AdminBlogService extends BaseService<Blog> {
         }
         return paginate;
     }
+
+    @Override
+    public String getTableName() {
+        return Blog.tableName;
+    }
 }

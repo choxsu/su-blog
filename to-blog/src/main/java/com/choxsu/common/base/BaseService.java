@@ -1,6 +1,5 @@
 package com.choxsu.common.base;
 
-import com.choxsu.common.entity.BlogCategory;
 import com.choxsu.common.kit.ClassKits;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Model;
@@ -13,7 +12,7 @@ import java.util.List;
 /**
  * @author choxsu
  */
-public class BaseService<M extends Model<M>> {
+public abstract class BaseService<M extends Model<M>> {
 
     public M DAO;
 
@@ -30,6 +29,8 @@ public class BaseService<M extends Model<M>> {
 
         DAO = ClassKits.newInstance(modelClass).dao();
     }
+
+    public abstract String getTableName();
 
     public M getDao() {
         return DAO;
@@ -51,8 +52,8 @@ public class BaseService<M extends Model<M>> {
      *
      * @return
      */
-    public List<M> findAll(String tableName) {
-        String sql = "select * from " + tableName;
+    public List<M> findAll() {
+        String sql = "select * from " + getTableName();
         return DAO.find(sql);
     }
 
@@ -263,5 +264,9 @@ public class BaseService<M extends Model<M>> {
                 keep(m, attrs);
             }
         }
+    }
+
+    public Page<M> paginate(Integer page, Integer size) {
+        return DAO.paginate(page, size, "select * ", "from " + getTableName());
     }
 }

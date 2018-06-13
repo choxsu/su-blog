@@ -9,8 +9,12 @@ import com.choxsu.common.entity.BlogTag;
  */
 public class AdminTagService extends BaseService<BlogTag> {
 
+
     public static final AdminTagService me = new AdminTagService();
 
 
-
+    @Override
+    public String getTableName() {
+        return BlogTag.tableName;
+    }
 }

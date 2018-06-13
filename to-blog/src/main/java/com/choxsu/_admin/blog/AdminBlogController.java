@@ -1,15 +1,11 @@
 package com.choxsu._admin.blog;
 
-import com.choxsu._admin.account.AccountAdminService;
-import com.choxsu._admin.blog.category.AdminCategoryService;
 import com.choxsu._admin.blog.tag.AdminTagService;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.constant.CategoryEnum;
-import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.Blog;
 import com.choxsu.common.entity.BlogCategory;
 import com.choxsu.common.entity.BlogTag;
-import com.choxsu.service.AccountService;
 import com.jfinal.aop.Before;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Page;
@@ -50,7 +46,7 @@ public class AdminBlogController extends BaseController {
             list.add(blogCategory);
         }
         setAttr("categoryList", list);
-        setAttr("tagList", tagService.findAll(BlogTag.tableName));
+        setAttr("tagList", tagService.findAll());
     }
 
     @Before(BlogValid.class)

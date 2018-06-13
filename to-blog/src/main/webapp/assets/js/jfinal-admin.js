@@ -98,7 +98,7 @@ function setCurrentAdminMenu() {
 
 	$(".jfa-sub-menu a[href]").each(function(index, element) {
 		var href = $(element).attr("href");
-		if (pathName.indexOf(href) >= 0) {
+		if (pathName == href) {
 			var currentMenu = $(".jfa-sub-menu a[href='" + href + "']");
 			currentMenu.addClass("jfa-cur-menu");
 			return false;
