@@ -65,7 +65,7 @@ public class LoginController extends Controller {
 	public void logout() {
 		srv.logout(getCookie(LoginService.sessionIdName));
 		removeCookie(LoginService.sessionIdName);
-		redirect("/");
+		redirect("/login");
 	}
 
 	/**
