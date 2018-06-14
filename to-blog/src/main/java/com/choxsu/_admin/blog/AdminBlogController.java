@@ -52,6 +52,8 @@ public class AdminBlogController extends BaseController {
     @Before(BlogValid.class)
     public void save() {
         Blog blog = getModel(Blog.class, "blog");
+        String html = getPara("md-html-code");
+        blog.setContent(html);
         blog.setAccountId(getLoginAccountId());
         blog.setUpdateAt(new Date());
         blog.setCreateAt(new Date());
