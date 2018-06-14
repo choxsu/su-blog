@@ -48,20 +48,6 @@
                 </div>
             </div>
             #end
-
-            #permission("/admin/blog/category")
-            <div class="col-md-6 col-sm-6 col-right">
-                <div class="jfa-content">
-                    <div class="profile-title">#(blogCategoryProfile.title??)</div>
-                    <div class="profile-num">
-                        <a href="/admin/blog/category">#(blogCategoryProfile.total??)</a>
-                    </div>
-                </div>
-            </div>
-            #end
-        </div>
-
-        <div class="row">
             #permission("/admin/blog/tag")
             <div class="col-md-6 col-sm-6 col-left">
                 <div class="jfa-content">
@@ -72,6 +58,9 @@
                 </div>
             </div>
             #end
+        </div>
+
+        <div class="row">
 
             #permission("/admin/permission")
             <div class="col-md-6 col-sm-6 col-right">
@@ -83,9 +72,7 @@
                 </div>
             </div>
             #end
-        </div>
 
-        <div class="row">
             <div class="col-md-6 col-sm-6 col-left">
                 <div class="jfa-content">
                     <div class="profile-title">#(visitorProfile.title??)</div>
@@ -94,6 +81,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
 
 
