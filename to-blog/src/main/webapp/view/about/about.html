@@ -10,7 +10,7 @@
 #for(r : result.list)
 <article class="post-62 post type-post status-publish format-standard has-post-thumbnail sticky hentry category-notes tag-hadoop">
     <header class="entry-header">
-        <h2 class="entry-title"><a href="/to-blog/detail/#(r.id)" rel="bookmark">#(r.title)</a></h2>
+        <h2 class="entry-title"><a href="javascript:;" rel="bookmark">#(r.title)</a></h2>
         <div class="entry-meta">
             <i class="fa fa-calendar"></i>
             <time datetime="#date(r.createAt, 'yyyy-MM-dd HH:mm')">#date(r.createAt, "yyyy-MM-dd HH:mm")
@@ -18,16 +18,6 @@
             <span class="cats">
                     <i class="fa fa-folder-open-o"></i>
                     <a href="javascript:void(0);" rel="category tag">#(r.category)</a>
-                </span>
-
-            <span class="tags">
-                    <i class="fa fa-tags"></i>
-                    <a href="/tag/#(r.tagId)" rel="tag">#(r.tagName)</a>
-                </span>
-
-            <span class="comments">
-                    <i class="fa fa-eye"></i>
-                    <b>#(r.clickCount)</b>
                 </span>
         </div>
     </header>
