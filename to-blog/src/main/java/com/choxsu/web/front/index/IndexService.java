@@ -60,7 +60,7 @@ public class IndexService {
         result.getList().forEach(s -> {
             String category = s.getStr("category");
             if (!Objects.equals(category, CategoryEnum.ABOUT.getName())) {
-                s.set("content", JsoupFilter.getText(s.get("content"), 320));
+                s.set("content", JsoupFilter.getText(s.get("content"), 150)+ "......") ;
             }
             Integer tagId = s.getInt("tagId");
             if (tagId != null && tagId > 0) {
