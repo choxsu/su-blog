@@ -24,9 +24,9 @@ public class IndexService {
      * @return
      */
     public List<Record> findBlogTags() {
-        String sql = "SELECT tag.id,tag.name,(SELECT count(0) FROM blog b WHERE tag_id = tag.id) as topicNum FROM blog_tag tag WHERE status = ?";
+        String sql = "SELECT tag.id,tag.name,(SELECT count(0) FROM blog b WHERE tag_id = tag.id and category != ?) as topicNum FROM blog_tag tag WHERE status = ?";
 
-        return Db.findByCache(EnCacheEnum.TAGS.getName(), EnCacheEnum.TAGS.getKey(), sql, 0);
+        return Db.findByCache(EnCacheEnum.TAGS.getName(), EnCacheEnum.TAGS.getKey(), sql, CategoryEnum.ABOUT.getName(), 0);
 
     }
 

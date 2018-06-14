@@ -1,5 +1,6 @@
 package com.choxsu.web.front.search;
 
+import com.choxsu.common.constant.CategoryEnum;
 import com.choxsu.web.front.index.IndexService;
 import com.jfinal.kit.Kv;
 import com.jfinal.kit.StrKit;
@@ -19,11 +20,12 @@ public class SearchService {
 
     public Page<Record> search(Integer pageNumber, Integer pageSize, String keyword) {
         if (StrKit.isBlank(keyword)) {
-            return new Page<Record>();
+            return new Page<>();
         }
         Kv kv = Kv.create();
         kv.put("keyword", keyword);
         int start = (pageNumber - 1) * pageSize;
+        kv.put("category", CategoryEnum.ABOUT.getName());
         kv.put("start", start);
         kv.put("pageSize", pageSize);
         SqlPara sqlPara = Db.getSqlPara("blog.searchCount", kv);
@@ -34,7 +36,7 @@ public class SearchService {
             sqlPara = Db.getSqlPara("blog.searchList", kv);
             list = Db.find(sqlPara);
         } else {
-            list = new ArrayList<Record>();
+            list = new ArrayList<>();
         }
 
         Page<Record> page = new Page<Record>(list, pageNumber, pageSize, (int) (t / pageSize), t.intValue());

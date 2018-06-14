@@ -18,6 +18,7 @@
     WHERE
       isDelete = 0
       AND title like concat('%',#para(keyword), '%')
+      and category != #para(category)
   #end
 
   #sql("searchList")
