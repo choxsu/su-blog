@@ -32,11 +32,11 @@
                     <select name="blog.category" class="form-control">
                         <option value="">请选择</option>
                         #for(x:categoryList)
-                            #if(x.name == blog.category??)
-                            <option value="#(x.name)" selected>#(x.name)</option>
-                            #else
-                            <option value="#(x.name)">#(x.name)</option>
-                            #end
+                        #if(x.name == blog.category??)
+                        <option value="#(x.name)" selected>#(x.name)</option>
+                        #else
+                        <option value="#(x.name)">#(x.name)</option>
+                        #end
                         #end
                     </select>
                 </div>
@@ -59,7 +59,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">正文</label>
                 <div class="col-sm-5" id="md" style="min-height: 500px;">
-                    <textarea name="blog.content" style="display:none;">#(blog.content??) </textarea>
+                    <textarea name="blog.markedContent" style="display:none;">#(blog.markedContent??) </textarea>
                 </div>
             </div>
 
@@ -95,11 +95,14 @@
 <script src="/assets/editor_md/editormd.js"></script>
 <script type="text/javascript">
 
-    var content = $("textarea[name = 'blog.content']").text();
+    var content = $("textarea[name = 'blog.markedContent']").text();
     if (content == undefined || content == null || content == "")
         content = null;
-    $(function () {
-        var editor = editormd("md", {
+
+    $(document).ready(function () {
+
+
+        editormd("md", {
             width: "80%",
             markdown: content,
             path: '/assets/editor_md/lib/',
@@ -112,26 +115,15 @@
             tex: true,                   // 开启科学公式TeX语言支持，默认关闭
             flowChart: true,             // 开启流程图支持，默认关闭
             sequenceDiagram: true,       // 开启时序/序列图支持，默认关闭,
-
+            saveHTMLToTextarea: true,
             imageUpload: true,
             imageFormats: ["jpg", "jpeg", "gif", "png", "bmp"],
             imageUploadURL: "",
             crossDomainUpload: true,
             uploadCallbackURL: "",
             autoHeight: true
-            /*
-             跨域时，上传的图片服务器后台只需要返回一个跳转 URL 并跳转到原页面同域下的 callback 页面，结构如下：
-             {
-                success   : 0 | 1,   // 0 表示上传失败，1 表示上传成功
-                message   : "提示的信息，上传成功或上传失败及错误信息等。",
-                dialog_id : $_GET['dialog_id'],
-                url       : "远程图片地址"    // 上传成功时才返回
-             }
-             */
         });
-    });
 
-    $(document).ready(function () {
         $("#myArticleForm").ajaxForm({
             dataType: "json"
             , beforeSubmit: function (formData, jqForm, options) {

@@ -45,8 +45,8 @@ public class IndexService {
      */
     public Page<Record> findBlogs(int page) {
         String select = "SELECT id,title,content,createAt,updateAt,clickCount,category,tag_id as tagId,category_id as categoryId";
-        String from = "FROM blog WHERE isDelete = ? ORDER BY clickCount DESC,updateAt DESC,createAt DESC";
-        Page<Record> result = Db.paginate(page, 15, select, from, 0);
+        String from = "FROM blog WHERE isDelete = ? and category != ? ORDER BY clickCount DESC,updateAt DESC,createAt DESC";
+        Page<Record> result = Db.paginate(page, 15, select, from, 0, CategoryEnum.ABOUT.getName());
         filedHandle(result);
         return result;
     }

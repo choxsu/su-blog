@@ -23,7 +23,8 @@ public class BlogValid extends Validator {
         validateRequired("blog.category", "msg", "请选择分类");
         validateRequired("blog.tag_id", "msg", "请选择标签");
 
-        validateString("blog.content", 10, 100000,  "msg", "内容最少10个字");
+        validateString("blog.markedContent", 10, 100000,  "msg", "内容最少10个字");
+        validateString("md-html-code", 10, 500000,  "msg", "内容最少10个字");
     }
 
     @Override

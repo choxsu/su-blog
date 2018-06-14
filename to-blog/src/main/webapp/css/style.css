@@ -153,7 +153,7 @@ body.tag {
 	margin: 0 0 15px;
 }
 
-.entry-content h2 {
+/*.entry-content h2 {
 	border-left: 10px solid #3498db;
 	padding: 10px 0 10px 14px;
 	background-color: #f7f7f7;
@@ -177,7 +177,7 @@ body.tag {
 	border-left: 4px solid #3498db;
 	padding: 4px 0 4px 8px;
 	background-color: #f7f7f7;
-}
+}*/
 
 .entry-content a {
 	color: #2080df;

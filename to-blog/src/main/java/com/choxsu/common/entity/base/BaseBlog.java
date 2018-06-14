@@ -28,6 +28,11 @@ public abstract class BaseBlog<M extends Model<M>> extends Model<M> {
      * 内容
      */
     private String content = "content";
+
+	/**
+	 * 待解析内容
+	 */
+	private String markedContent = "markedContent";
     /**
      * 创建时间
      */
@@ -260,4 +265,17 @@ public abstract class BaseBlog<M extends Model<M>> extends Model<M> {
 		return getInt(categoryId);
 	}
 
+	/**
+	 * get待解析内容
+	 */
+	public String getMarkedContent() {
+		return getStr(markedContent);
+	}
+
+	/**
+	 * set待解析内容
+	 */
+	public void setMarkedContent(String markedContent) {
+		set(this.markedContent, markedContent);
+	}
 }
