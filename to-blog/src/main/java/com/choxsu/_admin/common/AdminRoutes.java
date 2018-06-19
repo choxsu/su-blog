@@ -21,6 +21,7 @@ import com.choxsu._admin.blog.tag.AdminTagController;
 import com.choxsu._admin.index.IndexAdminController;
 import com.choxsu._admin.permission.PermissionAdminController;
 import com.choxsu._admin.role.RoleAdminController;
+import com.choxsu._admin.visitor.VisitorAdminController;
 import com.jfinal.config.Routes;
 
 /**
@@ -50,6 +51,7 @@ public class AdminRoutes extends Routes {
         add("/admin/account", AccountAdminController.class, "/account");
         add("/admin/role", RoleAdminController.class, "/role");
         add("/admin/permission", PermissionAdminController.class, "/permission");
+        add("/admin/visitor", VisitorAdminController.class, "/visitor");
     }
 }
 

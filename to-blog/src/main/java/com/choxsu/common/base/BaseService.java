@@ -269,4 +269,30 @@ public abstract class BaseService<M extends Model<M>> {
     public Page<M> paginate(Integer page, Integer size) {
         return DAO.paginate(page, size, "select * ", "from " + getTableName());
     }
+
+
+    /**
+     * @param page     当前页
+     * @param size     每页条数
+     * @param column   排序的字段
+     * @param sortEnum 类型
+     * @return
+     */
+    public Page<M> paginateOrderBy(Integer page, Integer size, String column, SortEnum sortEnum) {
+
+        if (StrKit.isBlank(column)) {
+            throw new RuntimeException("column can not be null");
+        }
+        if (sortEnum == null) {
+            throw new RuntimeException("sortEnum can not be null");
+        }
+
+        StringBuffer sql = new StringBuffer();
+        sql.append("from ").append(getTableName());
+
+        sql.append(" order by ").append(column).append("\t");
+        sql.append(sortEnum.toString().toLowerCase());
+        return DAO.paginate(page, size, "select * ", sql.toString());
+    }
+
 }
