@@ -28,6 +28,7 @@
 				<tr>
 					<th>id</th>
 					<th>标题</th>
+					<th>查看次数</th>
 					<th>创建时间</th>
 					<th>分类</th>
 					<th>标签</th>
@@ -39,6 +40,7 @@
 				<tr>
 					<th scope="row">#(x.id)</th>
 					<td><a href="/#(x.category)/detail/#(x.id)" target="_blank">#(x.title)</a></td>
+					<td>#(x.clickCount)</td>
 					<td>#date(x.createAt)</td>
 					<td>#(x.category)</td>
 					<td>#(x.tagName??)</td>

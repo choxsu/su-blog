@@ -7,6 +7,7 @@ import com.choxsu.api.vo.RepliesVo;
 import com.choxsu.common.base.BaseService;
 import com.choxsu.common.entity.Blog;
 import com.choxsu.common.entity.BlogTag;
+import com.choxsu.web.front.blog.BlogService;
 import com.jfinal.aop.Before;
 import com.jfinal.kit.Kv;
 import com.jfinal.kit.StrKit;
@@ -128,6 +129,8 @@ public class ApiBlogService extends BaseService<Blog> {
         List<RepliesVo> replies = new ArrayList<>();
         blogDetailVo.setReplies(replies);
         blogDetailVo.set_collect(true);
+
+        BlogService.addClick(id);
 
         return blogDetailVo;
     }

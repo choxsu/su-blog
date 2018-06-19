@@ -36,8 +36,12 @@ public class BlogService {
         if (Objects.equals(category, CategoryEnum.CODE.getName()) && Objects.nonNull(categoryId)) {
             indexService.doCodeCategoryNameSet(blog, categoryId);
         }
-        Db.update("UPDATE blog b set b.clickCount = b.clickCount + 1 WHERE id = ?", id);
+        BlogService.addClick(id);
         return blog;
+    }
+
+    public static void addClick(int id){
+        Db.update("UPDATE blog b set b.clickCount = b.clickCount + 1 WHERE id = ?", id);
     }
 
     /**
