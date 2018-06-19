@@ -23,6 +23,14 @@ public class VisitorInterceptor implements Interceptor {
         //将用户访问信息保存到数据库
         Controller c = inv.getController();
         HttpServletRequest request = c.getRequest();
+        String actionKey = inv.getActionKey();
+
+        //过滤后台地址的访问记录
+        if (actionKey.indexOf("/admin") == 0){
+            inv.invoke();
+            return;
+        }
+
         String url = request.getRequestURL().toString();
         String ip = IpKit.getRealIp(request);
         String method = request.getMethod();
