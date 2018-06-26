@@ -13,7 +13,7 @@ import com.jfinal.template.stat.Scope;
  * 用来控制界面上的菜单、按钮等等元素的显示
  * <p>
  * 使用示例见模板文件： /view/_admin/common/_menu.html 或者 /view/_admin/permission/index.html
- * #role("权限管理员", "CEO", "CTO")
+ * #role("管理员")
  * ...
  * #end
  */
@@ -24,7 +24,7 @@ public class RoleDirective extends Directive {
         Account account = (Account)scope.getRootData().get(LoginService.loginAccountCacheName);
         if (account != null && account.isStatusOk()) {
             // 如果是超级管理员，或者拥有指定的角色则放行
-            if (	AdminAuthService.me.isSuperAdmin(account.getId()) ||
+            if (AdminAuthService.me.isSuperAdmin(account.getId()) ||
                     AdminAuthService.me.hasRole(account.getId(), getRoleNameArray(scope))) {
                 stat.exec(env, scope, writer);
             }

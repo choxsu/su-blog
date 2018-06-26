@@ -3,6 +3,7 @@ package com.choxsu._admin.permission;
 import com.choxsu._admin.auth.AdminAuthInterceptor;
 import com.choxsu._admin.auth.AdminAuthService;
 import com.choxsu.common.entity.Account;
+import com.choxsu.login.LoginService;
 import com.jfinal.kit.Kv;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
@@ -29,39 +30,29 @@ public class PermissionDirective extends Directive {
 
 
     public void exec(Env env, Scope scope, Writer writer) {
-        Account account = AdminAuthInterceptor.getThreadLocalAccount();
+        Account account = (Account)scope.getRootData().get(LoginService.loginAccountCacheName);
         if (account != null && account.isStatusOk()) {
             // 如果是超级管理员，或者拥有指定的权限则放行
-            if (AdminAuthService.me.isSuperAdmin(account.getId())) {
+            if (AdminAuthService.me.isSuperAdmin(account.getId()) ||
+                    AdminAuthService.me.hasPermission(account.getId(), getPermission(scope))) {
                 stat.exec(env, scope, writer);
-            } else {
-                Object value = exprList.eval(scope);
-                if (!(value instanceof String)) {
-                    throw new IllegalArgumentException("权限参数只能为 String 类型");
-                }
-
-                if (hasPermission(account.getId(), (String) value)) {
-                    stat.exec(env, scope, writer);
-                }
             }
         }
     }
 
+
     /**
-     * 当前账号是否拥有某个权限
+     * 从 #permission 指令参数中获取 permission
      */
-    public static boolean hasPermission(int accountId, String actionKey) {
-        if (StrKit.isBlank(actionKey)) {
-            return false;
+    private String getPermission(Scope scope) {
+        Object value = exprList.eval(scope);
+        if (value instanceof String) {
+            return (String)value;
+        } else {
+            throw new IllegalArgumentException("权限参数只能为 String 类型");
         }
-
-        //准备将权限优化到缓存里，降低数据库压力 TODO
-
-        Kv data = Kv.by("accountId", accountId).set("actionKey", actionKey);
-        SqlPara sp = Db.getSqlPara("admin.permission.hasPermission", data);
-        Integer ret = Db.queryInt(sp.getSql(), sp.getPara());
-        return ret != null;
     }
+
 
     @Override
     public boolean hasEnd() {

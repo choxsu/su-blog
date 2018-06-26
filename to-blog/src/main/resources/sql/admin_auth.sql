@@ -15,3 +15,14 @@
 	where ar.accountId = #para(1)
 #end
 
+### 验证是否拥有某个 role
+#sql("hasRole")
+	select ar.accountId from account_role ar
+	inner join role r on ar.roleId = r.id
+	where ar.accountId = #para(accountId)
+	and (
+		#for (x : roleNameArray)
+			#(for.first ? "" : "or") r.name = #para(x.trim())
+		#end
+	)
+#end

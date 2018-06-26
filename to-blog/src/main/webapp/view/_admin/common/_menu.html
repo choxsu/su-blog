@@ -26,7 +26,7 @@
     <i class="right-icon fa fa-angle-down fa-lg"></i>
 </a>
 
-#role("权限管理员", "CEO", "CTO")
+#if(hasRole("管理员"))
 <ul class="jfa-sub-menu">
     #permission("/admin/account")
     <li><a href="/admin/account">账户管理</a></li>

@@ -1,6 +1,7 @@
 package com.choxsu._admin.auth;
 
 import com.jfinal.kit.Kv;
+import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.SqlPara;
 
@@ -25,6 +26,9 @@ public class AdminAuthService {
      * 是否拥有具体某个权限
      */
     public boolean hasPermission(int accountId, String actionKey) {
+        if (StrKit.isBlank(actionKey)) {
+            return false;
+        }
         SqlPara sp = Db.getSqlPara("admin.auth.hasPermission", actionKey, accountId);
         Integer ret = Db.queryInt(sp.getSql(), sp.getPara());
         return ret != null;

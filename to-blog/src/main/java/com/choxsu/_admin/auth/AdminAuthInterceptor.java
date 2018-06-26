@@ -1,5 +1,3 @@
-
-
 package com.choxsu._admin.auth;
 
 import com.choxsu.common.entity.Account;
@@ -17,7 +15,7 @@ public class AdminAuthInterceptor implements Interceptor {
     private AdminAuthService srv = AdminAuthService.me;
 
     /**
-     * 用于在模板指令中使用
+     * 用于 sharedObject、sharedMethod 扩展中使用
      */
     private static final ThreadLocal<Account> threadLocal = new ThreadLocal<>();
 
@@ -29,7 +27,7 @@ public class AdminAuthInterceptor implements Interceptor {
     public void intercept(Invocation inv) {
         Account loginAccount = inv.getController().getAttr(LoginService.loginAccountCacheName);
         if (loginAccount != null && loginAccount.isStatusOk()) {
-            // 传递给 RoleDirective、PermissionDirective 等组件使用
+            // 传递给 sharedObject、sharedMethod 扩展使用
             threadLocal.set(loginAccount);
 
             // 如果是超级管理员或者拥有对当前 action 的访问权限则放行
@@ -40,8 +38,7 @@ public class AdminAuthInterceptor implements Interceptor {
             }
         }
 
-        // renderError(404) 避免暴露后台管理 url，增加安全性
-        if (loginAccount == null || inv.getActionKey().equals("/admin")) {
+        if (loginAccount == null) {
             inv.getController().redirect("/login");
         }
         // renderJson 提示没有操作权限，提升用户体验

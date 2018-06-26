@@ -10,7 +10,7 @@ import com.choxsu.common.entity.Account;
  * <p>
  * <p>
  * 使用示例：
- * #if (hasRole("权限管理员", "CEO", "CTO"))
+ * #if (hasRole("管理员"))
  * ...
  * #else
  * ...
