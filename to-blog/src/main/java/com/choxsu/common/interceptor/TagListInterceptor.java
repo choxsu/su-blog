@@ -20,9 +20,9 @@ public class TagListInterceptor implements Interceptor {
 
     @Override
     public void intercept(Invocation inv) {
-        Controller c = inv.getController();
         inv.invoke();
 
+        Controller c = inv.getController();
         List<Record> tags = indexService.findBlogTags();
         c.setAttr("tags", tags);
     }
