@@ -40,7 +40,7 @@
 									   #if(x.isStatusReg()) disabled #end
 									   #if(x.isStatusLockId()) checked #end
 
-									   type="checkbox" class="js-switch">
+									   type="checkbox" class="mgc-switch mgc-tiny">
 							#end
 					</td>
 					<td class="jfa-operation-button">
@@ -76,7 +76,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		initSwitchery(prepareAction, {size: "small", color: "red"});
+        initMagicInput(prepareAction);
 	});
 
 	function prepareAction($this, state) {

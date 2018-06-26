@@ -59,7 +59,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		initSwitchery(prepareAction, {size: "small"});
+        initMagicInput(prepareAction);
 	});
 
 	function prepareAction($this, state) {
@@ -91,9 +91,8 @@
 				<input data-role-id="#(role.id)"
 					   data-permission-id="#(x.id)"
 					   #if(x.assigned) checked #end
-					   type="checkbox" class="js-switch">
+					   type="checkbox" class="mgc-switch mgc-tiny">
 			</td>
-
 			<td style="width: 240px">#(x.actionKey)</td>
 			<td>#(x.remark)</td>
 		</tr>
