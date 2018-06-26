@@ -111,14 +111,33 @@ public class PermissionAdminService {
 	 * 如果某个 action 已经删掉，或者改了名称，可以使用该方法删除
 	 */
 	public Ret delete(final int permissionId) {
-		Db.tx(new IAtom() {
-			public boolean run() throws SQLException {
-				Db.delete("delete from role_permission where permissionId = ?", permissionId);
-				dao.deleteById(permissionId);
-				return true;
-			  }
-		});
+		Db.tx(() -> {
+			Db.delete("delete from role_permission where permissionId = ?", permissionId);
+			dao.deleteById(permissionId);
+			return true;
+		  });
 
 		return Ret.ok("msg", "权限删除成功");
+	}
+
+	/**
+	 * 在已被移除的 permission 中 put 进去一个 removed 值为 true 的标记，便于在界面显示不同的样式
+	 * @return 存在被删除的 actionKey 时返回 true，否则返回 false
+	 */
+	public boolean markRemovedActionKey(Page<Permission> permissionPage) {
+		boolean ret = false;
+
+		for (Permission p : permissionPage.getList()) {
+			String actionKey = p.getActionKey();
+
+			String[] urlPara = new String[1];
+			Action action = JFinal.me().getAction(actionKey, urlPara);
+			if ( ! actionKey.equals(action.getActionKey())) {
+				p.put("removed", true);
+				ret = true;
+			}
+		}
+
+		return ret;
 	}
 }

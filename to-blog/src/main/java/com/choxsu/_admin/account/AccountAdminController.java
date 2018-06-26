@@ -29,6 +29,7 @@ public class AccountAdminController extends BaseController {
 	}
 
 	public void edit() {
+		keepPara("p");
 		Account account = srv.findById(getParaToInt("id"));
 		setAttr("account", account);
 		render("edit.html");

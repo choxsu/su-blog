@@ -62,6 +62,7 @@ public class AdminBlogController extends BaseController {
     }
 
     public void edit() {
+        keepPara("p");
         commonInfo();
         setAttr("blog", adminBlogService.DAO.findById(getParaToInt("id")));
         render("addOrEdit.html");

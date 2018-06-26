@@ -15,7 +15,9 @@ public class PermissionAdminController extends BaseController {
 	public void index() {
 		Page<Permission> permissionPage = srv.paginate(getParaToInt("p", 1));
 		srv.replaceControllerPrefix(permissionPage, "com.jfinal.club._admin.", "...");
+		boolean hasRemovedPermission = srv.markRemovedActionKey(permissionPage);
 		setAttr("permissionPage", permissionPage);
+		setAttr("hasRemovedPermission", hasRemovedPermission);
 		render("index.html");
 	}
 
@@ -25,6 +27,7 @@ public class PermissionAdminController extends BaseController {
 	}
 
 	public void edit() {
+		keepPara("p");
 		Permission permission = srv.findById(getParaToInt("id"));
 		setAttr("permission", permission);
 		render("edit.html");

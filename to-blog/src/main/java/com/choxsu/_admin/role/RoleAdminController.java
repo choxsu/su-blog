@@ -38,6 +38,7 @@ public class RoleAdminController extends BaseController {
 	}
 
 	public void edit() {
+		keepPara("p");
 		Role role = srv.findById(getParaToInt("id"));
 		setAttr("role", role);
 		render("edit.html");

@@ -36,6 +36,7 @@ public class AdminTagController extends BaseController {
     }
 
     public void edit() {
+        keepPara("p");
         setAttr("tag", tagService.DAO.findById(getParaToInt("id")));
         render("edit.html");
     }
