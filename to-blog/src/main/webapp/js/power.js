@@ -70,7 +70,7 @@ jQuery(document).ready(function($){
 		 */
 		addTongji: function() {
             var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?62495b8b72cb64d79b969def710402ec";
+            hm.src = "//hm.baidu.com/hm.js?6c51915c1861c8c53b084fbb6b99b43f";
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
 
