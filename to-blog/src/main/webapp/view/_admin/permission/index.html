@@ -41,13 +41,16 @@
 				#for(x : permissionPage.getList())
 				<tr>
 					<th scope="row">#(x.id)</th>
-					<td>#(x.actionKey)</td>
+					### 标记为 removed 值的 permission 显示中划线与红色字体，提示用户可以删掉
+					<td #if(x.removed) class="removed-action-key" #end >
+						#(x.actionKey)
+					</td>
 					<td>#(x.controller)</td>
 					<td>#(x.remark)</td>
 					<td class="jfa-operation-button">
 
 						#permission("/admin/permission/edit")
-						<a href="/admin/permission/edit?id=#(x.id)">
+						<a href="/admin/permission/edit?id=#(x.id)&p=#(permissionPage.pageNumber)">
 							<i class="fa fa-pencil" title="修改"></i>
 						</a>
 						#end
@@ -69,6 +72,13 @@
 				</tbody>
 			</table>
 
+			#if(hasRemovedPermission)
+			<div class="removed-notes">
+				注：红色字体的 actionKey 表示该 action 已在 Controller 中被删除，
+				点击右侧删除按钮无死角清除数据库中与之有关的所有数据
+			</div>
+			#end
+
 			<div>
 				#@adminPaginate(permissionPage.pageNumber, permissionPage.totalPage, "/admin/permission?p=")
 			</div>
@@ -76,6 +86,21 @@
 
 	</div><!-- END OF jfa-content -->
 </div><!-- END OF jfa-content-box -->
+
+
+<style type="text/css">
+	.removed-action-key {
+		text-decoration: line-through;
+		color: red;
+	}
+
+	.removed-notes {
+		margin: 20px 0 5px 0;
+		color: red;
+		font-size: 16px;
+	}
+</style>
+
 
 <script type="text/javascript">
 	$(document).ready(function() {

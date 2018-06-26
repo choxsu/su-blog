@@ -46,7 +46,7 @@
 					<td>#(x.tagName??)</td>
 					<td class="jfa-operation-button">
 						#permission("/admin/blog/edit")
-						<a href="/admin/blog/edit?id=#(x.id)">
+						<a href="/admin/blog/edit?id=#(x.id)&p=#(blogPage.pageNumber)">
 							<i class="fa fa-pencil" title="修改"></i>
 						</a>
 						#end

@@ -72,7 +72,7 @@
 			, beforeSubmit: function(formData, jqForm, options) {}
 			, success: function(ret) {
 				if (ret.state == "ok") {
-					location.href = "/admin/permission";
+					location.href = "/admin/permission?p=#(p ?? 1)";
 				} else {
 					showFailMsg(ret.msg);
 				}

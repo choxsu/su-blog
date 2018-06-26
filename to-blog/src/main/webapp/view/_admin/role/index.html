@@ -40,7 +40,7 @@
 					<td>#date(x.createAt)</td>
 					<td class="jfa-operation-button">
 						#permission("/admin/role/edit")
-						<a href="/admin/role/edit?id=#(x.id)">
+						<a href="/admin/role/edit?id=#(x.id)&p=#(rolePage.pageNumber)">
 							<i class="fa fa-pencil" title="修改"></i>
 						</a>
 						#end

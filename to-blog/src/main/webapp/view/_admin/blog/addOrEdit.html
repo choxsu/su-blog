@@ -130,7 +130,7 @@
             }
             , success: function (ret) {
                 if (ret.state == "ok") {
-                    location.href = "/admin/blog";
+                    location.href = "/admin/blog?p=#(p ?? 1)";
                 } else {
                     showFailMsg(ret.msg);
                 }
