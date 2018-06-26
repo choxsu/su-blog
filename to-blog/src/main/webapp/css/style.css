@@ -45,6 +45,8 @@ ol {
 .site-infos {
 	padding-top: 20px;
 	text-align: center;
+	position: fixed;
+	z-index: 100;
 }
 	.site-avator {
 		margin: 0 auto;
@@ -79,6 +81,8 @@ ol {
 
 .site-main {
 	padding-top: 30px;
+	float: right;
+	padding-left: 50px;
 }
 
 .site-footer {
