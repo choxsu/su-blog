@@ -19,7 +19,7 @@
                 <div class="icon">
                     <img alt="" src="/assets/login_reg/img/user_icon_copy.png">
                 </div>
-                <input name="userName" placeholder="邮箱" maxlength="100" class="username" type="text" autocomplete="off" >
+                <input name="userName" placeholder="邮箱" maxlength="100" class="username" type="text" autocomplete="off">
                 <div class="validation">
                     <img alt="" src="/assets/login_reg/img/tick.png">
                 </div>
@@ -28,7 +28,8 @@
                 <div class="icon">
                     <img alt="" src="/assets/login_reg/img/lock_icon_copy.png">
                 </div>
-                <input name="password" class="passwordNumder" placeholder="密码" maxlength="16" type="password" autocomplete="off">
+                <input name="password" class="passwordNumder" placeholder="密码" maxlength="16" type="password"
+                       autocomplete="off">
                 <div class="validation">
                     <img alt="" src="/assets/login_reg/img/tick.png">
                 </div>
@@ -37,7 +38,8 @@
                 <div class="icon">
                     <img alt="" src="/assets/login_reg/img/key.png">
                 </div>
-                <input name="captcha" placeholder="验证码" maxlength="4" class="ValidateNum" style="width: auto;" type="text" autocomplete="off">
+                <input name="captcha" placeholder="验证码" maxlength="4" class="ValidateNum" style="width: auto;"
+                       type="text" autocomplete="off">
                 <div class="validation" style="opacity: 1; right: -5px;top: -3px;">
                     <img title="点击刷新" class="J_codeimg captcha" src="/login/captcha" onclick="updateCaptcha();">
                 </div>
@@ -57,7 +59,6 @@
 <script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
 <link href="/assets/login_reg/layui/css/layui.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/assets/login_reg/js/jquery-ui.min.js"></script>
-<script type="text/javascript" src="/assets/login_reg/js/stopExecutionOnTimeout.js"></script>
 <script src="/assets/login_reg/layui/layui.js" type="text/javascript"></script>
 <script src="/assets/login_reg/js/Particleground.js" type="text/javascript"></script>
 <script src="/assets/login_reg/js/jquery.mockjax.js" type="text/javascript"></script>
@@ -69,7 +70,7 @@
 </html>
 
 <script type="text/javascript">
-   $(document).ready(function () {
+    $(document).ready(function () {
         $("#login_form").ajaxForm({
             dataType: "json"
             , beforeSubmit: function (formData, jqForm, options) {       // 表单提交之前回调
@@ -78,26 +79,9 @@
             , success: function (ret) {
                 // 业务层验证成功
                 if (ret.state == "ok") {
-
-                    //认证中..
-                    fullscreen();
-                    $('.login').addClass('test'); //倾斜特效
                     setTimeout(function () {
-                        $('.login').addClass('testtwo'); //平移特效
-                    }, 300);
-                    setTimeout(function () {
-                        $('.authent').show().animate({ right: -320 }, {
-                            easing: 'easeOutQuint',
-                            duration: 600,
-                            queue: false
-                        });
-                        $('.authent').animate({ opacity: 1 }, {
-                            duration: 200,
-                            queue: false
-                        }).addClass('visible');
-                    }, 500);
-
-                    location.href = ret.returnUrl;
+                        location.href = ret.returnUrl;
+                    },100);
                     return;
                 }
 
@@ -120,13 +104,16 @@
                 // Validator 层验证失败
                 if (ret.userNameMsg) {
                     layer.msg(ret.userNameMsg);
+                    return;
                 }
                 if (ret.passwordMsg) {
                     layer.msg(ret.passwordMsg);
+                    return;
                 }
                 if (ret.captchaMsg) {
                     layer.msg(ret.captchaMsg);
                     updateCaptcha();    // captcha 被验证过以后会立即失效，更新之
+                    return;
                 }
             }
             , error: function (ret) {
@@ -140,19 +127,4 @@
         $(".J_codeimg").attr("src", "/login/captcha?v=" + Math.random());
         $("#captchaInput").val("");
     }
-
-   var fullscreen = function () {
-       elem = document.body;
-       if (elem.webkitRequestFullScreen) {
-           elem.webkitRequestFullScreen();
-       } else if (elem.mozRequestFullScreen) {
-           elem.mozRequestFullScreen();
-       } else if (elem.requestFullScreen) {
-           elem.requestFullscreen();
-       } else {
-           //浏览器不支持全屏API或已被禁用
-       }
-   }
-
-
 </script>

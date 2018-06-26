@@ -13,7 +13,9 @@ public class VisitorAdminController extends BaseController {
 
     public void index() {
 
-        Page<Visitor> visitorPage = visitorAdminService.paginate(getParaToInt("p", 1));
+        Page<Visitor> visitorPage = visitorAdminService
+                .paginate(getParaToInt("p", 1),
+                        getParaToInt("size", 20));
         setAttr("visitorPage", visitorPage);
         render("index.html");
 

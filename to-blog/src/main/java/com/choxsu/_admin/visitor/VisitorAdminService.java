@@ -18,9 +18,9 @@ public class VisitorAdminService extends BaseService<Visitor> {
         return Visitor.tableName;
     }
 
-    public Page<Visitor> paginate(int page){
+    public Page<Visitor> paginate(int page, int size){
 
-        return paginateOrderBy(page, 10, "id", SortEnum.DESC);
+        return paginateOrderBy(page, size, "id", SortEnum.DESC);
     }
 
 
