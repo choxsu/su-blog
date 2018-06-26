@@ -42,13 +42,13 @@ public class RegService {
 
     /**
      * 昵称是否已被注册，昵称不区分大小写，以免存在多个用户昵称看起来一个样的情况
-     *
-     *  mysql 的 where 字句与 order by 子句默认不区分大小写，区分大小写需要在
-     *  字段名或字段值前面使用 binary 关键字例如：
-     *  where nickName = binary "jfinal" 或者 where binary nickName = "jfinal"，前者性能要高
-     *
-     *  为了避免不同的 mysql 配置破坏掉 mysql 的 where 不区分大小写的行为，这里在 sql 中使用
-     *  lower(...) 来处理，参数 nickName 也用 toLowerCase() 方法来处理，再次确保不区分大小写
+     * <p>
+     * mysql 的 where 字句与 order by 子句默认不区分大小写，区分大小写需要在
+     * 字段名或字段值前面使用 binary 关键字例如：
+     * where nickName = binary "jfinal" 或者 where binary nickName = "jfinal"，前者性能要高
+     * <p>
+     * 为了避免不同的 mysql 配置破坏掉 mysql 的 where 不区分大小写的行为，这里在 sql 中使用
+     * lower(...) 来处理，参数 nickName 也用 toLowerCase() 方法来处理，再次确保不区分大小写
      */
     public boolean isNickNameExists(String nickName) {
         nickName = nickName.toLowerCase().trim();
@@ -100,10 +100,10 @@ public class RegService {
             if (sendRegActivateAuthEmail(authCode, account)) {
                 return Ret.ok("msg", "注册成功，激活邮件已发送，请查收并激活账号：" + userName);
             } else {
-                return Ret.fail("msg", "注册成功，但是激活邮件发送失败，可能是邮件服务器出现故障，请去JFinal官方QQ群留言给群主，多谢！");
+                return Ret.fail("msg", "注册成功，但是激活邮件发送失败，请告知管理员！");
             }
         } else {
-            return Ret.fail("msg", "注册失败，account 保存失败，请告知管理员");
+            return Ret.fail("msg", "注册失败，注册信息保存失败，请告知管理员");
         }
     }
 
@@ -111,9 +111,9 @@ public class RegService {
      * 发送账号激活授权邮件
      */
     private boolean sendRegActivateAuthEmail(String authCode, Account reg) {
-        String title = "JFinal 会员激活邮件";
+        String title = "Choxsu博客社区 会员激活邮件";
         String content = "在浏览器地址栏里输入并访问下面激活链接即可完成账户激活：\n\n"
-                + " http://www.jfinal.com/reg/activate?authCode="
+                + " https://blog.styg.site/reg/activate?authCode="
                 + authCode;
 
         String emailServer = PropKit.get("emailServer");
@@ -130,7 +130,7 @@ public class RegService {
 
     /**
      * 激活账号，返回 false 表示激活码已过期或者不存在
-     * 	激活账号不要去自动登录，激活邮件如果发错到了别人的邮箱，会有别人冒用的可能
+     * 激活账号不要去自动登录，激活邮件如果发错到了别人的邮箱，会有别人冒用的可能
      * 并且登录功能还有额外有选择过期时间的功能
      */
     public Ret activate(String authCodeId) {
@@ -140,7 +140,7 @@ public class RegService {
             int n = Db.update("update account set status = ? where id = ? and status = ?", Account.STATUS_OK, authCode.get("accountId"), Account.STATUS_REG);
             if (n > 0) {
                 sendWelcomeMessage(authCode.getInt("accountId"));
-                return Ret.ok("msg", "账号激活成功，欢迎加入 JFinal 极速开发社区！");
+                return Ret.ok("msg", "账号激活成功，欢迎加入 Choxsu博客社区！");
             } else {
                 return Ret.fail("msg", "未找到需要激活的账号，可能是账号已经激活或已经被锁定，请联系管理员");
             }
@@ -154,11 +154,7 @@ public class RegService {
      */
     private void sendWelcomeMessage(Integer accountId) {
         try {   // try catch 确保主流程一定成功
-            String sysMsg =
-                    "您好，我是 JFinal 极速开发社区站长 James，非常欢迎您的加入。" +
-                            "<br/><br/>JFinal 社区是一个专注于极速开发的分享、交流平台，" +
-                            "社区将提供高品质、专业化的极速开发项目、以及项目的分享与反馈，极大提升开发效率与代码质量。" +
-                            "<br/><br/>我们倡议：所有会员使用真实头像！";
+            String sysMsg = "您好， TODO";
 //            MessageService.me.sendSystemMessage(1, accountId, sysMsg);
         } catch (Exception e) {
             LogKit.error("发送激活欢迎系统消息异常：" + e.getMessage(), e);
