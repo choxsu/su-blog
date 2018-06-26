@@ -2,6 +2,7 @@ package com.choxsu.common;
 
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
+import com.choxsu._admin.auth.AdminAuthKit;
 import com.choxsu._admin.common.AdminRoutes;
 import com.choxsu._admin.permission.PermissionDirective;
 import com.choxsu._admin.role.RoleDirective;
@@ -82,6 +83,8 @@ public class StartConfig extends JFinalConfig {
         me.addDirective("permission", PermissionDirective.class);
         me.addDirective("perm", PermissionDirective.class);        // 配置一个别名指令
 
+        // 添加角色、权限 shared method
+        me.addSharedMethod(AdminAuthKit.class);
 
         me.addSharedFunction("/view/_admin/common/__admin_layout.html");
         me.addSharedFunction("/view/_admin/common/_admin_paginate.html");
