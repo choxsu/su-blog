@@ -45,11 +45,3 @@
 #namespace("admin.auth")
 #include("admin_auth.sql")
 #end
-
-#namespace("admin.role")
-#include("admin_role.sql")
-#end
-
-#namespace("admin.permission")
-#include("admin_permission.sql")
-#end
