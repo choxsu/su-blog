@@ -39,7 +39,13 @@
 				#for(x : blogPage.getList())
 				<tr>
 					<th scope="row">#(x.id)</th>
-					<td><a href="/#(x.category)/detail/#(x.id)" target="_blank">#(x.title)</a></td>
+					<td>
+						#if(x.id == 14)
+							<a href="/about">#(x.title)</a>
+						#else
+							<a href="/#(x.category)/detail/#(x.id)" target="_blank">#(x.title)</a>
+						#end
+					</td>
 					<td>#(x.clickCount)</td>
 					<td>#date(x.createAt)</td>
 					<td>#(x.category)</td>
