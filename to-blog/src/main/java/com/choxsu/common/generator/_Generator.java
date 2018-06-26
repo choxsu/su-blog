@@ -1,16 +1,4 @@
-/**
- * 请勿将俱乐部专享资源复制给其他人，保护知识产权即是保护我们所在的行业，进而保护我们自己的利益
- * 即便是公司的同事，也请尊重 JFinal 作者的努力与付出，不要复制给同事
- * <p>
- * 如果你尚未加入俱乐部，请立即删除该项目，或者现在加入俱乐部：http://jfinal.com/club
- * <p>
- * 俱乐部将提供 jfinal-club 项目文档与设计资源、专用 QQ 群，以及作者在俱乐部定期的分享与答疑，
- * 价值远比仅仅拥有 jfinal club 项目源代码要大得多
- * <p>
- * JFinal 俱乐部是五年以来首次寻求外部资源的尝试，以便于有资源创建更加
- * 高品质的产品与服务，为大家带来更大的价值，所以请大家多多支持，不要将
- * 首次的尝试扼杀在了摇篮之中
- */
+
 
 package com.choxsu.common.generator;
 
@@ -40,9 +28,10 @@ public class _Generator {
      * 重用 JFinalClubConfig 中的数据源配置，避免冗余配置
      */
     public static DataSource getDataSource() {
-        String url = "jdbc:mysql://127.0.0.1:3306/sblog?characterEncoding=utf8&useSSL=false&autoReconnect=true&failOverReadOnly=false";
+
+        String url = "jdbc:mysql://192.168.3.45:3306/xilian168?characterEncoding=utf8&useSSL=false";
         String username = "root";
-        String pwd = "root";
+        String pwd = "xl168";
         DruidPlugin druidPlugin = new DruidPlugin(url, username, pwd);
 //        DruidPlugin druidPlugin = StartConfig.getDruidPlugin();
         druidPlugin.start();
@@ -102,7 +91,7 @@ public class _Generator {
         gen.setGenerateDataDictionary(false);
 
         //是否生成service
-        gen.setGenerateService(true);
+        gen.setGenerateService(false);
         // 设置需要被移除的表名前缀用于生成modelName。例如表名 "osc_user"，移除前缀 "osc_"后生成的model名为 "User"而非 OscUser
 //        gen.setRemovedTableNamePrefixes("sm_");
         // 生成
