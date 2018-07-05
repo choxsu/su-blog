@@ -3,12 +3,16 @@ package com.choxsu.login;
 
 import com.choxsu.common.interceptor.TagListInterceptor;
 import com.choxsu.common.kit.IpKit;
+import com.choxsu.common.kit.RSAKit;
 import com.choxsu.common.render.MyCaptchaRender;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
 import com.jfinal.core.ActionKey;
 import com.jfinal.core.Controller;
+import com.jfinal.kit.PropKit;
 import com.jfinal.kit.Ret;
+
+import java.security.interfaces.RSAPrivateKey;
 
 /**
  * 登录控制器
@@ -31,9 +35,14 @@ public class LoginController extends Controller {
 	 */
 	@Before(LoginValidator.class)
 	public void doLogin() {
+		String pModel = PropKit.get("hexModulus");
+		String exp = PropKit.get("hexPrivateExponent");
+		String encript = getPara("encryptPwd");
+		RSAPrivateKey privateKey = RSAKit.getRSAPrivateKey(pModel, exp);
+		String password = RSAKit.decryptString(privateKey, encript);
 		boolean keepLogin = getParaToBoolean("keepLogin", false);
 		String loginIp = IpKit.getRealIp(getRequest());
-		Ret ret = srv.login(getPara("userName"), getPara("password"), keepLogin, loginIp);
+		Ret ret = srv.login(getPara("userName"), password, keepLogin, loginIp);
 		if (ret.isOk()) {
 			String sessionId = ret.getStr(LoginService.sessionIdName);
 			int maxAgeInSeconds = ret.getInt("maxAgeInSeconds");
