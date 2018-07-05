@@ -22,7 +22,6 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
-import com.jfinal.render.RenderManager;
 import com.jfinal.template.Engine;
 import com.jfinal.template.source.ClassPathSourceFactory;
 import net.dreamlu.event.EventPlugin;
@@ -43,8 +42,7 @@ public class StartConfig extends JFinalConfig {
     /**
      * 先加载开发环境配置，再追加生产环境的少量配置覆盖掉开发环境配置
      */
-    private static Prop p = PropKit.use("sblog_config_dev.properties")
-            .appendIfExists("sblog_config_pro.properties");
+    private static Prop p = PropKit.appendIfExists("sblog_config_pro.properties");
 
     private WallFilter wallFilter;
 
