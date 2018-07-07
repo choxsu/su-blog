@@ -22,8 +22,7 @@ public class CommonUtil  {
 
     private static TransportClient client = null;
 
-    private static Prop p = PropKit.use("sblog_config_dev.txt")
-            .appendIfExists("sblog_config_pro.txt");
+    private static Prop p = PropKit.appendIfExists("sblog_config_pro.txt");
 
     private CommonUtil() {
 

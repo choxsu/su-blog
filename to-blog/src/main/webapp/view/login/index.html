@@ -75,9 +75,19 @@
 
     var publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDKXpP9KdQE/XrDGlqURnG1fJ+dC842Hfup5Z4mXFhNLfDqnSJyuu9DHIQ5FQvOUSxM9qZtznYJeO4rMcTdlTlBxEAeLcZ1g4cLfxPHK2ajmG3u4nQ8+EA33O5qmK4wtHUQyLtQD68xFFH21C59jcEMnGSmeVjF4M8QHPcqGiy1vwIDAQAB";
 
-    $(document).ready(function () {
 
-        $("#login_form").click(function () {  $("#_password").val(''); });
+
+
+    $("#login_form").submit(function () {
+        setPassToBlank();
+    });
+
+    function setPassToBlank(){
+        $("#_password").val('');
+    }
+
+
+    $(document).ready(function () {
 
         $("#login_form").ajaxForm({
             dataType: "json"
