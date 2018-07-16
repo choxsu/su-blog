@@ -73,7 +73,6 @@ jQuery(document).ready(function($){
             hm.src = "//hm.baidu.com/hm.js?3d3fc858d40c572073a9f088909eed2a";
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
-			console.log("百度统计代码添加完成！！！")
         },
 		/*
 		 * 代码高亮的工具栏
