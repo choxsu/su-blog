@@ -70,7 +70,7 @@ jQuery(document).ready(function($){
 		 */
 		addTongji: function() {
             var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?6c51915c1861c8c53b084fbb6b99b43f";
+            hm.src = "//hm.baidu.com/hm.js?3d3fc858d40c572073a9f088909eed2a";
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
 			console.log("百度统计代码添加完成！！！")
