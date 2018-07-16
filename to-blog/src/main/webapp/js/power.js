@@ -73,8 +73,8 @@ jQuery(document).ready(function($){
             hm.src = "//hm.baidu.com/hm.js?6c51915c1861c8c53b084fbb6b99b43f";
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
-
-		},
+			console.log("百度统计代码添加完成！！！")
+        },
 		/*
 		 * 代码高亮的工具栏
 		 */
