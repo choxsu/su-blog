@@ -106,7 +106,7 @@ public class IndexService {
         Matcher m_space = p_space.matcher(htmlStr);
         htmlStr = m_space.replaceAll(""); // 过滤空格回车标签
         htmlStr = htmlStr.trim();
-        if (length > 0){
+        if (length > 0 && htmlStr.length() > length){
             htmlStr = htmlStr.substring(0, length);
         }
         return htmlStr; // 返回文本字符串
