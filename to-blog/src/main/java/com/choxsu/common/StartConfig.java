@@ -72,10 +72,10 @@ public class StartConfig extends JFinalConfig {
     @Override
     public void configEngine(Engine me) {
         logger.info("init config engine");
-        me.setDevMode(p.getBoolean("engineDevMode", false));
-        me.addSharedFunction("/view/common/layout.html");
+        me.setDevMode(true);
+        me.addSharedFunction("/_view/common/layout.html");
         me.addSharedFunction("/view/common/paginate.html");
-        me.addSharedFunction("/view/common/cy.html");
+        me.addSharedFunction("/_view/common/cy.html");
 
         me.addDirective("role", RoleDirective.class);
         me.addDirective("permission", PermissionDirective.class);

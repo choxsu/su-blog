@@ -25,9 +25,9 @@ public class FrontRoutes extends Routes {
     public void config() {
         addInterceptor(new TagListInterceptor());
 
-        setBaseViewPath("/view");
+        setBaseViewPath("/_view");
 
-        add("/", IndexController.class, "/");
+        add("/", IndexController.class, "/index");
         add("/blog", BlogController.class, "/blog");
 
         add("/favorite", FavoriteController.class, "/favorite");
