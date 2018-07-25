@@ -1,0 +1,24 @@
+﻿#set(seoTitle="ChoxSu博客社区")
+#@layout()
+#define main()
+<div class="item">
+    <div class="item-box ">
+        <h3>#(blog.title)</a></h3>
+        <h5>发布于：<span>#date(blog.createAt, 'yyyy-MM-dd HH:mm')</span></h5>
+        <div>
+            #(blog.content)
+        </div>
+        <div class="count layui-clear">
+            <span class="pull-left">阅读 <em>#(blog.clickCount)</em></span>
+            <span class="pull-right like"><i class="layui-icon layui-icon-praise"></i>
+                <em>#(blog.likeCount == null? 0 : blog.likeCount)</em>
+            </span>
+        </div>
+    </div>
+</div>
+
+<!--<div class="comt layui-clear">
+    <a href="javascript:;" class="pull-left">评论</a>
+    <a href="comment.html" class="pull-right">写评论</a>
+</div>-->
+#end

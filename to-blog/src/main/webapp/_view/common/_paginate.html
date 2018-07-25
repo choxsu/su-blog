@@ -1,0 +1,40 @@
+### 分页模板函数，三个参数含义分别为：当前页、总页数，分页前方的链接
+#define paginate(currentPage, totalPage, link)
+#if(totalPage < 2 || currentPage > totalPage)
+	#return
+#end
+
+#setLocal(startPage = currentPage - 3)
+#if(startPage < 1)
+	#setLocal(startPage = 1)
+#end
+
+#setLocal(endPage = currentPage + 3)
+#if(endPage > totalPage)
+	#setLocal(endPage = totalPage)
+#end
+
+
+
+<div class="item-btn">
+#if(currentPage > 1)
+	<a class="layui-btn layui-btn-normal" href="#(link)?p=1#(currentPage - 1)#(append)">&lt;</a>
+#end
+#if(currentPage - 3 > 1)
+	<a class="layui-btn layui-btn-normal" href="#(link)?p=1#(append)">1</a>
+#end
+#for(i : [startPage..endPage])
+#if(currentPage == i)
+	<a class="layui-btn layui-btn-normal" href="javascript:void(0);" style="background: #0a001f;">#(i)</a>
+#else
+	<a class="layui-btn layui-btn-normal" href="#(link)?p=#(i)#(append)">#(i)</a>
+#end
+#end
+#if(currentPage + 3 < totalPage)
+	<a class="layui-btn layui-btn-normal" href="#(link)?p=#(totalPage)#(append)">#(totalPage)</a>
+#end
+#if(currentPage < totalPage)
+	<a class="layui-btn layui-btn-normal" href="#(link)?p=#(currentPage + 1)#(append)" >&gt;</a>
+#end
+</div>
+#end

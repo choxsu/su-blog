@@ -1,0 +1,29 @@
+#set(seoTitle="搜索到的好东西都在这里分享")
+#@layout()
+#define main()
+<h4 class="item-title">
+    <p><i class="layui-icon layui-icon-face-smile"></i>SEARCH HIDE_<small>搜索到的好东西都在这里分享</small></p>
+</h4>
+    #for(r : result.list)
+    <div class="item">
+        <div class="item-box  layer-photos-demo1 layer-photos-demo">
+            <h3><a href="/#(r.category)/detail/#(r.id)">#(r.title)</a></h3>
+            <h5>发布于：<span>#date(r.createAt, "yyyy-MM-dd HH:mm:ss")</span></h5>
+            <div>
+                #(r.content)
+            </div>
+        </div>
+        <div class="comment count">
+            <a href="/#(r.category)/detail/#(r.id)#comment">评论</a>
+            <a href="javascript:;" class="like">点赞</a>
+        </div>
+    </div>
+    #else
+    <div class="item" style="font-size: 18px;">
+        <div class="item-box">
+            该分类下暂时无文章哦
+        </div>
+    </div>
+    #end
+    #@paginate(result.pageNumber, result.totalPage, "/favorite")
+#end

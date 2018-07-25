@@ -106,7 +106,6 @@ layui.define(['element', 'form','laypage','jquery','laytpl'],function(exports){
         $(this).addClass('layblog-this');
     })
 
-
     // end点赞图标变身
 
     //end 提交
@@ -149,7 +148,22 @@ layui.define(['element', 'form','laypage','jquery','laytpl'],function(exports){
     }
     // end 图片遮罩
 
+    // begin选中模块
+    var url = location.pathname, navMenus = $(".layui-nav-item");
+    if (url == '/') {
+        navMenus.eq(0).addClass("layui-this");
+    } else if (!url.indexOf('/blog')) {
+        navMenus.eq(1).addClass("layui-this");
+    } else if (!url.indexOf('/favorite')) {
+        navMenus.eq(2).addClass("layui-this");
+    } else if (!url.indexOf('/code')) {
+        navMenus.eq(3).addClass("layui-this");
+    } else if (!url.indexOf('/about')) {
+        navMenus.eq(4).addClass("layui-this");
+    }
+    // end选中模块
 
     //输出test接口
     exports('blog', {});
+
 });
