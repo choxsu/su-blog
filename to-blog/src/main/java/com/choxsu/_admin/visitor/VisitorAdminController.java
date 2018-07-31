@@ -1,5 +1,6 @@
 package com.choxsu._admin.visitor;
 
+import com.choxsu.common.auto.Inject;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.base.SortEnum;
 import com.choxsu.common.entity.Visitor;
@@ -10,7 +11,8 @@ import com.jfinal.plugin.activerecord.Page;
  */
 public class VisitorAdminController extends BaseController {
 
-    VisitorAdminService visitorAdminService = VisitorAdminService.me;
+    @Inject
+    VisitorAdminService visitorAdminService;
 
     public void index() {
 

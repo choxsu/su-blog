@@ -1,6 +1,7 @@
 package com.choxsu._admin.blog;
 
 import com.choxsu._admin.blog.tag.AdminTagService;
+import com.choxsu.common.auto.Inject;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.constant.CategoryEnum;
 import com.choxsu.common.entity.Blog;
@@ -20,9 +21,10 @@ import java.util.List;
  */
 public class AdminBlogController extends BaseController {
 
-    AdminBlogService adminBlogService = AdminBlogService.me;
-
-    AdminTagService tagService = AdminTagService.me;
+    @Inject
+    AdminBlogService adminBlogService;
+    @Inject
+    AdminTagService tagService;
 
     public void index() {
 

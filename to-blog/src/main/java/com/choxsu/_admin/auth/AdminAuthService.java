@@ -10,7 +10,6 @@ import com.jfinal.plugin.activerecord.SqlPara;
  */
 public class AdminAuthService {
 
-    public static final AdminAuthService me = new AdminAuthService();
 
     /**
      * 是否为超级管理员，role.id 值为 1 的为超级管理员

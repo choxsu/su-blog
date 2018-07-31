@@ -22,8 +22,6 @@ import java.util.Date;
  */
 public class LoginService {
 
-    public static final LoginService me = new LoginService();
-
     private Account accountDao = new Account().dao();
 
     // 存放登录用户的 cacheName

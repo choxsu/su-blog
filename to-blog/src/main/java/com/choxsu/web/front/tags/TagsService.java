@@ -1,5 +1,6 @@
 package com.choxsu.web.front.tags;
 
+import com.choxsu.common.auto.Inject;
 import com.choxsu.common.constant.CategoryEnum;
 import com.choxsu.web.front.index.IndexService;
 import com.jfinal.plugin.activerecord.Db;
@@ -12,7 +13,8 @@ import com.jfinal.plugin.activerecord.Record;
  */
 public class TagsService {
 
-    private static IndexService indexService = IndexService.me;
+    @Inject
+    IndexService indexService;
     /**
      * 查询通过id
      * @param tagId

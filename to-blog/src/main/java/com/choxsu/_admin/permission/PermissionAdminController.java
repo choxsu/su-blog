@@ -1,5 +1,6 @@
 package com.choxsu._admin.permission;
 
+import com.choxsu.common.auto.Inject;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.entity.Permission;
 import com.jfinal.kit.Ret;
@@ -10,11 +11,12 @@ import com.jfinal.plugin.activerecord.Page;
  */
 public class PermissionAdminController extends BaseController {
 
-	PermissionAdminService srv = PermissionAdminService.me;
+	@Inject
+	PermissionAdminService srv;
 
 	public void index() {
 		Page<Permission> permissionPage = srv.paginate(getParaToInt("p", 1));
-		srv.replaceControllerPrefix(permissionPage, "com.jfinal.club._admin.", "...");
+		srv.replaceControllerPrefix(permissionPage, "com.choxsu._admin.", "...");
 		boolean hasRemovedPermission = srv.markRemovedActionKey(permissionPage);
 		setAttr("permissionPage", permissionPage);
 		setAttr("hasRemovedPermission", hasRemovedPermission);

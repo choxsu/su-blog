@@ -5,6 +5,7 @@ package com.choxsu.common.interceptor;
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.kit.IpKit;
 import com.choxsu.login.LoginService;
+import com.jfinal.aop.Enhancer;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
@@ -19,15 +20,19 @@ public class LoginSessionInterceptor implements Interceptor {
 
     public static final String remindKey = "_remind";
 
+    //@Inject
+	LoginService loginService = Enhancer.enhance(LoginService.class);
+
+
 	public void intercept(Invocation inv) {
         Account loginAccount ;
 		Controller c = inv.getController();
 		String sessionId = c.getCookie(LoginService.sessionIdName);
 		if (sessionId != null) {
-			loginAccount = LoginService.me.getLoginAccountWithSessionId(sessionId);
+			loginAccount = loginService.getLoginAccountWithSessionId(sessionId);
 			if (loginAccount == null) {
 				String loginIp = IpKit.getRealIp(c.getRequest());
-				loginAccount = LoginService.me.loginWithSessionId(sessionId, loginIp);
+				loginAccount = loginService.loginWithSessionId(sessionId, loginIp);
 			}
 			if (loginAccount != null) {
 				// 用户登录账号

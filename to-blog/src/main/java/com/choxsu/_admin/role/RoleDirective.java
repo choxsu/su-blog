@@ -1,8 +1,10 @@
 package com.choxsu._admin.role;
 
 import com.choxsu._admin.auth.AdminAuthService;
+import com.choxsu.common.auto.Inject;
 import com.choxsu.common.entity.Account;
 import com.choxsu.login.LoginService;
+import com.jfinal.aop.Enhancer;
 import com.jfinal.template.Directive;
 import com.jfinal.template.Env;
 import com.jfinal.template.io.Writer;
@@ -19,13 +21,16 @@ import com.jfinal.template.stat.Scope;
  */
 public class RoleDirective extends Directive {
 
+//    @Inject
+    AdminAuthService adminAuthService = Enhancer.enhance(AdminAuthService.class);
+
     @Override
     public void exec(Env env, Scope scope, Writer writer) {
         Account account = (Account)scope.getRootData().get(LoginService.loginAccountCacheName);
         if (account != null && account.isStatusOk()) {
             // 如果是超级管理员，或者拥有指定的角色则放行
-            if (AdminAuthService.me.isSuperAdmin(account.getId()) ||
-                    AdminAuthService.me.hasRole(account.getId(), getRoleNameArray(scope))) {
+            if (adminAuthService.isSuperAdmin(account.getId()) ||
+                    adminAuthService.hasRole(account.getId(), getRoleNameArray(scope))) {
                 stat.exec(env, scope, writer);
             }
         }

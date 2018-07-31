@@ -1,5 +1,6 @@
 package com.choxsu._admin.blog.tag;
 
+import com.choxsu.common.auto.Inject;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.entity.BlogTag;
 import com.choxsu.web.front.index.IndexService;
@@ -13,8 +14,10 @@ import com.jfinal.plugin.activerecord.Page;
  */
 public class AdminTagController extends BaseController {
 
-    AdminTagService tagService = AdminTagService.me;
-    IndexService indexService = IndexService.me;
+    @Inject
+    AdminTagService tagService;
+    @Inject
+    IndexService indexService;
 
     public void index(){
         Page<BlogTag> blogTagPage = tagService.paginate(getParaToInt("p", 1), 10);

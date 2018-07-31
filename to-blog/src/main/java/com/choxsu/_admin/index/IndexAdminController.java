@@ -3,6 +3,7 @@
 package com.choxsu._admin.index;
 
 
+import com.choxsu.common.auto.Inject;
 import com.choxsu.common.base.BaseController;
 import com.jfinal.aop.Clear;
 
@@ -11,7 +12,8 @@ import com.jfinal.aop.Clear;
  */
 public class IndexAdminController extends BaseController {
 
-	IndexAdminService srv = IndexAdminService.me;
+	@Inject
+	IndexAdminService srv;
 
 	public void index() {
 		setAttr("accountProfile", srv.getAccountProfile());

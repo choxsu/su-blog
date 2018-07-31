@@ -3,6 +3,7 @@
 package com.choxsu._admin.role;
 
 import com.choxsu._admin.permission.PermissionAdminService;
+import com.choxsu.common.auto.Inject;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.entity.Permission;
 import com.choxsu.common.entity.Role;
@@ -18,7 +19,11 @@ import java.util.List;
  */
 public class RoleAdminController extends BaseController {
 
-	RoleAdminService srv = RoleAdminService.me;
+	@Inject
+	RoleAdminService srv;
+	@Inject
+	PermissionAdminService permissionAdminService;
+
 
 	public void index() {
 		Page<Role> rolePage = srv.paginate(getParaToInt("p", 1));
@@ -59,12 +64,13 @@ public class RoleAdminController extends BaseController {
 		renderJson(ret);
 	}
 
+
 	/**
 	 * 分配权限
 	 */
 	public void assignPermissions() {
 		Role role = srv.findById(getParaToInt("id"));
-		List<Permission> permissionList = PermissionAdminService.me.getAllPermissions();
+		List<Permission> permissionList = permissionAdminService.getAllPermissions();
 		srv.markAssignedPermissions(role, permissionList);
 		LinkedHashMap<String, List<Permission>> permissionMap = srv.groupByController(permissionList);
 

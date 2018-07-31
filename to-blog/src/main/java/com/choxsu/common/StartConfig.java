@@ -6,6 +6,7 @@ import com.choxsu._admin.auth.AdminAuthKit;
 import com.choxsu._admin.common.AdminRoutes;
 import com.choxsu._admin.permission.PermissionDirective;
 import com.choxsu._admin.role.RoleDirective;
+import com.choxsu.common.auto.AopControllerFactory;
 import com.choxsu.common.base.dialect.BaseMysqlDialect;
 import com.choxsu.common.entity._MappingKit;
 import com.choxsu.common.es.EsPlugin;
@@ -56,7 +57,8 @@ public class StartConfig extends JFinalConfig {
         logger.info("init constants");
         me.setDevMode(p.getBoolean("devMode", false));
         me.setJsonFactory(MixedJsonFactory.me());
-        me.setI18nDefaultBaseName("i18n");
+//        me.setI18nDefaultBaseName("i18n");
+        me.setControllerFactory(new AopControllerFactory());
 
     }
 
@@ -74,8 +76,8 @@ public class StartConfig extends JFinalConfig {
         logger.info("init config engine");
         me.setDevMode(true);
         me.addSharedFunction("/_view/common/layout.html");
-        me.addSharedFunction("/view/common/paginate.html");
-        me.addSharedFunction("/_view/common/cy.html");
+        me.addSharedFunction("/_view/common/_paginate.html");
+        me.addSharedFunction("/view/common/cy.html");
 
         me.addDirective("role", RoleDirective.class);
         me.addDirective("permission", PermissionDirective.class);

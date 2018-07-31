@@ -2,6 +2,7 @@
 
 package com.choxsu.reg;
 
+import com.choxsu.common.auto.Inject;
 import com.choxsu.common.kit.SensitiveWordsKit;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.Ret;
@@ -12,7 +13,10 @@ import com.jfinal.validate.Validator;
  * RegValidator 验证注册表单，并且判断邮箱、昵称是否已被注册
  */
 public class RegValidator extends Validator {
-	
+
+	@Inject
+	RegService regService;
+
 	protected void validate(Controller c) {
 		setShortCircuit(true);
 
@@ -29,7 +33,7 @@ public class RegValidator extends Validator {
 		if (nickName.contains(" ") || nickName.contains("　")) {
 			addError("nickNameMsg", "昵称不能包含空格");
 		}
-		if (RegService.me.isNickNameExists(c.getPara("nickName"))) {
+		if (regService.isNickNameExists(c.getPara("nickName"))) {
 			addError("nickNameMsg", "昵称已被注册");
 		}
 		Ret ret = validateNickName(nickName);
@@ -39,7 +43,7 @@ public class RegValidator extends Validator {
 
 		validateRequired("userName", "userNameMsg", "邮箱不能为空");
 		validateEmail("userName", "userNameMsg", "邮箱格式不正确");
-		if(RegService.me.isUserNameExists(c.getPara("userName"))) {
+		if(regService.isUserNameExists(c.getPara("userName"))) {
 			addError("userNameMsg", "邮箱已被注册");
 		}
 

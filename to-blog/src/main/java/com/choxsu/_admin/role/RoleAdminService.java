@@ -21,7 +21,6 @@ import java.util.List;
  */
 public class RoleAdminService {
 
-	public static final RoleAdminService me = new RoleAdminService();
 	private Role dao = new Role().dao();
 
 	public Page<Role> paginate(int pageNum) {

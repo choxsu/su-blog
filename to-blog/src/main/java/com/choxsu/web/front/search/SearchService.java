@@ -1,5 +1,6 @@
 package com.choxsu.web.front.search;
 
+import com.choxsu.common.auto.Inject;
 import com.choxsu.common.constant.CategoryEnum;
 import com.choxsu.web.front.index.IndexService;
 import com.jfinal.kit.Kv;
@@ -17,6 +18,9 @@ import java.util.List;
  * @date 2018/01/06 16:44
  */
 public class SearchService {
+
+    @Inject
+    IndexService indexService;
 
     public Page<Record> search(Integer pageNumber, Integer pageSize, String keyword) {
         if (StrKit.isBlank(keyword)) {
@@ -40,7 +44,7 @@ public class SearchService {
         }
 
         Page<Record> page = new Page<Record>(list, pageNumber, pageSize, (int) (t / pageSize), t.intValue());
-        IndexService.me.filedHandle(page);
+        indexService.filedHandle(page);
         return page;
     }
 }

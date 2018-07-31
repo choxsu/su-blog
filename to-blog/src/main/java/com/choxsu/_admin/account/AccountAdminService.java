@@ -2,6 +2,7 @@
 
 package com.choxsu._admin.account;
 
+import com.choxsu.common.auto.Inject;
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.Role;
 import com.choxsu.common.entity.Session;
@@ -18,7 +19,9 @@ import java.util.List;
  */
 public class AccountAdminService {
 
-	public static final AccountAdminService me = new AccountAdminService();
+	@Inject
+	LoginService loginService;
+
 	private Account dao = new Account().dao();
 
 	public Page<Account> paginate(int pageNum) {
@@ -67,7 +70,7 @@ public class AccountAdminService {
 		List<Session> sessionList = Session.dao.find("select * from session where accountId = ?", lockedAccountId);
 		if (sessionList != null) {
 			for (Session session : sessionList) {			// 处理多客户端同时登录后的多 session 记录
-				LoginService.me.logout(session.getId());    // 清除登录 cache，强制退出
+				loginService.logout(session.getId());    // 清除登录 cache，强制退出
 			}
 		}
 

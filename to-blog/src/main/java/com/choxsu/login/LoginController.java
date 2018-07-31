@@ -1,6 +1,7 @@
 
 package com.choxsu.login;
 
+import com.choxsu.common.auto.Inject;
 import com.choxsu.common.interceptor.TagListInterceptor;
 import com.choxsu.common.kit.IpKit;
 import com.choxsu.common.kit.RSAKit;
@@ -20,7 +21,8 @@ import java.security.interfaces.RSAPrivateKey;
 @Clear(TagListInterceptor.class)
 public class LoginController extends Controller {
 
-	LoginService srv = LoginService.me;
+	@Inject
+	LoginService srv;
 
 	/**
 	 * 显示登录界面

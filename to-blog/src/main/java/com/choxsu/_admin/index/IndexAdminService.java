@@ -21,7 +21,6 @@ import com.jfinal.plugin.activerecord.Db;
  */
 public class IndexAdminService {
 
-	public static final IndexAdminService me = new IndexAdminService();
 
 	public Ret getAccountProfile() {
 		Ret ret = Ret.by("title", "账户总数");

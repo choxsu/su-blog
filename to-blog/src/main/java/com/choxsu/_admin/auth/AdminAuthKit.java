@@ -1,7 +1,9 @@
 package com.choxsu._admin.auth;
 
 
+import com.choxsu.common.auto.Inject;
 import com.choxsu.common.entity.Account;
+import com.jfinal.aop.Enhancer;
 
 /**
  * 权限管理的 shared method 扩展
@@ -24,14 +26,17 @@ import com.choxsu.common.entity.Account;
  */
 public class AdminAuthKit {
 
+    //@Inject
+    AdminAuthService adminAuthService = Enhancer.enhance(AdminAuthService.class);
+
     /**
      * 当前账号是否拥有某些角色
      */
     public boolean hasRole(String... roleNameArray) {
         Account account = AdminAuthInterceptor.getThreadLocalAccount();
         if (account != null && account.isStatusOk()) {
-            if (AdminAuthService.me.isSuperAdmin(account.getId()) ||
-                    AdminAuthService.me.hasRole(account.getId(), roleNameArray)) {
+            if (adminAuthService.isSuperAdmin(account.getId()) ||
+                    adminAuthService.hasRole(account.getId(), roleNameArray)) {
                 return true;
             }
         }
@@ -45,8 +50,8 @@ public class AdminAuthKit {
     public boolean hasPermission(String actionKey) {
         Account account = AdminAuthInterceptor.getThreadLocalAccount();
         if (account != null && account.isStatusOk()) {
-            if (AdminAuthService.me.isSuperAdmin(account.getId()) ||
-                    AdminAuthService.me.hasPermission(account.getId(), actionKey)) {
+            if (adminAuthService.isSuperAdmin(account.getId()) ||
+                    adminAuthService.hasPermission(account.getId(), actionKey)) {
                 return true;
             }
         }

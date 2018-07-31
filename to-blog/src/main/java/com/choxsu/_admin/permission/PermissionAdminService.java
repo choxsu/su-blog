@@ -20,7 +20,7 @@ import java.util.Set;
  */
 public class PermissionAdminService {
 
-	public static final PermissionAdminService me = new PermissionAdminService();
+
 	private Permission dao = new Permission().dao();
 
 	// 用于排除掉 BaseController 中的几个成为了 action 的方法

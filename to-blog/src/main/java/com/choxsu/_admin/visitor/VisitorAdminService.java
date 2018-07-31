@@ -11,7 +11,6 @@ import com.jfinal.plugin.activerecord.Page;
 public class VisitorAdminService extends BaseService<Visitor> {
 
 
-    public static final VisitorAdminService me = new VisitorAdminService();
 
     @Override
     public String getTableName() {

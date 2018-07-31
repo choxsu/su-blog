@@ -18,8 +18,6 @@ import java.util.regex.Pattern;
  */
 public class IndexService {
 
-    public static final IndexService me = new IndexService();
-
     /**
      * 查询所有有效的tags
      *

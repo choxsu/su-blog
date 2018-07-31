@@ -1,5 +1,6 @@
 package com.choxsu.web.front.blog;
 
+import com.choxsu.common.auto.Inject;
 import com.choxsu.common.constant.CategoryEnum;
 import com.choxsu.web.front.index.IndexService;
 import com.jfinal.plugin.activerecord.Db;
@@ -8,13 +9,15 @@ import com.jfinal.plugin.activerecord.Record;
 
 import java.util.Objects;
 
+
 /**
  * @author chox su
  * @date 2018/01/06 12:41
  */
 public class BlogService {
 
-    private static IndexService indexService = IndexService.me;
+    @Inject
+    IndexService indexService;
 
 
     public Record findBlog(Integer id) {

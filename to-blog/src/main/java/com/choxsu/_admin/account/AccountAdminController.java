@@ -2,6 +2,7 @@
 package com.choxsu._admin.account;
 
 import com.choxsu._admin.role.RoleAdminService;
+import com.choxsu.common.auto.Inject;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.Role;
@@ -18,9 +19,10 @@ import java.util.List;
  */
 public class AccountAdminController extends BaseController {
 
-	AccountAdminService srv = AccountAdminService.me;
-
-
+	@Inject
+	AccountAdminService srv;
+	@Inject
+	RoleAdminService roleAdminService;
 
 	public void index() {
 		Page<Account> accountPage = srv.paginate(getParaToInt("p", 1));
@@ -66,7 +68,7 @@ public class AccountAdminController extends BaseController {
 	 */
 	public void assignRoles() {
 		Account account = srv.findById(getParaToInt("id"));
-		List<Role> roleList = RoleAdminService.me.getAllRoles();
+		List<Role> roleList = roleAdminService.getAllRoles();
 		srv.markAssignedRoles(account, roleList);
 
 		setAttr("account", account);

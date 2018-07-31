@@ -16,8 +16,6 @@ import java.util.Date;
  */
 public class RegService {
 
-    public static final RegService me = new RegService();
-
     private Account accountDao = new Account().dao();
 
     /**

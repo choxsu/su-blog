@@ -11,7 +11,6 @@ import com.jfinal.plugin.activerecord.Page;
  */
 public class AdminBlogService extends BaseService<Blog> {
 
-    public static final AdminBlogService me = new AdminBlogService();
 
     public Page<Blog> paginate(Integer p) {
 
