@@ -83,11 +83,6 @@
         </div>
     </div>
 
-    <div  id="back-to-top" class="" style="position: absolute;right: 10vh;" title="返回顶部！" >
-        <i class="layui-icon layui-icon-top"></i>
-        <div class="doc-icon-name">返回顶部</div>
-        <!--<i class="layui-icon layui-icon-top" style="width: 100px;height: 100vh"></i>-->
-    </div>
 </div>
 </div>
 <div class="footer">
@@ -101,6 +96,41 @@
     layui.config({
         base: '/assets/choxsu_rs/js/'
     }).use('blog');
+
+
+    var Single = {
+        /* 返回顶部 */
+        backToTop: function() {
+            $('body').append('<div id="back-to-top" class="return-top" title="返回顶部！" > <img src="/images/top.png" width="40px" height="40px"></div>');
+            $(window).bind("scroll", function(){
+
+                // 获取网页文档对象滚动条的垂直偏移
+                var scrollTopNum = $(document).scrollTop(),
+                    // 获取浏览器当前窗口的高度
+                    winHeight = $(window).height(),
+                    returnTop = $("#back-to-top");
+
+                // 滚动条的垂直偏移大于 0 时显示，反之隐藏
+                (scrollTopNum > 300) ? returnTop.fadeIn(200) : returnTop.fadeOut(200);
+
+                // 给 IE6 定位
+                if (!-[1,]&&!window.XMLHttpRequest) {
+                    returnTop.css("top", scrollTopNum + winHeight - 200);
+                }
+
+            });
+
+            // 点击按钮后，滚动条的垂直方向的值逐渐变为0，也就是滑动向上的效果
+            $("#back-to-top").click(function() {
+                $("html, body").animate({ scrollTop: 0 }, 500);
+            });
+
+        },
+        init: function() {
+            this.backToTop();
+        }
+    };
+    Single.init();
 </script>
 #@js?()
 </body>
