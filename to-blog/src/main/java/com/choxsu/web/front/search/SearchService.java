@@ -1,8 +1,8 @@
 package com.choxsu.web.front.search;
 
-import com.choxsu.common.auto.Inject;
 import com.choxsu.common.constant.CategoryEnum;
 import com.choxsu.web.front.index.IndexService;
+import com.jfinal.aop.Enhancer;
 import com.jfinal.kit.Kv;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
@@ -19,8 +19,7 @@ import java.util.List;
  */
 public class SearchService {
 
-    @Inject
-    IndexService indexService;
+    IndexService indexService = Enhancer.enhance(IndexService.class);
 
     public Page<Record> search(Integer pageNumber, Integer pageSize, String keyword) {
         if (StrKit.isBlank(keyword)) {
