@@ -77,7 +77,6 @@ public class StartConfig extends JFinalConfig {
         me.setDevMode(true);
         me.addSharedFunction("/_view/common/layout.html");
         me.addSharedFunction("/_view/common/_paginate.html");
-        me.addSharedFunction("/view/common/cy.html");
 
         me.addDirective("role", RoleDirective.class);
         me.addDirective("permission", PermissionDirective.class);
@@ -86,8 +85,8 @@ public class StartConfig extends JFinalConfig {
         // 添加角色、权限 shared method
         me.addSharedMethod(AdminAuthKit.class);
 
-        me.addSharedFunction("/view/_admin/common/__admin_layout.html");
-        me.addSharedFunction("/view/_admin/common/_admin_paginate.html");
+        me.addSharedFunction("/_view/_admin/common/__admin_layout.html");
+        me.addSharedFunction("/_view/_admin/common/_admin_paginate.html");
     }
 
     @Override
