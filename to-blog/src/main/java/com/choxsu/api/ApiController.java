@@ -1,10 +1,7 @@
 package com.choxsu.api;
 
 import com.choxsu.common.base.BaseController;
-import com.choxsu.common.interceptor.CORSInterceptor;
 import com.choxsu.util.HttpUtil;
-import com.jfinal.aop.Before;
-import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;
 
 import java.util.Date;
@@ -15,7 +12,7 @@ import java.util.Map;
  * @author choxsu
  * @date 2018/8/24 0024
  */
-@Before(CORSInterceptor.class)
+// @Before(CORSInterceptor.class)
 public class ApiController extends BaseController {
     /**
      * 请求人民币汇率 接口
