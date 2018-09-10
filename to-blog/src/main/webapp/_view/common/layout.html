@@ -119,13 +119,13 @@
                 }
 
             });
-
             // 点击按钮后，滚动条的垂直方向的值逐渐变为0，也就是滑动向上的效果
             $("#back-to-top").click(function() {
                 $("html, body").animate({ scrollTop: 0 }, 500);
             });
 
         },
+
         init: function() {
             this.backToTop();
         }
