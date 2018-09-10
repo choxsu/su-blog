@@ -24,9 +24,16 @@ body {
 
 /* 网站头部 */
 .site-name {
-    font-size: 20px;
+    font-size: 1.3rem;
     color: #fff5d4;
 }
+
+@media only screen and (max-width: 385px) {
+    .site-name {
+        display: none;
+    }
+}
+
 
 /* start header */
 .lay-blog .header {
@@ -198,6 +205,7 @@ body {
         display: none !important;
     }
 }
+
 
 /* end header */
 
