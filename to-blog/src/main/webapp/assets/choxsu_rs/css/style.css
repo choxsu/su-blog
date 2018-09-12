@@ -36,11 +36,11 @@ img{
 
 /* 网站头部 */
 .site-name {
-    font-size: 1.3rem;
+    font-size: 1rem;
     color: #fff5d4;
 }
 
-@media only screen and (max-width: 385px) {
+@media only screen and (max-width: 350px) {
     .site-name {
         display: none;
     }
