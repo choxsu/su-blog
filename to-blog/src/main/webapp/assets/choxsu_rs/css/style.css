@@ -28,6 +28,11 @@ img{
     max-width: 100%;
 }
 
+.auto-n{
+    word-break: break-all;
+    word-wrap:break-word;
+}
+
 /* 网站头部 */
 .site-name {
     font-size: 1.3rem;
