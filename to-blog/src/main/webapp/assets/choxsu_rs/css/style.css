@@ -28,6 +28,7 @@ img{
     max-width: 100%;
 }
 
+/* 自动换行 */
 .auto-n{
     word-break: break-all;
     word-wrap:break-word;
