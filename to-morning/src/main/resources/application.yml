@@ -28,7 +28,6 @@ spring:
     timeout: 0
   mail:
     default-encoding: utf-8
-    host: stmp.163.com
+    host: smtp.163.com
     password: yourpassword  # 授权码
-    port: 465
     username: choxsu@163.com
