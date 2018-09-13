@@ -43,7 +43,7 @@ public class StartConfig extends JFinalConfig {
     /**
      * 先加载开发环境配置，再追加生产环境的少量配置覆盖掉开发环境配置
      */
-    private static Prop p = PropKit.appendIfExists("sblog_config_pro.properties");
+    private static Prop p = PropKit.appendIfExists("su_blog_config_pro.properties");
 
     private WallFilter wallFilter;
 
