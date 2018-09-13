@@ -50,7 +50,7 @@ public class LoginService {
         String salt = loginAccount.getSalt();
         String hashedPass = HashKit.sha256(salt + password);
         // 未通过密码验证
-        if (loginAccount.getPassword().equals(hashedPass)) {
+        if (!loginAccount.getPassword().equals(hashedPass)) {
             return Ret.fail("msg", "用户名或密码不正确");
         }
 

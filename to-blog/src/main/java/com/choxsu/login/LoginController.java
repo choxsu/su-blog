@@ -58,7 +58,7 @@ public class LoginController extends Controller {
             setAttr(LoginService.loginAccountCacheName, ret.get(LoginService.loginAccountCacheName));
             ret.set("returnUrl", getPara("returnUrl", "/admin"));    // 如果 returnUrl 存在则跳过去，否则跳去首页
         }
-        renderJson(ret.set("sss", password));
+        renderJson(ret);
     }
 
     /**
