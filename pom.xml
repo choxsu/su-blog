@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.choxsu</groupId>
-    <artifactId>sblog</artifactId>
+    <artifactId>su-blog</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
@@ -38,7 +38,7 @@
     </repositories>
 
     <build>
-        <finalName>sblog</finalName>
+        <finalName>su-blog</finalName>
         <plugins>
 
             <plugin>

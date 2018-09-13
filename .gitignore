@@ -23,4 +23,4 @@ to-morning/target/
 to-oss/target/
 to-pay/target/
 /to-morning/src/main/resources/application.yml
-s-blog.log_2018-09-10.log
+/to-blog/src/main/resources/sblog_config_pro.properties
