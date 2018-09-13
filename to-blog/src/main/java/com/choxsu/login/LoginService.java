@@ -149,7 +149,7 @@ public class LoginService {
         String emailPass = PropKit.get("emailPass");
         String toEmail = account.getStr("userName");
         try {
-            EmailKit.sendEmail(emailServer, fromEmail, emailPass, toEmail, title, content);
+            EmailKit.sendEmail(emailServer, fromEmail, emailPass, toEmail, title, content, true);
             return Ret.ok("msg", "密码找回邮件已发送至邮箱，请收取邮件并重置密码");
         } catch (Exception e) {
             return Ret.fail("msg", "密码找回邮件发送失败，可能是邮件服务器出现故障，请去JFinal官方QQ群留言给群主");

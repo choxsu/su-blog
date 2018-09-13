@@ -107,7 +107,7 @@ public class RegService {
         String emailPass = PropKit.get("emailPass");
         String toEmail = reg.getStr("userName");
         try {
-            EmailKit.sendEmail(emailServer, fromEmail, emailPass, toEmail, title, content);
+            EmailKit.sendEmail(emailServer, fromEmail, emailPass, toEmail, title, content, true);
             return true;
         } catch (Exception e) {
             return false;
