@@ -2,6 +2,7 @@
 
 package com.choxsu.common.kit;
 
+import com.jfinal.kit.PropKit;
 import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 import org.apache.commons.mail.Email;
@@ -16,31 +17,21 @@ import java.util.Date;
  */
 public class EmailKit {
 
-    private static final Log log = Log.getLog(EmailKit.class);
-
-    public static String sendEmail(String fromEmail, String toEmail, String title, String content, boolean isSendMsg) {
-        return sendEmail(null, fromEmail, null, toEmail, title, content, isSendMsg);
-    }
-
     /**
-     * @param emailServer
-     * @param fromEmail
-     * @param password
      * @param toEmail
      * @param title
      * @param content
-     * @param isSendMsg
+     * @param html
      * @return
      */
-    public static String sendEmail(String emailServer,
-                                   String fromEmail,
-                                   String password,
-                                   String toEmail,
+    public static String sendEmail(String toEmail,
                                    String title,
                                    String content,
-                                   boolean isSendMsg) {
-
-        Email email = isSendMsg ? new SimpleEmail() : new HtmlEmail();
+                                   boolean html) {
+        String emailServer = PropKit.get("emailServer");
+        String username = PropKit.get("username");
+        String password = PropKit.get("emailPass");
+        Email email = html ? new HtmlEmail() : new SimpleEmail();
         if (StrKit.notBlank(emailServer)) {
             email.setHostName(emailServer);
         } else {
@@ -50,13 +41,13 @@ public class EmailKit {
 
         // 如果密码为空，则不进行认证
         if (StrKit.notBlank(password)) {
-            email.setAuthentication(fromEmail, password);
+            email.setAuthentication(username, password);
         }
 
         email.setCharset("utf-8");
         try {
+            email.setFrom(username);
             email.addTo(toEmail);
-            email.setFrom(fromEmail);
             email.setSubject(title);
             email.setMsg(content);
             email.setSentDate(new Date());
@@ -67,16 +58,7 @@ public class EmailKit {
         }
     }
 
-    public static void main(String[] args) {
-        try {
-            EmailKit.sendEmail("smtp.163.com", "from@163.com", "------", "to@qq.com",
-                    "标题，测试" + new Date(),
-                    "内容，测试<div>123</div>" + new Date(), false);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println("邮件发送成功！");
-    }
+    private static final Log log = Log.getLog(EmailKit.class);
 
 }
 

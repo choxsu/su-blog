@@ -102,12 +102,9 @@ public class RegService {
                 + " https://blog.styg.site/reg/activate?authCode="
                 + authCode;
 
-        String emailServer = PropKit.get("emailServer");
-        String fromEmail = PropKit.get("fromEmail");
-        String emailPass = PropKit.get("emailPass");
         String toEmail = reg.getStr("userName");
         try {
-            EmailKit.sendEmail(emailServer, fromEmail, emailPass, toEmail, title, content, true);
+            EmailKit.sendEmail(toEmail, title, content, true);
             return true;
         } catch (Exception e) {
             return false;
