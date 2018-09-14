@@ -27,7 +27,7 @@ public class DemoController {
     EmailKit emailKit;
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public Map demoTest(String key, String value) {
+    public Map demoTest(@RequestParam String key, @RequestParam String value) {
         boolean isSu = redisService.set(key, value);
         if (isSu) {
             return Ret.ok("msg", "插入成功");
@@ -36,7 +36,7 @@ public class DemoController {
     }
 
     @RequestMapping(value = "/getTest", method = RequestMethod.GET)
-    public Map getTest(String key) {
+    public Map getTest(@RequestParam String key) {
         Object o = redisService.get(key);
         return Ret.ok("data", o);
     }
