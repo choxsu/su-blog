@@ -64,7 +64,7 @@ public class DemoController {
      * @apiSuccess {String} state  ok 成功 fail 失败
      * @apiSuccess {String} msg  提示信息
      * @apiSuccess {Object} data  返回的数据
-     * @apiSuccess {String} value redis value
+     * @apiSuccess {String} data.value redis value
      */
     @RequestMapping(value = "/getTest", method = RequestMethod.GET)
     public Map getTest(@RequestParam String key) {
