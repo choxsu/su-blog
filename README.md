@@ -20,7 +20,33 @@
  兼容大部分的手机或者平板；后端会使用SpringBoot来实现；前后端的分离采用接口的方式来实现，
  前端主要是用Vue js 来实现页面的数据交互; 
 
+## 技术选型
 
+### 后端技术:
+技术 | 名称 | 官网
+----|------|----
+Spring Framework | 容器  | [http://projects.spring.io/spring-framework/](http://projects.spring.io/spring-framework/)
+JFinal | MVC框架  | [http://jfinal.com/](http://jfinal.com/)
+Spring Boot | 容器 |  [http://spring.io/projects/spring-boot/](http://spring.io/projects/spring-boot/)
+SpringMVC | MVC框架  | [http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#mvc](http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#mvc)
+Druid | 数据库连接池  | [https://github.com/alibaba/druid](https://github.com/alibaba/druid)
+Redis | 分布式缓存数据库  | [https://redis.io/](https://redis.io/)
+Solr & Elasticsearch | 分布式全文搜索引擎  | [http://lucene.apache.org/solr/](http://lucene.apache.org/solr/) [https://www.elastic.co/](https://www.elastic.co/)
+Ehcache | 进程内缓存框架  | [http://www.ehcache.org/](http://www.ehcache.org/)
+Log4J | 日志组件  | [http://logging.apache.org/log4j/1.2/](http://logging.apache.org/log4j/1.2/)
+Maven | 项目构建管理  | [http://maven.apache.org/](http://maven.apache.org/)
+### 前端技术:
+技术 | 名称 | 官网
+----|------|----
+Vue | 渐进式js框架  | [http://vuejs.org/](http://vuejs.org/)
+Element | 基于vue的框架  | [https://element.eleme.io/](https://element.eleme.io/)
+Iview | 基于vue的框架  | [https://www.iviewui.com/](https://www.iviewui.com/)
+webpack |前端打包工具  | [https://webpack.js.org/](https://webpack.js.org/)
+jQuery | 函式库  | [http://jquery.com/](http://jquery.com/)
+Bootstrap | 前端框架  | [http://getbootstrap.com/](http://getbootstrap.com/)
+Bootstrap-table | Bootstrap数据表格  | [http://bootstrap-table.wenzhixin.net.cn/](http://bootstrap-table.wenzhixin.net.cn/)
+Editor.md | Markdown编辑器  | [https://github.com/pandao/editor.md](https://github.com/pandao/editor.md)
+socket.io.js | SocketIO插件  | [https://socket.io/](https://socket.io/)
 
 
 
