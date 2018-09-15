@@ -1,5 +1,6 @@
 package com.syc.api.controller;
 
+import com.jfinal.kit.StrKit;
 import com.syc.api.kit.EmailKit;
 import com.syc.api.service.common.RedisService;
 import com.jfinal.kit.Ret;
@@ -42,6 +43,9 @@ public class DemoController {
      */
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public Map demoTest(@RequestParam String key, @RequestParam String value) {
+        if (StrKit.isBlank(key)){
+            return Ret.fail().set("msg", "key不能为空串");
+        }
         boolean isSu = redisService.set(key, value);
         if (isSu) {
             return Ret.ok("msg", "插入成功");
@@ -64,6 +68,9 @@ public class DemoController {
      */
     @RequestMapping(value = "/getTest", method = RequestMethod.GET)
     public Map getTest(@RequestParam String key) {
+        if (StrKit.isBlank(key)){
+            return Ret.fail().set("msg", "key不能为空串");
+        }
         Object o = redisService.get(key);
         Map map = new HashMap();
         map.put("value", o);
