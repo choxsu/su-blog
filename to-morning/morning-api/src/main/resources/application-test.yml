@@ -13,5 +13,5 @@ spring:
   mail:
     default-encoding: utf-8
     host: smtp.163.com
-    password: ------------  # 授权码
+    password: ---------  # 授权码
     username: choxsu@163.com
