@@ -48,5 +48,20 @@ Bootstrap-table | Bootstrap数据表格  | [http://bootstrap-table.wenzhixin.net
 Editor.md | Markdown编辑器  | [https://github.com/pandao/editor.md](https://github.com/pandao/editor.md)
 socket.io.js | SocketIO插件  | [https://socket.io/](https://socket.io/)
 
+### 开发工具:
+- MySql: 数据库
+- jetty: 开发服务器
+- Tomcat: 应用服务器
+- SVN|Git: 版本管理
+- Nginx: 反向代理服务器
+- IntelliJ IDEA: 开发IDE
+- PowerDesigner: 建模工具
+- Navicat for MySQL: 数据库客户端
+
+### 开发环境：
+- Jdk7+
+- Mysql5.5+
+- Redis
+
 
 
