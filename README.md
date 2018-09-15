@@ -25,9 +25,8 @@
 ### 后端技术:
 技术 | 名称 | 官网
 ----|------|----
-Spring Framework | 容器  | [http://projects.spring.io/spring-framework/](http://projects.spring.io/spring-framework/)
-JFinal | MVC框架  | [http://jfinal.com/](http://jfinal.com/)
 Spring Boot | 容器 |  [http://spring.io/projects/spring-boot/](http://spring.io/projects/spring-boot/)
+JFinal | MVC框架  | [http://jfinal.com/](http://jfinal.com/)
 SpringMVC | MVC框架  | [http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#mvc](http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#mvc)
 Druid | 数据库连接池  | [https://github.com/alibaba/druid](https://github.com/alibaba/druid)
 Redis | 分布式缓存数据库  | [https://redis.io/](https://redis.io/)
