@@ -9,21 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>morning-api</artifactId>
+    <artifactId>morning-model</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.choxsu.syc</groupId>
-            <artifactId>morning-service</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
         </dependency>
-
-        <dependency>
-            <groupId>com.choxsu.syc</groupId>
-            <artifactId>morning-model</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
     </dependencies>
 
 </project>
