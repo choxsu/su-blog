@@ -1,6 +1,12 @@
 package com.syc.api.config;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.github.benmanes.caffeine.cache.CacheLoader;
+import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
+import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
+import com.jfinal.plugin.druid.DruidPlugin;
+import com.jfinal.template.source.ClassPathSourceFactory;
+import com.syc.model.entity.jf._MappingKit;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +22,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+import java.sql.Connection;
 import java.util.List;
 
 /**
@@ -24,6 +33,10 @@ import java.util.List;
  */
 @Configuration
 public class AppConfig {
+
+
+    @Resource
+    private DataSource dataSource;
 
     /**
      * Caffeine 换成bean 配置
@@ -70,6 +83,19 @@ public class AppConfig {
         };
 
         return cacheLoader;
+    }
+
+    @Bean
+    public ActiveRecordPlugin loaderARPlugin(){
+        ActiveRecordPlugin arp = new ActiveRecordPlugin(dataSource);
+        arp.setDialect(new MysqlDialect());
+        arp.setTransactionLevel(Connection.TRANSACTION_READ_COMMITTED);
+        _MappingKit.mapping(arp);
+        arp.setShowSql(true);
+        arp.getEngine().setSourceFactory(new ClassPathSourceFactory());
+        // arp.addSqlTemplate("/sql/all_sqls.sql");
+        arp.start();
+        return arp;
     }
 
 
