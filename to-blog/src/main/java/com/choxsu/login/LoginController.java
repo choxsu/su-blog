@@ -12,6 +12,7 @@ import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
 import com.jfinal.core.ActionKey;
 import com.jfinal.core.Controller;
+import com.jfinal.kit.LogKit;
 import com.jfinal.kit.PropKit;
 import com.jfinal.kit.Ret;
 
@@ -51,7 +52,11 @@ public class LoginController extends Controller {
         if (ret.isOk()) {
             Account account = (Account) ret.get(LoginService.loginAccountCacheName);
             String content = "在 " + new Date() + "登陆 Choxsu博客社区后台成功 <br/> 登陆ip:" + IpKit.getRealIp(this.getRequest()) + "<br/> 如果非本人登录，请及时联系超级管理员";
-            EmailKit.sendEmail(account.getUserName(), "登陆styg.site后台成功提示", content, true);
+            try {
+                EmailKit.sendEmail(account.getUserName(), "登陆styg.site后台成功提示", content, true);
+            } catch (Exception e) {
+                LogKit.error(e.getMessage(), e);
+            }
             String sessionId = ret.getStr(LoginService.sessionIdName);
             int maxAgeInSeconds = ret.getInt("maxAgeInSeconds");
             setCookie(LoginService.sessionIdName, sessionId, maxAgeInSeconds, true);

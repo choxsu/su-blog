@@ -51,6 +51,7 @@ public class EmailKit {
             email.setSubject(title);
             email.setMsg(content);
             email.setSentDate(new Date());
+            email.setSSL(true);
             return email.send();
         } catch (EmailException e) {
             log.error(e.getMessage(), e);
