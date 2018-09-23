@@ -1,6 +1,6 @@
 package com.syc.api.controller.blog;
 
-import com.jfinal.plugin.activerecord.Page;
+import com.github.pagehelper.Page;
 import com.syc.api.controller.common.BaseApiController;
 import com.syc.model.entity.jf.Blog;
 import com.syc.model.result.Result;
@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Action;
 
 @CrossOrigin
 @RestController
@@ -38,7 +37,7 @@ public class ApiIndexController extends BaseApiController {
                         @RequestParam(value = "pageNumber", defaultValue = "1") Integer pageNumber,
                         @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         Blog blog = new Blog();
-        Page<Blog> list = indexService.findList(blog, pageNumber, pageSize);
+        Page list = indexService.findList(blog, pageNumber, pageSize);
         return Result.ok().setData(list);
     }
 }

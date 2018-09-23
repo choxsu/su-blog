@@ -1,6 +1,6 @@
 package com.syc.service.service;
 
-import com.jfinal.plugin.activerecord.Page;
+import com.github.pagehelper.Page;
 import com.syc.model.entity.jf.Blog;
 
 import java.util.List;
@@ -13,7 +13,7 @@ public interface IndexService {
      * @param paeSize    每页显示的条数
      * @return
      */
-    Page<Blog> findList(Blog blog, int pageNumber, int paeSize);
+    Page findList(Blog blog, int pageNumber, int paeSize);
 
     /**
      * 获取制定条数博客
@@ -22,7 +22,7 @@ public interface IndexService {
      * @param limit 限制的条数，最大1000条，默认100条
      * @return
      */
-    List<Blog> findList(Blog blog, int limit);
+    List findList(Blog blog, int limit);
 
     /**
      * 查询一条博客数据
