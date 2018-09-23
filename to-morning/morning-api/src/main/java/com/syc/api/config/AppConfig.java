@@ -1,20 +1,16 @@
 package com.syc.api.config;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import com.github.benmanes.caffeine.cache.CacheLoader;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
-import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.template.source.ClassPathSourceFactory;
 import com.syc.model.entity.jf._MappingKit;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -22,7 +18,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.util.List;
@@ -34,8 +29,7 @@ import java.util.List;
 @Configuration
 public class AppConfig {
 
-
-    @Resource
+    @Autowired
     private DataSource dataSource;
 
     /**
@@ -87,7 +81,7 @@ public class AppConfig {
 
     @Bean
     public ActiveRecordPlugin loaderARPlugin(){
-        ActiveRecordPlugin arp = new ActiveRecordPlugin(dataSource);
+        ActiveRecordPlugin arp = new ActiveRecordPlugin(this.dataSource);
         arp.setDialect(new MysqlDialect());
         arp.setTransactionLevel(Connection.TRANSACTION_READ_COMMITTED);
         _MappingKit.mapping(arp);
