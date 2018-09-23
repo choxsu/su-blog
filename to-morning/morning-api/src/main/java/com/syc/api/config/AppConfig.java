@@ -156,6 +156,7 @@ public class AppConfig {
     class Person {
         private Integer id;
 
+        private String name;
 
     }
 
