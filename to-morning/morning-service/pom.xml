@@ -11,5 +11,8 @@
 
     <artifactId>morning-service</artifactId>
 
+    <dependencies>
+
+    </dependencies>
 
 </project>
