@@ -12,7 +12,6 @@
         <module>to-blog</module>
         <module>to-oss</module>
         <module>to-pay</module>
-        <module>to-morning</module>
         <module>to-elastic</module>
     </modules>
 

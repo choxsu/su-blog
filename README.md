@@ -16,9 +16,7 @@
 ### to--elastic模块
  to-elastic是ElasticSearch全文检索DEMO,如有需要可以作参考，在这里不在做过多的说明 
 ### to-morning模块
- 这个模块主要是做一个全新前后端分离的CMS管理系统，包括PC,PC端会做成响应式的布局，  
- 兼容大部分的手机或者平板；后端会使用SpringBoot来实现；前后端的分离采用接口的方式来实现，
- 前端主要是用Vue js 来实现页面的数据交互; 
+ 这个模块移步到 [https://github.com/choxsu/morning.git](https://github.com/choxsu/morning.git)
 
 ## 技术选型
 
