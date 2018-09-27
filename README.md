@@ -12,6 +12,10 @@
   后台管理实现了权限管理，没用使用第三方权限框架，全手写权限框架，包括权限、角色、用户，更多请参考code;
   
   配置文件中使用了ES的相关配置，这个是测试ES时候留下的，如果不用，那就不用配置该项
+  
+  演示后台地址：http://www.styg.site/admin
+  
+  账号：test@test.com  密码：123456
 
 ### to--elastic模块
  to-elastic是ElasticSearch全文检索DEMO,如有需要可以作参考，在这里不在做过多的说明 
