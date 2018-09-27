@@ -26,7 +26,6 @@
     <i class="right-icon fa fa-angle-down fa-lg"></i>
 </a>
 
-#if(hasRole("管理员"))
 <ul class="jfa-sub-menu">
     #permission("/admin/account")
     <li><a href="/admin/account">账户管理</a></li>
@@ -44,5 +43,4 @@
     <li><a href="/admin/visitor">访问管理</a></li>
     #end
 </ul>
-#end
 
