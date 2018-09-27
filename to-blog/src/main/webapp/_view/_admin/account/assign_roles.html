@@ -30,7 +30,7 @@
 						<input data-account-id="#(account.id)"
 							   data-role-id="#(x.id)"
 							   #if(x.assigned) checked #end
-							   type="checkbox" class="js-switch">
+							   type="checkbox" class="mgc-switch mgc-tiny">
 					</td>
 
 					<td>#(x.name)</td>
@@ -70,7 +70,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		initSwitchery(prepareAction, {size: "small"});
+        initMagicInput(prepareAction, {size: "small"});
 	});
 
 	function prepareAction($this, state) {
