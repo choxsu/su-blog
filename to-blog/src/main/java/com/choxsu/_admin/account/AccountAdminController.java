@@ -10,6 +10,7 @@ import com.choxsu.common.kit.IpKit;
 import com.choxsu.login.LoginService;
 import com.jfinal.aop.Before;
 import com.jfinal.ext.interceptor.NotAction;
+import com.jfinal.i18n.Res;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Page;
 
@@ -47,6 +48,11 @@ public class AccountAdminController extends BaseController {
         renderJson(ret);
     }
 
+    public void del() {
+        Ret ret = srv.delete(getParaToInt("id"));
+        renderJson(ret);
+    }
+
 
     public void edit() {
         keepPara("p");
@@ -54,6 +60,7 @@ public class AccountAdminController extends BaseController {
         setAttr("account", account);
         render("edit.html");
     }
+
 
     /**
      * 提交修改

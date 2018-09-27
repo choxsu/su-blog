@@ -200,4 +200,16 @@ public class AccountAdminService {
         nickName = nickName.toLowerCase().trim();
         return Db.queryInt("select id from account where lower(nickName) = ? limit 1", nickName) != null;
     }
+
+    public Ret delete(Integer id) {
+        if (id != null && id == 1){
+            return Ret.fail().set("msg", "不能删除超级管理员");
+        }
+        boolean b = dao.deleteById(id);
+        if (b){
+            return Ret.ok().set("msg", "删除成功");
+        }
+        return Ret.fail().set("msg", "删除失败");
+
+    }
 }

@@ -59,15 +59,17 @@
 						</a>
 						#end
 
-						<!--<a href="/user/#(x.id)" target="_blank">
-							<i class="fa fa-eye" title="查看"></i>
-						</a>-->
-
 						#permission("/admin/account/assignRoles")
 						<a href="/admin/account/assignRoles?id=#(x.id)">
 							<i class="fa fa-user" title="分配角色"></i>
 						</a>
 						#end
+
+						<a data-delete
+						   data-title="#escape(x.title)"
+						   data-action="/admin/account/del?id=#(x.id)">
+							<i class="fa fa-trash" title="删除"></i>
+						</a>
 
 					</td>
 				</tr>
