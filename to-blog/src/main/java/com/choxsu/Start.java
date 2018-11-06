@@ -23,6 +23,7 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
+import com.jfinal.server.undertow.UndertowServer;
 import com.jfinal.template.Engine;
 import com.jfinal.template.source.ClassPathSourceFactory;
 import net.dreamlu.event.EventPlugin;
@@ -46,11 +47,6 @@ public class Start extends JFinalConfig {
     private static Prop p = PropKit.appendIfExists("su_blog_config_pro.properties");
 
     private WallFilter wallFilter;
-
-
-    public static void main(String[] args) {
-        JFinal.start("to-blog/src/main/webapp", 8080, "/");
-    }
 
     @Override
     public void configConstant(Constants me) {
@@ -173,4 +169,11 @@ public class Start extends JFinalConfig {
         //TODO
         logger.info("jfinal start stop before(jfinal停止之前执行)");
     }
+
+
+    public static void main(String[] args) {
+        UndertowServer.start(Start.class, 8080, true);
+    }
+
+
 }
