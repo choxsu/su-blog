@@ -1,4 +1,4 @@
-package com.choxsu.common;
+package com.choxsu;
 
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
@@ -35,9 +35,9 @@ import java.sql.Connection;
 /**
  * @author choxsu
  */
-public class StartConfig extends JFinalConfig {
+public class Start extends JFinalConfig {
 
-    private static final Logger logger = LoggerFactory.getLogger(StartConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(Start.class);
 
 
     /**
