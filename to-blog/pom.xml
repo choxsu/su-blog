@@ -18,6 +18,9 @@
     </repositories>
 
 
+    <build>
+        <finalName>blog</finalName>
+    </build>
     <dependencies>
 
         <dependency>
@@ -26,10 +29,35 @@
             <version>3.4</version>
         </dependency>
 
+        <!--
         <dependency>
+             <groupId>javax.servlet</groupId>
+             <artifactId>javax.servlet-api</artifactId>
+             <version>3.0.1</version>
+         </dependency>
+         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.0.1</version>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+        </dependency>
+         -->
+
+        <dependency>
+            <groupId>io.undertow</groupId>
+            <artifactId>undertow-core</artifactId>
+            <version>2.0.1.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.undertow</groupId>
+            <artifactId>undertow-servlet</artifactId>
+            <version>2.0.1.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.undertow</groupId>
+            <artifactId>undertow-websockets-jsr</artifactId>
+            <version>2.0.1.Final</version>
         </dependency>
 
         <dependency>
@@ -165,13 +193,6 @@
             <version>1.16.20</version>
         </dependency>
 
-        <!-- jfinal事件驱动 -->
-        <dependency>
-            <groupId>net.dreamlu</groupId>
-            <artifactId>JFinal-event</artifactId>
-            <version>2.1.0</version>
-        </dependency>
-
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
@@ -197,7 +218,4 @@
             </exclusions>
         </dependency>
     </dependencies>
-    <build>
-        <finalName>blog</finalName>
-    </build>
 </project>
