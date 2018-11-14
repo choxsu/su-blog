@@ -1,5 +1,5 @@
 ## 前言
-  此版本的前端UI即将重写设计布局，旧版UI移步分支(v1)[https://gitee.com/choxsu/sblog/tree/v1/]
+  此版本的前端UI即将重写设计布局，旧版UI移步分支 [v1](https://gitee.com/choxsu/sblog/tree/v1)
 ## 项目介绍
   基于JFinal编写的博客系统、后台权限管理，Elastic全文检索；基于SpringBoot集成实现Elastic全文检索,Redis ，CMS管理系统
 ## 模块说明
