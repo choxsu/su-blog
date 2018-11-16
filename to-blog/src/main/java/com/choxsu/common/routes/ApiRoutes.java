@@ -1,6 +1,5 @@
 package com.choxsu.common.routes;
 
-import com.choxsu.api.ApiController;
 import com.choxsu.api.blog.ApiBlogController;
 import com.choxsu.api.home.ApiHomeController;
 import com.jfinal.config.Routes;
@@ -18,8 +17,6 @@ public class ApiRoutes extends Routes {
 
         add("/api/v1/home", ApiHomeController.class);
         add("/api/v1/blog", ApiBlogController.class);
-        add("/v1/api", ApiController.class);
-
 
     }
 }
