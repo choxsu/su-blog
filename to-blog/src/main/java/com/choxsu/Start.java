@@ -67,6 +67,8 @@ public class Start extends JFinalConfig {
 
     @Override
     public void configEngine(Engine me) {
+        //me.setBaseTemplatePath("webapp");
+        //me.setToClassPathSourceFactory();
         logger.info("init config engine");
         me.setDevMode(true);
         me.addSharedFunction("/_view/common/layout.html");
@@ -149,7 +151,7 @@ public class Start extends JFinalConfig {
 
 
     public static void main(String[] args) {
-        UndertowServer.start(Start.class, 8080, true);
+        UndertowServer.start(Start.class, 8000, false);
     }
 
 
