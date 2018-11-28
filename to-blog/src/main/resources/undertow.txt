@@ -7,7 +7,7 @@ undertow.host=0.0.0.0
 
 undertow.contextPath=/
 # js、css 等等 web 资源存放的目录
-undertow.resourcePath=webapp, to-blog/src/main/webapp
+undertow.resourcePath=webapp, to-blog/src/main/webapp, to-blog/src/main/resources/webapp
 
 # io 线程数与 worker 线程数
 # undertow.ioThreads=
