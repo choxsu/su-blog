@@ -1,10 +1,8 @@
 package com.choxsu._admin.permission;
 
 import com.choxsu._admin.auth.AdminAuthService;
-import com.choxsu.common.auto.Inject;
 import com.choxsu.common.entity.Account;
 import com.choxsu.login.LoginService;
-import com.choxsu.web.front.index.IndexService;
 import com.jfinal.aop.Enhancer;
 import com.jfinal.template.Directive;
 import com.jfinal.template.Env;
@@ -26,7 +24,6 @@ import com.jfinal.template.stat.Scope;
  */
 public class PermissionDirective extends Directive {
 
-//    @Inject
     AdminAuthService adminAuthService = Enhancer.enhance(AdminAuthService.class);
 
     public void exec(Env env, Scope scope, Writer writer) {

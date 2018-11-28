@@ -1,7 +1,6 @@
 package com.choxsu._admin.auth;
 
 
-import com.choxsu.common.auto.Inject;
 import com.choxsu.common.entity.Account;
 import com.jfinal.aop.Enhancer;
 
@@ -26,7 +25,6 @@ import com.jfinal.aop.Enhancer;
  */
 public class AdminAuthKit {
 
-    //@Inject
     AdminAuthService adminAuthService = Enhancer.enhance(AdminAuthService.class);
 
     /**

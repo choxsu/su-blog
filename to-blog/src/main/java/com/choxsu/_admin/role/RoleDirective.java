@@ -1,7 +1,6 @@
 package com.choxsu._admin.role;
 
 import com.choxsu._admin.auth.AdminAuthService;
-import com.choxsu.common.auto.Inject;
 import com.choxsu.common.entity.Account;
 import com.choxsu.login.LoginService;
 import com.jfinal.aop.Enhancer;
@@ -21,7 +20,6 @@ import com.jfinal.template.stat.Scope;
  */
 public class RoleDirective extends Directive {
 
-//    @Inject
     AdminAuthService adminAuthService = Enhancer.enhance(AdminAuthService.class);
 
     @Override

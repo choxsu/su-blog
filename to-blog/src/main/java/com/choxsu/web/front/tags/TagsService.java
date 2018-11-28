@@ -1,6 +1,5 @@
 package com.choxsu.web.front.tags;
 
-import com.choxsu.common.auto.Inject;
 import com.choxsu.common.constant.CategoryEnum;
 import com.choxsu.web.front.index.IndexService;
 import com.jfinal.aop.Enhancer;
