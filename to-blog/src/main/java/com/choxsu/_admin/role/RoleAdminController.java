@@ -3,7 +3,7 @@
 package com.choxsu._admin.role;
 
 import com.choxsu._admin.permission.PermissionAdminService;
-import com.choxsu.common.auto.Inject;
+import com.jfinal.aop.Inject;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.entity.Permission;
 import com.choxsu.common.entity.Role;

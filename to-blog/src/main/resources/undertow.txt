@@ -1,0 +1,5 @@
+# 配置信息
+
+undertow.devMode=true
+undertow.port=1013
+undertow.host=0.0.0.0

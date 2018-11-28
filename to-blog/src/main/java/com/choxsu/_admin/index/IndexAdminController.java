@@ -2,10 +2,8 @@
 
 package com.choxsu._admin.index;
 
-
-import com.choxsu.common.auto.Inject;
+import com.jfinal.aop.Inject;
 import com.choxsu.common.base.BaseController;
-import com.jfinal.aop.Clear;
 
 /**
  * 后台管理首页

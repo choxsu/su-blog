@@ -6,7 +6,6 @@ import com.choxsu._admin.auth.AdminAuthKit;
 import com.choxsu._admin.common.AdminRoutes;
 import com.choxsu._admin.permission.PermissionDirective;
 import com.choxsu._admin.role.RoleDirective;
-import com.choxsu.common.auto.AopControllerFactory;
 import com.choxsu.common.base.dialect.BaseMysqlDialect;
 import com.choxsu.common.entity._MappingKit;
 import com.choxsu.common.es.EsPlugin;
@@ -22,7 +21,6 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
-import com.jfinal.server.undertow.UndertowConfig;
 import com.jfinal.server.undertow.UndertowServer;
 import com.jfinal.template.Engine;
 import com.jfinal.template.source.ClassPathSourceFactory;
@@ -42,7 +40,7 @@ public class Start extends JFinalConfig {
     /**
      * 先加载开发环境配置，再追加生产环境的少量配置覆盖掉开发环境配置
      */
-    private static Prop p = PropKit.appendIfExists("su_blog_config_pro.properties");
+    private static Prop p = PropKit.use("su-blog-config-dev.properties").appendIfExists("su-blog-config-pro.properties");
 
     private WallFilter wallFilter;
 
@@ -51,8 +49,7 @@ public class Start extends JFinalConfig {
         logger.info("init constants");
         me.setDevMode(p.getBoolean("devMode", false));
         me.setJsonFactory(MixedJsonFactory.me());
-//        me.setI18nDefaultBaseName("i18n");
-        me.setControllerFactory(new AopControllerFactory());
+        me.setInjectDependency(true);
 
     }
 
@@ -67,9 +64,6 @@ public class Start extends JFinalConfig {
 
     @Override
     public void configEngine(Engine me) {
-        //me.setBaseTemplatePath("webapp");
-        //me.setToClassPathSourceFactory();
-        logger.info("init config engine");
         me.setDevMode(true);
         me.addSharedFunction("/_view/common/layout.html");
         me.addSharedFunction("/_view/common/_paginate.html");
@@ -87,7 +81,6 @@ public class Start extends JFinalConfig {
 
     @Override
     public void configPlugin(Plugins me) {
-        logger.info("init plugins");
         DruidPlugin druidPlugin = getDruidPlugin();
         // 加强数据库安全
         wallFilter = new WallFilter();
@@ -114,14 +107,12 @@ public class Start extends JFinalConfig {
 
     @Override
     public void configInterceptor(Interceptors me) {
-        logger.info("init interceptor");
         me.add(new LoginSessionInterceptor());
         me.add(new VisitorInterceptor());
     }
 
     @Override
     public void configHandler(Handlers me) {
-        logger.info("init handler");
         me.add(DruidKit.getFilterHandler("/druid"));
 
     }
@@ -151,7 +142,7 @@ public class Start extends JFinalConfig {
 
 
     public static void main(String[] args) {
-        UndertowServer.start(Start.class, 8000, false);
+        UndertowServer.start(Start.class);
     }
 
 

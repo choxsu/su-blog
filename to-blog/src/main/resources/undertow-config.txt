@@ -1,4 +1,0 @@
-undertow.port=8080
-undertow.devMode=true
-undertow.contextPath=/
-undertow.basePath=to-blog/src/main/webapp

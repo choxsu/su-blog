@@ -1,6 +1,6 @@
 package com.choxsu._admin.permission;
 
-import com.choxsu.common.auto.Inject;
+import com.jfinal.aop.Inject;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.entity.Permission;
 import com.jfinal.kit.Ret;

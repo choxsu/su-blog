@@ -1,12 +1,11 @@
 package com.choxsu._admin.blog;
 
 import com.choxsu._admin.blog.tag.AdminTagService;
-import com.choxsu.common.auto.Inject;
+import com.jfinal.aop.Inject;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.constant.CategoryEnum;
 import com.choxsu.common.entity.Blog;
 import com.choxsu.common.entity.BlogCategory;
-import com.choxsu.common.entity.BlogTag;
 import com.jfinal.aop.Before;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Page;

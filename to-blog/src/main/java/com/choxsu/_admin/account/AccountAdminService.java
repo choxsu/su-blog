@@ -2,12 +2,10 @@
 
 package com.choxsu._admin.account;
 
-import com.choxsu.common.authcode.AuthCodeService;
-import com.choxsu.common.auto.Inject;
+import com.jfinal.aop.Inject;
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.Role;
 import com.choxsu.common.entity.Session;
-import com.choxsu.common.kit.IpKit;
 import com.choxsu.login.LoginService;
 import com.jfinal.kit.HashKit;
 import com.jfinal.kit.Ret;

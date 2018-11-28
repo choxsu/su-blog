@@ -1,6 +1,6 @@
 package com.choxsu.web.front.code;
 
-import com.choxsu.common.auto.Inject;
+import com.jfinal.aop.Inject;
 import com.choxsu.web.front.blog.BlogService;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.constant.CategoryEnum;

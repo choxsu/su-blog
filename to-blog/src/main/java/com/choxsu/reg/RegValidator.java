@@ -2,7 +2,7 @@
 
 package com.choxsu.reg;
 
-import com.choxsu.common.auto.Inject;
+import com.jfinal.aop.Inject;
 import com.choxsu.common.kit.SensitiveWordsKit;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.Ret;

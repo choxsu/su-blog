@@ -33,7 +33,7 @@ public class _Generator {
         String username = "root";
         String pwd = "xl168";
         DruidPlugin druidPlugin = new DruidPlugin(url, username, pwd);
-//        DruidPlugin druidPlugin = StartConfig.getDruidPlugin();
+//        DruidPlugin druidPlugin = Start.getDruidPlugin();
         druidPlugin.start();
         return druidPlugin.getDataSource();
     }

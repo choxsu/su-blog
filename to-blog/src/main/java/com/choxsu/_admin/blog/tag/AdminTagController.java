@@ -1,6 +1,6 @@
 package com.choxsu._admin.blog.tag;
 
-import com.choxsu.common.auto.Inject;
+import com.jfinal.aop.Inject;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.entity.BlogTag;
 import com.choxsu.web.front.index.IndexService;

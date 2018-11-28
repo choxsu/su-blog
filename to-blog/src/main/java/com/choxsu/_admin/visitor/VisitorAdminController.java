@@ -1,6 +1,6 @@
 package com.choxsu._admin.visitor;
 
-import com.choxsu.common.auto.Inject;
+import com.jfinal.aop.Inject;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.base.SortEnum;
 import com.choxsu.common.entity.Visitor;

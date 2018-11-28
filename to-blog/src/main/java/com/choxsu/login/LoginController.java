@@ -1,7 +1,7 @@
 
 package com.choxsu.login;
 
-import com.choxsu.common.auto.Inject;
+import com.jfinal.aop.Inject;
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.interceptor.TagListInterceptor;
 import com.choxsu.common.kit.EmailKit;
