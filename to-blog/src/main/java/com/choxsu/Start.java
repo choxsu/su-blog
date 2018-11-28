@@ -46,7 +46,6 @@ public class Start extends JFinalConfig {
 
     @Override
     public void configConstant(Constants me) {
-        logger.info("init constants");
         me.setDevMode(p.getBoolean("devMode", false));
         me.setJsonFactory(MixedJsonFactory.me());
         me.setInjectDependency(true);
@@ -55,8 +54,6 @@ public class Start extends JFinalConfig {
 
     @Override
     public void configRoute(Routes me) {
-
-        logger.info("init route");
         me.add(new FrontRoutes());
         me.add(new AdminRoutes());
         me.add(new ApiRoutes());
@@ -130,7 +127,6 @@ public class Start extends JFinalConfig {
 
     @Override
     public void afterJFinalStart() {
-        //TODO
         logger.info("jfinal start after action(jfinal启动完成之后执行)");
     }
 

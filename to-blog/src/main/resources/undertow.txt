@@ -3,3 +3,28 @@
 undertow.devMode=true
 undertow.port=1013
 undertow.host=0.0.0.0
+
+
+undertow.contextPath=/
+# js、css 等等 web 资源存放的目录
+undertow.resourcePath=webapp, to-blog/src/main/webapp
+
+# io 线程数与 worker 线程数
+# undertow.ioThreads=
+# undertow.workerThreads=
+
+# gzip 压缩开关
+undertow.gzip.enable=true
+# 配置压缩级别，默认值 -1。 可配置 1 到 9。 1 拥有最快压缩速度，9 拥有最高压缩率
+undertow.gzip.level=1
+# 触发压缩的最小内容长度
+undertow.gzip.minLength=1024
+
+# 是否开启 http2 支持，注意：这个版本暂不支持 http2，暂时可以通过 nginx 来支持
+# undertow.http2.enable=false
+
+# session 过期时间，注意单位是秒
+# undertow.session.timeout=1800
+# 热加载保持 session 值，避免依赖于 session 的登录型项目反复登录，默认值为 true。仅用于 devMode，生产环境无影响
+# undertow.session.hotSwap=true
+

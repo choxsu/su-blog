@@ -2,7 +2,6 @@ package com.choxsu.web.front.index;
 
 import com.jfinal.aop.Inject;
 import com.choxsu.common.base.BaseController;
-import com.choxsu.login.LoginService;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 

@@ -3,9 +3,8 @@ package com.choxsu.common.base;
 import com.choxsu.common.entity.Account;
 import com.choxsu.login.LoginService;
 import com.choxsu.result.ResultModel;
-import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
-import com.jfinal.ext.interceptor.NotAction;
+import com.jfinal.core.NotAction;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +16,7 @@ public class BaseController extends Controller {
 
     private Account loginAccount = null;
 
-    @Before(NotAction.class)
+    @NotAction
     public Account getLoginAccount() {
         if (loginAccount == null) {
             loginAccount = getAttr(LoginService.loginAccountCacheName);
@@ -28,12 +27,12 @@ public class BaseController extends Controller {
         return loginAccount;
     }
 
-    @Before(NotAction.class)
+    @NotAction
     public boolean isLogin() {
         return getLoginAccount() != null;
     }
 
-    @Before(NotAction.class)
+    @NotAction
     public boolean notLogin() {
         return !isLogin();
     }
@@ -43,44 +42,51 @@ public class BaseController extends Controller {
      * 确保在 FrontAuthInterceptor 之下使用，或者 isLogin() 为 true 时使用
      * 也即确定已经是在登录后才可调用
      */
-    @Before(NotAction.class)
+    @NotAction
     public int getLoginAccountId() {
         return getLoginAccount().getId();
     }
 
 
     //成功返回
-
+    @NotAction
     public ResultModel success() {
         return ResultModel.success("成功");
     }
 
+    @NotAction
     public ResultModel success(String msg) {
         return ResultModel.success(msg);
     }
 
+    @NotAction
     public ResultModel success(Object data) {
         return ResultModel.success(data);
     }
 
+    @NotAction
     public ResultModel success(String msg, Object data) {
         return ResultModel.success(msg, data);
     }
 
     //失败返回
 
+    @NotAction
     public ResultModel fail() {
         return ResultModel.fail("失败");
     }
 
+    @NotAction
     public ResultModel fail(String msg) {
         return ResultModel.fail(msg);
     }
 
+    @NotAction
     public ResultModel fail(Object data) {
         return ResultModel.fail(data);
     }
 
+    @NotAction
     public ResultModel fail(String msg, Object data) {
         return ResultModel.fail(msg, data);
     }
@@ -97,6 +103,7 @@ public class BaseController extends Controller {
      *
      * @return Map
      */
+    @NotAction
     public Map<String, Object> respSuccess() {
         Map<String, Object> result = getHashMap();
         result.put("type", SUCCESS);
@@ -105,6 +112,7 @@ public class BaseController extends Controller {
         return result;
     }
 
+    @NotAction
     public Map<String, Object> respSuccess(String msg) {
         Map<String, Object> result = getHashMap();
         result.put("type", SUCCESS);
@@ -119,6 +127,7 @@ public class BaseController extends Controller {
      * @param object 返回的结果对象
      * @return Map
      */
+    @NotAction
     public Map<String, Object> respSuccess(Object object) {
         Map<String, Object> result = getHashMap();
         result.put("type", SUCCESS);
@@ -133,6 +142,7 @@ public class BaseController extends Controller {
      * @param object 返回的结果对象
      * @return Map
      */
+    @NotAction
     public Map<String, Object> respSuccess(String msg, Object object) {
         Map<String, Object> result = getHashMap();
         result.put("type", SUCCESS);
@@ -142,6 +152,7 @@ public class BaseController extends Controller {
     }
 
 
+    @NotAction
     public Map<String, Object> respFail() {
         Map<String, Object> result = getHashMap();
         result.put("type", FAILED);
@@ -150,6 +161,7 @@ public class BaseController extends Controller {
         return result;
     }
 
+    @NotAction
     public Map<String, Object> respFail(String msg) {
         Map<String, Object> result = getHashMap();
         result.put("type", FAILED);
@@ -158,6 +170,7 @@ public class BaseController extends Controller {
         return result;
     }
 
+    @NotAction
     public Map<String, Object> respFail(Object object) {
         Map<String, Object> result = getHashMap();
         result.put("type", FAILED);
@@ -166,6 +179,7 @@ public class BaseController extends Controller {
         return result;
     }
 
+    @NotAction
     public Map<String, Object> respFail(String msg, Object object) {
         Map<String, Object> result = getHashMap();
         result.put("type", FAILED);
@@ -174,11 +188,13 @@ public class BaseController extends Controller {
         return result;
     }
 
+    @NotAction
     private Map<String, Object> getHashMap() {
         return new HashMap<String, Object>();
     }
 
 
+    @NotAction
     public Map<String, Object> getSuccessApiResult(String msg, Object object){
         Map<String, Object> result = getHashMap();
         result.put("success", true);
@@ -187,6 +203,7 @@ public class BaseController extends Controller {
         return result;
     }
 
+    @NotAction
     public Map<String, Object> getFailApiResult(String msg, Object object){
         Map<String, Object> result = getHashMap();
         result.put("success", false);
