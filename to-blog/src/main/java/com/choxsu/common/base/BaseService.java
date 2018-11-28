@@ -275,12 +275,13 @@ public abstract class BaseService<M extends Model<M>> {
      * @param page     当前页
      * @param size     每页条数
      * @param column   排序的字段
+     * @param sortColumn   返回的字段
      * @param sortEnum 类型
      * @return
      */
-    public Page<M> paginateOrderBy(Integer page, Integer size, String column, SortEnum sortEnum) {
+    public Page<M> paginateOrderBy(Integer page, Integer size, String column, String sortColumn, SortEnum sortEnum) {
 
-        if (StrKit.isBlank(column)) {
+        if (StrKit.isBlank(sortColumn)) {
             throw new RuntimeException("column can not be null");
         }
         if (sortEnum == null) {
@@ -290,9 +291,12 @@ public abstract class BaseService<M extends Model<M>> {
         StringBuffer sql = new StringBuffer();
         sql.append("from ").append(getTableName());
 
-        sql.append(" order by ").append(column).append("\t");
+        sql.append(" order by ").append(sortColumn).append("\t");
         sql.append(sortEnum.toString().toLowerCase());
-        return DAO.paginate(page, size, "select * ", sql.toString());
+        if (StrKit.isBlank(column)){
+            column = "*";
+        }
+        return DAO.paginate(page, size, "select " + column, sql.toString());
     }
 
 }
