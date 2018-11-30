@@ -4,7 +4,7 @@
   基于JFinal编写的博客系统、后台权限管理，Elastic全文检索；基于SpringBoot集成实现Elastic全文检索,Redis ，CMS管理系统
 ## 模块说明
 ### to-blog模块
-  主要是一个博客的实现，效果[choxsu's blog](http://www.styg.site "ChoxSu博客社区"); 使用了Java语言来开发的，后端框架使用了[JFinal](http://jfinal.com) 来实现
+  主要是一个博客的实现，效果[choxsu's blog](http://118.24.122.21/ "ChoxSu博客社区"); 使用了Java语言来开发的，后端框架使用了[JFinal](http://jfinal.com) 来实现
     
   后台管理在地址后面输入  /login 或 /admin, 登录密码是做了加密传输，主要使用了非对称加密的方式
   来保证密码的安全性，具体参照代码里的注释来做，实在搞不懂，请留言，
@@ -13,7 +13,7 @@
   
   配置文件中使用了ES的相关配置，这个是测试ES时候留下的，如果不用，那就不用配置该项
   
-  演示后台地址：http://www.styg.site/admin
+  演示后台地址：http://118.24.122.21/admin
   
   账号：test@test.com  密码：123456
 
