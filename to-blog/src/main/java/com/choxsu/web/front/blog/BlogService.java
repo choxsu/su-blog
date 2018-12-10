@@ -6,6 +6,9 @@ import com.choxsu.web.front.index.IndexService;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
+import org.commonmark.node.Node;
+import org.commonmark.parser.Parser;
+import org.commonmark.renderer.html.HtmlRenderer;
 
 import java.util.Objects;
 
@@ -23,17 +26,32 @@ public class BlogService {
     public Record findBlog(Integer id) {
 
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT id,title,content,createAt,updateAt,clickCount,category,tag_id as tagId,category_id as categoryId ");
+        sb.append("SELECT id," +
+                "title," +
+                "markedContent," +
+                "createAt," +
+                "updateAt," +
+                "clickCount," +
+                "category," +
+                "tag_id as tagId," +
+                "category_id as categoryId ");
         sb.append("FROM blog WHERE id = ? ");
         String sql = sb.toString();
         Record blog = Db.findFirst(sql, id);
-        if (blog == null){
+        if (blog == null) {
             return null;
         }
         Integer tagId = blog.getInt("tagId");
         if (tagId != null && tagId > 0) {
             indexService.doTagNameSet(blog, tagId);
         }
+        String markedContent = blog.getStr("markedContent");
+        Parser parser = Parser.builder().build();
+        Node node = parser.parse(markedContent == null ? "" : markedContent);
+        HtmlRenderer renderer = HtmlRenderer.builder().build();
+        String render = renderer.render(node);
+        blog.set("content", render);
+        blog.remove("markedContent");
         String category = blog.getStr("category");
         Integer categoryId = blog.getInt("categoryId");
         if (Objects.equals(category, CategoryEnum.CODE.getName()) && Objects.nonNull(categoryId)) {
@@ -43,7 +61,7 @@ public class BlogService {
         return blog;
     }
 
-    public static void addClick(int id){
+    public static void addClick(int id) {
         Db.update("UPDATE blog b set b.clickCount = b.clickCount + 1 WHERE id = ?", id);
     }
 
