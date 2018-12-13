@@ -916,6 +916,11 @@ img {
     margin-bottom: 30px
 }
 
+.article-content img{
+    width: 100%;
+    cursor: auto;
+}
+
 .article-content h2, .article-content h3, .article-content h4 {
     display: block;
     margin-bottom: 10px;
