@@ -40,6 +40,7 @@ public class IndexService {
     /**
      * 查询所有博客分页
      * update: 最近两天发布的放在最前面 TODO
+     *
      * @param page
      * @return
      */
@@ -81,11 +82,10 @@ public class IndexService {
 
     /**
      * @param htmlStr
-     * @return
-     *  删除Html标签
+     * @return 删除Html标签
      */
     public static String delHTMLTag(String htmlStr, int length) {
-        if (StrKit.isBlank(htmlStr)){
+        if (StrKit.isBlank(htmlStr)) {
             return "";
         }
         Pattern p_script = Pattern.compile(regEx_script, Pattern.CASE_INSENSITIVE);
@@ -104,7 +104,7 @@ public class IndexService {
         Matcher m_space = p_space.matcher(htmlStr);
         htmlStr = m_space.replaceAll(""); // 过滤空格回车标签
         htmlStr = htmlStr.trim();
-        if (length > 0 && htmlStr.length() > length){
+        if (length > 0 && htmlStr.length() > length) {
             htmlStr = htmlStr.substring(0, length);
         }
         return htmlStr; // 返回文本字符串
@@ -138,4 +138,7 @@ public class IndexService {
         s.set("categoryName", name);
     }
 
+    public Record findBlog(String id) {
+        return Db.findById("blog", id);
+    }
 }

@@ -12,6 +12,8 @@ public class IndexController extends BaseController {
 
     @Inject
     IndexService indexService;
+
+
     public void index() {
 
         int page = getParaToInt("p", 1);
@@ -19,6 +21,16 @@ public class IndexController extends BaseController {
         Page<Record> blogPage = indexService.findBlogs(page);
         setAttr("blogs", blogPage);
 
-        render("index.html");
+        render("blog/index.html");
+    }
+
+    public void detail() {
+
+        String id = getPara("id");
+
+        Record record = indexService.findBlog(id);
+        setAttr("blog", record);
+
+        render("blog/detail.html");
     }
 }
