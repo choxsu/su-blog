@@ -19,14 +19,14 @@ public class IndexController extends BaseController {
         int page = getParaToInt("p", 1);
 
         Page<Record> blogPage = indexService.findBlogs(page);
-        setAttr("blogs", blogPage);
+        setAttr("page", blogPage);
 
         render("blog/index.html");
     }
 
     public void detail() {
 
-        String id = getPara("id");
+        Integer id = getParaToInt();
 
         Record record = indexService.findBlog(id);
         setAttr("blog", record);

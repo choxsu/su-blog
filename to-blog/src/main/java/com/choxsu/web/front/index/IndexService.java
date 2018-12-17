@@ -18,6 +18,10 @@ import java.util.regex.Pattern;
  */
 public class IndexService {
 
+    public static void addClick(Object id) {
+        Db.update("UPDATE blog set clickCount = clickCount + 1 WHERE id = ?", id);
+    }
+
     /**
      * 查询所有有效的tags
      *
@@ -61,7 +65,7 @@ public class IndexService {
         result.getList().forEach(s -> {
             String category = s.getStr("category");
             if (!Objects.equals(category, CategoryEnum.ABOUT.getName())) {
-                s.set("content", delHTMLTag(s.get("content"), 150) + "......");
+                s.set("content", delHTMLTag(s.get("content"), 50));
             }
             Integer tagId = s.getInt("tagId");
             if (tagId != null && tagId > 0) {
@@ -138,7 +142,9 @@ public class IndexService {
         s.set("categoryName", name);
     }
 
-    public Record findBlog(String id) {
-        return Db.findById("blog", id);
+    public Record findBlog(Integer id) {
+        Record blog = Db.findById("blog", id);
+        IndexService.addClick(id);
+        return blog;
     }
 }

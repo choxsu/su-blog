@@ -1,15 +1,14 @@
 
 package com.choxsu.login;
 
-import com.jfinal.aop.Inject;
 import com.choxsu.common.entity.Account;
-import com.choxsu.common.interceptor.TagListInterceptor;
 import com.choxsu.common.kit.EmailKit;
 import com.choxsu.common.kit.IpKit;
 import com.choxsu.common.kit.RSAKit;
 import com.choxsu.common.render.MyCaptchaRender;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
+import com.jfinal.aop.Inject;
 import com.jfinal.core.ActionKey;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.LogKit;
@@ -22,7 +21,6 @@ import java.util.Date;
 /**
  * 登录控制器
  */
-@Clear(TagListInterceptor.class)
 public class LoginController extends Controller {
 
     @Inject

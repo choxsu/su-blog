@@ -3,7 +3,6 @@
 package com.choxsu.reg;
 
 import com.jfinal.aop.Inject;
-import com.choxsu.common.interceptor.TagListInterceptor;
 import com.choxsu.common.kit.IpKit;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
@@ -13,7 +12,6 @@ import com.jfinal.kit.Ret;
 /**
  * 注册控制器
  */
-@Clear(TagListInterceptor.class)
 public class RegController extends Controller {
 
 	@Inject

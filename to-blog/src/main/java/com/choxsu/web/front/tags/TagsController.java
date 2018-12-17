@@ -2,6 +2,7 @@ package com.choxsu.web.front.tags;
 
 import com.choxsu.common.base.BaseController;
 import com.jfinal.aop.Enhancer;
+import com.jfinal.aop.Inject;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 
@@ -11,14 +12,15 @@ import com.jfinal.plugin.activerecord.Record;
  */
 public class TagsController extends BaseController {
 
-    private static TagsService tagsService = Enhancer.enhance(TagsService.class);
+    @Inject
+    TagsService tagsService;
 
-    public void index(){
+    public void index() {
         Integer tagId = getParaToInt();
         setAttr("tag", tagsService.findById(tagId));
         Integer pageNumber = getParaToInt("p", 1);
-        Page<Record> page = tagsService.findBlogByTagId(pageNumber, 15 , tagId);
-        setAttr("result", page);
-        render("list.html");
+        Page<Record> page = tagsService.findBlogByTagId(pageNumber, 50, tagId);
+        setAttr("page", page);
+        render("blog/index.html");
     }
 }
