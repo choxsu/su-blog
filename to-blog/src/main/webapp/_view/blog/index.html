@@ -1,32 +1,37 @@
 #set(seoTitle="Chosu | Java")
 #@layout()
 #define main()
-<ul class="article-list">
-    #for(r : page.list)
-    <li class="article-list-item">
-        <a href="/detail/#(r.id)"
-           title="#(r.title)">
-            <h5>
-                #(r.title)
-                <svg viewBox="0 0 16 16">
-                    <path d="M15.429 7.973c0 0.080-0.036 0.161-0.089 0.214l-3.429 3.161c-0.089 0.080-0.205 0.098-0.313 0.054-0.098-0.045-0.17-0.143-0.17-0.259v-2h-11.143c-0.161 0-0.286-0.125-0.286-0.286v-1.714c0-0.161 0.125-0.286 0.286-0.286h11.143v-2c0-0.116 0.063-0.214 0.17-0.259s0.223-0.027 0.313 0.045l3.429 3.125c0.054 0.054 0.089 0.125 0.089 0.205v0z"></path>
-                </svg>
-            </h5>
-        </a>
-        <div class="article-list-footer">
+<div>
+    <ul class="article-list">
+        #for(r : page.list)
+        <li class="article-list-item">
+            <a href="/detail/#(r.id)"
+               title="#(r.title)">
+                <h5>
+                    #(r.title)
+                    <svg viewBox="0 0 16 16">
+                        <path d="M15.429 7.973c0 0.080-0.036 0.161-0.089 0.214l-3.429 3.161c-0.089 0.080-0.205 0.098-0.313 0.054-0.098-0.045-0.17-0.143-0.17-0.259v-2h-11.143c-0.161 0-0.286-0.125-0.286-0.286v-1.714c0-0.161 0.125-0.286 0.286-0.286h11.143v-2c0-0.116 0.063-0.214 0.17-0.259s0.223-0.027 0.313 0.045l3.429 3.125c0.054 0.054 0.089 0.125 0.089 0.205v0z"></path>
+                    </svg>
+                </h5>
+            </a>
+            <div class="article-list-footer">
                         <span class="article-list-date">
                         #date(r.createAt, "yyyy-MM-dd hh:mm")
                         </span>
-            <span class="article-list-divider">-</span>
-            <span class="article-list-minutes">
+                <span class="article-list-divider">-</span>
+                <span class="article-list-minutes">
                             阅读: #(r.clickCount)
                         </span>
-            <span class="article-list-divider">-</span>
-            <div class="article-list-tags">
-                <a href="/tag/#(r.tagId)">#(r.tagName)</a>
+                <span class="article-list-divider">-</span>
+                <div class="article-list-tags">
+                    <a href="/tag/#(r.tagId)">#(r.tagName)</a>
+                </div>
             </div>
-        </div>
-    </li>
-    #end
-</ul>
+        </li>
+        #end
+    </ul>
+</div>
+<div class="article-page">
+    #@paginate(page.pageNumber, page.totalPage, "/")
+</div>
 #end

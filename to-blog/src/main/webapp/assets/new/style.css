@@ -500,7 +500,6 @@ img {
     display: block;
     padding-top: 35px;
     margin-bottom: 85px;
-    border-top: 1px solid #ebeaea
 }
 
 .footer p {
@@ -1443,5 +1442,17 @@ img {
     .footer{
         margin-bottom: 0;
     }
+}
+
+
+.article-page{
+    text-align: center;
+}
+
+.article-page a{
+    margin: 3px;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 10px;
 }
 

@@ -15,7 +15,7 @@ public class ArticleController extends BaseController {
 
     public void index() {
         int page = getParaToInt("p", 1);
-        Page<Record> blogPage = articleService.findArticles(page, 5, null);
+        Page<Record> blogPage = articleService.findArticles(page, 10, null);
         setAttr("page", blogPage);
         render("blog/index.html");
     }
