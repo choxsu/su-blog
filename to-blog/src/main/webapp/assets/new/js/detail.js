@@ -3,6 +3,16 @@ var Detail = {
         this.zooming();
         this.showTopImg();
         this.returnTop();
+        this.appendShareUrl();
+    },
+    appendShareUrl: function () {
+        var as = document.getElementsByClassName("article-share");
+        var aList = as[0].getElementsByTagName("a");
+        for (var i = 0; i < aList.length; i++) {
+            var src = aList[i].getAttribute("href");
+            src = src + window.location;
+            aList[i].setAttribute("href", src);
+        }
     },
     showTopImg: function () {
         window.onscroll = function () {

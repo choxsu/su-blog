@@ -1064,6 +1064,14 @@ img {
     fill: #393636
 }
 
+.header-links li a img {
+    width: 16px;
+    height: 16px;
+    fill: #393636;
+    margin-top: -4px;
+}
+
+
 .header-links li a:hover svg {
     fill: #121111
 }
