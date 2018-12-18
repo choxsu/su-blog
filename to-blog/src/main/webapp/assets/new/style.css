@@ -1456,3 +1456,19 @@ img {
     border-radius: 10px;
 }
 
+.return-top{
+    display: none;
+    position: fixed;
+    right: 20px;
+    bottom: 100px;
+    cursor: pointer;
+}
+
+.return-top img{
+    width: 30px;
+    height: 30px;
+    border: 1px solid #91c1bf;
+    border-radius: 4px;
+    background: #fff;
+    opacity:.8
+}
