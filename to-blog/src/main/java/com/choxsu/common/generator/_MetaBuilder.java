@@ -1,7 +1,7 @@
 package com.choxsu.common.generator;
 
 
-import com.choxsu.common.go.MetaBuilder;
+import com.jfinal.plugin.activerecord.generator.MetaBuilder;
 
 import javax.sql.DataSource;
 import java.util.Arrays;

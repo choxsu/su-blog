@@ -6,7 +6,6 @@ import com.choxsu._admin.auth.AdminAuthKit;
 import com.choxsu._admin.common.AdminRoutes;
 import com.choxsu._admin.permission.PermissionDirective;
 import com.choxsu._admin.role.RoleDirective;
-import com.choxsu.common.base.dialect.BaseMysqlDialect;
 import com.choxsu.common.entity._MappingKit;
 import com.choxsu.common.es.EsPlugin;
 import com.choxsu.common.interceptor.LoginSessionInterceptor;
@@ -88,15 +87,13 @@ public class Start extends JFinalConfig {
         me.add(druidPlugin);
         ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
 
-        arp.setDialect(new BaseMysqlDialect());
-
         arp.setTransactionLevel(Connection.TRANSACTION_READ_COMMITTED);
         _MappingKit.mapping(arp);
         arp.setShowSql(p.getBoolean("devMode", false));
         arp.getEngine().setSourceFactory(new ClassPathSourceFactory());
         arp.addSqlTemplate("/sql/all_sqls.sql");
         me.add(arp);
-        me.add(new EsPlugin(p.get("elasticsearch_hosts"), p.get("cluster_name", "choxsu-cs")));
+        //me.add(new EsPlugin(p.get("elasticsearch_hosts"), p.get("cluster_name", "choxsu-cs")));
         me.add(new EhCachePlugin());
 
 
