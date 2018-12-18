@@ -26,4 +26,8 @@ public class ArticleController extends BaseController {
         setAttr("blog", record);
         render("blog/detail.html");
     }
+
+    public void feed(){
+        renderXml("feed.xml");
+    }
 }
