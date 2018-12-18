@@ -8,29 +8,22 @@ import com.jfinal.plugin.activerecord.Record;
 /**
  * @author choxsu
  */
-public class IndexController extends BaseController {
+public class ArticleController extends BaseController {
 
     @Inject
-    IndexService indexService;
-
+    ArticleService articleService;
 
     public void index() {
-
         int page = getParaToInt("p", 1);
-
-        Page<Record> blogPage = indexService.findBlogs(page);
+        Page<Record> blogPage = articleService.findArticles(page, 5, null);
         setAttr("page", blogPage);
-
         render("blog/index.html");
     }
 
     public void detail() {
-
         Integer id = getParaToInt();
-
-        Record record = indexService.findBlog(id);
+        Record record = articleService.findBlog(id);
         setAttr("blog", record);
-
         render("blog/detail.html");
     }
 }

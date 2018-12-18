@@ -2,7 +2,7 @@
 
 package com.choxsu.common.routes;
 
-import com.choxsu.web.front.index.IndexController;
+import com.choxsu.web.front.index.ArticleController;
 import com.choxsu.web.front.tags.TagsController;
 import com.jfinal.config.Routes;
 
@@ -16,7 +16,7 @@ public class FrontRoutes extends Routes {
     @Override
     public void config() {
         setBaseViewPath("/_view");
-        add("/", IndexController.class, "/");
+        add("/", ArticleController.class, "/");
         add("/tag", TagsController.class, "/");
     }
 

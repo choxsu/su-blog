@@ -3,7 +3,7 @@ package com.choxsu._admin.blog.tag;
 import com.jfinal.aop.Inject;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.entity.BlogTag;
-import com.choxsu.web.front.index.IndexService;
+import com.choxsu.web.front.index.ArticleService;
 import com.jfinal.aop.Before;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Page;
@@ -17,7 +17,7 @@ public class AdminTagController extends BaseController {
     @Inject
     AdminTagService tagService;
     @Inject
-    IndexService indexService;
+    ArticleService articleService;
 
     public void index(){
         Page<BlogTag> blogTagPage = tagService.paginate(getParaToInt("p", 1), 10);
@@ -34,7 +34,6 @@ public class AdminTagController extends BaseController {
         BlogTag tag = getModel(BlogTag.class, "tag");
         tag.setStatus(0);
         tag.save();
-        indexService.clearTagsCache();
         renderJson(Ret.ok());
     }
 
@@ -48,14 +47,12 @@ public class AdminTagController extends BaseController {
     public void update() {
         BlogTag tag = getModel(BlogTag.class, "tag");
         tag.update();
-        indexService.clearTagsCache();
         renderJson(Ret.ok());
     }
 
     public void delete() {
         Integer id = getParaToInt("id");
         tagService.DAO.deleteById(id);
-        indexService.clearTagsCache();
         renderJson(Ret.ok().set("msg", "删除成功！"));
     }
 

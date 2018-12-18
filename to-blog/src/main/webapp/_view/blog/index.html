@@ -1,11 +1,11 @@
-#set(seoTitle="ChoxSu博客社区")
+#set(seoTitle="Chosu | Java")
 #@layout()
 #define main()
 <ul class="article-list">
     #for(r : page.list)
-    <li class="article-list-item scrollappear appear appeared">
+    <li class="article-list-item">
         <a href="/detail/#(r.id)"
-           title="JFinal ActiveRecordPlugin插件事物交给Spring管理">
+           title="#(r.title)">
             <h5>
                 #(r.title)
                 <svg viewBox="0 0 16 16">
@@ -13,9 +13,6 @@
                 </svg>
             </h5>
         </a>
-        <div>
-            #(r.content)
-        </div>
         <div class="article-list-footer">
                         <span class="article-list-date">
                         #date(r.createAt, "yyyy-MM-dd hh:mm")

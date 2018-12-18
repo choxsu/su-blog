@@ -1,4 +1,4 @@
-var Single = {
+var Detail = {
     init: function () {
         this.zooming();
     },
@@ -7,12 +7,9 @@ var Single = {
         for (var i = 0; i < img.length; i++) {
             var imgElement = img[i];
             var zooming = new Zooming({
-                //回调函数
-                //onBeforeOpen: function () {
-                //onOpen: function () {
-                //onBeforeClose: function () {
-                //onClose: function () {
-                scaleBase: 0.5
+                scaleBase: 1,
+                preloadImage: true,
+                bgColor: 'rgb(205, 255, 255)'
             });
             zooming.listen(imgElement);
         }
@@ -20,4 +17,4 @@ var Single = {
 };
 
 //初始化
-Single.init();
+Detail.init();

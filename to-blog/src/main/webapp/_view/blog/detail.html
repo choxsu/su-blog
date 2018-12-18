@@ -1,10 +1,10 @@
-#set(seoTitle="ChoxSu博客社区")
+#set(seoTitle="Chosu | Java")
 #@layout()
 #define main()
 <article class="article scrollappear appear appeared">
     <header class="article-header">
         <h1>#(blog.title)</h1>
-        <p>#(blog.title)</p>
+        <!--<p>#(blog.title)</p>-->
         <div class="article-list-footer">
                         <span class="article-list-date">
                         #date(blog.createAt, "yyyy-MM-dd hh:mm")
@@ -13,39 +13,14 @@
             <span class="article-list-minutes">
                         阅读: #(blog.clickCount)
                         </span>
-            <!--<span class="article-list-divider">-</span>
+            <span class="article-list-divider">-</span>
             <div class="article-list-tags">
                 <a href="javascrpt:;">#(blog.tagName)</a>
-            </div>-->
+            </div>
         </div>
     </header>
     <div class="article-content">
         #(blog.content)
-        <!--<h4 id="features">Features:</h4>
-        <img src="http://chalk.nielsenramon.com/assets/documentation/chalk-intro@2x-d0c0ee7141c3804d3a7c0db8992cbbb8248913a9f85923f1d3fa8343093978f0.png"
-             alt="" style="opacity: 1;">
-        <ul>
-            <li>About page.</li>
-            <li>Automatic RSS feed.</li>
-            <li>Automatic sitemap.</li>
-            <li>Automatic time to read post indicator.</li>
-            <li>Cross browser support (supports all modern browsers).</li>
-            <li>Custom 404 page.</li>
-            <li>Custom code highlighting.</li>
-            <li>Customizable pagination.</li>
-            <li>Dark and Light theme.</li>
-            <li>Easy setup and deploying.</li>
-            <li>Enlarge images on click.</li>
-            <li>Filter on tags.</li>
-            <li>Frequently updated with new versions.</li>
-            <li>Many social media links supported.</li>
-            <li>Media embed for videos.</li>
-            <li>PageSpeed optimized.</li>
-            <li>Proper sharing links for posts on Facebook, Twitter and Google Plus.</li>
-            <li>SEO optimized.</li>
-            <li>Support for local fonts.</li>
-            <li>Support for emoji’s.</li>
-        </ul>-->
     </div>
     <div class="article-share">
         <a href="https://twitter.com/home?status=Introducing+chalk%20-%20http://chalk.nielsenramon.com/posts/introducing-chalk%20by%20@nielsenramon"
@@ -83,4 +58,6 @@
 
     <noscript>Please enable JavaScript to view the comments.</noscript>
 </article>
+<script src="/assets/new/js/zooming.min.js"> </script>
+<script src="/assets/new/js/detail.js"> </script>
 #end
