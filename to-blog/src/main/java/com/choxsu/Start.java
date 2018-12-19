@@ -92,10 +92,6 @@ public class Start extends JFinalConfig {
         arp.getEngine().setSourceFactory(new ClassPathSourceFactory());
         arp.addSqlTemplate("/sql/all_sqls.sql");
         me.add(arp);
-        //me.add(new EsPlugin(p.get("elasticsearch_hosts"), p.get("cluster_name", "choxsu-cs")));
-        me.add(new EhCachePlugin());
-
-
     }
 
     @Override
@@ -123,13 +119,12 @@ public class Start extends JFinalConfig {
 
     @Override
     public void afterJFinalStart() {
-        logger.info("jfinal start after action(jfinal启动完成之后执行)");
+        //启动完成之后执行
     }
 
     @Override
     public void beforeJFinalStop() {
-        //TODO
-        logger.info("jfinal start stop before(jfinal停止之前执行)");
+        //停止之前执行
     }
 
 
