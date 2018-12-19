@@ -11,8 +11,18 @@ import com.jfinal.core.Controller;
  */
 public abstract class BaseSeoInterceptor implements Interceptor {
 
+	/**
+	 * 网站标题
+	 */
 	public static final String SEO_TITLE = "seoTitle";
+	/**
+	 * 网站关键字
+	 */
 	public static final String SEO_KEYWORDS = "seoKeywords";
+
+	/**
+	 * 网站描述
+	 */
 	public static final String SEO_DESCR = "seoDescr";
 
 	protected void setSeoTitle(Controller c, String seoTitle) {

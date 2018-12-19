@@ -16,8 +16,10 @@ public class FrontRoutes extends Routes {
     @Override
     public void config() {
         setBaseViewPath("/_view");
-        add("/", ArticleController.class, "/");
-        add("/tag", TagsController.class, "/");
+
+        add("/", ArticleController.class);
+        add("/article", ArticleController.class, "/");
+        add("/tag", TagsController.class);
     }
 
 }

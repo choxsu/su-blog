@@ -36,7 +36,9 @@ public class ArticleService {
      */
     public Record findBlog(Integer id) {
         Record blog = Db.findById("blog", id);
-        ArticleService.addClick(id);
+        if (blog == null){
+            return null;
+        }
         this.doTagNameSet(blog);
         return blog;
     }
