@@ -7,6 +7,7 @@ import com.choxsu._admin.common.AdminRoutes;
 import com.choxsu._admin.permission.PermissionDirective;
 import com.choxsu._admin.role.RoleDirective;
 import com.choxsu.common.entity._MappingKit;
+import com.choxsu.common.handler.UrlSeoHandler;
 import com.choxsu.common.interceptor.LoginSessionInterceptor;
 import com.choxsu.common.interceptor.VisitorInterceptor;
 import com.choxsu.common.kit.DruidKit;
@@ -18,7 +19,6 @@ import com.jfinal.kit.Prop;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
-import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.server.undertow.UndertowServer;
 import com.jfinal.template.Engine;
 import com.jfinal.template.source.ClassPathSourceFactory;
@@ -103,7 +103,7 @@ public class Start extends JFinalConfig {
     @Override
     public void configHandler(Handlers me) {
         me.add(DruidKit.getFilterHandler("/druid"));
-
+        me.add(new UrlSeoHandler());
     }
 
 
