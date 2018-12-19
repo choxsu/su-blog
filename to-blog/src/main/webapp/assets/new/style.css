@@ -899,7 +899,7 @@ img {
     text-decoration: none
 }
 
-.article-header h1 {
+.article-header .title {
     font-size: 1.3em;
     font-weight: 400;
     letter-spacing: -.03em;
