@@ -1,11 +1,10 @@
-#set(seoTitle="Chosu | Java")
 #@layout()
 #define main()
 <div>
     <ul class="article-list">
         #for(r : page.list)
         <li class="article-list-item">
-            <a href="/detail/#(r.id)"
+            <a href="/article/#(r.id)"
                title="#(r.title)">
                 <h5>
                     #(r.title)
