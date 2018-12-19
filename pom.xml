@@ -10,9 +10,6 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>to-blog</module>
-        <module>to-oss</module>
-        <module>to-pay</module>
-        <module>to-elastic</module>
     </modules>
 
     <properties>
