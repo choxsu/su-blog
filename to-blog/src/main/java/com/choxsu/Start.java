@@ -7,7 +7,6 @@ import com.choxsu._admin.common.AdminRoutes;
 import com.choxsu._admin.permission.PermissionDirective;
 import com.choxsu._admin.role.RoleDirective;
 import com.choxsu.common.entity._MappingKit;
-import com.choxsu.common.es.EsPlugin;
 import com.choxsu.common.interceptor.LoginSessionInterceptor;
 import com.choxsu.common.interceptor.VisitorInterceptor;
 import com.choxsu.common.kit.DruidKit;

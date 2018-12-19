@@ -1,8 +1,7 @@
 package com.choxsu.common.kit;
 
+
 import org.apache.commons.codec.binary.Base64;
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 
 import javax.crypto.Cipher;
 import java.io.ByteArrayOutputStream;
@@ -14,8 +13,6 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPrivateCrtKeySpec;
 import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.RSAPublicKeySpec;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * RSA非对称加密辅助类
