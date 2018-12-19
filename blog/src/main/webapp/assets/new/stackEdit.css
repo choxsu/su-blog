@@ -1921,7 +1921,7 @@ hr {
 }
 
 pre > code {
-    background-color: rgba(168, 126, 187, 0.3);
+    background-color: rgba(12, 12, 12, 0.06);
     display: block;
     padding: .5em;
     -webkit-text-size-adjust: none;
