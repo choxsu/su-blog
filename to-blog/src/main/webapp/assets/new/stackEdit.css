@@ -2073,7 +2073,7 @@ hr {
 }
 
 pre > code {
-    background-color: rgba(0, 0, 0, .05);
+    background-color: rgba(168, 126, 187, 0.3);
     display: block;
     padding: .5em;
     -webkit-text-size-adjust: none;
