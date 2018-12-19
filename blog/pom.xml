@@ -9,8 +9,8 @@
     <groupId>com.choxsu.blog</groupId>
     <artifactId>blog</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-SNAPSHOT</version>
-    <name>to-blog Maven Webapp</name>
+    <version>1.0</version>
+    <name>blog Maven Webapp</name>
     <url>http://maven.apache.org</url>
 
     <repositories>
