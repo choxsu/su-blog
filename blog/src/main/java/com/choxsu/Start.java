@@ -50,7 +50,7 @@ public class Start extends JFinalConfig {
     // 先加载开发环境配置，再追加生产环境的少量配置覆盖掉开发环境配置
     static void loadConfig() {
         if (p == null) {
-            p = PropKit.use("jfinal-club-config-dev.txt").appendIfExists("jfinal-club-config-pro.txt");
+            p = PropKit.use("su-blog-config-dev.properties").appendIfExists("su-blog-config-pro.properties");
         }
     }
 
@@ -63,7 +63,7 @@ public class Start extends JFinalConfig {
 
     @Override
     public void configEngine(Engine me) {
-        me.setDevMode(true);
+        me.setDevMode(p.getBoolean("engineDevMode", false));
         me.addSharedFunction("/_view/common/layout.html");
         me.addSharedFunction("/_view/common/_paginate.html");
 
