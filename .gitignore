@@ -14,13 +14,5 @@ out/
 /.idea/encodings.
 /target/
 *.class
-s-blog.log
-to-blog/src/main/java/com/choxsu/api/entity/
-to-blog/target/
-to-elastic/target/
-to-jfinal/target/generated-sources/
-to-morning/target/
-to-oss/target/
-to-pay/target/
-/to-morning/src/main/resources/application.yml
-/to-blog/src/main/resources/sblog_config_pro.properties
+blog.log
+/blog/target/
