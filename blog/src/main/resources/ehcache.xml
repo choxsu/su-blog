@@ -19,7 +19,35 @@
 			statistics="false">
 		<persistence strategy="localTempSwap"/>
 	</defaultCache>
-    
+
+	<cache name="pageViewIp"
+		   maxEntriesLocalHeap="90000"
+		   eternal="false"
+		   timeToIdleSeconds="60"
+		   timeToLiveSeconds="60"
+		   overflowToDisk="false"
+		   diskPersistent="false"
+	/>
+
+	<cache name="articlePageView"
+		   maxEntriesLocalHeap="90000"
+		   eternal="false"
+		   timeToIdleSeconds="60"
+		   timeToLiveSeconds="60"
+		   overflowToDisk="false"
+		   diskPersistent="false"
+	/>
+
+	<cache name="articleClickPageView"
+		   maxEntriesLocalHeap="90000"
+		   eternal="false"
+		   timeToIdleSeconds="60"
+		   timeToLiveSeconds="60"
+		   overflowToDisk="false"
+		   diskPersistent="false"
+	/>
+
+
 	<cache name="sampleCache1"
 	       maxEntriesLocalHeap="10000"
 	       maxEntriesLocalDisk="1000"

@@ -9,7 +9,7 @@ import com.choxsu._admin.role.RoleDirective;
 import com.choxsu.common.entity._MappingKit;
 import com.choxsu.common.handler.UrlSeoHandler;
 import com.choxsu.common.interceptor.LoginSessionInterceptor;
-import com.choxsu.common.interceptor.VisitorInterceptor;
+import com.choxsu.common.pageview.VisitorInterceptor;
 import com.choxsu.common.kit.DruidKit;
 import com.choxsu.common.routes.ApiRoutes;
 import com.choxsu.common.routes.FrontRoutes;
@@ -18,7 +18,9 @@ import com.jfinal.json.MixedJsonFactory;
 import com.jfinal.kit.Prop;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
+import com.jfinal.plugin.cron4j.Cron4jPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
+import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.server.undertow.UndertowServer;
 import com.jfinal.template.Engine;
 import com.jfinal.template.source.ClassPathSourceFactory;
@@ -96,6 +98,10 @@ public class Start extends JFinalConfig {
         arp.getEngine().setSourceFactory(new ClassPathSourceFactory());
         arp.addSqlTemplate("/sql/all_sqls.sql");
         me.add(arp);
+        //缓存插件
+        me.add(new EhCachePlugin());
+        //定时任务
+        me.add(new Cron4jPlugin(p));
     }
 
     @Override
