@@ -11,6 +11,7 @@ import com.jfinal.plugin.cron4j.ITask;
  */
 public class PageViewUpdateTask implements ITask {
 
+    //这里不能使用 @Inject ,只能使用Aop.get(XXX.class)来注入
     PageViewService pageViewService = Aop.get(PageViewService.class);
 
     @Override
