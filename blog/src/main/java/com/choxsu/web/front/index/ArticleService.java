@@ -15,6 +15,10 @@ public class ArticleService {
         Db.update("UPDATE blog set clickCount = clickCount + 1 WHERE id = ?", id);
     }
 
+    public static void addClick(Object id, int count) {
+        Db.update("UPDATE blog set clickCount = clickCount + ? WHERE id = ?", count, id);
+    }
+
     /**
      * 查询所有博客分页
      * TODO update: 最近两天发布的放在最前面
@@ -36,7 +40,7 @@ public class ArticleService {
      */
     public Record findBlog(Integer id) {
         Record blog = Db.findById("blog", id);
-        if (blog == null){
+        if (blog == null) {
             return null;
         }
         this.doTagNameSet(blog);

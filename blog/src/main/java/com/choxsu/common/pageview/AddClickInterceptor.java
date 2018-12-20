@@ -1,11 +1,17 @@
 package com.choxsu.common.pageview;
 
+import com.choxsu.common.kit.IpKit;
 import com.choxsu.web.front.index.ArticleService;
+import com.jfinal.aop.Inject;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
 
 public class AddClickInterceptor implements Interceptor {
+
+    @Inject
+    PageViewService pageViewService;
+
     @Override
     public void intercept(Invocation inv) {
         inv.invoke();
@@ -14,7 +20,8 @@ public class AddClickInterceptor implements Interceptor {
 
         if (c.isParaExists(0)) {
             Integer id = c.getParaToInt();
-            ArticleService.addClick(id);
+            String ip = IpKit.getRealIp(c.getRequest());
+            pageViewService.processArticleToCache(id, ip);
         }
     }
 }
