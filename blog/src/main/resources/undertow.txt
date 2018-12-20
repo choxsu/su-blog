@@ -28,3 +28,6 @@ undertow.gzip.minLength=1024
 # 热加载保持 session 值，避免依赖于 session 的登录型项目反复登录，默认值为 true。仅用于 devMode，生产环境无影响
 # undertow.session.hotSwap=true
 
+# 热加载出现的NoClassDefFoundError
+# undertow.hotSwapClassPrefix=com.choxsu
+
