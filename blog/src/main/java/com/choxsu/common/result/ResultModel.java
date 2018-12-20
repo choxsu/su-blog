@@ -1,4 +1,4 @@
-package com.choxsu.result;
+package com.choxsu.common.result;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

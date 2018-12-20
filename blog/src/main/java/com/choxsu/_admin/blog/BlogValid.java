@@ -1,6 +1,6 @@
 package com.choxsu._admin.blog;
 
-import com.choxsu.common.kit.SensitiveWordsKit;
+import com.choxsu.kit.SensitiveWordsKit;
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
 

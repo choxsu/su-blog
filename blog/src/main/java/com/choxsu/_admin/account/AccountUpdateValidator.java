@@ -2,7 +2,7 @@
 
 package com.choxsu._admin.account;
 
-import com.choxsu.common.kit.SensitiveWordsKit;
+import com.choxsu.kit.SensitiveWordsKit;
 import com.choxsu.reg.RegValidator;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.Ret;

@@ -1,7 +1,7 @@
 package com.choxsu._admin.auth;
 
 import com.choxsu.common.entity.Account;
-import com.choxsu.login.LoginService;
+import com.choxsu._admin.login.LoginService;
 import com.jfinal.aop.Duang;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;

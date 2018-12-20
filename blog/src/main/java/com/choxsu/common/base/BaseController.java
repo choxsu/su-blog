@@ -1,13 +1,10 @@
 package com.choxsu.common.base;
 
 import com.choxsu.common.entity.Account;
-import com.choxsu.login.LoginService;
-import com.choxsu.result.ResultModel;
+import com.choxsu._admin.login.LoginService;
+import com.choxsu.common.result.ResultModel;
 import com.jfinal.core.Controller;
 import com.jfinal.core.NotAction;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author choxsu

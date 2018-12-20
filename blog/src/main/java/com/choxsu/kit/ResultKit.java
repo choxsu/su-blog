@@ -1,4 +1,4 @@
-package com.choxsu.common.kit;
+package com.choxsu.kit;
 
 
 import java.util.HashMap;

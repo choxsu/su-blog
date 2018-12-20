@@ -1,10 +1,10 @@
 
-package com.choxsu.login;
+package com.choxsu._admin.login;
 
 import com.choxsu.common.entity.Account;
-import com.choxsu.common.kit.EmailKit;
-import com.choxsu.common.kit.IpKit;
-import com.choxsu.common.kit.RSAKit;
+import com.choxsu.kit.EmailKit;
+import com.choxsu.kit.IpKit;
+import com.choxsu.kit.RSAKit;
 import com.choxsu.common.render.MyCaptchaRender;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;

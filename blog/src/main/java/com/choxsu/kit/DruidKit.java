@@ -1,6 +1,6 @@
 
 
-package com.choxsu.common.kit;
+package com.choxsu.kit;
 
 import com.choxsu.common.handler.DruidFilterHandler;
 import com.jfinal.handler.Handler;

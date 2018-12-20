@@ -6,7 +6,7 @@ import com.jfinal.aop.Inject;
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.Role;
 import com.choxsu.common.entity.Session;
-import com.choxsu.login.LoginService;
+import com.choxsu._admin.login.LoginService;
 import com.jfinal.kit.HashKit;
 import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;

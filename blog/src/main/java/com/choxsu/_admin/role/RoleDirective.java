@@ -2,7 +2,7 @@ package com.choxsu._admin.role;
 
 import com.choxsu._admin.auth.AdminAuthService;
 import com.choxsu.common.entity.Account;
-import com.choxsu.login.LoginService;
+import com.choxsu._admin.login.LoginService;
 import com.jfinal.aop.Enhancer;
 import com.jfinal.template.Directive;
 import com.jfinal.template.Env;

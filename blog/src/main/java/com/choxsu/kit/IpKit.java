@@ -1,6 +1,6 @@
 
 
-package com.choxsu.common.kit;
+package com.choxsu.kit;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;

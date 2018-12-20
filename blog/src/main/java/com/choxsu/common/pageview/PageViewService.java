@@ -1,7 +1,7 @@
 package com.choxsu.common.pageview;
 
 import com.choxsu.common.entity.Visitor;
-import com.choxsu.common.kit.IpKit;
+import com.choxsu.kit.IpKit;
 import com.choxsu.front.index.ArticleService;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.LogKit;

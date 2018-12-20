@@ -1,6 +1,6 @@
 
 
-package com.choxsu.common.kit;
+package com.choxsu.kit;
 
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;

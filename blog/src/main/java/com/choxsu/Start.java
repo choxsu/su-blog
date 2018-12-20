@@ -10,7 +10,7 @@ import com.choxsu.common.entity._MappingKit;
 import com.choxsu.common.handler.UrlSeoHandler;
 import com.choxsu.common.interceptor.LoginSessionInterceptor;
 import com.choxsu.common.pageview.VisitorInterceptor;
-import com.choxsu.common.kit.DruidKit;
+import com.choxsu.kit.DruidKit;
 import com.choxsu.common.routes.ApiRoutes;
 import com.choxsu.common.routes.FrontRoutes;
 import com.jfinal.config.*;

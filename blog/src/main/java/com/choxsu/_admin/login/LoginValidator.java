@@ -1,6 +1,6 @@
 
 
-package com.choxsu.login;
+package com.choxsu._admin.login;
 
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;

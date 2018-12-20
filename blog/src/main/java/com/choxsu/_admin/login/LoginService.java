@@ -1,14 +1,13 @@
 
 
-package com.choxsu.login;
+package com.choxsu._admin.login;
 
 import com.choxsu.common.authcode.AuthCodeService;
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.AuthCode;
 import com.choxsu.common.entity.Session;
-import com.choxsu.common.kit.EmailKit;
+import com.choxsu.kit.EmailKit;
 import com.jfinal.kit.HashKit;
-import com.jfinal.kit.PropKit;
 import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;

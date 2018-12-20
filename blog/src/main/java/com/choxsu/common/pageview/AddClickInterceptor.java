@@ -1,6 +1,6 @@
 package com.choxsu.common.pageview;
 
-import com.choxsu.common.kit.IpKit;
+import com.choxsu.kit.IpKit;
 import com.jfinal.aop.Inject;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;

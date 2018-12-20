@@ -5,7 +5,7 @@ import com.choxsu._admin.role.RoleAdminService;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.Role;
-import com.choxsu.common.kit.IpKit;
+import com.choxsu.kit.IpKit;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Inject;
 import com.jfinal.kit.Ret;

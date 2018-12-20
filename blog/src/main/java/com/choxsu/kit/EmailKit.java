@@ -1,6 +1,6 @@
 
 
-package com.choxsu.common.kit;
+package com.choxsu.kit;
 
 import com.jfinal.kit.PropKit;
 import com.jfinal.kit.StrKit;
