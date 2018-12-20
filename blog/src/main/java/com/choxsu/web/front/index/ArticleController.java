@@ -40,6 +40,7 @@ public class ArticleController extends BaseController {
         }
     }
 
+    @ActionKey("/feed")
     public void feed() {
         renderXml("feed.xml");
     }
