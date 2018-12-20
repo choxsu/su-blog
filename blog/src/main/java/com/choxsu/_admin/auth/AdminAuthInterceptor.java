@@ -1,25 +1,28 @@
 package com.choxsu._admin.auth;
 
 import com.choxsu.common.entity.Account;
-import com.choxsu._admin.login.LoginService;
-import com.jfinal.aop.Duang;
+import com.choxsu._admin.login.AdminLoginService;
+import com.jfinal.aop.Inject;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.kit.Ret;
 
 /**
  * 后台权限管理拦截器
+ *
  * @author choxsu
  */
 public class AdminAuthInterceptor implements Interceptor {
 
-    //@Inject
-    AdminAuthService srv = Duang.duang(AdminAuthService.class);
+    @Inject
+    AdminAuthService srv;
 
     /**
      * 用于 sharedObject、sharedMethod 扩展中使用
      */
     private static final ThreadLocal<Account> threadLocal = new ThreadLocal<>();
+
+    private static final String loginActionKey = "/admin/login";
 
     public static Account getThreadLocalAccount() {
         return threadLocal.get();
@@ -27,7 +30,7 @@ public class AdminAuthInterceptor implements Interceptor {
 
     @Override
     public void intercept(Invocation inv) {
-        Account loginAccount = inv.getController().getAttr(LoginService.loginAccountCacheName);
+        Account loginAccount = inv.getController().getAttr(AdminLoginService.loginAccountCacheName);
         if (loginAccount != null && loginAccount.isStatusOk()) {
             // 传递给 sharedObject、sharedMethod 扩展使用
             threadLocal.set(loginAccount);
@@ -39,9 +42,12 @@ public class AdminAuthInterceptor implements Interceptor {
                 return;
             }
         }
+        String actionKey = inv.getActionKey();
 
-        if (loginAccount == null) {
-            inv.getController().redirect("/login");
+        if (loginAccount == null && !loginActionKey.equals(actionKey)) {
+            inv.getController().redirect(loginActionKey);
+        } else if (loginActionKey.equals(actionKey)) {
+            inv.invoke();
         }
         // renderJson 提示没有操作权限，提升用户体验
         else {

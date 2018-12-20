@@ -21,10 +21,10 @@ import java.util.Date;
 /**
  * 登录控制器
  */
-public class LoginController extends Controller {
+public class AdminLoginController extends Controller {
 
     @Inject
-    LoginService srv;
+    AdminLoginService srv;
 
     /**
      * 显示登录界面
@@ -37,7 +37,7 @@ public class LoginController extends Controller {
     /**
      * 登录
      */
-    @Before(LoginValidator.class)
+    @Before(AdminLoginValidator.class)
     public void doLogin() {
         String pModel = PropKit.get("hexModulus");
         String exp = PropKit.get("hexPrivateExponent");
@@ -48,17 +48,17 @@ public class LoginController extends Controller {
         String loginIp = IpKit.getRealIp(getRequest());
         Ret ret = srv.login(getPara("userName"), password, keepLogin, loginIp);
         if (ret.isOk()) {
-            Account account = (Account) ret.get(LoginService.loginAccountCacheName);
+            Account account = (Account) ret.get(AdminLoginService.loginAccountCacheName);
             String content = "在 " + new Date() + "登陆 Choxsu博客社区后台成功 <br/> 登陆ip:" + IpKit.getRealIp(this.getRequest()) + "<br/> 如果非本人登录，请及时联系超级管理员";
             try {
                 EmailKit.sendEmail(account.getUserName(), "登陆styg.site后台成功提示", content, true);
             } catch (Exception e) {
                 LogKit.error(e.getMessage(), e);
             }
-            String sessionId = ret.getStr(LoginService.sessionIdName);
+            String sessionId = ret.getStr(AdminLoginService.sessionIdName);
             int maxAgeInSeconds = ret.getInt("maxAgeInSeconds");
-            setCookie(LoginService.sessionIdName, sessionId, maxAgeInSeconds, true);
-            setAttr(LoginService.loginAccountCacheName, ret.get(LoginService.loginAccountCacheName));
+            setCookie(AdminLoginService.sessionIdName, sessionId, maxAgeInSeconds, true);
+            setAttr(AdminLoginService.loginAccountCacheName, ret.get(AdminLoginService.loginAccountCacheName));
             ret.set("returnUrl", getPara("returnUrl", "/admin"));    // 如果 returnUrl 存在则跳过去，否则跳去首页
         }
         renderJson(ret);
@@ -70,8 +70,8 @@ public class LoginController extends Controller {
     @Clear
     @ActionKey("/logout")
     public void logout() {
-        srv.logout(getCookie(LoginService.sessionIdName));
-        removeCookie(LoginService.sessionIdName);
+        srv.logout(getCookie(AdminLoginService.sessionIdName));
+        removeCookie(AdminLoginService.sessionIdName);
         redirect("/login");
     }
 

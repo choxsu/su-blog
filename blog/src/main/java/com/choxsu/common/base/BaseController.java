@@ -1,7 +1,7 @@
 package com.choxsu.common.base;
 
 import com.choxsu.common.entity.Account;
-import com.choxsu._admin.login.LoginService;
+import com.choxsu._admin.login.AdminLoginService;
 import com.choxsu.common.result.ResultModel;
 import com.jfinal.core.Controller;
 import com.jfinal.core.NotAction;
@@ -16,7 +16,7 @@ public class BaseController extends Controller {
     @NotAction
     public Account getLoginAccount() {
         if (loginAccount == null) {
-            loginAccount = getAttr(LoginService.loginAccountCacheName);
+            loginAccount = getAttr(AdminLoginService.loginAccountCacheName);
             if (loginAccount != null && !loginAccount.isStatusOk()) {
                 throw new IllegalStateException("当前用户状态不允许登录，status = " + loginAccount.getStatus());
             }

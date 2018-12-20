@@ -2,7 +2,7 @@ package com.choxsu._admin.role;
 
 import com.choxsu._admin.auth.AdminAuthService;
 import com.choxsu.common.entity.Account;
-import com.choxsu._admin.login.LoginService;
+import com.choxsu._admin.login.AdminLoginService;
 import com.jfinal.aop.Enhancer;
 import com.jfinal.template.Directive;
 import com.jfinal.template.Env;
@@ -24,7 +24,7 @@ public class RoleDirective extends Directive {
 
     @Override
     public void exec(Env env, Scope scope, Writer writer) {
-        Account account = (Account)scope.getRootData().get(LoginService.loginAccountCacheName);
+        Account account = (Account)scope.getRootData().get(AdminLoginService.loginAccountCacheName);
         if (account != null && account.isStatusOk()) {
             // 如果是超级管理员，或者拥有指定的角色则放行
             if (adminAuthService.isSuperAdmin(account.getId()) ||

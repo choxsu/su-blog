@@ -8,7 +8,7 @@ import com.jfinal.validate.Validator;
 /**
  * ajax 登录参数验证
  */
-public class LoginValidator extends Validator {
+public class AdminLoginValidator extends Validator {
 
 	protected void validate(Controller c) {
 		setShortCircuit(true);

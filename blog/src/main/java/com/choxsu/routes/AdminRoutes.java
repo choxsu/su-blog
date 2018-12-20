@@ -8,6 +8,7 @@ import com.choxsu._admin.blog.AdminBlogController;
 import com.choxsu._admin.blog.tag.AdminTagController;
 import com.choxsu._admin.common.PjaxInterceptor;
 import com.choxsu._admin.index.IndexAdminController;
+import com.choxsu._admin.login.AdminLoginController;
 import com.choxsu._admin.permission.PermissionAdminController;
 import com.choxsu._admin.role.RoleAdminController;
 import com.choxsu._admin.visitor.VisitorAdminController;
@@ -32,11 +33,9 @@ public class AdminRoutes extends Routes {
         setBaseViewPath("/_view/_admin");
 
         add("/admin", IndexAdminController.class, "/index");
-
+        add("/admin/login", AdminLoginController.class, "/index");
         add("/admin/blog", AdminBlogController.class, "/blog");
         add("/admin/blog/tag", AdminTagController.class, "/tag");
-
-
         add("/admin/account", AccountAdminController.class, "/account");
         add("/admin/role", RoleAdminController.class, "/role");
         add("/admin/permission", PermissionAdminController.class, "/permission");

@@ -19,7 +19,7 @@ import java.util.Date;
 /**
  * 登录业务
  */
-public class LoginService {
+public class AdminLoginService {
 
     private Account accountDao = new Account().dao();
 

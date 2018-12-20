@@ -6,7 +6,7 @@ import com.jfinal.aop.Inject;
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.Role;
 import com.choxsu.common.entity.Session;
-import com.choxsu._admin.login.LoginService;
+import com.choxsu._admin.login.AdminLoginService;
 import com.jfinal.kit.HashKit;
 import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;
@@ -23,7 +23,7 @@ import java.util.List;
 public class AccountAdminService {
 
     @Inject
-    LoginService loginService;
+    AdminLoginService adminLoginService;
 
     private Account dao = new Account().dao();
 
@@ -73,7 +73,7 @@ public class AccountAdminService {
         List<Session> sessionList = Session.dao.find("select * from session where accountId = ?", lockedAccountId);
         if (sessionList != null) {
             for (Session session : sessionList) {            // 处理多客户端同时登录后的多 session 记录
-                loginService.logout(session.getId());    // 清除登录 cache，强制退出
+                adminLoginService.logout(session.getId());    // 清除登录 cache，强制退出
             }
         }
 
