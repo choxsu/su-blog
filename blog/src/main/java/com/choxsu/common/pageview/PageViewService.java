@@ -47,7 +47,7 @@ public class PageViewService {
         CacheKit.put(cacheName, url, visitor);
     }
 
-    public void updateToDataBase() {
+    void updateToDataBase() {
         List urls = CacheKit.getKeys(cacheName);
         List<Visitor> list = new ArrayList<>();
         for (Object urlKey : urls) {
@@ -92,7 +92,7 @@ public class PageViewService {
 
     }
 
-    public void updateArticleClickToDataBase() {
+    void updateArticleClickToDataBase() {
         List ids = CacheKit.getKeys(cacheClickName);
         for (Object id : ids) {
             Integer visitCount = CacheKit.get(cacheClickName, id);
