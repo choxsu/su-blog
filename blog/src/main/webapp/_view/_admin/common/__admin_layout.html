@@ -9,37 +9,32 @@
 		#@doAdminLayout()
 	#end
 #end
-
 #define doAdminLayout()
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="/assets/favicon.ico" />
+	<link rel="bookmark" href="/assets/favicon.ico" />
 	<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-	<title>SBlog后台管理</title>
+	<title>Chosu后台管理</title>
 
 	<!-- Bootstrap -->
 	<link href="/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-	<link href="/assets/nprogress/nprogress.css" rel="stylesheet">
-	<link href="/assets/magic_input/magic-input.css" rel="stylesheet">
-
-	<link href="/assets/jcrop/css/jquery.Jcrop.min.css" rel="stylesheet">
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="/assets/new/js/jquery.min-v1.11.3.js"></script>
-	<script src="/assets/jquery_form/jquery.form.min.js"></script>
-	<script src="/assets/jquery_pjax/jquery.pjax.js"></script>
+	<script src="/assets/new/js/jquery.form.min.js"></script>
+	<script src="/assets/new/js/jquery.pjax.min.js"></script>
+
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
-	<script src="/assets/nprogress/nprogress.js"></script>
-	<script src="/assets/layer/layer/layer.js"></script>
+	<script src="/assets//new/js/layer/layer.js"></script>
 
 	<!-- 后台管理 js -->
-	<script src="/assets/js/jfinal-admin-common.js"></script>
-	<script src="/assets/js/jfinal-admin.js"></script>
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -54,7 +49,7 @@
 	### 左侧区域容器
 	<div class="jfa-left-box">
 		<div class="jfa-logo">
-			SBLOG
+			Chosu
 		</div>
 		<div class="jfa-menu-box">
 			#include("_menu.html")
