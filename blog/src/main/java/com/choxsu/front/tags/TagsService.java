@@ -1,8 +1,6 @@
-package com.choxsu.web.front.tags;
+package com.choxsu.front.tags;
 
-import com.choxsu.common.constant.CategoryEnum;
-import com.choxsu.web.front.index.ArticleService;
-import com.jfinal.aop.Enhancer;
+import com.choxsu.front.index.ArticleService;
 import com.jfinal.aop.Inject;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;

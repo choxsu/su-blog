@@ -2,8 +2,8 @@
 
 package com.choxsu.common.routes;
 
-import com.choxsu.web.front.index.ArticleController;
-import com.choxsu.web.front.tags.TagsController;
+import com.choxsu.front.index.ArticleController;
+import com.choxsu.front.tags.TagsController;
 import com.jfinal.config.Routes;
 
 /**

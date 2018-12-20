@@ -3,7 +3,7 @@ package com.choxsu._admin.blog.tag;
 import com.jfinal.aop.Inject;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.entity.BlogTag;
-import com.choxsu.web.front.index.ArticleService;
+import com.choxsu.front.index.ArticleService;
 import com.jfinal.aop.Before;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Page;

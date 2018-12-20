@@ -7,7 +7,7 @@ import com.choxsu.api.vo.RepliesVo;
 import com.choxsu.common.base.BaseService;
 import com.choxsu.common.entity.Blog;
 import com.choxsu.common.entity.BlogTag;
-import com.choxsu.web.front.index.ArticleService;
+import com.choxsu.front.index.ArticleService;
 import com.jfinal.aop.Before;
 import com.jfinal.kit.Kv;
 import com.jfinal.kit.StrKit;

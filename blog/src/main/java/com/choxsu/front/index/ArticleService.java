@@ -1,4 +1,4 @@
-package com.choxsu.web.front.index;
+package com.choxsu.front.index;
 
 import com.jfinal.kit.Kv;
 import com.jfinal.plugin.activerecord.Db;

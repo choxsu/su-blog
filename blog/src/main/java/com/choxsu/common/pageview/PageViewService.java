@@ -2,7 +2,7 @@ package com.choxsu.common.pageview;
 
 import com.choxsu.common.entity.Visitor;
 import com.choxsu.common.kit.IpKit;
-import com.choxsu.web.front.index.ArticleService;
+import com.choxsu.front.index.ArticleService;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.LogKit;
 import com.jfinal.plugin.activerecord.Db;
