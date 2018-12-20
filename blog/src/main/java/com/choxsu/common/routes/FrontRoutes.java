@@ -19,7 +19,7 @@ public class FrontRoutes extends Routes {
 
         add("/", ArticleController.class);
         add("/article", ArticleController.class, "/");
-        add("/tag", TagsController.class);
+        add("/article/tag", TagsController.class, "/");
     }
 
 }

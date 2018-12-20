@@ -22,8 +22,6 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.server.undertow.UndertowServer;
 import com.jfinal.template.Engine;
 import com.jfinal.template.source.ClassPathSourceFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 
@@ -31,8 +29,6 @@ import java.sql.Connection;
  * @author choxsu
  */
 public class Start extends JFinalConfig {
-
-    private static final Logger logger = LoggerFactory.getLogger(Start.class);
 
 
     /**
