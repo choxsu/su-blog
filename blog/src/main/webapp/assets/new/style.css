@@ -802,17 +802,15 @@ img {
     text-decoration: none
 }
 
-.article-list-item a h5 {
+.article-list-item a .title {
     position: relative;
     display: block;
-    padding-right: 25px;
     color: #121111;
     font-family: sans-serif;
     border-bottom: 1px solid transparent
-
 }
 
-.article-list-item a h5 svg {
+.article-list-item a .title svg {
     width: 16px;
     height: 16px;
     vertical-align: middle;
@@ -823,7 +821,7 @@ img {
     transition: opacity .2s linear
 }
 
-.article-list-item a:hover h5 svg {
+.article-list-item a:hover .title svg {
     opacity: 1
 }
 

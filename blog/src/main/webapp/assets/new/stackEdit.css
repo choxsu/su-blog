@@ -1881,7 +1881,8 @@ dt {
 a {
     color: #0c93e4;
     text-decoration: underline;
-    text-decoration-skip: ink
+    text-decoration-skip: ink;
+    word-break: break-all;
 }
 
 a:focus, a:hover {

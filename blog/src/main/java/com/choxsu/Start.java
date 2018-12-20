@@ -123,7 +123,8 @@ public class Start extends JFinalConfig {
 
     @Override
     public void afterJFinalStart() {
-        //启动完成之后执行
+        // 让 druid 允许在 sql 中使用 union
+        wallFilter.getConfig().setSelectUnionCheck(false);
     }
 
     @Override
