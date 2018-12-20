@@ -43,11 +43,10 @@ public class AdminAuthInterceptor implements Interceptor {
             }
         }
         String actionKey = inv.getActionKey();
-
-        if (loginAccount == null && !loginActionKey.equals(actionKey)) {
-            inv.getController().redirect(loginActionKey);
-        } else if (loginActionKey.equals(actionKey)) {
+        if (actionKey.contains(loginActionKey)) {
             inv.invoke();
+        } else if (loginAccount == null) {
+            inv.getController().redirect(loginActionKey);
         }
         // renderJson 提示没有操作权限，提升用户体验
         else {

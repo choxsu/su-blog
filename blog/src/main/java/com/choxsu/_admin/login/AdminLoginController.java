@@ -43,6 +43,10 @@ public class AdminLoginController extends Controller {
         String exp = PropKit.get("hexPrivateExponent");
         String encript = getPara("encryptPwd");
         RSAPrivateKey privateKey = RSAKit.getRSAPrivateKey(pModel, exp);
+        if (privateKey == null){
+            renderJson(Ret.fail().set("msg", "RSA私钥无效或不存在"));
+            return;
+        }
         String password = RSAKit.decryptString(privateKey, encript);
         boolean keepLogin = getParaToBoolean("keepLogin", false);
         String loginIp = IpKit.getRealIp(getRequest());

@@ -76,8 +76,8 @@ public class Start extends JFinalConfig {
         // 添加角色、权限 shared method
         me.addSharedMethod(AdminAuthKit.class);
 
-        //me.addSharedFunction("/_view/_admin/common/__admin_layout.html");
-        //me.addSharedFunction("/_view/_admin/common/_admin_paginate.html");
+        me.addSharedFunction("/_view/_admin/common/__admin_layout.html");
+        me.addSharedFunction("/_view/_admin/common/_admin_paginate.html");
     }
 
     @Override

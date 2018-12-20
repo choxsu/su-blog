@@ -1,51 +1,38 @@
-#set(seoTitle="登录")
-
-<!--必要样式-->
-<link href="/assets/login_reg/css/styles.css" rel="stylesheet" type="text/css">
-<link href="/assets/login_reg/css/login.css" rel="stylesheet" type="text/css">
-<link href="/assets/login_reg/css/loaders.css" rel="stylesheet" type="text/css">
-<html>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chosu后台登录</title>
+    <link rel="shortcut icon" href="/assets/favicon.ico" />
+    <link rel="bookmark" href="/assets/favicon.ico" />
+    <link href="/assets/new/style.css" rel="stylesheet" type="text/css">
+    <link href="/assets/new/login/login.css" rel="stylesheet" type="text/css">
+</head>
 <body>
-<canvas class="pg-canvas" width="1920" height="959"></canvas>
 <div class="login">
-
-    <!--<img class="MyLogo" src="loginSpecial/images/logo01.png" alt="   LOGO">-->
     <div class="login_title">
         <span>管理员登录</span>
     </div>
-    <form id="login_form" action="/login/doLogin?returnUrl=#(returnUrl)" method="post">
+    <form id="login_form" action="/admin/login/doLogin?returnUrl=#(returnUrl)" method="post">
         <div class="login_fields">
             <div class="login_fields__user">
-                <div class="icon">
-                    <img alt="" src="/assets/login_reg/img/user_icon_copy.png">
-                </div>
                 <input name="userName" placeholder="邮箱" maxlength="100" class="username" type="text" autocomplete="off">
-                <div class="validation">
-                    <img alt="" src="/assets/login_reg/img/tick.png">
-                </div>
             </div>
             <div class="login_fields__password">
-                <div class="icon">
-                    <img alt="" src="/assets/login_reg/img/lock_icon_copy.png">
-                </div>
                 <input id="_password" name="password" class="passwordNumder" placeholder="密码" maxlength="16"
                        type="password"
                        onchange="setEncPwd(this)"
                        onkeyup="setEncPwd(this)"
                        autocomplete="off">
                 <input id="_encryptPwd" type="hidden" name="encryptPwd"/>
-                <div class="validation">
-                    <img alt="" src="/assets/login_reg/img/tick.png">
-                </div>
             </div>
             <div class="login_fields__password">
-                <div class="icon">
-                    <img alt="" src="/assets/login_reg/img/key.png">
-                </div>
                 <input name="captcha" placeholder="验证码" maxlength="4" class="ValidateNum" style="width: auto;"
                        type="text" autocomplete="off">
                 <div class="validation" style="opacity: 1; right: -5px;top: -3px;">
-                    <img title="点击刷新" class="J_codeimg captcha" src="/login/captcha" onclick="updateCaptcha();">
+                    <img title="点击刷新" class="J_codeimg captcha" src="/admin/login/captcha" onclick="updateCaptcha();">
                 </div>
             </div>
             <div class="login_fields__submit">
@@ -56,35 +43,23 @@
     <div class="success">
     </div>
 </div>
-
-<link href="/assets/login_reg/layui/css/layui.css" rel="stylesheet" type="text/css">
-
-<script type="text/javascript" src="/assets/login_reg/js/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="/assets/jquery_form/jquery.form.min.js"></script>
-<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
-<script type="text/javascript" src="/assets/login_reg/js/jquery-ui.min.js"></script>
-<script src="/assets/login_reg/layui/layui.js" type="text/javascript"></script>
-<script src="/assets/login_reg/js/Particleground.js" type="text/javascript"></script>
-<script src="/assets/login_reg/js/jquery.mockjax.js" type="text/javascript"></script>
-<script src="/assets/login_reg/js/controlLogin.js" type="text/javascript"></script>
-<script src="/assets/jsencrypt/jsencrypt.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/assets/new/js/jquery.min-v1.11.3.js"></script>
+<script type="text/javascript" src="/assets/new/js/jquery.form.min.js"></script>
+<script type="text/javascript" src="/assets/new/js/layer/layer.js"></script>
+<script type="text/javascript" src="/assets/new/js/jsencrypt.min.js"></script>
 </body>
 </html>
 
 <script type="text/javascript">
 
-    var publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDeniVaKAmFtYLYlkY2u8+r3Uzpxy6A/oNZLSLGVKQZpgwtosHzsQ93KB+i4JFmRvq6Ud9xEilqWb3NUvG6zvJIdemX7WiM9cc/+T7GeLEwIrZJPgmqn7vGHkwA+3FWiXA+H/NpJIOp7VFiAKXtv919h1OcwoS9lsyfpB1CMPiwEQIDAQAB";
-
-
-
+    let publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDeniVaKAmFtYLYlkY2u8+r3Uzpxy6A/oNZLSLGVKQZpgwtosHzsQ93KB+i4JFmRvq6Ud9xEilqWb3NUvG6zvJIdemX7WiM9cc/+T7GeLEwIrZJPgmqn7vGHkwA+3FWiXA+H/NpJIOp7VFiAKXtv919h1OcwoS9lsyfpB1CMPiwEQIDAQAB";
     $("#login_form").submit(function () {
         setPassToBlank();
     });
 
-    function setPassToBlank(){
+    function setPassToBlank() {
         $("#_password").val('');
     }
-
 
     $(document).ready(function () {
 
@@ -92,7 +67,7 @@
             dataType: "json"
             , success: function (ret) {
                 // 业务层验证成功
-                if (ret.state == "ok") {
+                if (ret.state === "ok") {
                     setTimeout(function () {
                         location.href = ret.returnUrl;
                     }, 100);
@@ -138,7 +113,7 @@
     });
 
     function updateCaptcha() {
-        $(".J_codeimg").attr("src", "/login/captcha?v=" + Math.random());
+        $(".J_codeimg").attr("src", "/admin/login/captcha?v=" + Math.random());
         $("#captchaInput").val("");
     }
 
