@@ -1,144 +1,170 @@
 #@adminLayout()
 
 #define main()
-<div class="jfa-header-box" id="jfa-header-box">
-    <div class="jfa-crumbs" id="jfa-crumbs">
-        首页
-    </div>
-    <div class="jfa-search-box">
-        <form action="/admin/project/search">
-            ### <input class="jfa-search" type="text" name="keyword" placeholder="搜索">
-        </form>
-    </div>
-    #include("/_view/_admin/common/_header_right.html")
-</div>
-
 ### 内容区域
-<div class="jfa-content-box" id="jfa-content-box">
-    <div class="container-fluid">
+<h2 class="page-header">Dashboard</h2>
 
-        <div class="row">
-            <div class="col-md-6 col-sm-6 col-left">
-                <div class="jfa-content">
-                    <div class="profile-title">欢迎，#(loginAccount.nickName)</div>
-                    <div class="profile-user-name">#(loginAccount.userName)</div>
-                </div>
-            </div>
+<div class="row placeholders">
+    #perm("/admin/account")
+    <div class="col-xs-6 col-sm-3 placeholder">
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+        <h4><a href="/admin/account">#(accountProfile.total)</a></h4>
+        <span class="text-muted">#(accountProfile.title )</span>
+    </div>
+    #end
 
-            #permission("/admin/account")
-            <div class="col-md-6 col-sm-6 col-right">
-                <div class="jfa-content">
-                    <div class="profile-title">#(accountProfile.title)</div>
-                    <div class="profile-num">
-                        <a href="/admin/account">#(accountProfile.total)</a>
-                    </div>
-                </div>
-            </div>
-            #end
-        </div>
+    #perm("/admin/blog")
+    <div class="col-xs-6 col-sm-3 placeholder">
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+        <h4><a href="/admin/blog">#(blogProfile.total ??)</a></h4>
+        <span class="text-muted">#(blogProfile.title ??)</span>
+    </div>
+    #end
 
-        <div class="row">
-            #permission("/admin/blog")
-            <div class="col-md-6 col-sm-6 col-left">
-                <div class="jfa-content">
-                    <div class="profile-title">#(blogProfile.title??)</div>
-                    <div class="profile-num">
-                        <a href="/admin/blog">#(blogProfile.total??)</a>
-                    </div>
-                </div>
-            </div>
-            #end
-            #permission("/admin/blog/tag")
-            <div class="col-md-6 col-sm-6 col-left">
-                <div class="jfa-content">
-                    <div class="profile-title">#(blogTagProfile.title??)</div>
-                    <div class="profile-num">
-                        <a href="/admin/blog/tag">#(blogTagProfile.total??)</a>
-                    </div>
-                </div>
-            </div>
-            #end
-        </div>
+    #permission("/admin/permission")
+    <div class="col-xs-6 col-sm-3 placeholder">
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+        <h4><a href="/admin/permission">#(permissionProfile.total)</a></h4>
+        <span class="text-muted">#(permissionProfile.title)</span>
+    </div>
+    #end
 
-        <div class="row">
-
-            #permission("/admin/permission")
-            <div class="col-md-6 col-sm-6 col-right">
-                <div class="jfa-content">
-                    <div class="profile-title">#(permissionProfile.title)</div>
-                    <div class="profile-num">
-                        <a href="/admin/permission">#(permissionProfile.total)</a>
-                    </div>
-                </div>
-            </div>
-            #end
-
-            #permission("/admin/visitor")
-            <div class="col-md-6 col-sm-6 col-left">
-                <div class="jfa-content">
-                    <div class="profile-title">#(visitorProfile.title??)</div>
-                    <div class="profile-num">
-                         <a href="/admin/visitor">#(visitorProfile.total??)</a>
-                    </div>
-                </div>
-            </div>
-            #end
-
-        </div>
-
-
-    </div><!-- END OF bootstrap container -->
-</div><!-- END OF jfa-content-box -->
-
-<style type="text/css">
-    .jfa-content-box {
-        padding: 20px 10px 20px 10px;
-    }
-
-    .jfa-content {
-        height: 160px;
-        padding: 30px 0 0 30px;
-
-        font-size: 16px;
-        font-weight: 400;
-    }
-
-    .row {
-        margin-bottom: 20px;
-    }
-
-    .col-md-6 {
-        padding: 0 10px 0 10px;
-    }
-
-    .profile-title {
-        font-size: 16px;
-    / / color: #616161;
-        color: #757575;
-    }
-
-    .profile-user-name {
-        margin-top: 8px;
-        font-size: 14px;
-        color: #8f8f8f;
-    }
-
-    .profile-num {
-        margin: 12px 0 0 120px;
-        font-size: 30px;
-    }
-
-    .profile-num a {
-        text-decoration: none;
-    }
-
-    .profile-num a:hover {
-        color: #44B549;
-    }
-</style>
-
-<script type="text/javascript">
-</script>
+    #permission("/admin/visitor")
+    <div class="col-xs-6 col-sm-3 placeholder">
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+        <h4><a href="/admin/visitor">#(visitorProfile.total)</a></h4>
+        <span class="text-muted">#(visitorProfile.title)</span>
+    </div>
+    #end
+    <h2 class="sub-header">Section title</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-condensed">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Header</th>
+                <th>Header</th>
+                <th>Header</th>
+                <th>Header</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1,001</td>
+                <td>Lorem</td>
+                <td>ipsum</td>
+                <td>dolor</td>
+                <td>sit</td>
+            </tr>
+            <tr>
+                <td>1,002</td>
+                <td>amet</td>
+                <td>consectetur</td>
+                <td>adipiscing</td>
+                <td>elit</td>
+            </tr>
+            <tr>
+                <td>1,003</td>
+                <td>Integer</td>
+                <td>nec</td>
+                <td>odio</td>
+                <td>Praesent</td>
+            </tr>
+            <tr>
+                <td>1,003</td>
+                <td>libero</td>
+                <td>Sed</td>
+                <td>cursus</td>
+                <td>ante</td>
+            </tr>
+            <tr>
+                <td>1,004</td>
+                <td>dapibus</td>
+                <td>diam</td>
+                <td>Sed</td>
+                <td>nisi</td>
+            </tr>
+            <tr>
+                <td>1,005</td>
+                <td>Nulla</td>
+                <td>quis</td>
+                <td>sem</td>
+                <td>at</td>
+            </tr>
+            <tr>
+                <td>1,006</td>
+                <td>nibh</td>
+                <td>elementum</td>
+                <td>imperdiet</td>
+                <td>Duis</td>
+            </tr>
+            <tr>
+                <td>1,007</td>
+                <td>sagittis</td>
+                <td>ipsum</td>
+                <td>Praesent</td>
+                <td>mauris</td>
+            </tr>
+            <tr>
+                <td>1,008</td>
+                <td>Fusce</td>
+                <td>nec</td>
+                <td>tellus</td>
+                <td>sed</td>
+            </tr>
+            <tr>
+                <td>1,009</td>
+                <td>augue</td>
+                <td>semper</td>
+                <td>porta</td>
+                <td>Mauris</td>
+            </tr>
+            <tr>
+                <td>1,010</td>
+                <td>massa</td>
+                <td>Vestibulum</td>
+                <td>lacinia</td>
+                <td>arcu</td>
+            </tr>
+            <tr>
+                <td>1,011</td>
+                <td>eget</td>
+                <td>nulla</td>
+                <td>Class</td>
+                <td>aptent</td>
+            </tr>
+            <tr>
+                <td>1,012</td>
+                <td>taciti</td>
+                <td>sociosqu</td>
+                <td>ad</td>
+                <td>litora</td>
+            </tr>
+            <tr>
+                <td>1,013</td>
+                <td>torquent</td>
+                <td>per</td>
+                <td>conubia</td>
+                <td>nostra</td>
+            </tr>
+            <tr>
+                <td>1,014</td>
+                <td>per</td>
+                <td>inceptos</td>
+                <td>himenaeos</td>
+                <td>Curabitur</td>
+            </tr>
+            <tr>
+                <td>1,015</td>
+                <td>sodales</td>
+                <td>ligula</td>
+                <td>in</td>
+                <td>libero</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 #end
 
 

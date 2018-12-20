@@ -1,84 +1,62 @@
 #@adminLayout()
 
 #define main()
-<div class="jfa-header-box" id="jfa-header-box">
-	<div class="jfa-crumbs" id="jfa-crumbs">
-		内容管理 / 博客管理
-	</div>
-	<div class="jfa-search-box"></div>
-	#include("/_view/_admin/common/_header_right.html")
-</div>
+<h3 class="page-header">=>博客管理<=</h3>
 
 ### 内容区域
-<div class="jfa-content-box" id="jfa-content-box">
-	<div class="jfa-content" id="jfa-content">
+#permission("/admin/blog/add")
+<a class="btn btn-primary btn-sm" href="/admin/blog/add">
+	<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>创建
+</a>
+#end
 
-		<div class="jfa-toolbar">
-			#permission("/admin/blog/add")
-			<a class="btn btn-primary btn-sm" href="/admin/blog/add">
-				<i class="fa fa-plus"></i>
-				创建
-			</a>
-			#end
-		</div>
-
-		<div class="jfa-table-box margin-top-30">
-			<table class="table table-bordered table-hover margin-bottom-10">
-				<thead>
-				<tr>
-					<th>id</th>
-					<th>标题</th>
-					<th>查看次数</th>
-					<th>创建时间</th>
-					<th>分类</th>
-					<th>标签</th>
-					<th>操作</th>
-				</tr>
-				</thead>
-				<tbody>
-				#for(x : blogPage.getList())
-				<tr>
-					<th scope="row">#(x.id)</th>
-					<td>
-						#if(x.id == 14)
-							<a href="/about">#(x.title)</a>
-						#else
-							<a href="/#(x.category)/detail/#(x.id)" target="_blank">#(x.title)</a>
-						#end
-					</td>
-					<td>#(x.clickCount)</td>
-					<td>#date(x.createAt)</td>
-					<td>#(x.category)</td>
-					<td>#(x.tagName??)</td>
-					<td class="jfa-operation-button">
-						#permission("/admin/blog/edit")
-						<a href="/admin/blog/edit?id=#(x.id)&p=#(blogPage.pageNumber)">
-							<i class="fa fa-pencil" title="修改"></i>
-						</a>
-						#end
-
-						#permission("/admin/blog/delete")
-						<a data-delete
-						   data-title="#escape(x.title)"
-						   data-action="/admin/blog/delete?id=#(x.id)">
-							<i class="fa fa-trash" title="删除"></i>
-						</a>
-						#end
-					</td>
-				</tr>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>id</th>
+			<th>标题</th>
+			<th>查看次数</th>
+			<th>创建时间</th>
+			<th>分类</th>
+			<th>标签</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		#for(x : blogPage.getList())
+		<tr>
+			<th scope="row">#(x.id)</th>
+			<td>
+				<a href="/article/#(x.id)" target="_blank">#(x.title)</a>
+			</td>
+			<td>#(x.clickCount)</td>
+			<td>#date(x.createAt)</td>
+			<td>#(x.category)</td>
+			<td>#(x.tagName??)</td>
+			<td class="jfa-operation-button">
+				#permission("/admin/blog/edit")
+				<a class="glyphicon glyphicon-pencil"
+				   title="修改"
+				   href="/admin/blog/edit?id=#(x.id)&p=#(blogPage.pageNumber)">
+				</a>
 				#end
-				</tbody>
-			</table>
 
-			<div>
-				#@adminPaginate(blogPage.pageNumber, blogPage.totalPage, "/admin/blog?p=")
-			</div>
-		</div>
-
-	</div><!-- END OF jfa-content -->
-</div><!-- END OF jfa-content-box -->
-
-<script type="text/javascript">
-</script>
+				#permission("/admin/blog/delete")
+				<a class="glyphicon glyphicon-remove"
+				   title="删除"
+				   data-delete
+				   data-title="#escape(x.title)"
+				   data-action="/admin/blog/delete?id=#(x.id)">
+					<i class="fa fa-trash" title="删除"></i>
+				</a>
+				#end
+			</td>
+		</tr>
+		#end
+	</tbody>
+</table>
+<div>
+	#@adminPaginate(blogPage.pageNumber, blogPage.totalPage, "/admin/blog?p=")
+</div>
 #end
 

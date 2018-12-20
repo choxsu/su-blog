@@ -1,95 +1,81 @@
 #@adminLayout()
 
 #define main()
-<div class="jfa-header-box" id="jfa-header-box">
-	<div class="jfa-crumbs" id="jfa-crumbs">
-		权限系统 / 账户管理
-	</div>
-	<div class="jfa-search-box"></div>
-	#include("/_view/_admin/common/_header_right.html")
-</div>
+<h3 class="page-header">=>账户管理<=</h3>
 
 ### 内容区域
-<div class="jfa-content-box" id="jfa-content-box">
-	<div class="jfa-content" id="jfa-content">
+#permission("/admin/account/add")
+<a class="btn btn-primary btn-sm" href="/admin/account/add">
+	<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>创建
+</a>
+#end
 
-		<div class="jfa-toolbar">
-			#permission("/admin/account/add")
-			<a class="btn btn-primary btn-sm" href="/admin/account/add">
-				<i class="fa fa-plus"></i>
-				创建
+<table class="table table-hover">
+	<thead>
+	<tr>
+		<th>id</th>
+		<th>昵称</th>
+		<th>用户名</th>
+		<th>注册时间</th>
+		<th>锁定</th>
+		<th>操作</th>
+	</tr>
+	</thead>
+	<tbody>
+	#for(x : accountPage.getList())
+	<tr>
+		<th scope="row">#(x.id)</th>
+		<td>#(x.nickName)</td>
+		<td>#(x.userName)</td>
+		<td>#date(x.createAt)</td>
+		<td>
+			#if(x.isStatusReg())
+			未激活
+			#else
+			<input data-id="#(x.id)"
+				   #if(x.isStatusReg()) disabled #end
+				   #if(x.isStatusLockId()) checked #end
+
+				   type="checkbox" class="mgc-switch mgc-tiny">
+			#end
+		</td>
+		<td class="jfa-operation-button">
+			#perm("/admin/account/edit")
+			<a class="glyphicon glyphicon-pencil"
+			   title="修改"
+			   href="/admin/account/edit?id=#(x.id)&p=#(accountPage.pageNumber)">
 			</a>
 			#end
-		</div>
 
-		<div class="jfa-table-box margin-top-30">
-			<table class="table table-bordered table-hover margin-bottom-10">
-				<thead>
-				<tr>
-					<th>id</th>
-					<th>昵称</th>
-					<th>用户名</th>
-					<th>注册时间</th>
-					<th>锁定</th>
-					<th>操作</th>
-				</tr>
-				</thead>
-				<tbody>
-				#for(x : accountPage.getList())
-				<tr>
-					<th scope="row">#(x.id)</th>
-					<td>#(x.nickName)</td>
-					<td>#(x.userName)</td>
-					<td>#date(x.createAt)</td>
-					<td>
-							#if(x.isStatusReg())
-								未激活
-							#else
-								<input data-id="#(x.id)"
-									   #if(x.isStatusReg()) disabled #end
-									   #if(x.isStatusLockId()) checked #end
+			#perm("/admin/account/del")
+			<a class="glyphicon glyphicon-remove"
+			   title="删除"
+			   data-delete
+			   data-title="#escape(x.userName)"
+			   data-action="/admin/account/del?id=#(x.id)">
+				<i class="fa fa-trash" title="删除"></i>
+			</a>
+			#end
 
-									   type="checkbox" class="mgc-switch mgc-tiny">
-							#end
-					</td>
-					<td class="jfa-operation-button">
-						#permission("/admin/account/edit")
-						<a href="/admin/account/edit?id=#(x.id)&p=#(accountPage.pageNumber)">
-							<i class="fa fa-pencil" title="修改"></i>
-						</a>
-						#end
+			#perm("/admin/account/assignRoles")
+			<a  class="glyphicon glyphicon-random"
+				title="分配角色"
+				href="/admin/account/assignRoles?id=#(x.id)">
+			</a>
+			#end
 
-						#permission("/admin/account/assignRoles")
-						<a href="/admin/account/assignRoles?id=#(x.id)">
-							<i class="fa fa-user" title="分配角色"></i>
-						</a>
-						#end
-
-						<a data-delete
-						   data-title="#escape(x.userName)"
-						   data-action="/admin/account/del?id=#(x.id)">
-							<i class="fa fa-trash" title="删除"></i>
-						</a>
-
-					</td>
-				</tr>
-				#end
-				</tbody>
-			</table>
-
-			<div>
-				#@adminPaginate(accountPage.pageNumber, accountPage.totalPage, "/admin/account?p=")
-			</div>
-		</div>
-
-	</div><!-- END OF jfa-content -->
-</div><!-- END OF jfa-content-box -->
-
+		</td>
+	</tr>
+	#end
+	</tbody>
+</table>
+<div>
+	#@adminPaginate(accountPage.pageNumber, accountPage.totalPage, "/admin/account?p=")
+</div>
 <script type="text/javascript">
 	$(document).ready(function() {
         initMagicInput(prepareAction);
 	});
-
 	function prepareAction($this, state) {
 		return {
 			url: state ? "/admin/account/lock" : "/admin/account/unlock",

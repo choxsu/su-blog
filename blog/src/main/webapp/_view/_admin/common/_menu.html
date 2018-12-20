@@ -1,46 +1,38 @@
-<a class="jfa-main-menu" href="/admin" home="true">
-    <i class="left-icon fa fa-dashboard"></i>
-    首页
-</a>
+<div class="col-sm-3 col-md-2 sidebar ">
+    <ul class="nav nav-sidebar">
+        <li><a href="/admin">Dashboard</span></a></li>
+    </ul>
 
+    <ul class="nav nav-sidebar">
+        #perm("/admin/blog")
+        <li><a href="/admin/blog">博客管理</a></li>
+        #end
 
-<a class="jfa-main-menu" home="false">
-    <i class="left-icon fa fa-file-o"></i>
-    后台管理
-    <i class="right-icon fa fa-angle-down fa-lg"></i>
-</a>
-<ul class="jfa-sub-menu">
+        #perm("/admin/blog/tag")
+        <li><a href="/admin/blog/tag">标签管理</a></li>
+        #end
 
-    #permission("/admin/blog")
-    <li><a href="/admin/blog">博客管理</a></li>
-    #end
+    </ul>
+    <ul class="nav nav-sidebar">
+        #perm("/admin/account")
+        <li><a href="/admin/account">账户管理</a></li>
+        #end
 
-    #permission("/admin/blog/tag")
-    <li><a href="/admin/blog/tag">标签管理</a></li>
-    #end
-</ul>
+        #perm("/admin/role")
+        <li><a href="/admin/role">角色管理</a></li>
+        #end
 
-<a class="jfa-main-menu" home="false">
-    <i class="left-icon fa fa-user-o"></i>
-    权限系统
-    <i class="right-icon fa fa-angle-down fa-lg"></i>
-</a>
+        #perm("/admin/permission")
+        <li><a href="/admin/permission">权限管理</a></li>
+        #end
 
-<ul class="jfa-sub-menu">
-    #permission("/admin/account")
-    <li><a href="/admin/account">账户管理</a></li>
-    #end
-
-    #permission("/admin/role")
-    <li><a href="/admin/role">角色管理</a></li>
-    #end
-
-    #permission("/admin/permission")
-    <li><a href="/admin/permission">权限管理</a></li>
-    #end
-
-    #permission("/admin/visitor")
-    <li><a href="/admin/visitor">访问管理</a></li>
-    #end
-</ul>
-
+        #perm("/admin/visitor")
+        <li><a href="/admin/visitor">PV记录</a></li>
+        #end
+    </ul>
+    <ul class="nav nav-sidebar">
+        <li><a href="#">字典管理</a></li>
+        <li><a href="#">Druid数据库监控</a></li>
+        <li><a href="#">Enhancer缓存</a></li>
+    </ul>
+</div>

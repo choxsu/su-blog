@@ -18,7 +18,7 @@ public class VisitorAdminController extends BaseController {
 
         Page<Visitor> visitorPage = visitorAdminService
                 .paginateOrderBy(getParaToInt("p", 1),
-                        getParaToInt("size", 20),
+                        getParaToInt("size", 15),
                         "*, method as md",
                         "requestTime",
                         SortEnum.DESC);
