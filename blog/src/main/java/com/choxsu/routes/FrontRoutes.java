@@ -1,6 +1,6 @@
 
 
-package com.choxsu.common.routes;
+package com.choxsu.routes;
 
 import com.choxsu.front.index.ArticleController;
 import com.choxsu.front.tags.TagsController;

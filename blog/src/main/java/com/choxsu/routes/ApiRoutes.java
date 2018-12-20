@@ -1,4 +1,4 @@
-package com.choxsu.common.routes;
+package com.choxsu.routes;
 
 import com.choxsu.api.blog.ApiBlogController;
 import com.jfinal.config.Routes;

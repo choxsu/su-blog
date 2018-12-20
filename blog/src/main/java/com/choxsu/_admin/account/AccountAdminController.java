@@ -5,8 +5,6 @@ import com.choxsu._admin.role.RoleAdminService;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.Role;
-import com.choxsu.kit.IpKit;
-import com.jfinal.aop.Before;
 import com.jfinal.aop.Inject;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Page;
@@ -35,16 +33,6 @@ public class AccountAdminController extends BaseController {
         render("add.html");
     }
 
-    /**
-     * 提交保存
-     */
-    @Before(AccountSaveValidator.class)
-    public void save() {
-        String ip = IpKit.getRealIp(getRequest());
-        Ret ret = srv.save(getPara("userName"), getPara("password"), getPara("nickName"), ip);
-        renderJson(ret);
-    }
-
     public void del() {
         Ret ret = srv.delete(getParaToInt("id"));
         renderJson(ret);
@@ -58,16 +46,6 @@ public class AccountAdminController extends BaseController {
         render("edit.html");
     }
 
-
-    /**
-     * 提交修改
-     */
-    @Before(AccountUpdateValidator.class)
-    public void update() {
-        Account account = getBean(Account.class);
-        Ret ret = srv.update(account);
-        renderJson(ret);
-    }
 
     /**
      * 账户锁定
