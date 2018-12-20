@@ -51,14 +51,11 @@ public class UrlSeoHandler extends Handler {
         Action action = JFinal.me().getAction(target, urlPara);
         if (action != null) {
             String methodName = action.getMethodName();
-            if ("index".equals(methodName)) {
+            String controllerKey = action.getControllerKey();
+            // 只有当路由 为 /article 时候才做 "detail" 的路由修改
+            if ("index".equals(methodName) && controllerKey.equals("/article")) {
                 if (StrKit.notBlank(urlPara[0])) {
-                    String controllerKey = action.getControllerKey();
-                    if (controllerKey.equalsIgnoreCase("/")) {
-                        target = detailMethodWithSlash + urlPara[0];
-                    } else {
-                        target = controllerKey + detailMethodWithSlash + urlPara[0];
-                    }
+                    target = controllerKey + detailMethodWithSlash + urlPara[0];
                 }
             }
             // 不允许 "detail" 出现在 url 中，映射到 detail() 方法的 url 仅使用 "/project/123" 这种格式
