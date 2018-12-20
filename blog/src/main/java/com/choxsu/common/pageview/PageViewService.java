@@ -48,20 +48,9 @@ public class PageViewService {
     }
 
     void updateToDataBase() {
-        List urls = CacheKit.getKeys(cacheName);
-        List<Visitor> list = new ArrayList<>();
-        for (Object urlKey : urls) {
-            Visitor visitor = CacheKit.get(cacheName, urlKey.toString());
-            if (visitor == null) {
-                continue;
-            }
-            String key = visitor.getUrl();
-            list.add(visitor);
-            // 获取以后立即清除，因为获取后的值将累加到数据表中。或许放在 for 循环的最后一行为好
-            CacheKit.remove(cacheName, key);
-        }
-        int[] ints = Db.batchSave(list, 100);
-        LogKit.info("请求记录保存成功记录数：" + ints.length);
+        this.updatePvDataBase();
+        this.updateArticleClickToDataBase();
+
     }
 
     /**
@@ -92,7 +81,30 @@ public class PageViewService {
 
     }
 
-    void updateArticleClickToDataBase() {
+    /**
+     * 更新页面浏览记录到数据库
+     */
+    private void updatePvDataBase() {
+        List urls = CacheKit.getKeys(cacheName);
+        List<Visitor> list = new ArrayList<>();
+        for (Object urlKey : urls) {
+            Visitor visitor = CacheKit.get(cacheName, urlKey.toString());
+            if (visitor == null) {
+                continue;
+            }
+            String key = visitor.getUrl();
+            list.add(visitor);
+            // 获取以后立即清除，因为获取后的值将累加到数据表中。或许放在 for 循环的最后一行为好
+            CacheKit.remove(cacheName, key);
+        }
+        int[] ints = Db.batchSave(list, 100);
+        LogKit.info("请求记录保存成功记录数：" + ints.length);
+
+    }
+    /**
+     * 更新帖子详情查看次数到数据库，数据本地1分钟更新一次，正式服10分钟更新一次
+     */
+    private void updateArticleClickToDataBase() {
         List ids = CacheKit.getKeys(cacheClickName);
         for (Object id : ids) {
             Integer visitCount = CacheKit.get(cacheClickName, id);

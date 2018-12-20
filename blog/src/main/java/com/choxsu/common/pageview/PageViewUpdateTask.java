@@ -27,6 +27,5 @@ public class PageViewUpdateTask implements ITask {
     private void doUpdate() {
         // 如果是分布式环境下面，可以在这里加上分布式锁，防止数据的错误
         pageViewService.updateToDataBase();
-        pageViewService.updateArticleClickToDataBase();
     }
 }
