@@ -3,7 +3,7 @@ package com.choxsu;
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
 import com.choxsu._admin.auth.AdminAuthKit;
-import com.choxsu._admin.common.AdminRoutes;
+import com.choxsu.routes.AdminRoutes;
 import com.choxsu._admin.permission.PermissionDirective;
 import com.choxsu._admin.role.RoleDirective;
 import com.choxsu.common.entity._MappingKit;
