@@ -6,13 +6,20 @@
     <li class="active">账户管理</li>
 </ul>
 ### 内容区域
-#permission("/admin/account/add")
 <div class="page-header">
+    #perm("/admin/account/add")
     <a class="btn btn-primary btn-sm" href="/admin/account/add">
         <span class="fa fa-plus" aria-hidden="true">&nbsp;</span>创建
     </a>
+    #end
+
+    #perm("/admin/account/showAdminList")
+    <a class="btn btn-primary btn-sm" href="/admin/account/showAdminList">
+        <span class="fa fa-user" aria-hidden="true">&nbsp;</span>查看后台账户
+    </a>
+    #end
 </div>
-#end
+
 <div class="table-responsive">
     <table class="table table-hover table-striped ">
         <thead>

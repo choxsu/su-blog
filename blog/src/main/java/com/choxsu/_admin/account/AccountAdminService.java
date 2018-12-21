@@ -210,4 +210,17 @@ public class AccountAdminService {
         return Ret.fail().set("msg", "删除失败");
 
     }
+
+    /**
+     * 获取 "后台账户/管理员" 列表，在 account_role 表中存在的账户(被分配过角色的账户)
+     * 被定义为 "后台账户/管理员"
+     *
+     * 该功能便于查看后台都有哪些账户被分配了角色，在对账户误操作分配了角色时，也便于取消角色分配
+     */
+    public List<Record> getAdminList() {
+        String sql = "select a.nickName, a.userName, ar.*, r.name from account a, account_role ar, role r " +
+                "where a.id = ar.accountId and ar.roleId = r.id " +
+                "order by roleId asc";
+        return Db.find(sql);
+    }
 }

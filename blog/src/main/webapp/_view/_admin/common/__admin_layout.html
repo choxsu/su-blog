@@ -52,7 +52,8 @@
     <![endif]-->
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<!--navbar-inverse 黑色主题 navbar-default 默认主题-->
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
@@ -68,19 +69,19 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">文档</a></li>
                 <li><a href="#">设置</a></li>
-                <li><a href="#">系统配置</a></li>
+                <li><a href="#">更改密码</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">#(loginAccount.nickName??) <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/" target="_blank">前台</a></li>
+                        <li><a href="/" target="_blank">前台页面</a></li>
                         <li role="separator"><a href="/logout">退出</a></li>
                     </ul>
                 </li>
             </ul>
-            <form class="navbar-form navbar-right">
+          <!--  <form class="navbar-form navbar-right">
                 <input type="text" class="form-control" placeholder="Search...">
-            </form>
+            </form>-->
         </div>
     </div>
 </nav>

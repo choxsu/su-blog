@@ -30,29 +30,31 @@
         <input class="form-control"
                name="captcha" placeholder="验证码" maxlength="4"
                type="text" autocomplete="off" required>
-            <img title="点击刷新" class="J_codeimg captcha" src="/login/captcha" onclick="updateCaptcha();">
+        <img title="点击刷新" class="J_codeimg captcha" src="/login/captcha" onclick="updateCaptcha();">
     </div>
-    <button type="submit" class="btn btn-primary">登录</button>
+    <button id="login_submit" type="submit" class="btn btn-primary" data-loading-text="登录中...">登录</button>
 </form>
 <script type="text/javascript" src="/assets/new/js/jquery.min-v1.11.3.js"></script>
 <script type="text/javascript" src="/assets/new/js/jquery.form.min.js"></script>
 <script type="text/javascript" src="/assets/new/js/layer/layer.js"></script>
 <script type="text/javascript" src="/assets/new/js/jsencrypt.min.js"></script>
+<script type="text/javascript" src="/assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 <script type="text/javascript">
 
-    let publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDeniVaKAmFtYLYlkY2u8+r3Uzpxy6A/oNZLSLGVKQZpgwtosHzsQ93KB+i4JFmRvq6Ud9xEilqWb3NUvG6zvJIdemX7WiM9cc/+T7GeLEwIrZJPgmqn7vGHkwA+3FWiXA+H/NpJIOp7VFiAKXtv919h1OcwoS9lsyfpB1CMPiwEQIDAQAB";
-    $("#login_form").submit(function () {
-        setPassToBlank();
-    });
+    //加密公私
+    var publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDeniVaKAmFtYLYlkY2u8+r3Uzpxy6A/oNZLSLGVKQZpgwtosHzsQ93KB+i4JFmRvq6Ud9xEilqWb3NUvG6zvJIdemX7WiM9cc/+T7GeLEwIrZJPgmqn7vGHkwA+3FWiXA+H/NpJIOp7VFiAKXtv919h1OcwoS9lsyfpB1CMPiwEQIDAQAB";
+
+    /* $("#login_form").submit(function () {
+         setPassToBlank();
+     });*/
 
     function setPassToBlank() {
         $("#_password").val('');
     }
 
     $(document).ready(function () {
-
         $("#login_form").ajaxForm({
             dataType: "json"
             , success: function (ret) {
@@ -79,7 +81,6 @@
                     );
                     return;
                 }
-
                 // Validator 层验证失败
                 if (ret.userNameMsg) {
                     layer.msg(ret.userNameMsg);
@@ -92,13 +93,17 @@
                 if (ret.captchaMsg) {
                     layer.msg(ret.captchaMsg);
                     updateCaptcha();    // captcha 被验证过以后会立即失效，更新之
-                    return;
                 }
             }
             , error: function (ret) {
             }              // ret.status != 200 时回调
             , complete: function (ret) {
+                setPassToBlank();
+                $('#login_submit').button('reset')
             }       // 无论是 success 还是 error，最终都会被回调
+            , beforeSubmit: function () {
+                $('#login_submit').button('loading')
+            }
         });
     });
 
@@ -108,11 +113,11 @@
     }
 
     function setEncPwd($this) {
-        let $1 = $($this);
-        let words = $1.val();
-        let crypt = new JSEncrypt();
+        var $1 = $($this);
+        var words = $1.val();
+        var crypt = new JSEncrypt();
         crypt.setPublicKey(publicKey);
-        let enc = crypt.encrypt(words);
+        var enc = crypt.encrypt(words);
         $("#_encryptPwd").val(enc);
     }
 

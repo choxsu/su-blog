@@ -1,5 +1,5 @@
 
-<form id="myArticleForm" action=#(action) method="post">
+<form id="myArticleForm" class="col-md-4" action=#(action) method="post">
 	#if(tag.id??)
 		<input type="hidden" name="tag.id" value="#(tag.id)" />
 	#end
@@ -10,4 +10,3 @@
 	</div>
 	<input class="btn btn-primary" type="submit" value="提交" />
 </form>
-

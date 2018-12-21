@@ -7,61 +7,33 @@
     <li class="active">增加</li>
 </ul>
 ### 内容区域
-<div class="jfa-content-box" id="jfa-content-box">
-    <div class="jfa-content" id="jfa-content">
-
-        <form class="form-horizontal clearfix margin-top-30" id="myArticleForm" action="/admin/account/save"
-              method="post">
-
-            <div class="form-group">
-                <label class="col-sm-4 control-label">昵称</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" name="nickName" placeholder="请填写昵称">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label">邮箱</label>
-                <div class="col-sm-8">
-                    <input type="email" class="form-control" name="userName" placeholder="填写合法的 email">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label">密码</label>
-                <div class="col-sm-8">
-                    <input type="password" minlength="6" class="form-control" name="password" placeholder="请填写密码"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-4 col-sm-8">
-                    <input class="btn btn-primary" type="submit" value="提交"/>
-                </div>
-            </div>
-        </form>
-    </div><!-- END OF jfa-content -->
-</div><!-- END OF jfa-content-box -->
+<form id="submit_form" class="col-md-4" action="/admin/account/save" method="post">
+    <div class="form-group">
+        <label>昵称</label>
+        <input type="text" class="form-control" name="account.nickName" placeholder="请填写昵称">
+    </div>
+    <div class="form-group">
+        <label>邮箱</label>
+        <input type="email" class="form-control" name="account.userName" placeholder="填写合法的 email">
+    </div>
+    <div class="form-group">
+        <label>密码</label>
+        <input type="password" minlength="6" class="form-control" name="account.password" placeholder="请填写密码"/>
+    </div>
+    <div class="form-group">
+        <input class="btn btn-primary" type="submit" value="提交" />
+    </div>
+</form>
 
 <style type="text/css">
-    #myArticleForm {
-        width: 500px;
-    }
-
-    .form-group {
+    form .form-group {
         margin-bottom: 25px;
-    }
-
-    .jfa-content label {
-        line-height: 1;
-        vertical-align: baseline;
-        color: #23527c;
-        font-size: 20px;
-        font-weight: normal;
-        margin-bottom: 8px;;
     }
 </style>
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#myArticleForm").ajaxForm({
+        $("#submit_form").ajaxForm({
             dataType: "json"
             , beforeSubmit: function (formData, jqForm, options) {
             }

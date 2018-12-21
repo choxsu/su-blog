@@ -5,9 +5,12 @@ import com.choxsu._admin.role.RoleAdminService;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.Role;
+import com.choxsu.kit.IpKit;
+import com.jfinal.aop.Before;
 import com.jfinal.aop.Inject;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 
 import java.util.List;
 
@@ -33,6 +36,13 @@ public class AccountAdminController extends BaseController {
         render("add.html");
     }
 
+    @Before(AccountSaveUpdateValidator.class)
+    public void save() {
+        Account account = getBean(Account.class);
+        Ret ret = srv.save(account.getUserName(), account.getPassword(), account.getNickName(), IpKit.getRealIp(getRequest()));
+        renderJson(ret);
+    }
+
     public void del() {
         Ret ret = srv.delete(getParaToInt("id"));
         renderJson(ret);
@@ -44,6 +54,16 @@ public class AccountAdminController extends BaseController {
         Account account = srv.findById(getParaToInt("id"));
         setAttr("account", account);
         render("edit.html");
+    }
+
+    /**
+     * 提交修改
+     */
+    @Before(AccountSaveUpdateValidator.class)
+    public void update() {
+        Account account = getBean(Account.class);
+        Ret ret = srv.update(account);
+        renderJson(ret);
     }
 
 
@@ -90,6 +110,19 @@ public class AccountAdminController extends BaseController {
     public void deleteRole() {
         Ret ret = srv.deleteRole(getParaToInt("accountId"), getParaToInt("roleId"));
         renderJson(ret);
+    }
+
+
+    /**
+     * 显示 "后台账户/管理员" 列表，在 account_role 表中存在的账户(被分配过角色的账户)
+     * 被定义为 "后台账户/管理员"
+     *
+     * 该功能便于查看后台都有哪些账户被分配了角色，在对账户误操作分配了角色时，也便于取消角色分配
+     */
+    public void showAdminList() {
+        List<Record> adminList = srv.getAdminList();
+        setAttr("adminList", adminList);
+        render("admin_list.html");
     }
 
 }
