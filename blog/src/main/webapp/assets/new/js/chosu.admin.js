@@ -55,12 +55,16 @@ var Admin = {
     },
     selectLeftTab: function () {
         var pathname = location.pathname;
-        var ps = pathname.split("/");
         $(".nav-sidebar li a[href]").each(function (index, element) {
             var href = $(element).attr("href");
-            if (pathname === href) {
+            if (pathname === '/admin' || pathname === '/admin/'){
+                $(".nav-sidebar li a[home]").parent().addClass("active");
+                return false;
+            }
+            if (href !== '/admin' && pathname.indexOf(href) >= 0) {
                 var currentMenu = $(".nav-sidebar li a[href='" + href + "']");
                 currentMenu.parent().addClass("active");
+                return false;
             }
         })
     },
