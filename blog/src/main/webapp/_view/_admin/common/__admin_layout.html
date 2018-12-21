@@ -3,12 +3,13 @@
 否则调用 doAdminLayout 函数
 --#
 #define adminLayout()
-#if(isPjax)
-#@main()
-#else
-#@doAdminLayout()
+    #if(isPjax)
+        #@main()
+    #else
+        #@doAdminLayout()
+    #end
 #end
-#end
+
 #define doAdminLayout()
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -26,6 +27,8 @@
     <link href="/assets/new/dashboard.css" rel="stylesheet"/>
     <!-- fa fa-icon-->
     <link href="/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <!-- nprogress css-->
+    <link href="/assets/nprogress/nprogress.css" rel="stylesheet"/>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="/assets/new/js/jquery.min-v1.11.3.js"></script>
@@ -34,8 +37,9 @@
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <!-- nprogress js-->
+    <script src="/assets/nprogress/nprogress.js"></script>
     <script src="/assets/new/js/layer/layer.js"></script>
-
     <!-- 后台管理 js -->
     <script src="/assets/new/js/chosu.admin.js"></script>
 
@@ -83,7 +87,7 @@
 <div class="container-fluid">
     <div class="row">
         #include("_menu.html")
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div id="pjax-container"  class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             #@main()
         </div>
     </div>

@@ -69,7 +69,7 @@
                 if (ret.state == "ok") {
                     location.href = "/admin/account?p=#(p ?? 1)";
                 } else {
-                    showFailMsg(ret.msg);
+                    ShowUtil.showFailMsg(ret.msg);
                 }
             }
             , error: function (ret) {

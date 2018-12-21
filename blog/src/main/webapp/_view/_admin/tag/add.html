@@ -20,7 +20,7 @@
 				if (ret.state == "ok") {
 					location.href = "/admin/blog/tag";
 				} else {
-					showFailMsg(ret.msg);
+					ShowUtil.showFailMsg(ret.msg);
 				}
 			}
 			, error: function(ret) {alert(ret.statusText);}

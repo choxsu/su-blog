@@ -41,7 +41,7 @@
 				if (ret.state == "ok") {
 					location.href = "/admin/role";
 				} else {
-					showFailMsg(ret.msg);
+					ShowUtil.showFailMsg(ret.msg);
 				}
 			}
 			, error: function(ret) {alert(ret.statusText);}

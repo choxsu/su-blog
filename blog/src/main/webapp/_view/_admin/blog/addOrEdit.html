@@ -1,7 +1,7 @@
 #@adminLayout()
 
 #define main()
-<link rel="stylesheet" href="/assets/editor_md/css/editormd.css"/>
+<!--<link rel="stylesheet" href="/assets/editor_md/css/editormd.css"/>-->
 
 <ul class="breadcrumb">
     <li><a href="/admin">首页</a></li>
@@ -75,7 +75,7 @@
         margin-bottom: 8px;;
     }
 </style>
-<script src="/assets/editor_md/editormd.js"></script>
+<!--<script src="/assets/editor_md/editormd.js"></script>-->
 <script type="text/javascript">
 
     var content = $("textarea[name = 'blog.markedContent']").text();
@@ -115,7 +115,7 @@
                 if (ret.state == "ok") {
                     location.href = "/admin/blog?p=#(p ?? 1)";
                 } else {
-                    showFailMsg(ret.msg);
+                    ShowUtil.showFailMsg(ret.msg);
                 }
             }
             , error: function (ret) {
