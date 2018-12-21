@@ -7,9 +7,9 @@
 </ul>
 
 ### 内容区域
-#permission("/admin/blog/tag/add")
+#permission("/admin/tag/add")
 <div class="page-header">
-    <a class="btn btn-primary btn-sm" href="/admin/blog/tag/add">
+    <a class="btn btn-primary btn-sm" href="/admin/tag/add">
         <span class="fa fa-plus" aria-hidden="true">&nbsp;</span>创建
     </a>
 </div>
@@ -29,16 +29,16 @@
             <th scope="row">#(x.id)</th>
             <td>#(x.name)</td>
             <td>
-                #permission("/admin/blog/tag/edit")
-                <a href="/admin/blog/tag/edit?id=#(x.id)&p=#(blogTagPage.pageNumber)">
+                #permission("/admin/tag/edit")
+                <a href="/admin/tag/edit?id=#(x.id)&p=#(blogTagPage.pageNumber)">
                     <i class="fa fa-edit" title="修改"></i>
                 </a>
                 #end
 
-                #permission("/admin/blog/tag/delete")
+                #permission("/admin/tag/delete")
                 <a data-delete
                    data-title="#escape(x.name)"
-                   data-action="/admin/blog/tag/delete?id=#(x.id)">
+                   data-action="/admin/tag/delete?id=#(x.id)">
                     <i class="fa fa-trash" title="删除"></i>
                 </a>
                 #end
@@ -47,7 +47,7 @@
         #end
         </tbody>
     </table>
-    #@adminPaginate(blogTagPage.pageNumber, blogTagPage.totalPage, "/admin/blog/tag?p=")
+    #@adminPaginate(blogTagPage.pageNumber, blogTagPage.totalPage, "/admin/tag?p=")
 </div>
 #end
 

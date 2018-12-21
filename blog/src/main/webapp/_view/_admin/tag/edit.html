@@ -3,12 +3,12 @@
 #define main()
 <ul class="breadcrumb">
 	<li><a href="/admin">首页</a></li>
-	<li><a href="/admin/blog/tag">标签管理</a></li>
+	<li><a href="/admin/tag">标签管理</a></li>
 	<li class="active">修改</li>
 </ul>
 ### 内容区域
 <div>
-	#include("_form.html", action="/admin/blog/tag/update")
+	#include("_form.html", action="/admin/tag/update")
 </div>
 
 <script type="text/javascript">
@@ -18,7 +18,7 @@
 			, beforeSubmit: function(formData, jqForm, options) {}
 			, success: function(ret) {
 				if (ret.state == "ok") {
-					location.href = "/admin/blog/tag?p=#(p ?? 1)";
+					location.href = "/admin/tag?p=#(p ?? 1)";
 				} else {
 					ShowUtil.showFailMsg(ret.msg);
 				}

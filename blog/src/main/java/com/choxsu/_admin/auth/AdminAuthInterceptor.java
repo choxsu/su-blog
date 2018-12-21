@@ -22,7 +22,7 @@ public class AdminAuthInterceptor implements Interceptor {
      */
     private static final ThreadLocal<Account> threadLocal = new ThreadLocal<>();
 
-    private static final String loginActionKey = "/admin/login";
+    private static final String loginActionKey = "/login";
 
     public static Account getThreadLocalAccount() {
         return threadLocal.get();

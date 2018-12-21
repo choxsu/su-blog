@@ -11,7 +11,7 @@
     <link href="/assets/new/login/login.css" rel="stylesheet" type="text/css">
 </head>
 <body class="text-center">
-<form id="login_form" class="form-signin" action="/admin/login/doLogin?returnUrl=#(returnUrl)" method="post">
+<form id="login_form" class="form-signin" action="/login/doLogin?returnUrl=#(returnUrl)" method="post">
     <img class="mb-4" src="/images/c.jpg" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">请登录</h1>
     <div class="form-group">
@@ -30,7 +30,7 @@
         <input class="form-control"
                name="captcha" placeholder="验证码" maxlength="4"
                type="text" autocomplete="off" required>
-            <img title="点击刷新" class="J_codeimg captcha" src="/admin/login/captcha" onclick="updateCaptcha();">
+            <img title="点击刷新" class="J_codeimg captcha" src="/login/captcha" onclick="updateCaptcha();">
     </div>
     <button type="submit" class="btn btn-primary">登录</button>
 </form>
@@ -103,7 +103,7 @@
     });
 
     function updateCaptcha() {
-        $(".J_codeimg").attr("src", "/admin/login/captcha?v=" + Math.random());
+        $(".J_codeimg").attr("src", "/login/captcha?v=" + Math.random());
         $("#captchaInput").val("");
     }
 

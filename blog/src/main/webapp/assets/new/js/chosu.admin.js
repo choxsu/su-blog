@@ -58,22 +58,11 @@ var Admin = {
         var ps = pathname.split("/");
         $(".nav-sidebar li a[href]").each(function (index, element) {
             var href = $(element).attr("href");
-
             if (pathname === href) {
                 var currentMenu = $(".nav-sidebar li a[href='" + href + "']");
                 currentMenu.parent().addClass("active");
             }
         })
-        /*var as = $(".nav-sidebar li a[href]");
-        for (var i = 0; i < as.length; i++) {
-            var a = as[i];
-            var href = $(a).attr("href");
-            if (pathname === href && pathname.indexOf(href) !== -1) {
-                $(a).parent().addClass("active");
-            } else {
-                $(a).parent().removeClass("active");
-            }
-        }*/
     },
     sendPjax: function (url, container, extData) {
         $.pjax({
@@ -143,6 +132,12 @@ $(document).ready(function () {
     $(".nav-sidebar li a").bind("click", Menu.clickMenu);
     // table 操作栏按钮绑定 click 事件，动态添加的元素必须使用 $(...).on(...) 才能绑定
     $('#pjax-container').on("click", "a[data-delete]", Admin.deleteArticle);
+    // pjax timeout 配置
+    $.pjax.defaults.timeout = 5000;
+
+    // data-pjax 属性与 a 标签组合选择器绑定 pjax，例如分页链接、操作按钮
+    $(document).pjax('[data-pjax] a, a[data-pjax]', '#pjax-container');
+
     // 进度条效果
     $(document).on('pjax:start', function () {
         Admin.nprogressStart()
@@ -164,7 +159,6 @@ var Magic = {
 
     initMagicInput: function (prepareAction) {
         var magicInput = $("input.mgc-switch,input.mgc");
-
         // 锁定开关绑定事件
         magicInput.on("click", function (event) {
             var $this = $(event.target);	// 或者 $(this)

@@ -32,10 +32,11 @@ public class AdminRoutes extends Routes {
 
         setBaseViewPath("/_view/_admin");
 
+        add("/login", AdminLoginController.class, "/login");
+
         add("/admin", IndexAdminController.class, "/index");
-        add("/admin/login", AdminLoginController.class, "/login");
         add("/admin/blog", AdminBlogController.class, "/blog");
-        add("/admin/blog/tag", AdminTagController.class, "/tag");
+        add("/admin/tag", AdminTagController.class, "/tag");
         add("/admin/account", AccountAdminController.class, "/account");
         add("/admin/role", RoleAdminController.class, "/role");
         add("/admin/permission", PermissionAdminController.class, "/permission");
