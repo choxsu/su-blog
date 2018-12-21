@@ -1,11 +1,16 @@
 /**
  * 存放当前页面环境变量
+ * @type {{ueditor: null, deleteTarget: null}}
  */
 var env = {
     ueditor: null,
     deleteTarget: null
 };
 
+/**
+ * 显示工具
+ * @type {{showAjaxActionMsg: ShowUtil.showAjaxActionMsg, showFailMsg: ShowUtil.showFailMsg}}
+ */
 var ShowUtil = {
     showFailMsg: function (msg, callback) {
         layer.msg(
@@ -45,7 +50,10 @@ var ShowUtil = {
     }
 
 };
-
+/**
+ * 后台相关业务
+ * @type {{sendPjax: Admin.sendPjax, nprogressStart: Admin.nprogressStart, nprogressDone: Admin.nprogressDone, ajaxAction: Admin.ajaxAction, confirmAjaxAction: Admin.confirmAjaxAction, selectLeftTab: Admin.selectLeftTab, deleteArticle: Admin.deleteArticle}}
+ */
 var Admin = {
     nprogressStart: function () {
         NProgress.configure({showSpinner: false}).start();
@@ -117,6 +125,10 @@ var Admin = {
     },
 };
 
+/**
+ * 菜单业务处理
+ * @type {{clickMenu: Menu.clickMenu}}
+ */
 var Menu = {
     clickMenu: function (event) {
         event.preventDefault();	// 取代 return false 防止页面跳转
@@ -127,38 +139,12 @@ var Menu = {
         $(".nav-sidebar li").removeClass("active");
         $this.parent().addClass("active");
     }
-}
+};
 
-
-$(document).ready(function () {
-    Admin.nprogressStart();
-    // 绑定首页菜单事件
-    $(".nav-sidebar li a").bind("click", Menu.clickMenu);
-    // table 操作栏按钮绑定 click 事件，动态添加的元素必须使用 $(...).on(...) 才能绑定
-    $('#pjax-container').on("click", "a[data-delete]", Admin.deleteArticle);
-    // pjax timeout 配置
-    $.pjax.defaults.timeout = 5000;
-
-    // data-pjax 属性与 a 标签组合选择器绑定 pjax，例如分页链接、操作按钮
-    $(document).pjax('[data-pjax] a, a[data-pjax]', '#pjax-container');
-
-    // 进度条效果
-    $(document).on('pjax:start', function () {
-        Admin.nprogressStart()
-    });
-    $(document).on('pjax:end', function () {
-        Admin.nprogressDone()
-    });
-    //页面加载完成关闭进度条
-    $(window).load(function () {
-        Admin.nprogressDone();
-    });
-
-    //选中当前菜单
-    Admin.selectLeftTab();
-});
-
-
+/**
+ * 状态图标业务
+ * @type {{resetMagicInput: Magic.resetMagicInput, initMagicInput: Magic.initMagicInput}}
+ */
 var Magic = {
 
     initMagicInput: function (prepareAction) {
@@ -192,4 +178,46 @@ var Magic = {
         checkbox.checked = !checkbox.checked;
     }
 };
+
+
+/**
+ * 密码业务处理
+ * @type {{showPage: PasswordMs.showPage}}
+ */
+var PasswordMs = {
+    showPage: function () {
+        console.log("组件寻找中...")
+    }
+};
+
+$(document).ready(function () {
+    Admin.nprogressStart();
+    // 绑定首页菜单事件
+    $(".nav-sidebar li a").bind("click", Menu.clickMenu);
+    // table 操作栏按钮绑定 click 事件，动态添加的元素必须使用 $(...).on(...) 才能绑定
+    $('#pjax-container').on("click", "a[data-delete]", Admin.deleteArticle);
+    // pjax timeout 配置
+    $.pjax.defaults.timeout = 5000;
+
+    // data-pjax 属性与 a 标签组合选择器绑定 pjax，例如分页链接、操作按钮
+    $(document).pjax('[data-pjax] a, a[data-pjax]', '#pjax-container');
+
+    // 进度条效果
+    $(document).on('pjax:start', function () {
+        Admin.nprogressStart()
+    });
+    $(document).on('pjax:end', function () {
+        Admin.nprogressDone()
+    });
+    //页面加载完成关闭进度条
+    $(window).load(function () {
+        Admin.nprogressDone();
+    });
+
+    //选中当前菜单
+    Admin.selectLeftTab();
+    //更改密码事件绑定
+    $(".update-password").bind("click", PasswordMs.showPage);
+});
+
 
