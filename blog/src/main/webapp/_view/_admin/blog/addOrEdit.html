@@ -2,7 +2,12 @@
 
 #define main()
 <link rel="stylesheet" href="/assets/editor_md/css/editormd.css"/>
-<h3 class="page-header">=><a href="/admin/blog">博客管理</a> / #(blog.id?? == null ? '创建' : '修改')<=</h3>
+
+<ul class="breadcrumb">
+    <li><a href="/admin">首页</a></li>
+    <li><a href="/admin/blog">文章管理</a></li>
+    <li class="active">#(blog.id?? == null ? '创建' : '修改')</li>
+</ul>
 
 ### 内容区域
 <form id="myArticleForm"

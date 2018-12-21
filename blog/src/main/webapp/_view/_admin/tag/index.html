@@ -1,51 +1,53 @@
 #@adminLayout()
 
 #define main()
-<h3 class="page-header">=>标签管理<=</h3>
+<ul class="breadcrumb">
+    <li><a href="/admin">首页</a></li>
+    <li class="active">标签管理</li>
+</ul>
 
 ### 内容区域
 #permission("/admin/blog/tag/add")
-<a class="btn btn-primary btn-sm" href="/admin/blog/tag/add">
-	<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>创建
-</a>
+<div class="page-header">
+    <a class="btn btn-primary btn-sm" href="/admin/blog/tag/add">
+        <span class="fa fa-plus" aria-hidden="true">&nbsp;</span>创建
+    </a>
+</div>
 #end
+<div class="table-responsive">
+    <table class="table table-hover table-striped ">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>名称</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        #for(x : blogTagPage.getList())
+        <tr>
+            <th scope="row">#(x.id)</th>
+            <td>#(x.name)</td>
+            <td>
+                #permission("/admin/blog/tag/edit")
+                <a href="/admin/blog/tag/edit?id=#(x.id)&p=#(blogTagPage.pageNumber)">
+                    <i class="fa fa-edit" title="修改"></i>
+                </a>
+                #end
 
-<table class="table table-hover">
-	<thead>
-	<tr>
-		<th>id</th>
-		<th>名称</th>
-		<th>操作</th>
-	</tr>
-	</thead>
-	<tbody>
-	#for(x : blogTagPage.getList())
-	<tr>
-		<th scope="row">#(x.id)</th>
-		<td>#(x.name)</td>
-		<td class="jfa-operation-button">
-			#permission("/admin/blog/tag/edit")
-			<a class="glyphicon glyphicon-pencil"
-			   title="修改"
-			   href="/admin/blog/tag/edit?id=#(x.id)&p=#(blogTagPage.pageNumber)">
-			</a>
-			#end
-
-			#permission("/admin/blog/tag/delete")
-			<a class="glyphicon glyphicon-remove"
-			   title="删除"
-			   data-delete
-			   data-title="#escape(x.name)"
-			   data-action="/admin/blog/tag/delete?id=#(x.id)">
-			</a>
-			#end
-		</td>
-	</tr>
-	#end
-	</tbody>
-</table>
-<div>
-	#@adminPaginate(blogTagPage.pageNumber, blogTagPage.totalPage, "/admin/blog/tag?p=")
+                #permission("/admin/blog/tag/delete")
+                <a data-delete
+                   data-title="#escape(x.name)"
+                   data-action="/admin/blog/tag/delete?id=#(x.id)">
+                    <i class="fa fa-trash" title="删除"></i>
+                </a>
+                #end
+            </td>
+        </tr>
+        #end
+        </tbody>
+    </table>
+    #@adminPaginate(blogTagPage.pageNumber, blogTagPage.totalPage, "/admin/blog/tag?p=")
 </div>
 #end
 

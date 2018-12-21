@@ -1,60 +1,61 @@
 #@adminLayout()
 
 #define main()
-<h3 class="page-header">=>角色管理<=</h3>
-
+<ul class="breadcrumb">
+    <li><a href="/admin">首页</a></li>
+    <li class="active">角色管理</li>
+</ul>
 ### 内容区域
 #permission("/admin/role/add")
-<a class="btn btn-primary btn-sm" href="/admin/role/add">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>创建
-</a>
+<div class="page-header">
+    <a class="btn btn-primary btn-sm" href="/admin/role/add">
+        <span class="fa fa-plus" aria-hidden="true">&nbsp;</span></span>创建
+    </a>
+</div>
 #end
 
-<table class="table table-hover">
-    <thead>
-    <tr>
-        <th>id</th>
-        <th>名称</th>
-        <th>创建时间</th>
-        <th>操作</th>
-    </tr>
-    </thead>
-    <tbody>
-    #for(x : rolePage.getList())
-    <tr>
-        <th scope="row">#(x.id)</th>
-        <td>#(x.name)</td>
-        <td>#date(x.createAt)</td>
-        <td class="jfa-operation-button">
-            #permission("/admin/role/edit")
-            <a class="glyphicon glyphicon-pencil"
-               title="修改"
-               href="/admin/role/edit?id=#(x.id)&p=#(rolePage.pageNumber)">
-            </a>
-            #end
+<div class="table-responsive">
+    <table class="table table-hover table-striped ">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>名称</th>
+            <th>创建时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        #for(x : rolePage.getList())
+        <tr>
+            <th scope="row">#(x.id)</th>
+            <td>#(x.name)</td>
+            <td>#date(x.createAt)</td>
+            <td class="jfa-operation-button">
+                #permission("/admin/role/edit")
+                <a class="fa fa-edit"
+                   title="修改"
+                   href="/admin/role/edit?id=#(x.id)&p=#(rolePage.pageNumber)">
+                </a>
+                #end
 
-            #permission("/admin/role/delete")
-            <a class="glyphicon glyphicon-remove"
-               title="删除"
-               data-delete
-               data-title="#escape(x.name)"
-               data-action="/admin/role/delete?id=#(x.id)">
-                <i class="fa fa-trash" title="删除"></i>
-            </a>
-            #end
+                #permission("/admin/role/delete")
+                <a data-delete
+                   data-title="#escape(x.name)"
+                   data-action="/admin/role/delete?id=#(x.id)">
+                    <i class="fa fa-trash" title="删除"></i>
+                </a>
+                #end
 
-            #permission("/admin/role/assignPermissions")
-            <a class="glyphicon glyphicon-random"
-               title="分配权限"
-               href="/admin/role/assignPermissions?id=#(x.id)">
-            </a>
-            #end
-        </td>
-    </tr>
-    #end
-    </tbody>
-</table>
-<div>
+                #permission("/admin/role/assignPermissions")
+                <a href="/admin/role/assignPermissions?id=#(x.id)">
+                    <i class="fa fa-random" title="分配权限"></i>
+                </a>
+                #end
+            </td>
+        </tr>
+        #end
+        </tbody>
+    </table>
     #@adminPaginate(rolePage.pageNumber, rolePage.totalPage, "/admin/role?p=")
 </div>
 #end

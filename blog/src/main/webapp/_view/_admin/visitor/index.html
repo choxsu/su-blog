@@ -1,34 +1,37 @@
 #@adminLayout()
 
 #define main()
-<h3 class="page-header">==PV记录==</h3>
+<ul class="breadcrumb">
+    <li><a href="/admin">首页</a></li>
+    <li class="active">PV记录</li>
+</ul>
 ### 内容区域
-<table class="table table-hover">
-	<thead>
-	<tr>
-		<th>id</th>
-		<th>IP</th>
-		<th>访问地址</th>
-		<th>客户端</th>
-		<th>请求方法</th>
-		<th>创建时间</th>
-	</tr>
-	</thead>
-	<tbody>
-	#for(x : visitorPage.getList())
-	<tr>
-		<th scope="row">#(x.id)</th>
-		<td>#(x.ip)</td>
-		<td>#(x.url)</td>
-		<td>#(x.client)</td>
-		<td>#(x.methodName ?? "GET")</td>
-		<td>#date(x.requestTime)</td>
-	</tr>
-	#end
-	</tbody>
-</table>
-<div>
-	#@adminPaginate(visitorPage.pageNumber, visitorPage.totalPage, "/admin/visitor?p=")
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>IP</th>
+            <th>访问地址</th>
+            <th>客户端</th>
+            <th>请求方法</th>
+            <th>创建时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        #for(x : visitorPage.getList())
+        <tr>
+            <th scope="row">#(x.id)</th>
+            <td>#(x.ip)</td>
+            <td>#(x.url)</td>
+            <td>#(x.client)</td>
+            <td>#(x.methodName ?? "GET")</td>
+            <td>#date(x.requestTime)</td>
+        </tr>
+        #end
+        </tbody>
+    </table>
+    #@adminPaginate(visitorPage.pageNumber, visitorPage.totalPage, "/admin/visitor?p=")
 </div>
 #end
 

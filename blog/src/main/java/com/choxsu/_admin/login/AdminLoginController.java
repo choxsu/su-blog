@@ -17,6 +17,8 @@ import com.jfinal.kit.Ret;
 
 import java.security.interfaces.RSAPrivateKey;
 import java.util.Date;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * 登录控制器
@@ -25,6 +27,8 @@ public class AdminLoginController extends Controller {
 
     @Inject
     AdminLoginService srv;
+
+    private static ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     /**
      * 显示登录界面
@@ -43,7 +47,7 @@ public class AdminLoginController extends Controller {
         String exp = PropKit.get("hexPrivateExponent");
         String encript = getPara("encryptPwd");
         RSAPrivateKey privateKey = RSAKit.getRSAPrivateKey(pModel, exp);
-        if (privateKey == null){
+        if (privateKey == null) {
             renderJson(Ret.fail().set("msg", "RSA私钥无效或不存在"));
             return;
         }
@@ -54,11 +58,13 @@ public class AdminLoginController extends Controller {
         if (ret.isOk()) {
             Account account = (Account) ret.get(AdminLoginService.loginAccountCacheName);
             String content = "在 " + new Date() + "登陆 Choxsu博客社区后台成功 <br/> 登陆ip:" + IpKit.getRealIp(this.getRequest()) + "<br/> 如果非本人登录，请及时联系超级管理员";
-            try {
-                EmailKit.sendEmail(account.getUserName(), "登陆styg.site后台成功提示", content, true);
-            } catch (Exception e) {
-                LogKit.error(e.getMessage(), e);
-            }
+            executorService.execute(() -> {
+                try {
+                    EmailKit.sendEmail(account.getUserName(), "登陆styg.site后台成功提示", content, true);
+                } catch (Exception e) {
+                    LogKit.error(e.getMessage(), e);
+                }
+            });
             String sessionId = ret.getStr(AdminLoginService.sessionIdName);
             int maxAgeInSeconds = ret.getInt("maxAgeInSeconds");
             setCookie(AdminLoginService.sessionIdName, sessionId, maxAgeInSeconds, true);

@@ -1,73 +1,73 @@
 #@adminLayout()
 
 #define main()
-<h3 class="page-header">=>权限管理<=</h3>
-
+<ul class="breadcrumb">
+    <li><a href="/admin">首页</a></li>
+    <li class="active">权限管理</li>
+</ul>
 ### 内容区域
 #permission("/admin/permission/sync")
-<div class="text-right">
+<div class="page-header text-right">
     <a data-toolbar
        data-action="/admin/permission/sync"
        class="btn btn-primary btn-sm">
-        <span class="glyphicon glyphicon-retweet"></span>
+        <span class="fa fa-refresh" aria-hidden="true">&nbsp;</span>
         一键同步
     </a>
 </div>
 #end
+<div class="table-responsive ">
+    <table class="table table-hover table-striped ">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>actionKey</th>
+            <th>controller</th>
+            <th>备注</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        #for(x : permissionPage.getList())
+        <tr>
+            <th scope="row">#(x.id)</th>
+            ### 标记为 removed 值的 permission 显示中划线与红色字体，提示用户可以删掉
+            <td #if(x.removed) class="removed-action-key" #end>
+                #(x.actionKey)
+            </td>
+            <td>#(x.controller)</td>
+            <td>#(x.remark)</td>
+            <td>
+                #permission("/admin/permission/edit")
+                <a class="fa fa-edit"
+                   title="修改"
+                   href="/admin/permission/edit?id=#(x.id)&p=#(permissionPage.pageNumber)">
+                </a>
+                #end
 
-<table class="table table-hover">
-    <thead>
-    <tr>
-        <th>id</th>
-        <th>actionKey</th>
-        <th>controller</th>
-        <th>备注</th>
-        <th>操作</th>
-    </tr>
-    </thead>
-    <tbody>
-    #for(x : permissionPage.getList())
-    <tr>
-        <th scope="row">#(x.id)</th>
-        ### 标记为 removed 值的 permission 显示中划线与红色字体，提示用户可以删掉
-        <td #if(x.removed) class="removed-action-key" #end>
-            #(x.actionKey)
-        </td>
-        <td>#(x.controller)</td>
-        <td>#(x.remark)</td>
-        <td>
-            #permission("/admin/permission/edit")
-            <a  class="glyphicon glyphicon-pencil"
-                title="修改"
-               href="/admin/permission/edit?id=#(x.id)&p=#(permissionPage.pageNumber)">
-            </a>
-            #end
+                #role("管理员")
+                    #permission("/admin/permission/delete")
+                    <a class="fa fa-trash"
+                       title="删除"
+                       data-delete
+                       data-title="#escape(x.actionKey)"
+                       data-action="/admin/permission/delete?id=#(x.id)">
+                    </a>
+                    #end
+                #end
+            </td>
+        </tr>
+        #end
+        </tbody>
+    </table>
 
-            #role("管理员")
-            #permission("/admin/permission/delete")
-            <a class="glyphicon glyphicon-remove"
-               title="删除"
-               data-delete
-               data-title="#escape(x.actionKey)"
-               data-action="/admin/permission/delete?id=#(x.id)">
-            </a>
-            #end
-            #end
-
-        </td>
-    </tr>
+    #if(hasRemovedPermission)
+    <div class="removed-notes">
+        注：红色字体的 actionKey 表示该 action 已在 Controller 中被删除，
+        点击右侧删除按钮无死角清除数据库中与之有关的所有数据
+    </div>
     #end
-    </tbody>
-</table>
 
-#if(hasRemovedPermission)
-<div class="removed-notes">
-    注：红色字体的 actionKey 表示该 action 已在 Controller 中被删除，
-    点击右侧删除按钮无死角清除数据库中与之有关的所有数据
-</div>
-#end
-
-<div>
     #@adminPaginate(permissionPage.pageNumber, permissionPage.totalPage, "/admin/permission?p=")
 </div>
 

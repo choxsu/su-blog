@@ -1,62 +1,63 @@
 #@adminLayout()
 
 #define main()
-<h3 class="page-header">=>博客管理<=</h3>
-
+<ul class="breadcrumb">
+    <li><a href="/admin">首页</a></li>
+    <li class="active">文章管理</li>
+</ul>
 ### 内容区域
 #permission("/admin/blog/add")
-<a class="btn btn-primary btn-sm" href="/admin/blog/add">
-	<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>创建
-</a>
-#end
-
-<table class="table table-hover">
-	<thead>
-		<tr>
-			<th>id</th>
-			<th>标题</th>
-			<th>查看次数</th>
-			<th>创建时间</th>
-			<th>分类</th>
-			<th>标签</th>
-			<th>操作</th>
-		</tr>
-	</thead>
-	<tbody>
-		#for(x : blogPage.getList())
-		<tr>
-			<th scope="row">#(x.id)</th>
-			<td>
-				<a href="/article/#(x.id)" target="_blank">#(x.title)</a>
-			</td>
-			<td>#(x.clickCount)</td>
-			<td>#date(x.createAt)</td>
-			<td>#(x.category)</td>
-			<td>#(x.tagName??)</td>
-			<td class="jfa-operation-button">
-				#permission("/admin/blog/edit")
-				<a class="glyphicon glyphicon-pencil"
-				   title="修改"
-				   href="/admin/blog/edit?id=#(x.id)&p=#(blogPage.pageNumber)">
-				</a>
-				#end
-
-				#permission("/admin/blog/delete")
-				<a class="glyphicon glyphicon-remove"
-				   title="删除"
-				   data-delete
-				   data-title="#escape(x.title)"
-				   data-action="/admin/blog/delete?id=#(x.id)">
-					<i class="fa fa-trash" title="删除"></i>
-				</a>
-				#end
-			</td>
-		</tr>
-		#end
-	</tbody>
-</table>
-<div>
-	#@adminPaginate(blogPage.pageNumber, blogPage.totalPage, "/admin/blog?p=")
+<div class="page-header">
+    <a class="btn btn-primary btn-sm" href="/admin/blog/add">
+        <span class="fa fa-plus" aria-hidden="true">&nbsp;</span>创建
+    </a>
 </div>
+#end
+<div class="table-responsive">
+    <table class="table table-hover table-striped ">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>标题</th>
+            <th>查看次数</th>
+            <th>创建时间</th>
+            <th>分类</th>
+            <th>标签</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        #for(x : blogPage.getList())
+        <tr>
+            <th scope="row">#(x.id)</th>
+            <td>
+                <a href="/article/#(x.id)" target="_blank">#(x.title)</a>
+            </td>
+            <td>#(x.clickCount)</td>
+            <td>#date(x.createAt)</td>
+            <td>#(x.category)</td>
+            <td>#(x.tagName??)</td>
+            <td>
+                #permission("/admin/blog/edit")
+                <a href="/admin/blog/edit?id=#(x.id)&p=#(blogPage.pageNumber)">
+                    <i class="fa fa-edit" title="修改"></i>
+                </a>
+                #end
+
+                #permission("/admin/blog/delete")
+                <a data-delete
+                   data-title="#escape(x.title)"
+                   data-action="/admin/blog/delete?id=#(x.id)">
+                    <i class="fa fa-trash" title="删除"></i>
+                </a>
+                #end
+            </td>
+        </tr>
+        #end
+        </tbody>
+    </table>
+    #@adminPaginate(blogPage.pageNumber, blogPage.totalPage, "/admin/blog?p=")
+</div>
+
 #end
 
