@@ -59,9 +59,11 @@
         width: 100%;
         text-align: left;
     }
-    .markdown-area{
+
+    .markdown-area {
         min-height: 450px;
     }
+
     .form-group {
         margin-bottom: 25px;
     }
@@ -72,12 +74,15 @@
 #end
 #define js()
 <script src="/assets/editor_md/editormd.js"></script>
+<script src="/assets/localResizeIMG/lrz.bundle.js"></script>
 #end
 <script type="text/javascript">
+
     var Article = {
+        editor: null,
         md: function () {
             //markdown编辑器
-            editormd("#(com.choxsu._admin.blog.AdminBlogController::MARKED_ID)", {
+            this.editor = editormd("#(com.choxsu._admin.blog.AdminBlogController::MARKED_ID)", {
                 width: "100%",
                 markdown: $('#tx').text(),
                 path: '/assets/editor_md/lib/',
@@ -88,16 +93,16 @@
                         "table", "datetime", "html-entities", "pagebreak", "search", "image",
                         "||", "watch", "preview"]
                 },
+                autoHeight: true,
                 tex: false,                   // 开启科学公式TeX语言支持，默认关闭
                 flowChart: false,             // 开启流程图支持，默认关闭
                 sequenceDiagram: false,       // 开启时序/序列图支持，默认关闭,
                 saveHTMLToTextarea: true,
                 imageUpload: true,
                 imageFormats: ["jpg", "jpeg", "gif", "png", "bmp"],
-                imageUploadURL: "/",
-                crossDomainUpload: true,
-                uploadCallbackURL: "",
-                autoHeight: true
+                imageUploadURL: "/admin/upload/editormdImgUpload",
+                crossDomainUpload: false
+                //uploadCallbackURL: "",
             });
         },
         submitForm: function () {
@@ -106,7 +111,7 @@
                 , beforeSubmit: function (formData, jqForm, options) {
                 }
                 , success: function (ret) {
-                    if (ret.state == "ok") {
+                    if (ret.state === "ok") {
                         location.href = "/admin/blog?p=#(p ?? 1)";
                     } else {
                         ShowUtil.showFailMsg(ret.msg);
@@ -118,11 +123,78 @@
                 , complete: function (ret) {
                 } 	      // 无论是 success 还是 error，最终都会被回调
             });
+        },
+        ImageLrz: function (reader, fileSuffix) {
+            //前端压缩
+            lrz(reader.result, {width: 500}).then(function (res) {
+                var index;
+                $.ajax({
+                    url: "/admin/upload/base64ImgUpload",
+                    type: 'post',
+                    data: {
+                        "base64Image": res.base64,
+                        "imageName": new Date().getTime() + "." + fileSuffix
+                    },
+                    contentType: 'application/x-www-form-urlencoded;charest=UTF-8',
+                    beforeSend: function (XHR) {
+                        //加载上传条
+                        index = layer.load(1); //换了种风格
+                    },
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        if (data.success === 1) {
+                            var url = '![' + data.original + '](' + data.url + ')';
+                            Article.editor.insertValue(url);
+                        } else {
+                            alert(data.message)
+                        }
+                    },
+                    complete: function (XHR, TS) {
+                        //结束上传条
+                        layer.close(index);
+                    }
+                })
+            });
         }
     };
     $(document).ready(function () {
         Article.md();
         Article.submitForm();
     });
+
+    function paste(event) {
+        var clipboardData = event.clipboardData;
+        var items, item, types;
+        if (clipboardData) {
+            items = clipboardData.items;
+            if (!items) {
+                return;
+            }
+            // 保存在剪贴板中的数据类型
+            types = clipboardData.types || [];
+            for (var i = 0; i < types.length; i++) {
+                if (types[i] === 'Files') {
+                    item = items[i];
+                    break;
+                }
+            }
+            // 判断是否为图片数据
+            if (item && item.kind === 'file' && item.type.match(/^image\//i)) {
+                var strings = item.type.split("/");
+                var fileSuffix = strings[1];
+                // 读取该图片
+                var file = item.getAsFile();
+                var reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function () {
+                    Article.ImageLrz(reader, fileSuffix)
+                }
+            }
+        }
+    }
+
+    document.addEventListener('paste', function (event) {
+        paste(event);
+    })
 </script>
 #end

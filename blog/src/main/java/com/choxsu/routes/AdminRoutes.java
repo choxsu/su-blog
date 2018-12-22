@@ -13,6 +13,7 @@ import com.choxsu._admin.login.AdminLoginController;
 import com.choxsu._admin.permission.PermissionAdminController;
 import com.choxsu._admin.role.RoleAdminController;
 import com.choxsu._admin.visitor.VisitorAdminController;
+import com.choxsu.common.upload.UploadController;
 import com.jfinal.config.Routes;
 
 /**
@@ -43,6 +44,8 @@ public class AdminRoutes extends Routes {
         add("/admin/permission", PermissionAdminController.class, "/permission");
         add("/admin/visitor", VisitorAdminController.class, "/visitor");
         add("/admin/druid", DruidController.class, "/druid");
+        //图片上传
+        add("/admin/upload", UploadController.class);
     }
 }
 
