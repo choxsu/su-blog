@@ -39,7 +39,7 @@
 			dataType: "json"
 			, beforeSubmit: function(formData, jqForm, options) {}
 			, success: function(ret) {
-				if (ret.state == "ok") {
+				if (ret.state === "ok") {
 					location.href = "/admin/account?p=#(p ?? 1)";
 				} else {
 					ShowUtil.showFailMsg(ret.msg);

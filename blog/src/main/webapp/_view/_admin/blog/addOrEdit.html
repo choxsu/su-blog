@@ -1,8 +1,6 @@
 #@adminLayout()
 
 #define main()
-<!--<link rel="stylesheet" href="/assets/editor_md/css/editormd.css"/>-->
-
 <ul class="breadcrumb">
     <li><a href="/admin">首页</a></li>
     <li><a href="/admin/blog">文章管理</a></li>
@@ -24,11 +22,11 @@
         <select name="blog.category" class="form-control">
             <option value="">请选择</option>
             #for(x:categoryList)
-                #if(x.name == blog.category??)
-                    <option value="#(x.name)" selected>#(x.name)</option>
-                #else
-                    <option value="#(x.name)">#(x.name)</option>
-                #end
+            #if(x.name == blog.category??)
+            <option value="#(x.name)" selected>#(x.name)</option>
+            #else
+            <option value="#(x.name)">#(x.name)</option>
+            #end
             #end
         </select>
     </div>
@@ -37,20 +35,21 @@
         <select name="blog.tag_id" class="form-control">
             <option value="">请选择</option>
             #for(x:tagList)
-                #if(x.id == blog.tag_id??)
-                    <option value="#(x.id)" selected>#(x.name)</option>
-                #else
-                    <option value="#(x.id)">#(x.name)</option>
-                #end
+            #if(x.id == blog.tag_id??)
+            <option value="#(x.id)" selected>#(x.name)</option>
+            #else
+            <option value="#(x.id)">#(x.name)</option>
+            #end
             #end
         </select>
     </div>
     <div class="form-group">
-        <label for="markedContent">正文</label>
-        <textarea class="form-control" name="blog.markedContent"  id="markedContent" rows="3">#(blog.markedContent??)</textarea>
+        <label for="tx">正文</label>
+        <div class="markdown-area" id="#(com.choxsu._admin.blog.AdminBlogController::MARKED_ID)"></div>
+        <textarea id="tx" class="form-control hidden">#(blog.markedContent??)</textarea>
     </div>
     <div class="form-group">
-        <input class="btn btn-primary" type="submit" value="提交" />
+        <input class="btn btn-primary" type="submit" value="提交"/>
     </div>
 
 </form>
@@ -60,71 +59,70 @@
         width: 100%;
         text-align: left;
     }
-
+    .markdown-area{
+        min-height: 450px;
+    }
     .form-group {
         margin-bottom: 25px;
-
     }
 
-    .jfa-content label {
-        line-height: 1;
-        vertical-align: baseline;
-        color: #23527c;
-        font-size: 20px;
-        font-weight: normal;
-        margin-bottom: 8px;;
-    }
 </style>
-<!--<script src="/assets/editor_md/editormd.js"></script>-->
+#define css()
+<link rel="stylesheet" href="/assets/editor_md/css/editormd.css"/>
+#end
+#define js()
+<script src="/assets/editor_md/editormd.js"></script>
+#end
 <script type="text/javascript">
-
-    var content = $("textarea[name = 'blog.markedContent']").text();
-    if (content == undefined || content == null || content == "")
-        content = null;
-
-    $(document).ready(function () {
-
-
-        editormd("md", {
-            width: "80%",
-            markdown: content,
-            path: '/assets/editor_md/lib/',
-            toolbarIcons: function () {
-                return ["undo", "redo", "|", "bold", "hr", "|", "italic",
-                    "quote", "uppercase", "list-ul", "list-ol", "hr", "image", "code", "code-block",
-                    "table", "datetime", "html-entities", "pagebreak", "search", "image",
-                    "||", "watch", "preview"]
-            },
-            tex: true,                   // 开启科学公式TeX语言支持，默认关闭
-            flowChart: true,             // 开启流程图支持，默认关闭
-            sequenceDiagram: true,       // 开启时序/序列图支持，默认关闭,
-            saveHTMLToTextarea: true,
-            imageUpload: true,
-            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp"],
-            imageUploadURL: "",
-            crossDomainUpload: true,
-            uploadCallbackURL: "",
-            autoHeight: true
-        });
-
-        $("#myArticleForm").ajaxForm({
-            dataType: "json"
-            , beforeSubmit: function (formData, jqForm, options) {
-            }
-            , success: function (ret) {
-                if (ret.state == "ok") {
-                    location.href = "/admin/blog?p=#(p ?? 1)";
-                } else {
-                    ShowUtil.showFailMsg(ret.msg);
+    var Article = {
+        md: function () {
+            //markdown编辑器
+            editormd("#(com.choxsu._admin.blog.AdminBlogController::MARKED_ID)", {
+                width: "100%",
+                markdown: $('#tx').text(),
+                path: '/assets/editor_md/lib/',
+                toolbarIcons: function () {
+                    return ["undo", "redo", "|", "bold", "hr", "|", "italic",
+                        "quote", "uppercase", "list-ul", "list-ol", "hr", "image", "code",
+                        "code-block",
+                        "table", "datetime", "html-entities", "pagebreak", "search", "image",
+                        "||", "watch", "preview"]
+                },
+                tex: false,                   // 开启科学公式TeX语言支持，默认关闭
+                flowChart: false,             // 开启流程图支持，默认关闭
+                sequenceDiagram: false,       // 开启时序/序列图支持，默认关闭,
+                saveHTMLToTextarea: true,
+                imageUpload: true,
+                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp"],
+                imageUploadURL: "/",
+                crossDomainUpload: true,
+                uploadCallbackURL: "",
+                autoHeight: true
+            });
+        },
+        submitForm: function () {
+            $("#myArticleForm").ajaxForm({
+                dataType: "json"
+                , beforeSubmit: function (formData, jqForm, options) {
                 }
-            }
-            , error: function (ret) {
-                alert(ret.statusText);
-            }
-            , complete: function (ret) {
-            } 	      // 无论是 success 还是 error，最终都会被回调
-        });
+                , success: function (ret) {
+                    if (ret.state == "ok") {
+                        location.href = "/admin/blog?p=#(p ?? 1)";
+                    } else {
+                        ShowUtil.showFailMsg(ret.msg);
+                    }
+                }
+                , error: function (ret) {
+                    alert(ret.statusText);
+                }
+                , complete: function (ret) {
+                } 	      // 无论是 success 还是 error，最终都会被回调
+            });
+        }
+    };
+    $(document).ready(function () {
+        Article.md();
+        Article.submitForm();
     });
 </script>
-
 #end

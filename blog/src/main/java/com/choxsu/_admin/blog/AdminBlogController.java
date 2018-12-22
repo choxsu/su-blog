@@ -7,6 +7,7 @@ import com.choxsu.common.constant.CategoryEnum;
 import com.choxsu.common.entity.Blog;
 import com.choxsu.common.entity.BlogCategory;
 import com.jfinal.aop.Before;
+import com.jfinal.core.NotAction;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Page;
 
@@ -19,6 +20,8 @@ import java.util.List;
  * @date 2018/6/12 22:05
  */
 public class AdminBlogController extends BaseController {
+
+    public static final String MARKED_ID = "markedContent";
 
     @Inject
     AdminBlogService adminBlogService;
@@ -52,14 +55,20 @@ public class AdminBlogController extends BaseController {
 
     @Before(BlogValid.class)
     public void save() {
+        Blog blog = getParaToSet();
+        Ret ret = adminBlogService.saveOrUpdateArticle(blog);
+        renderJson(ret);
+    }
+
+    @NotAction
+    private Blog getParaToSet() {
         Blog blog = getModel(Blog.class, "blog");
-        String html = getPara("md-html-code");
+        String html = getPara(MARKED_ID + "-html-code");
+        String md = getPara(MARKED_ID + "-markdown-doc");
         blog.setContent(html);
         blog.setAccountId(getLoginAccountId());
-        blog.setUpdateAt(new Date());
-        blog.setCreateAt(new Date());
-        blog.save();
-        renderJson(Ret.ok());
+        blog.setMarkedContent(md);
+        return blog;
     }
 
     public void edit() {
@@ -71,13 +80,9 @@ public class AdminBlogController extends BaseController {
 
     @Before(BlogValid.class)
     public void update() {
-        Blog blog = getModel(Blog.class, "blog");
-        String html = getPara("md-html-code");
-        blog.setContent(html);
-        blog.setAccountId(getLoginAccountId());
-        blog.setCreateAt(new Date());
-        blog.update();
-        renderJson(Ret.ok());
+        Blog blog = getParaToSet();
+        Ret ret = adminBlogService.saveOrUpdateArticle(blog);
+        renderJson(ret);
     }
 
     public void delete() {
