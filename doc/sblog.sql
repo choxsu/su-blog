@@ -11,7 +11,7 @@
  Target Server Version : 50721
  File Encoding         : 65001
 
- Date: 22/12/2018 17:26:47
+ Date: 22/12/2018 17:55:21
 */
 
 SET NAMES utf8mb4;
@@ -536,6 +536,17 @@ INSERT INTO `session` VALUES ('ee34a1166b1e449b8167adf142d4df99', 1, 15375001274
 INSERT INTO `session` VALUES ('f1180527572a4a1e872f0e7b98848344', 1, 1528968843645);
 INSERT INTO `session` VALUES ('f4970418dc3547209c5aa2ab21aee54f', 1, 1545472172407);
 INSERT INTO `session` VALUES ('f538e022c9134baea27f1c5a5374cf4e', 1, 1528951222466);
+
+-- ----------------------------
+-- Table structure for upload_counter
+-- ----------------------------
+DROP TABLE IF EXISTS `upload_counter`;
+CREATE TABLE `upload_counter`  (
+  `uploadType` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `counter` int(11) NOT NULL,
+  `descr` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`uploadType`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for visitor
