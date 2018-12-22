@@ -67,6 +67,10 @@ body {
     background-color: #428bca;
 }
 
+.border-bottom-1 {
+    border-bottom: 1px solid #dad4d4;
+}
+
 
 /*
  * Main content
