@@ -1,6 +1,10 @@
 #@layout()
 #define main()
+#define css()
 <link rel="stylesheet" href="/assets/new/stackEdit.css" media="all">
+<!--<link rel="stylesheet" href="/assets/editor_md/css/editormd.preview.css">
+<link rel="stylesheet" href="/assets/editor_md/css/editormd.min.css" media="all">-->
+#end
 <article class="article">
     <header class="article-header">
         <div class="title">#(blog.title)</div>
@@ -19,7 +23,7 @@
             </div>
         </div>
     </header>
-    <div class="article-content">
+    <div id="content-id" class="article-content">
         #(blog.content)
     </div>
     <div class="article-share">
@@ -47,6 +51,12 @@
     <noscript>Please enable JavaScript to view the comments.</noscript>
 </article>
 <div class="return-top" title="返回顶部"><img src="/assets/new/images/top.png"></div>
-<script src="/assets/new/js/zooming.min.js"> </script>
-<script src="/assets/new/js/detail.js"> </script>
+#define js()
+<script src="/assets/new/js/zooming.min.js"></script>
+<script src="/assets/new/js/detail.js"></script>
+<!--<script src="/assets/new/js/jquery.min-v1.11.3.js"></script>
+<script src="/assets/editor_md/lib/marked.min.js"></script>
+<script src="/assets/editor_md/lib/prettify.min.js"></script>
+<script src="/assets/editor_md/editormd.min.js"></script>-->
+#end
 #end
