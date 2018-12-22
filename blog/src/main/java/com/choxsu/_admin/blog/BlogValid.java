@@ -28,7 +28,7 @@ public class BlogValid extends Validator {
             addError("msg", "标题已经存在，请更换！");
         }
 
-        validateRequired("blog.category", "msg", "请选择分类");
+        //validateRequired("blog.category", "msg", "请选择分类");
         validateRequired("blog.tag_id", "msg", "请选择标签");
 
         validateString("markedContent-markdown-doc", 5, 500000, "msg", "内容最少5个字符");

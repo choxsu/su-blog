@@ -17,7 +17,7 @@
         <label for="name">标题</label>
         <input type="text" class="form-control" placeholder="请输入标题" name="blog.title" id="name" value="#(blog.title??)">
     </div>
-    <div class="form-group">
+<!--    <div class="form-group">
         <label for="name">分类</label>
         <select name="blog.category" class="form-control">
             <option value="">请选择</option>
@@ -29,7 +29,7 @@
             #end
             #end
         </select>
-    </div>
+    </div>-->
     <div class="form-group">
         <label for="name">标签</label>
         <select name="blog.tag_id" class="form-control">
@@ -63,11 +63,6 @@
     .markdown-area {
         min-height: 450px;
     }
-
-    .form-group {
-        margin-bottom: 25px;
-    }
-
 </style>
 #define css()
 <link rel="stylesheet" href="/assets/editor_md/css/editormd.css"/>
@@ -84,6 +79,7 @@
             //markdown编辑器
             this.editor = editormd("#(com.choxsu._admin.blog.AdminBlogController::MARKED_ID)", {
                 width: "100%",
+                height: 700,
                 markdown: $('#tx').text(),
                 path: '/assets/editor_md/lib/',
                 toolbarIcons: function () {
@@ -93,7 +89,7 @@
                         "table", "datetime", "html-entities", "pagebreak", "search", "image",
                         "||", "watch", "preview"]
                 },
-                autoHeight: true,
+                autoHeight: false,
                 tex: false,                   // 开启科学公式TeX语言支持，默认关闭
                 flowChart: false,             // 开启流程图支持，默认关闭
                 sequenceDiagram: false,       // 开启时序/序列图支持，默认关闭,
