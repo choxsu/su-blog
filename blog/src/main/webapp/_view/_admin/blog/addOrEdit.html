@@ -126,7 +126,7 @@
         },
         ImageLrz: function (reader, fileSuffix) {
             //前端压缩
-            lrz(reader.result, {width: 500}).then(function (res) {
+            lrz(reader.result, {width: 1080}).then(function (res) {
                 var index;
                 $.ajax({
                     url: "/admin/upload/base64ImgUpload",
