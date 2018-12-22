@@ -211,11 +211,12 @@ public class UploadService {
     }
 
     /**
-     * //data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj
-     *
+     * data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj
+     * @param dataBase64Img
+     * @param originalFileName
      * @return
      */
-    public UploadFile getUploadFile(String dataBase64Img) {
+    public UploadFile getUploadFile(String dataBase64Img, String originalFileName) {
         if (StrKit.isBlank(dataBase64Img)) {
             return null;
         }
@@ -224,9 +225,6 @@ public class UploadService {
         String base64 = dataBase64Img.substring(dex + inOf.length());
         String data = dataBase64Img.substring(0, dex - 1);
         String contentType = data.split(":")[1];
-        String[] split = data.split("/");
-        String imgSuffix = "." + split[split.length - 1];
-        String originalFileName = System.currentTimeMillis() + imgSuffix;
         String path = PathKit.getWebRootPath() + File.separator + JFinal.me().getConstants().getBaseUploadPath() + uploadTempPath;
         String pathFile = path + File.separator + originalFileName;// 新生成的图片
         File file = new File(path);

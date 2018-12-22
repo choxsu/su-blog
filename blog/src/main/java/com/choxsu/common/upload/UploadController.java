@@ -73,11 +73,12 @@ public class UploadController extends BaseController {
         }
 
         String dataBase64Img = getPara("base64Image");
-        if (StrKit.isBlank(dataBase64Img)) {
+        String imageName = getPara("imageName");
+        if (StrKit.isBlank(dataBase64Img) || StrKit.isBlank(imageName)) {
             renderJson(Ret.by("success", 0).set("message", "上传图片不存在"));
             return;
         }
-        UploadFile uploadFile = srv.getUploadFile(dataBase64Img);
+        UploadFile uploadFile = srv.getUploadFile(dataBase64Img, imageName);
         try {
             Ret ret = srv.editorUpload(getLoginAccount(), uploadTypes[0], uploadFile);
             render(new JsonRender(ret).forIE());    // 防止 IE 下出现文件下载现象
