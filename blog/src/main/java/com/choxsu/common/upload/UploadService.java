@@ -227,8 +227,12 @@ public class UploadService {
         String[] split = data.split("/");
         String imgSuffix = "." + split[split.length - 1];
         String originalFileName = System.currentTimeMillis() + imgSuffix;
-        String path = PathKit.getWebRootPath() + "\\" + JFinal.me().getConstants().getBaseUploadPath() + uploadTempPath;
+        String path = PathKit.getWebRootPath() + File.separator + JFinal.me().getConstants().getBaseUploadPath() + uploadTempPath;
         String pathFile = path + File.separator + originalFileName;// 新生成的图片
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdir();
+        }
         //先写入到本地临时文件夹
         OutputStream out = null;
         try {
