@@ -2,8 +2,9 @@
 
 package com.choxsu.kit;
 
-import com.choxsu.common.handler.DruidFilterHandler;
-import com.jfinal.handler.Handler;
+import com.choxsu._admin.login.AdminLoginService;
+import com.choxsu.common.entity.Account;
+import com.choxsu.common.interceptor.AuthCacheClearInterceptor;
 import com.jfinal.plugin.druid.DruidStatViewHandler;
 
 import javax.servlet.http.Cookie;
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 创建 DruidStatViewHandler 的工具类
  * <p>
- * 可通过 "/blog/druid" 访问到 druid 提供的 sql 监控与统计功能
+ * 可通过 "/assets/druid" 访问到 druid 提供的 sql 监控与统计功能
  * 方便找到慢 sql，进而对慢 sql 进行优化
  * 注意：这里的访问路径是下面代码中指定的，可以设置为任意路径
  * <p>
@@ -20,16 +21,17 @@ import javax.servlet.http.HttpServletRequest;
  * 如果你的项目在前端有 nginx 代理过了这些静态资源，需要将这些资源解压出来并放到
  * 正确的目录下面
  * <p>
- * 具体到该配置中的 url 为 "/blog/druid"，那么相关静态资源需要解压到该目录之下
- *
- * @author choxsu
+ * 具体到该配置中的 url 为 "/assets/druid"，那么相关静态资源需要解压到该目录之下
  */
 public class DruidKit {
 
     public static DruidStatViewHandler getDruidStatViewHandler() {
-
-        return new DruidStatViewHandler("/blog/druid", request -> {
-            //TODO 这里需要去做判断，管理员才可以登录查看
+        return new DruidStatViewHandler("/assets/druid", request -> {
+            String sessionId = getCookie(request, AdminLoginService.sessionIdName);
+            if (sessionId != null) {
+                Account loginAccount = AdminLoginService.me.getLoginAccountWithSessionId(sessionId);
+                return AuthCacheClearInterceptor.isAdmin(loginAccount);
+            }
             return false;
         });
     }
@@ -58,13 +60,4 @@ public class DruidKit {
         return null;
     }
 
-    /**
-     * 获取过滤字段
-     * @param regex
-     * @return
-     */
-    public static Handler getFilterHandler(String regex) {
-
-        return new DruidFilterHandler(regex);
-    }
 }

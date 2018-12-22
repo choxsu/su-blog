@@ -112,8 +112,8 @@ public class Start extends JFinalConfig {
 
     @Override
     public void configHandler(Handlers me) {
-        me.add(DruidKit.getFilterHandler("/druid"));
-        me.add(new UrlSeoHandler());
+        me.add(DruidKit.getDruidStatViewHandler()); // druid 统计页面功能
+        me.add(new UrlSeoHandler()); //文章列表 和 详情的SEO优化
     }
 
 

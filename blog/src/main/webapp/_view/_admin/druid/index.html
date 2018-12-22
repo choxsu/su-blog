@@ -1,0 +1,36 @@
+#@adminLayout()
+
+#define main()
+<ul class="breadcrumb">
+    <li><a href="/admin">首页</a></li>
+    <li class="active">Druid数据监控</li>
+</ul>
+### 内容区域
+<div class="druid">
+    <iframe src="/assets/druid" frameborder="0" scrolling="no" id="external-frame" onload="setIframeHeight(this)"></iframe>
+</div>
+
+<style>
+    .druid iframe {
+        width: 100%;
+    }
+
+</style>
+<script>
+    function setIframeHeight(iframe) {
+        if (iframe) {
+            var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+            if (iframeWin.document.body) {
+                iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+            }
+        }
+    };
+
+    window.onload = function () {
+        setIframeHeight(document.getElementById('external-frame'));
+    };
+</script>
+#end
+
+
+

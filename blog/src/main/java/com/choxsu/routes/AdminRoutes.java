@@ -7,6 +7,7 @@ import com.choxsu._admin.auth.AdminAuthInterceptor;
 import com.choxsu._admin.blog.AdminBlogController;
 import com.choxsu._admin.blog.tag.AdminTagController;
 import com.choxsu._admin.common.PjaxInterceptor;
+import com.choxsu._admin.druid.DruidController;
 import com.choxsu._admin.index.IndexAdminController;
 import com.choxsu._admin.login.AdminLoginController;
 import com.choxsu._admin.permission.PermissionAdminController;
@@ -41,6 +42,7 @@ public class AdminRoutes extends Routes {
         add("/admin/role", RoleAdminController.class, "/role");
         add("/admin/permission", PermissionAdminController.class, "/permission");
         add("/admin/visitor", VisitorAdminController.class, "/visitor");
+        add("/admin/druid", DruidController.class, "/druid");
     }
 }
 
