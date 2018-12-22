@@ -1,4 +1,4 @@
-package com.choxsu._admin.blog.tag;
+package com.choxsu._admin.tag;
 
 import com.choxsu.common.base.BaseService;
 import com.choxsu.common.entity.BlogTag;

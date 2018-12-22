@@ -5,7 +5,7 @@ package com.choxsu.routes;
 import com.choxsu._admin.account.AccountAdminController;
 import com.choxsu._admin.auth.AdminAuthInterceptor;
 import com.choxsu._admin.blog.AdminBlogController;
-import com.choxsu._admin.blog.tag.AdminTagController;
+import com.choxsu._admin.tag.AdminTagController;
 import com.choxsu._admin.common.PjaxInterceptor;
 import com.choxsu._admin.druid.DruidController;
 import com.choxsu._admin.index.IndexAdminController;

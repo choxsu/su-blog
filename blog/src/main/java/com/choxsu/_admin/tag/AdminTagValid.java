@@ -1,4 +1,4 @@
-package com.choxsu._admin.blog.tag;
+package com.choxsu._admin.tag;
 
 import com.choxsu.kit.SensitiveWordsKit;
 import com.jfinal.core.Controller;
