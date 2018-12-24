@@ -61,7 +61,7 @@ public class AccountAdminService {
     /**
      * 注意要验证 nickName 与 userName 是否存在
      */
-    public Ret update(Account account) {
+    public Ret update(Account account, Account loginAccount) {
         String nickName = account.getNickName().toLowerCase().trim();
         String sql = "select id from account where lower(nickName) = ? and id != ? limit 1";
         Integer id = Db.queryInt(sql, nickName, account.getId());
@@ -69,16 +69,18 @@ public class AccountAdminService {
             return Ret.fail("msg", "昵称已经存在，请输入别的昵称");
         }
 
-        String userName = account.getUserName().toLowerCase().trim();
+       /* String userName = account.getUserName().toLowerCase().trim();
         sql = "select id from account where lower(userName) = ? and id != ? limit 1";
         id = Db.queryInt(sql, userName, account.getId());
         if (id != null) {
             return Ret.fail("msg", "邮箱已经存在，请输入别的昵称");
-        }
-
-        // 暂时只允许修改 nickName 与 userName
-        account.keep("id", "nickName", "userName");
+        }*/
+        // 暂时只允许修改 nickName
+        account.keep("id", "nickName");
         account.update();
+        if (account.getId().equals(loginAccount.getId())){
+            AdminLoginService.me.reloadLoginAccount(loginAccount);
+        }
         return Ret.ok("msg", "账户更新成功");
     }
 
@@ -223,11 +225,11 @@ public class AccountAdminService {
     }
 
     public Ret delete(Integer id) {
-        if (id != null && id == 1){
+        if (id != null && id == 1) {
             return Ret.fail().set("msg", "不能删除超级管理员");
         }
         boolean b = dao.deleteById(id);
-        if (b){
+        if (b) {
             return Ret.ok().set("msg", "删除成功");
         }
         return Ret.fail().set("msg", "删除失败");
@@ -237,7 +239,7 @@ public class AccountAdminService {
     /**
      * 获取 "后台账户/管理员" 列表，在 account_role 表中存在的账户(被分配过角色的账户)
      * 被定义为 "后台账户/管理员"
-     *
+     * <p>
      * 该功能便于查看后台都有哪些账户被分配了角色，在对账户误操作分配了角色时，也便于取消角色分配
      */
     public List<Record> getAdminList() {
@@ -265,8 +267,7 @@ public class AccountAdminService {
             String saveFile = PathKit.getWebRootPath() + avatarUrl;
             ImageKit.zoom(500, uf.getFile(), saveFile);
             return Ret.ok("avatarUrl", avatarUrl);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return Ret.fail("msg", e.getMessage());
         } finally {
             uf.getFile().delete();
@@ -277,7 +278,7 @@ public class AccountAdminService {
     public Ret saveAvatar(Account loginAccount, String avatarUrl, int x, int y, int width, int height) {
         int accountId = loginAccount.getId();
         // 暂时用的 webRootPath，以后要改成 baseUploadPath，并从一个合理的地方得到
-        String webRootPath = PathKit.getWebRootPath() ;
+        String webRootPath = PathKit.getWebRootPath();
         String avatarFileName = webRootPath + avatarUrl;
 
         try {
@@ -298,18 +299,18 @@ public class AccountAdminService {
         } catch (Exception e) {
             return Ret.fail("msg", "头像更新失败：" + e.getMessage());
         } finally {
-            new File(avatarFileName).delete();	 // 删除用于裁切的源文件
+            new File(avatarFileName).delete();     // 删除用于裁切的源文件
         }
     }
 
     /**
      * 1：生成保存于 account.avatar 字段的：相对路径 + 文件名，存放于 relativePathFileName[0]
      * 2：生成保存于文件系统的：绝对路径 + 文件名，存放于 absolutePathFileName[0]
-     *
+     * <p>
      * 3：用户头像保存于 baseUploadPath 之下的 /avatar/ 之下
      * 4：account.avatar 只存放相对于 baseUploadPath + "/avatar/" 之后的路径和文件名
-     *    例如：/upload/avatar/0/123.jpg 只存放 "0/123.jpg" 这部分到 account.avatar 字段之中
-     *
+     * 例如：/upload/avatar/0/123.jpg 只存放 "0/123.jpg" 这部分到 account.avatar 字段之中
+     * <p>
      * 5："/avatar/" 之下生成的子录为 accountId 对 5000取整，例如 accountId 为 123 时，123 / 5000 = 0，生成目录为 "0"
      * 6：avatar 文件名为：accountId + ".jpg"
      */

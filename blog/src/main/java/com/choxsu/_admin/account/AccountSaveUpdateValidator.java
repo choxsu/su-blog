@@ -51,17 +51,17 @@ public class AccountSaveUpdateValidator extends Validator {
             addError("msg", ret.getStr("msg"));
         }
 
-        /**
-         * 验证 userName
-         */
-        validateRequired("account.userName", "msg", "邮箱不能为空");
-        String para = c.getPara("account.userName");
-        System.out.println(para);
-        validateEmail("account.userName", "msg", "邮箱格式不正确");
         if (actionMethodName.equalsIgnoreCase("save")) {
+            /**
+             * 验证 userName
+             */
+            validateRequired("account.userName", "msg", "邮箱不能为空");
+            String para = c.getPara("account.userName");
+            validateEmail("account.userName", "msg", "邮箱格式不正确");
             //验证密码
             validateRequired("account.password", "msg", "密码不能为空");
             validateString("account.password", 6, 16, "msg", "密码长度6到16位之间");
+
         }
 
     }

@@ -69,7 +69,7 @@ public class AccountAdminController extends BaseController {
     @Before(AccountSaveUpdateValidator.class)
     public void update() {
         Account account = getBean(Account.class);
-        Ret ret = srv.update(account);
+        Ret ret = srv.update(account, getLoginAccount());
         renderJson(ret);
     }
 
