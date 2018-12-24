@@ -2,53 +2,131 @@
 
 #define main()
 <ul class="breadcrumb">
-	<li><a href="/admin">首页</a></li>
-	<li><a href="/admin/account">账户管理</a></li>
-	<li class="active"> 修改</li>
+    <li><a href="/admin">首页</a></li>
+    <li><a href="/admin/account">账户管理</a></li>
+    <li class="active"> 修改</li>
 </ul>
 ### 内容区域
 <form id="submit_form" class="col-md-4" action="/admin/account/update" method="post">
-	<input type="hidden" name="account.id" value="#(account.id)" />
-	<div class="form-group">
-		<label >头像</label>
-		<img src="/upload/avatar/#(account.avatar)" >
-	</div>
-	<div class="form-group">
-		<label >昵称</label>
-		<input type="text" class="form-control" name="account.nickName" value="#(account.nickName)">
-	</div>
-	<div class="form-group">
-		<label >邮箱</label>
-		<input type="email" class="form-control" name="account.userName" value="#(account.userName)" placeholder="填写合法的 email">
-	</div>
-	<div class="form-group">
-		<input class="btn btn-primary" type="submit" value="提交" />
-	</div>
+    <input type="hidden" name="account.id" value="#(account.id)"/>
+    <div class="form-group">
+        <label>头像</label>
+        <img class="avatar" title="点我修改头像" alt="#(account.avatar)" src="/upload/avatar/#(account.avatar)">
+        <input type="file" id="selectAvatar" accept="image/*" class="hidden">
+    </div>
+    <div class="form-group">
+        <label>昵称</label>
+        <input type="text" class="form-control" name="account.nickName" value="#(account.nickName)">
+    </div>
+    <div class="form-group">
+        <label>邮箱</label>
+        <input type="email" class="form-control" name="account.userName" value="#(account.userName)"
+               placeholder="填写合法的 email">
+    </div>
+    <div class="form-group">
+        <input class="btn btn-primary" type="submit" value="提交"/>
+    </div>
 </form>
 
+
+<div id="showSelectImg" class="hidden">
+    <img src=""/>
+</div>
+
+#define css()
+<link rel="stylesheet" href="/assets/Jcrop/css/jquery.Jcrop.css">
+#end
+#define js()
+<script src="/assets/Jcrop/js/jquery.Jcrop.js"></script>
+#end
 <style type="text/css">
-	form .form-group {
-		margin-bottom: 25px;
-	}
+    form .form-group {
+        margin-bottom: 25px;
+    }
+
+    form .avatar {
+        width: 100px;
+        height: 100px;
+        cursor: pointer;
+        border-radius: 50%;
+    }
+
+    #showSelectImg {
+        width: 800px;
+        height: 300px;
+    }
 
 </style>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("#submit_form").ajaxForm({
-			dataType: "json"
-			, beforeSubmit: function(formData, jqForm, options) {}
-			, success: function(ret) {
-				if (ret.state === "ok") {
-					location.href = "/admin/account?p=#(p ?? 1)";
-				} else {
-					ShowUtil.showFailMsg(ret.msg);
-				}
-			}
-			, error: function(ret) {alert(ret.statusText);}
-			, complete: function(ret) {} 	      // 无论是 success 还是 error，最终都会被回调
-		});
-	});
+    var editMt = {
+        jcropApi: null,
+        updateAvatar: function () {
+            $("#selectAvatar").click();
+        },
+        imageUpload: function (event) {
+            var imgValue = $(event.target).val();
+            var ssi = $('#showSelectImg');
+            var formData = new FormData();
+            formData.append("myfile", document.getElementById("showSelectImg").files[0]);
+            $.ajax
+
+
+
+            ssi.removeClass('hidden');
+            console.log(imgValue);
+            var img = ssi.find("img");
+
+            editMt.jcropShow(img);
+            //ShowUtil.showFailMsg("请选择图片");
+        },
+        layerShow: function (ssi) {
+            layer.open({
+                type: 1,
+                id: 'layerImgShow',
+                content: ssi,
+                offset: '100px',
+                cancel: function () {
+                    ssi.addClass('hidden');
+                }
+            });
+        },
+        jcropShow: function (img) {
+            img.Jcrop({
+                allowSelect: true,
+                baseClass: 'jcrop'
+            }, function () {
+                editMt.jcropApi = this;
+            });
+        },
+        ajaxForm: function () {
+            $("#submit_form").ajaxForm({
+                dataType: "json"
+                , beforeSubmit: function (formData, jqForm, options) {
+                }
+                , success: function (ret) {
+                    if (ret.state === "ok") {
+                        location.href = "/admin/account?p=#(p ?? 1)";
+                    } else {
+                        ShowUtil.showFailMsg(ret.msg);
+                    }
+                }
+                , error: function (ret) {
+                    alert(ret.statusText);
+                }
+                , complete: function (ret) {
+                } 	      // 无论是 success 还是 error，最终都会被回调
+            });
+        }
+    };
+
+
+    $(document).ready(function () {
+        editMt.ajaxForm();
+        $("img[class='avatar']").on('click', editMt.updateAvatar);
+        $("#selectAvatar").bind('change', editMt.imageUpload);
+
+    });
 </script>
 
 #end

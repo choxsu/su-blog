@@ -5,12 +5,16 @@ import com.choxsu._admin.role.RoleAdminService;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.Role;
+import com.choxsu.kit.ImageKit;
 import com.choxsu.kit.IpKit;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Inject;
+import com.jfinal.core.NotAction;
+import com.jfinal.kit.PathKit;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.upload.UploadFile;
 
 import java.util.List;
 
@@ -124,5 +128,38 @@ public class AccountAdminController extends BaseController {
         setAttr("adminList", adminList);
         render("admin_list.html");
     }
+
+    /**
+     * 上传用户图片，为裁切头像做准备
+     */
+    public void uploadAvatar() {
+        UploadFile uf = null;
+        try {
+            uf = getFile("avatar", srv.getAvatarTempDir(), srv.getAvatarMaxSize());
+            if (uf == null) {
+                renderJson(Ret.fail("msg", "请先选择上传文件"));
+                return;
+            }
+        } catch (Exception e) {
+            if (e instanceof com.jfinal.upload.ExceededSizeException) {
+                renderJson(Ret.fail("msg", "文件大小超出范围"));
+            } else {
+                if (uf != null) {
+                    // 只有出现异常时才能删除，不能在 finally 中删，因为后面需要用到上传文件
+                    uf.getFile().delete();
+                }
+                renderJson(Ret.fail("msg", e.getMessage()));
+            }
+            return ;
+        }
+
+        Ret ret = srv.uploadAvatar(getLoginAccountId(), uf);
+        if (ret.isOk()) {   // 上传成功则将文件 url 径暂存起来，供下个环节进行裁切
+            setSessionAttr("avatarUrl", ret.get("avatarUrl"));
+        }
+        renderJson(ret);
+    }
+
+
 
 }

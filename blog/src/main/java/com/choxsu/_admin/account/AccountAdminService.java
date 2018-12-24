@@ -2,17 +2,20 @@
 
 package com.choxsu._admin.account;
 
+import com.choxsu.kit.ImageKit;
 import com.jfinal.aop.Inject;
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.Role;
 import com.choxsu.common.entity.Session;
 import com.choxsu._admin.login.AdminLoginService;
 import com.jfinal.kit.HashKit;
+import com.jfinal.kit.PathKit;
 import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.upload.UploadFile;
 
 import java.util.Date;
 import java.util.List;
@@ -26,6 +29,11 @@ public class AccountAdminService {
     AdminLoginService adminLoginService;
 
     private Account dao = new Account().dao();
+
+    // 经测试对同一张图片裁切后的图片 jpg为3.28KB，而 png 为 33.7KB，大了近 10 倍
+    public static final String extName = ".jpg";
+
+
 
     public Page<Account> paginate(int pageNum) {
         return dao.paginate(pageNum, 10, "select *", "from account order by id desc");
@@ -222,5 +230,43 @@ public class AccountAdminService {
                 "where a.id = ar.accountId and ar.roleId = r.id " +
                 "order by roleId asc";
         return Db.find(sql);
+    }
+
+
+    /**
+     * 上传图像到临时目录，发回路径供 jcrop 裁切
+     */
+    public Ret uploadAvatar(int accountId, UploadFile uf) {
+        if (uf == null) {
+            return Ret.fail("msg", "上传文件UploadFile对象不能为null");
+        }
+
+        try {
+            if (ImageKit.notImageExtName(uf.getFileName())) {
+                return Ret.fail("msg", "文件类型不正确，只支持图片类型：gif、jpg、jpeg、png、bmp");
+            }
+
+            String avatarUrl = "/upload" + getAvatarTempDir() + accountId + "_" + System.currentTimeMillis() + extName;
+            String saveFile = PathKit.getWebRootPath() + avatarUrl;
+            ImageKit.zoom(500, uf.getFile(), saveFile);
+            return Ret.ok("avatarUrl", avatarUrl);
+        }
+        catch (Exception e) {
+            return Ret.fail("msg", e.getMessage());
+        } finally {
+            uf.getFile().delete();
+        }
+    }
+
+    /**
+     * 上传文件，以及上传后立即缩放后的文件暂存目录
+     */
+    public String getAvatarTempDir() {
+        return "/avatar/temp/";
+    }
+
+    // 用户上传图像最多只允许 1M大小
+    public int getAvatarMaxSize() {
+        return 1024 * 1024;
     }
 }
