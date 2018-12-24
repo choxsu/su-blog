@@ -17,7 +17,7 @@
 	 -->
 	<formats>
 		<format>dir</format>
-		<format>zip</format>
+		<!--<format>zip</format>-->
 		<!-- <format>tar.gz</format> -->
 	</formats>
 	
@@ -32,10 +32,10 @@
 		</fileSet>
 		
 		<!-- src/main/webapp 全部 copy 到 webapp 目录下 -->
-		<fileSet>
+		<!--<fileSet>
 			<directory>${basedir}/src/main/webapp</directory>
 			<outputDirectory>webapp</outputDirectory>
-		</fileSet>
+		</fileSet>-->
 		
 		<!-- 项目根下面的脚本文件 copy 到根目录下 -->
 		<fileSet>
