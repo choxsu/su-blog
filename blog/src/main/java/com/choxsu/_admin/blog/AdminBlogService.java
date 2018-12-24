@@ -1,14 +1,17 @@
 package com.choxsu._admin.blog;
 
 import com.choxsu.common.base.BaseService;
+import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.Blog;
+import com.choxsu.common.interceptor.AuthCacheClearInterceptor;
 import com.jfinal.kit.Ret;
-import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author chox su
@@ -17,14 +20,27 @@ import java.util.Date;
 public class AdminBlogService extends BaseService<Blog> {
 
 
-    public Page<Blog> paginate(Integer p) {
+    public Page<Blog> list(Integer p, Integer pageSize, Account loginAccount) {
 
-        String sql = "from blog where isDelete = 0";
-        Page<Blog> paginate = DAO.paginate(p, 10, "select * ", sql);
+        boolean admin = AuthCacheClearInterceptor.isAdmin(loginAccount);
+        String sql = "from blog where isDelete = 0 ";
+        List<Object> list = new ArrayList<>();
+        if (!admin) {
+            sql += "and accountId = ? ";
+            list.add(loginAccount.getId());
+        }
+        Page<Blog> paginate = DAO.paginate(p, pageSize, "select * ", sql, list.toArray());
         for (Blog blog : paginate.getList()) {
-            blog.put("tagName", Db.queryStr("select name from blog_tag where id = ?", blog.getTagId()));
+            blog.put("tagName", getTagStr(blog));
         }
         return paginate;
+    }
+
+    private String getTagStr(Blog blog) {
+        if (blog == null) {
+            return null;
+        }
+        return Db.queryStr("select name from blog_tag where id = ?", blog.getTagId());
     }
 
     @Override
@@ -61,13 +77,13 @@ public class AdminBlogService extends BaseService<Blog> {
             return b;
         }
         Record record = Db.findById(getTableName(), id);
-        if (record == null){
+        if (record == null) {
             return b;
         }
         String oldTitle = record.getStr("title");
-        if (oldTitle != null && oldTitle.equals(title)){
+        if (oldTitle != null && oldTitle.equals(title)) {
             return false;
-        }else {
+        } else {
             return b;
         }
 

@@ -1,15 +1,16 @@
 package com.choxsu._admin.blog;
 
-import com.jfinal.aop.Inject;
+import com.choxsu._admin.tag.AdminTagService;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.constant.CategoryEnum;
+import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.Blog;
 import com.choxsu.common.entity.BlogCategory;
 import com.jfinal.aop.Before;
+import com.jfinal.aop.Inject;
 import com.jfinal.core.NotAction;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Page;
-import com.choxsu._admin.tag.AdminTagService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +29,10 @@ public class AdminBlogController extends BaseController {
     AdminTagService tagService;
 
     public void index() {
-
-        Page<Blog> blogPage = adminBlogService.paginate(getParaToInt("p", 1));
+        Account loginAccount = getLoginAccount();
+        Integer p = getParaToInt("p", 1);
+        Integer size = getParaToInt("size", 10);
+        Page<Blog> blogPage = adminBlogService.list(p, size, loginAccount);
         setAttr("blogPage", blogPage);
         render("index.html");
     }
