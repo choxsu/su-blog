@@ -10,12 +10,15 @@ import com.choxsu.kit.IpKit;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Inject;
 import com.jfinal.core.NotAction;
+import com.jfinal.ext.interceptor.GET;
+import com.jfinal.ext.interceptor.POST;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.upload.UploadFile;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -120,7 +123,7 @@ public class AccountAdminController extends BaseController {
     /**
      * 显示 "后台账户/管理员" 列表，在 account_role 表中存在的账户(被分配过角色的账户)
      * 被定义为 "后台账户/管理员"
-     *
+     * <p>
      * 该功能便于查看后台都有哪些账户被分配了角色，在对账户误操作分配了角色时，也便于取消角色分配
      */
     public void showAdminList() {
@@ -150,7 +153,7 @@ public class AccountAdminController extends BaseController {
                 }
                 renderJson(Ret.fail("msg", e.getMessage()));
             }
-            return ;
+            return;
         }
 
         Ret ret = srv.uploadAvatar(getLoginAccountId(), uf);
@@ -160,6 +163,37 @@ public class AccountAdminController extends BaseController {
         renderJson(ret);
     }
 
+    /**
+     * 保存 jcrop 裁切区域为用户头像
+     */
+    @Before(POST.class)
+    public void saveAvatar() {
+        String avatarUrl = getSessionAttr("avatarUrl");
+        Integer id = getParaToInt("id");
+        int x = getParaToInt("x");
+        int y = getParaToInt("y");
+        int width = getParaToInt("width");
+        int height = getParaToInt("height");
+        Ret ret = srv.saveAvatar(id == null ? getLoginAccount() : getAccount(id), avatarUrl, x, y, width, height);
+        renderJson(ret);
+    }
+
+    /**
+     * 删除存放在临时目录的文件
+     */
+    public void delTemFile() {
+        //String avatarUrl = getPara("avatarUrl");
+        String avatarUrl = getSessionAttr("avatarUrl");
+        String tempFile = PathKit.getWebRootPath() + avatarUrl;
+        File file = new File(tempFile);
+        System.out.println(tempFile);
+        if (file.exists()) {
+            file.delete();
+            renderJson(Ret.ok().set("msg", "临时图片已经删除！"));
+            return;
+        }
+        renderJson(Ret.fail().set("msg", "临时文件不存在，或者临时文件已经删除！"));
+    }
 
 
 }

@@ -2,6 +2,7 @@
 
 package com.choxsu._admin.account;
 
+import com.choxsu.front.index.ArticleService;
 import com.choxsu.kit.ImageKit;
 import com.jfinal.aop.Inject;
 import com.choxsu.common.entity.Account;
@@ -15,8 +16,11 @@ import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.plugin.ehcache.CacheKit;
 import com.jfinal.upload.UploadFile;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +37,17 @@ public class AccountAdminService {
     // 经测试对同一张图片裁切后的图片 jpg为3.28KB，而 png 为 33.7KB，大了近 10 倍
     public static final String extName = ".jpg";
 
+    /**
+     * 上传文件，以及上传后立即缩放后的文件暂存目录
+     */
+    public String getAvatarTempDir() {
+        return "/avatar/temp/";
+    }
+
+    // 用户上传图像最多只允许 1M大小
+    public int getAvatarMaxSize() {
+        return 1024 * 1024;
+    }
 
 
     public Page<Account> paginate(int pageNum) {
@@ -258,15 +273,70 @@ public class AccountAdminService {
         }
     }
 
-    /**
-     * 上传文件，以及上传后立即缩放后的文件暂存目录
-     */
-    public String getAvatarTempDir() {
-        return "/avatar/temp/";
+
+    public Ret saveAvatar(Account loginAccount, String avatarUrl, int x, int y, int width, int height) {
+        int accountId = loginAccount.getId();
+        // 暂时用的 webRootPath，以后要改成 baseUploadPath，并从一个合理的地方得到
+        String webRootPath = PathKit.getWebRootPath() ;
+        String avatarFileName = webRootPath + avatarUrl;
+
+        try {
+            // 相对路径 + 文件名：用于保存到 account.avatar 字段
+            String[] relativePathFileName = new String[1];
+            // 绝对路径 + 文件名：用于保存到文件系统
+            String[] absolutePathFileName = new String[1];
+            buildPathAndFileName(accountId, webRootPath, relativePathFileName, absolutePathFileName);
+
+            BufferedImage bi = ImageKit.crop(avatarFileName, x, y, width, height);
+            bi = ImageKit.resize(bi, 200, 200);     // 将 size 变为 200 X 200，resize 不会变改分辨率
+            deleteOldAvatarIfExists(absolutePathFileName[0]);
+            ImageKit.save(bi, absolutePathFileName[0]);
+
+            updateAccountAvatar(accountId, relativePathFileName[0]);
+            AdminLoginService.me.reloadLoginAccount(loginAccount);
+            return Ret.ok("msg", "头像更新成功，部分浏览器需要按 CTRL + F5 强制刷新看效果").set("url", relativePathFileName[0]);
+        } catch (Exception e) {
+            return Ret.fail("msg", "头像更新失败：" + e.getMessage());
+        } finally {
+            new File(avatarFileName).delete();	 // 删除用于裁切的源文件
+        }
     }
 
-    // 用户上传图像最多只允许 1M大小
-    public int getAvatarMaxSize() {
-        return 1024 * 1024;
+    /**
+     * 1：生成保存于 account.avatar 字段的：相对路径 + 文件名，存放于 relativePathFileName[0]
+     * 2：生成保存于文件系统的：绝对路径 + 文件名，存放于 absolutePathFileName[0]
+     *
+     * 3：用户头像保存于 baseUploadPath 之下的 /avatar/ 之下
+     * 4：account.avatar 只存放相对于 baseUploadPath + "/avatar/" 之后的路径和文件名
+     *    例如：/upload/avatar/0/123.jpg 只存放 "0/123.jpg" 这部分到 account.avatar 字段之中
+     *
+     * 5："/avatar/" 之下生成的子录为 accountId 对 5000取整，例如 accountId 为 123 时，123 / 5000 = 0，生成目录为 "0"
+     * 6：avatar 文件名为：accountId + ".jpg"
+     */
+    private void buildPathAndFileName(int accountId, String webRootPath, String[] relativePathFileName, String[] absolutePathFileName) {
+        String relativePath = (accountId / 5000) + "/";
+        String fileName = accountId + extName;
+        relativePathFileName[0] = relativePath + fileName;
+
+        String absolutePath = webRootPath + "/upload/avatar/" + relativePath;   // webRootPath 将来要根据 baseUploadPath 调整，改代码，暂时选先这样用着，着急上线
+        File temp = new File(absolutePath);
+        if (!temp.exists()) {
+            temp.mkdirs();  // 如果目录不存在则创建
+        }
+        absolutePathFileName[0] = absolutePath + fileName;
+    }
+
+    /**
+     * 目前该方法为空实现
+     * 如果在 linux 上跑稳了，此方法可以删除，不必去实现，如果出现 bug，
+     * 则尝试实现该方法，即当用户图像存在时再次上传保存，则先删除老的，
+     * 以免覆盖老文件时在 linux 之上出 bug
+     */
+    private void deleteOldAvatarIfExists(String oldAvatar) {
+
+    }
+
+    public void updateAccountAvatar(int accountId, String relativePathFileName) {
+        Db.update("update account set avatar=? where id=? limit 1", relativePathFileName, accountId);
     }
 }

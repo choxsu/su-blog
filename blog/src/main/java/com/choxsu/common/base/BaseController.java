@@ -12,7 +12,7 @@ import com.jfinal.core.NotAction;
 public class BaseController extends Controller {
 
     private Account loginAccount = null;
-
+    public static final Account accountDao = new Account().dao();
     @NotAction
     public Account getLoginAccount() {
         if (loginAccount == null) {
@@ -23,6 +23,15 @@ public class BaseController extends Controller {
         }
         return loginAccount;
     }
+
+    @NotAction
+    public Account getAccount(Integer id) {
+        if (id == null){
+            return null;
+        }
+        return accountDao.findById(id);
+    }
+
 
     @NotAction
     public boolean isLogin() {
