@@ -78,7 +78,7 @@ public class AccountAdminService {
         // 暂时只允许修改 nickName
         account.keep("id", "nickName");
         account.update();
-        if (account.getId().equals(loginAccount.getId())){
+        if (account.getId().equals(loginAccount.getId())) {
             AdminLoginService.me.reloadLoginAccount(loginAccount);
         }
         return Ret.ok("msg", "账户更新成功");
@@ -339,5 +339,9 @@ public class AccountAdminService {
 
     public void updateAccountAvatar(int accountId, String relativePathFileName) {
         Db.update("update account set avatar=? where id=? limit 1", relativePathFileName, accountId);
+    }
+
+    public Page<Record> findLoginLog(Integer id, Integer p, Integer size) {
+        return Db.paginate(p, size, "SELECT l.*,a.userName,a.nickName", " FROM login_log l ,account a where l.accountId = a.id and accountId = ?", id);
     }
 }

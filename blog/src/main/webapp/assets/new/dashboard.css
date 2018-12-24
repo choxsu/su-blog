@@ -114,6 +114,14 @@ body {
     border-radius: 50%;
 }
 
+a:hover {
+    text-decoration: none
+}
+
 a:focus {
     text-decoration: none
+}
+
+.margin3{
+    margin: 3px;
 }

@@ -51,13 +51,14 @@
             </td>
             <td>
                 #perm("/admin/account/edit")
-                <a href="/admin/account/edit?id=#(x.id)&p=#(accountPage.pageNumber)">
-                    <i class="fa fa-edit" title="修改"></i>
-                </a>
+                    <a class="margin3" href="/admin/account/edit?id=#(x.id)&p=#(accountPage.pageNumber)">
+                        <i class="fa fa-edit" title="修改"></i>
+                    </a>
                 #end
 
                 #perm("/admin/account/del")
-                <a data-delete
+                <a class="margin3"
+                   data-delete
                    data-title="#escape(x.userName)"
                    data-action="/admin/account/del?id=#(x.id)">
                     <i class="fa fa-trash" title="删除"></i>
@@ -65,10 +66,14 @@
                 #end
 
                 #perm("/admin/account/assignRoles")
-                <a href="/admin/account/assignRoles?id=#(x.id)">
+                <a class="margin3" href="/admin/account/assignRoles?id=#(x.id)">
                     <i class="fa fa-random" title="分配角色"></i>
                 </a>
                 #end
+
+                <a class="margin3" href="/admin/account/loginLog?id=#(x.id)">
+                    <i class="fa fa-history" title="登录日志"></i>
+                </a>
 
             </td>
         </tr>

@@ -186,13 +186,21 @@ public class AccountAdminController extends BaseController {
         String avatarUrl = getSessionAttr("avatarUrl");
         String tempFile = PathKit.getWebRootPath() + avatarUrl;
         File file = new File(tempFile);
-        System.out.println(tempFile);
         if (file.exists()) {
             file.delete();
             renderJson(Ret.ok().set("msg", "临时图片已经删除！"));
             return;
         }
         renderJson(Ret.fail().set("msg", "临时文件不存在，或者临时文件已经删除！"));
+    }
+
+
+    public void loginLog() {
+        Integer id = getParaToInt("id");
+        keepPara("id");
+        Page<Record> page = srv.findLoginLog(id, getParaToInt("p", 1), getParaToInt("size", 10));
+        setAttr("page", page);
+        render("login_log.html");
     }
 
 
