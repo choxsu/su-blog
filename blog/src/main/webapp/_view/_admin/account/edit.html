@@ -28,10 +28,15 @@
     </div>
 </form>
 
-
 <div id="showSelectImg" class="hidden">
+    <!--<img src="/upload/avatar/temp/1_1545658136942.jpg"/>-->
     <img src=""/>
 </div>
+
+<input type="hidden" id="x" name="x"/>
+<input type="hidden" id="y" name="y"/>
+<input type="hidden" id="width" name="width"/>
+<input type="hidden" id="height" name="height"/>
 
 #define css()
 <link rel="stylesheet" href="/assets/Jcrop/css/jquery.Jcrop.css">
@@ -51,10 +56,15 @@
         border-radius: 50%;
     }
 
-    #showSelectImg {
-        width: 800px;
-        height: 300px;
+    /*#showSelectImg {
+        max-width: 500px;
+        max-height: 500px;
     }
+
+    #showSelectImg img {
+        max-height: 500px;
+        width: auto;
+    }*/
 
 </style>
 
@@ -64,40 +74,137 @@
         updateAvatar: function () {
             $("#selectAvatar").click();
         },
-        imageUpload: function (event) {
-            var imgValue = $(event.target).val();
+        imageUpload: function () {
             var ssi = $('#showSelectImg');
+            var elementInputImg = document.getElementById("selectAvatar");
             var formData = new FormData();
-            formData.append("myfile", document.getElementById("showSelectImg").files[0]);
-            $.ajax
-
-
-
-            ssi.removeClass('hidden');
-            console.log(imgValue);
-            var img = ssi.find("img");
-
-            editMt.jcropShow(img);
-            //ShowUtil.showFailMsg("请选择图片");
+            formData.append("avatar", elementInputImg.files[0]);
+            var data = formData;
+            editMt.avatarUploadToTemp('/admin/account/uploadAvatar', data, function (result) {
+                console.log(result);
+                if (result.state === 'ok') {
+                    var avatarUrl = result.avatarUrl;
+                    //删除本地input file的value
+                    $(elementInputImg).val("");
+                    editMt.layerShow(ssi);
+                    ssi.removeClass('hidden');
+                    var img = ssi.find("img");
+                    editMt.jcropShow(img);
+                    img.attr("src", avatarUrl);
+                } else {
+                    ShowUtil.showFailMsg(result.msg);
+                }
+            });
+        },
+        avatarUploadToTemp: function (url, data, callBack) {
+            var index;
+            $.ajax({
+                url: url,
+                data: data,
+                type: "POST",
+                dataType: "json",
+                cache: false,//上传文件无需缓存
+                processData: false,//用于对data参数进行序列化处理 这里必须false
+                contentType: false, //必须
+                beforeSend: function (XHR) {
+                    //加载上传条
+                    index = layer.load(1);
+                },
+                success: function (result) {
+                    callBack(result);
+                },
+                complete: function (XHR, TS) {
+                    //结束上传条
+                    layer.close(index);
+                }
+            });
         },
         layerShow: function (ssi) {
             layer.open({
                 type: 1,
+                title: '头像裁剪',
                 id: 'layerImgShow',
                 content: ssi,
-                offset: '100px',
+                offset: ['100px', '30%'],
+                btn: ['保存选中区域'],
+                btnAlign: 'c',
+                yes: function (index, layero) {
+                    //保存头像，更新本地图片，并关闭窗口并提示头像更新成功
+                    editMt.saveAvatar(index);
+                },
                 cancel: function () {
                     ssi.addClass('hidden');
+                    //TODO 调接口删除临时文件
+                    $.ajax({
+                        url: '/admin/account/delTemFile',
+                        //data: {avatarUrl: avatarUrl},
+                        dataType: 'json',
+                        success: function (ret) {
+                            if (ret.state === 'ok'){
+                                ShowUtil.showOk(ret.msg);
+                            } else {
+                                ShowUtil.showFailMsg(ret.msg);
+                            }
+                        }
+                    })
                 }
             });
         },
+        saveAvatar: function (index) {
+            var x = $('#x').val(),
+                y = $('#y').val(),
+                width = $('#width').val(),
+                height = $('#height').val();
+            if (x === '' || y === '' || width === '' || height === '') {
+                ShowUtil.showFailMsg("请选择图片区域！");
+                return true;
+            }
+            var data = {x: x, y: y, width: width, height: height, id: '#(account.id)'};
+            editMt.doSaveAvatar('/admin/account/saveAvatar', data, function (result) {
+                if (result.state === 'ok') {
+                    $("img[class='avatar']").attr("src", "/upload/avatar/" + result.url);
+                    layer.close(index);
+                    layer.msg(result.msg);
+                } else {
+                    ShowUtil.showFailMsg(result.msg);
+                }
+            })
+        },
+        doSaveAvatar: function (url, data, callback) {
+            var index;
+            $.ajax({
+                url: url,
+                data: data,
+                type: 'POST',
+                beforeSend: function (XHR) {
+                    index = layer.load(1);
+                },
+                success: function (result) {
+                    callback(result);
+                },
+                complete: function (XHR, TS) {
+                    layer.close(index);
+                }
+
+            })
+        },
         jcropShow: function (img) {
             img.Jcrop({
+                setSelect: [30, 30, 250, 250],
+                minSize: [30, 30],
                 allowSelect: true,
-                baseClass: 'jcrop'
+                baseClass: 'jcrop',
+                onSelect: editMt.updateCoords,
+                onChange: editMt.updateCoords
             }, function () {
                 editMt.jcropApi = this;
             });
+        },
+        updateCoords: function (c) {
+            $('#x').val(c.x);
+            $('#y').val(c.y);
+            $('#width').val(c.w);
+            $('#height').val(c.h);
         },
         ajaxForm: function () {
             $("#submit_form").ajaxForm({

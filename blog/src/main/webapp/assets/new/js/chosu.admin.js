@@ -12,6 +12,9 @@ var env = {
  * @type {{showAjaxActionMsg: ShowUtil.showAjaxActionMsg, showFailMsg: ShowUtil.showFailMsg}}
  */
 var ShowUtil = {
+    showOk: function (msg) {
+        layer.msg(msg);
+    },
     showFailMsg: function (msg, callback) {
         layer.msg(
             msg
@@ -65,7 +68,7 @@ var Admin = {
         var pathname = location.pathname;
         $(".nav-sidebar li a[href]").each(function (index, element) {
             var href = $(element).attr("href");
-            if (pathname === '/admin' || pathname === '/admin/'){
+            if (pathname === '/admin' || pathname === '/admin/') {
                 $(".nav-sidebar li a[home]").parent().addClass("active");
                 return false;
             }
