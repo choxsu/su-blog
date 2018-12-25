@@ -39,7 +39,7 @@
             <td>#(x.remark)</td>
             <td>
                 #permission("/admin/permission/edit")
-                <a class="fa fa-edit"
+                <a class="fa fa-edit margin3"
                    title="修改"
                    href="/admin/permission/edit?id=#(x.id)&p=#(permissionPage.pageNumber)">
                 </a>
@@ -47,7 +47,7 @@
 
                 #role("管理员")
                 #permission("/admin/permission/delete")
-                <a class="fa fa-trash"
+                <a class="fa fa-trash margin3"
                    title="删除"
                    data-delete
                    data-title="#escape(x.actionKey)"

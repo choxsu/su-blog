@@ -21,7 +21,6 @@
             <th>标题</th>
             <th>查看次数</th>
             <th>创建时间</th>
-            <th>分类</th>
             <th>标签</th>
             <th>操作</th>
         </tr>
@@ -35,17 +34,17 @@
             </td>
             <td>#(x.clickCount)</td>
             <td>#date(x.createAt)</td>
-            <td>#(x.category)</td>
             <td>#(x.tagName??)</td>
             <td>
                 #permission("/admin/blog/edit")
-                <a href="/admin/blog/edit?id=#(x.id)&p=#(blogPage.pageNumber)">
+                <a class="margin3" href="/admin/blog/edit?id=#(x.id)&p=#(blogPage.pageNumber)">
                     <i class="fa fa-edit" title="修改"></i>
                 </a>
                 #end
 
                 #permission("/admin/blog/delete")
-                <a data-delete
+                <a class="margin3"
+                   data-delete
                    data-title="#escape(x.title)"
                    data-action="/admin/blog/delete?id=#(x.id)">
                     <i class="fa fa-trash" title="删除"></i>

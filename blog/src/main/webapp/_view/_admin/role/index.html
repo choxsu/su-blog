@@ -32,14 +32,15 @@
             <td>#date(x.createAt)</td>
             <td class="jfa-operation-button">
                 #permission("/admin/role/edit")
-                <a class="fa fa-edit"
+                <a class="fa fa-edit margin3"
                    title="修改"
                    href="/admin/role/edit?id=#(x.id)&p=#(rolePage.pageNumber)">
                 </a>
                 #end
 
                 #permission("/admin/role/delete")
-                <a data-delete
+                <a class="margin3"
+                   data-delete
                    data-title="#escape(x.name)"
                    data-action="/admin/role/delete?id=#(x.id)">
                     <i class="fa fa-trash" title="删除"></i>
@@ -47,7 +48,7 @@
                 #end
 
                 #permission("/admin/role/assignPermissions")
-                <a href="/admin/role/assignPermissions?id=#(x.id)">
+                <a class="margin3" href="/admin/role/assignPermissions?id=#(x.id)">
                     <i class="fa fa-random" title="分配权限"></i>
                 </a>
                 #end

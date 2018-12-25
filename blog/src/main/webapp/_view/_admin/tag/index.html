@@ -30,13 +30,14 @@
             <td>#(x.name)</td>
             <td>
                 #permission("/admin/tag/edit")
-                <a href="/admin/tag/edit?id=#(x.id)&p=#(blogTagPage.pageNumber)">
+                <a class="margin3" href="/admin/tag/edit?id=#(x.id)&p=#(blogTagPage.pageNumber)">
                     <i class="fa fa-edit" title="修改"></i>
                 </a>
                 #end
 
                 #permission("/admin/tag/delete")
-                <a data-delete
+                <a class="margin3"
+                   data-delete
                    data-title="#escape(x.name)"
                    data-action="/admin/tag/delete?id=#(x.id)">
                     <i class="fa fa-trash" title="删除"></i>
