@@ -80,7 +80,7 @@
             formData.append("avatar", elementInputImg.files[0]);
             var data = formData;
             editMt.avatarUploadToTemp('/admin/account/uploadAvatar', data, function (result) {
-                console.log(result);
+                //console.log(result);
                 if (result.state === 'ok') {
                     var avatarUrl = result.avatarUrl;
                     //删除本地input file的value

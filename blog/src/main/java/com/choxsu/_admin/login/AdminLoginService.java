@@ -55,8 +55,8 @@ public class AdminLoginService {
             return Ret.fail("msg", "用户名或密码不正确");
         }
 
-        // 如果用户勾选保持登录，暂定过期时间为 7 天，否则为 120 分钟，单位为秒
-        long liveSeconds = keepLogin ? 7 * 24 * 60 * 60 : 2 * 60 * 60;
+        // 如果用户勾选保持登录，暂定过期时间为 15 天，否则为 7 天，单位为秒
+        long liveSeconds = keepLogin ? 15 * 24 * 60 * 60 : 7 * 24 * 60 * 60;
         // 传递给控制层的 cookie
         int maxAgeInSeconds = (int) (keepLogin ? liveSeconds : -1);
         // expireAt 用于设置 session 的过期时间点，需要转换成毫秒
