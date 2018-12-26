@@ -32,7 +32,7 @@ public class SensitiveWordController extends BaseController {
 
 
     @Before({POST.class})
-    public void saveOrUpdate() {
+    public void save() {
         SensitiveWords sensitiveWords = getModel(SensitiveWords.class, "r");
         String word = sensitiveWords.getWord();
         if (StrKit.isBlank(word)) {
@@ -49,6 +49,18 @@ public class SensitiveWordController extends BaseController {
         SensitiveWords sensitiveWords = sensitiveWordService.findById(id);
         setAttr("r", sensitiveWords);
         render("addOrEdit.html");
+    }
+
+    @Before({POST.class})
+    public void update() {
+        SensitiveWords sensitiveWords = getModel(SensitiveWords.class, "r");
+        String word = sensitiveWords.getWord();
+        if (StrKit.isBlank(word)) {
+            renderJson(Ret.fail().set("msg", "请输入需要屏蔽敏感字"));
+            return;
+        }
+        Ret ret = sensitiveWordService.saveOrUpdate(sensitiveWords);
+        renderJson(ret);
     }
 
     public void delete() {
