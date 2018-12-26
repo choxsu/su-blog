@@ -51,7 +51,7 @@ public class AdminBlogController extends BaseController {
             blogCategory.setName(value.getName());
             list.add(blogCategory);
         }
-        setAttr("categoryList", list);
+        //setAttr("categoryList", list);
         setAttr("tagList", tagService.findAll());
     }
 

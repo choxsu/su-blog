@@ -3,6 +3,7 @@
 package com.choxsu.common.safe;
 
 import com.choxsu.common.entity.Account;
+import com.choxsu.common.entity.Blog;
 import com.jfinal.plugin.activerecord.Model;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -45,37 +46,19 @@ public class JsoupFilter {
                 .addAttributes("embed", "src", "quality", "width", "height", "allowFullScreen", "allowScriptAccess", "flashvars", "name", "type", "pluginspage");
     }
 
+
     /**
-     * 过滤 model 中的 title 与 content 字段，其中 title 过滤为纯 text
-     * content 使用 contentWhitelist 过滤
+     * 对项目的 title、content 进行过滤
+     * title 过滤为纯 text 文本，content 保留部分标签
      */
-    public static void filterTitleAndContent(Model m) {
-        String title = m.getStr("title");
+    public static void filterArticle(Blog blog) {
+        String title = blog.getTitle();
         if (title != null) {
-            m.set("title", getText(title));
+            blog.setTitle(getText(title));
         }
-        String content = m.getStr("content");
+        String content = blog.getContent();
         if (content != null) {
-            m.set("content", filterArticleContent(content));
-        }
-    }
-
-    /**
-     * 对要显示在列表中的 article list 进行过滤，将其中的 title content 转成纯文本
-     */
-    public static void filterArticleList(List<? extends Model> modelList, int titleLen, int contentLen) {
-        for (Model m : modelList) {
-            String title = getText(m.getStr("title"));
-            if (title.length() > titleLen) {
-                title = title.substring(0, titleLen - 1);
-            }
-
-            String content = getText(m.getStr("content")).replaceAll("&nbsp;", " ");
-            if (content.length() > contentLen) {
-                content = content.substring(0, contentLen - 1);
-            }
-            m.set("title", title);
-            m.set("content", content);
+            blog.setContent(filterArticleContent(content));
         }
     }
 
@@ -86,19 +69,6 @@ public class JsoupFilter {
         // return content != null ? Jsoup.clean(content, contentWhitelist) : null;
         // 添加 notPrettyPrint 参数，避免重新格式化，主要是 at me 时候不会在超链前面添加 "\n"
         return content != null ? Jsoup.clean(content, "", contentWhitelist, notPrettyPrint) : null;
-    }
-
-    /**
-     * 对文章 content 字段过滤
-     */
-    public static String filterArticleContent(String content, int length) {
-        assert content != null;
-        assert length != 0;
-        content = Jsoup.clean(content, "", contentWhitelist, notPrettyPrint);
-        if (content.length() > length) {
-            content = content.substring(0, length);
-        }
-        return content;
     }
 
     /**
@@ -113,16 +83,6 @@ public class JsoupFilter {
      */
     public static String filterContentKeepNewline(String content) {
         return content != null ? Jsoup.clean(content, "", contentWhitelist, notPrettyPrint) : null;
-    }
-
-    /**
-     * 将回车换行符过滤成 <br> 标记。三次 replace 为兼容 windows、linux、mac os 输入
-     * windows换行为：\r\n
-     * linux 换行为：\n
-     * mac os 换行为：\r
-     */
-    public static String filterNewlineToBrTag(String content) {
-        return content != null ? content.replaceAll("\r\n", "<br>").replaceAll("\r", "<br>").replaceAll("\n", "<br>") : null;
     }
 
     /**

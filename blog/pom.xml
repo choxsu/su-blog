@@ -166,9 +166,9 @@
                             <recompressZippedFiles>false</recompressZippedFiles>
                             <!-- 打包生成的文件是否要追加 release.xml 中定义的 id 值 -->
                             <appendAssemblyId>true</appendAssemblyId>
-                            <!-- 指向打包描述文件 package.xml -->
+                            <!-- 指向打包描述文件 assembly.xml -->
                             <descriptors>
-                                <descriptor>package.xml</descriptor>
+                                <descriptor>assembly.xml</descriptor>
                             </descriptors>
                             <!-- 打包结果输出的基础目录 -->
                             <outputDirectory>${project.build.directory}/</outputDirectory>
