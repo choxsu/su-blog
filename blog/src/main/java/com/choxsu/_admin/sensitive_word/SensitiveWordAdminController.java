@@ -8,20 +8,24 @@ import com.jfinal.ext.interceptor.POST;
 import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.ehcache.CacheKit;
+import net.sf.ehcache.CacheManager;
+
+import java.util.List;
 
 /**
  * @author choxsu
  * @date 2018/12/26
  */
-public class SensitiveWordController extends BaseController {
+public class SensitiveWordAdminController extends BaseController {
 
     @Inject
-    SensitiveWordService sensitiveWordService;
+    SensitiveWordAdminService sensitiveWordAdminService;
 
     public void index() {
         Integer p = getParaToInt("p", 1);
         Integer size = getParaToInt("size", 10);
-        Page<SensitiveWords> page = sensitiveWordService.list(p, size);
+        Page<SensitiveWords> page = sensitiveWordAdminService.list(p, size);
         setAttr("page", page);
         render("index.html");
     }
@@ -39,14 +43,14 @@ public class SensitiveWordController extends BaseController {
             renderJson(Ret.fail().set("msg", "请输入需要屏蔽敏感字"));
             return;
         }
-        Ret ret = sensitiveWordService.saveOrUpdate(sensitiveWords);
+        Ret ret = sensitiveWordAdminService.saveOrUpdate(sensitiveWords);
         renderJson(ret);
     }
 
 
     public void edit() {
         Integer id = getParaToInt("id");
-        SensitiveWords sensitiveWords = sensitiveWordService.findById(id);
+        SensitiveWords sensitiveWords = sensitiveWordAdminService.findById(id);
         setAttr("r", sensitiveWords);
         render("addOrEdit.html");
     }
@@ -59,12 +63,12 @@ public class SensitiveWordController extends BaseController {
             renderJson(Ret.fail().set("msg", "请输入需要屏蔽敏感字"));
             return;
         }
-        Ret ret = sensitiveWordService.saveOrUpdate(sensitiveWords);
+        Ret ret = sensitiveWordAdminService.saveOrUpdate(sensitiveWords);
         renderJson(ret);
     }
 
     public void delete() {
-        boolean bool = sensitiveWordService.deleteById(getParaToInt("id"));
+        boolean bool = sensitiveWordAdminService.deleteById(getParaToInt("id"));
         if (bool) {
             renderJson(Ret.ok().set("msg", "删除成功"));
             return;

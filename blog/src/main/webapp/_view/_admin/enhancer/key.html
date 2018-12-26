@@ -1,0 +1,18 @@
+#@adminLayout()
+
+#define main()
+<ul class="breadcrumb">
+    <li><a href="/admin">首页</a></li>
+    <li><a href="/admin/enhancer">Enhancer缓存管理</a></li>
+    <li class="active">#(key)</li>
+</ul>
+### 内容区域
+<div class="table-responsive">
+    <div>
+        <b>key:</b><span>#(key)</span>
+    </div>
+    <div>
+        <b>value:</b><span>#(value)</span>
+    </div>
+</div>
+#end

@@ -11,7 +11,7 @@ import com.jfinal.plugin.activerecord.Page;
  * @author choxsu
  * @date 2018/12/26
  */
-public class SensitiveWordService extends BaseService<SensitiveWords> {
+public class SensitiveWordAdminService extends BaseService<SensitiveWords> {
 
     @Override
     public String getTableName() {
