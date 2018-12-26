@@ -9,7 +9,7 @@
 
 ### 内容区域
 <form id="myArticleForm" class="col-md-10"
-      action="/admin/sensitiveWord/saveOrUpdate"
+      action="#(r.id?? == null ? '/admin/sensitiveWord/save' : '/admin/sensitiveWord/update')"
       method="post">
     <input type="hidden" name="r.id" value="#(r.id??)"/>
 
