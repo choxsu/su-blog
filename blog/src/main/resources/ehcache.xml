@@ -47,47 +47,6 @@
 		   diskPersistent="false"
 	/>
 
-
-	<cache name="sampleCache1"
-	       maxEntriesLocalHeap="10000"
-	       maxEntriesLocalDisk="1000"
-	       eternal="false"
-	       diskSpoolBufferSizeMB="20"
-	       timeToIdleSeconds="300"
-	       timeToLiveSeconds="600"
-	       memoryStoreEvictionPolicy="LFU"
-	       transactionalMode="off">
-		<persistence strategy="localTempSwap"/>
-	</cache>
-
-	<!--
-	Sample cache named sampleCache2
-	This cache has a maximum of 1000 elements in memory. There is no overflow to disk, so 1000
-	is also the maximum cache size. Note that when a cache is eternal, timeToLive and
-	timeToIdle are not used and do not need to be specified.
-	-->
-	<cache name="sampleCache2"
-	       maxEntriesLocalHeap="1000"
-	       eternal="true"
-	       memoryStoreEvictionPolicy="FIFO"
-			/>
-
-	<!--
-	Sample cache named sampleCache3. This cache overflows to disk. The disk store is
-	persistent between cache and VM restarts. The disk expiry thread interval is set to 10
-	minutes, overriding the default of 2 minutes.
-	-->
-	<cache name="sampleCache3"
-	       maxEntriesLocalHeap="500"
-	       eternal="false"
-	       overflowToDisk="true"
-	       diskPersistent="true"
-	       timeToIdleSeconds="300"
-	       timeToLiveSeconds="600"
-	       diskExpiryThreadIntervalSeconds="1"
-	       memoryStoreEvictionPolicy="LFU">
-	</cache>
-
 	<!-- 缓存登录用户信息，空闲 30 分钟则清除，否则一直保持登录状态，
         登录过期时间是指 session表中的 expireAt，此缓存仅用于统计 login_log
         以及提升性能(不必总读取数据库 session 表) -->
