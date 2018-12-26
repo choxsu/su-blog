@@ -89,17 +89,6 @@ public abstract class BaseService<M extends Model<M>> {
     }
 
     /**
-     * 保存或更新
-     *
-     * @param model
-     * @return
-     */
-    public boolean saveOrUpdate(M model) {
-        return true;
-    }
-
-
-    /**
      * 更新
      *
      * @param model

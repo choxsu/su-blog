@@ -22,7 +22,7 @@ public class PgBeanKit<T> {
      * @return 分页对象
      */
     public static <T> Page<T> getPage(List<T> list, int page, int size, int total) {
-        return new Page<T>(list, page, size, ((total + size - 1) / size), total);
+        return new Page<>(list, page, size, ((total + size - 1) / size), total);
     }
 
     /**
@@ -34,6 +34,6 @@ public class PgBeanKit<T> {
      * @return 分页对象
      */
     public static <T> Page<T> getPage(int page, int size) {
-        return new Page<T>(new ArrayList<T>(), page, size, ((size - 1) / size), 0);
+        return new Page<>(new ArrayList<>(), page, size, ((size - 1) / size), 0);
     }
 }

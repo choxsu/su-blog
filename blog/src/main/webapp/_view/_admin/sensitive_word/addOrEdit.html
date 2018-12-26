@@ -1,0 +1,52 @@
+#@adminLayout()
+
+#define main()
+<ul class="breadcrumb">
+    <li><a href="/admin">首页</a></li>
+    <li><a href="/admin/sensitiveWord">敏感字管理</a></li>
+    <li class="active">#(r.id?? == null ? '创建' : '修改')</li>
+</ul>
+
+### 内容区域
+<form id="myArticleForm" class="col-md-10"
+      action="/admin/sensitiveWord/saveOrUpdate"
+      method="post">
+    <input type="hidden" name="r.id" value="#(r.id??)"/>
+
+    <div class="form-group">
+        <label for="name">敏感文字</label>
+        <input type="text" class="form-control" placeholder="请输入文字" name="r.word" id="name" value="#(r.word??)">
+    </div>
+    <div class="form-group">
+        <input class="btn btn-primary" type="submit" value="提交"/>
+    </div>
+
+</form>
+<script type="text/javascript">
+
+    var Article = {
+        submitForm: function () {
+            $("#myArticleForm").ajaxForm({
+                dataType: "json"
+                , beforeSubmit: function (formData, jqForm, options) {
+                }
+                , success: function (ret) {
+                    if (ret.state === "ok") {
+                        location.href = "/admin/sensitiveWord?p=#(p ?? 1)";
+                    } else {
+                        ShowUtil.showFailMsg(ret.msg);
+                    }
+                }
+                , error: function (ret) {
+                    alert(ret.statusText);
+                }
+                , complete: function (ret) {
+                } 	      // 无论是 success 还是 error，最终都会被回调
+            });
+        },
+    };
+    $(document).ready(function () {
+        Article.submitForm();
+    });
+</script>
+#end
