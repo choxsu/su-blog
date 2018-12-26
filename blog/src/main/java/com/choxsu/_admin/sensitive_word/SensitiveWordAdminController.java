@@ -37,18 +37,12 @@ public class SensitiveWordAdminController extends BaseController {
 
     @Before({POST.class})
     public void save() {
-        SensitiveWords sensitiveWords = getModel(SensitiveWords.class, "r");
-        String word = sensitiveWords.getWord();
-        if (StrKit.isBlank(word)) {
-            renderJson(Ret.fail().set("msg", "请输入需要屏蔽敏感字"));
-            return;
-        }
-        Ret ret = sensitiveWordAdminService.saveOrUpdate(sensitiveWords);
-        renderJson(ret);
+        saveOrUpdate();
     }
 
 
     public void edit() {
+        keepPara("p");
         Integer id = getParaToInt("id");
         SensitiveWords sensitiveWords = sensitiveWordAdminService.findById(id);
         setAttr("r", sensitiveWords);
@@ -57,6 +51,10 @@ public class SensitiveWordAdminController extends BaseController {
 
     @Before({POST.class})
     public void update() {
+        saveOrUpdate();
+    }
+
+    private void saveOrUpdate() {
         SensitiveWords sensitiveWords = getModel(SensitiveWords.class, "r");
         String word = sensitiveWords.getWord();
         if (StrKit.isBlank(word)) {
