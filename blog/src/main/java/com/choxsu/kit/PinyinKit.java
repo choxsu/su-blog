@@ -1,5 +1,6 @@
 package com.choxsu.kit;
 
+import com.jfinal.kit.StrKit;
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
@@ -18,16 +19,17 @@ import java.util.regex.Pattern;
 public class PinyinKit {
 
     /**
-     * @param str
-     * @return
+     * @param str                  需要转换的汉字
+     * @param firstCharToUpperCase 首字母大写 true 大写 false 小写
+     * @param space                转换后的汉字拼音是否留空格 true 留空格 false 不留空格
+     * @return 转换后的拼音
      */
-    public static String hanyuToPinyin(String str) {
+    public static String hanyuToPinyin(String str, boolean firstCharToUpperCase, boolean space) {
 
         StringBuilder pinyin = new StringBuilder();
         HanyuPinyinOutputFormat defaultFormat = new HanyuPinyinOutputFormat();
         defaultFormat.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
         defaultFormat.setVCharType(HanyuPinyinVCharType.WITH_V);
-        defaultFormat.setCaseType(HanyuPinyinCaseType.UPPERCASE);
         for (int i = 0; i < str.length(); i++) {
             char c = str.charAt(i);
             if (!isHanyu(c)) {
@@ -41,7 +43,11 @@ public class PinyinKit {
                 e.printStackTrace();
             }
             if (pinyinArray != null) {
-                pinyin.append(pinyinArray[0]);
+                String charPiny = firstCharToUpperCase ? StrKit.firstCharToUpperCase(pinyinArray[0]) : pinyinArray[0];
+                pinyin.append(charPiny);
+                if (space) {
+                    pinyin.append(" ");
+                }
             } else if (c != ' ') {
                 pinyin.append(str.charAt(i));
             }

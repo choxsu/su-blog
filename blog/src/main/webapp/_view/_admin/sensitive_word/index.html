@@ -8,18 +8,25 @@
 ### 内容区域
 #permission("/admin/sensitiveWord/add")
 <div class="page-header">
-    <a class="btn btn-primary btn-sm" href="/admin/sensitiveWord/add">
-        <span class="fa fa-plus" aria-hidden="true">&nbsp;</span>创建
-    </a>
-  <!--  <a class="btn btn-primary btn-sm" href="/admin/sensitiveWord/import">
-        <span class="fa fa-arrow-up" aria-hidden="true">&nbsp;</span>导入
-    </a>
-    <a class="btn btn-primary btn-sm" href="/admin/sensitiveWord/downloadTemplate">
-        <span class="fa fa-download" aria-hidden="true">&nbsp;</span>下载导入模板
-    </a>
-    <a class="btn btn-primary btn-sm" href="/admin/sensitiveWord/export">
-        <span class="fa fa-arrow-down" aria-hidden="true">&nbsp;</span>导出
-    </a>-->
+    <div class="text-right d-inline">
+        <a class="btn btn-primary btn-sm" href="/admin/sensitiveWord/add">
+            <span class="fa fa-plus" aria-hidden="true">&nbsp;</span>创建
+        </a>
+        <!--  <a class="btn btn-primary btn-sm" href="/admin/sensitiveWord/import">
+              <span class="fa fa-arrow-up" aria-hidden="true">&nbsp;</span>导入
+          </a>
+          <a class="btn btn-primary btn-sm" href="/admin/sensitiveWord/downloadTemplate">
+              <span class="fa fa-download" aria-hidden="true">&nbsp;</span>下载导入模板
+          </a>
+          <a class="btn btn-primary btn-sm" href="/admin/sensitiveWord/export">
+              <span class="fa fa-arrow-down" aria-hidden="true">&nbsp;</span>导出
+          </a>-->
+        <a class="btn btn-primary btn-sm"
+           data-toolbar
+           data-action="/admin/sensitiveWord/exchange">
+            <span class="fa fa-exchange" aria-hidden="true">&nbsp;</span>一键敏感文字转拼音
+        </a>
+    </div>
 </div>
 #end
 <div class="table-responsive">
@@ -60,6 +67,19 @@
     </table>
     #@adminPaginate(page.pageNumber, page.totalPage, "/admin/sensitiveWord?p=")
 </div>
+<script type="text/javascript">
+    var Methods = {
+        exchange: function (event) {
+            event.preventDefault();
+            var action = $(this).attr("data-action");
+            Admin.ajaxAction(action);
+        }
+    };
 
+    $(document).ready(function () {
+        $(".page-header").on("click", "a[data-toolbar]", Methods.exchange);
+    });
+
+</script>
 #end
 

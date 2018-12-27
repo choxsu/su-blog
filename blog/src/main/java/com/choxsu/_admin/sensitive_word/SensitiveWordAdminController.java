@@ -76,4 +76,13 @@ public class SensitiveWordAdminController extends BaseController {
     }
 
 
+    /**
+     * 敏感字转换拼音
+     */
+    public void exchange() {
+        Ret ret = sensitiveWordAdminService.exchange(getLoginAccount());
+        renderJson(ret);
+    }
+
+
 }
