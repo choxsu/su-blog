@@ -33,7 +33,7 @@ public class PinyinKit {
         for (int i = 0; i < str.length(); i++) {
             char c = str.charAt(i);
             if (!isHanyu(c)) {
-                pinyin.append(c);
+                pinyin.append(c).append(" ");
                 continue;
             }
             String[] pinyinArray = null;
