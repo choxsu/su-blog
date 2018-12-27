@@ -94,20 +94,14 @@ public class SensitiveWordAdminService extends BaseService<SensitiveWords> {
         if (!admin) {
             return Ret.fail().set("msg", "只有管理员才有操作权限");
         }
-        int i = 0, j = 0;
         List<SensitiveWords> sensitiveWords = DAO.find("select * from " + getTableName() + " where word_pinyin = '' ");
         if (sensitiveWords.size() > 0) {
             for (SensitiveWords sensitiveWord : sensitiveWords) {
                 sensitiveWord.setWordPinyin(PinyinKit.hanyuToPinyin(sensitiveWord.getWord(), true, true));
-                boolean update = sensitiveWord.update();
-                if (update) {
-                    i++;
-                } else {
-                    j++;
-                }
             }
         }
-        String msg = "转换成功条数：" + i + ",转换失败条数：" + j;
+        int[] ints = Db.batchUpdate(sensitiveWords, 500);
+        String msg = "转换成功条数：" + ints.length + ",转换失败条数：" + (sensitiveWords.size() - ints.length);
         return Ret.ok().set("msg", msg);
     }
 }
