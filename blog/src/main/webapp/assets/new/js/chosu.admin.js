@@ -113,7 +113,10 @@ var Admin = {
             , dataType: "json"
             // , data: {	}
             , beforeSend: function () {
-                before()
+                var type = typeof before;
+                if (type === 'function'){
+                    before();
+                }
             }
             , error: function (ret) {
                 alert(ret.statusText);
@@ -125,7 +128,10 @@ var Admin = {
                     ShowUtil.showAjaxActionMsg(6, ret.msg);
                 }
             }, complete: function () {
-                complete()
+                var type = typeof complete;
+                if (type === 'function'){
+                    complete();
+                }
             }
         });
     },
