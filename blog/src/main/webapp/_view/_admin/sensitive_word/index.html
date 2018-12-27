@@ -24,7 +24,7 @@
         <a class="btn btn-primary btn-sm"
            data-toolbar
            data-action="/admin/sensitiveWord/exchange">
-            <span class="fa fa-exchange" aria-hidden="true">&nbsp;</span>一键敏感文字转拼音
+            <span class="fa fa-exchange">&nbsp;一键敏感文字转拼音</span>
         </a>
     </div>
 </div>
@@ -71,8 +71,17 @@
     var Methods = {
         exchange: function (event) {
             event.preventDefault();
-            var action = $(this).attr("data-action");
-            Admin.ajaxAction(action);
+            var $this = $(this);
+            var action = $this.attr("data-action");
+            var span = $this.children("span")[0];
+            var beforeText = span.innerText;
+            Admin.ajaxAction(action, function () {
+                span.innerText = " 转换中...";
+                $this.attr("disabled", true);
+            },function () {
+                span.innerText = beforeText;
+                $this.removeAttr("disabled");
+            });
         }
     };
 

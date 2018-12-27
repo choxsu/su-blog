@@ -106,13 +106,14 @@ var Admin = {
             layer.close(index);                           // 需要调用 layer.close(index) 才能关闭对话框
         });
     },
-    ajaxAction: function (url) {
+    ajaxAction: function (url, before, complete) {
         $.ajax(url, {
             type: "GET"
             , cache: false
             , dataType: "json"
             // , data: {	}
             , beforeSend: function () {
+                before()
             }
             , error: function (ret) {
                 alert(ret.statusText);
@@ -123,6 +124,8 @@ var Admin = {
                 } else {
                     ShowUtil.showAjaxActionMsg(6, ret.msg);
                 }
+            }, complete: function () {
+                complete()
             }
         });
     },
