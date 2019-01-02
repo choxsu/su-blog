@@ -29,9 +29,9 @@ public class _Generator {
      */
     public static DataSource getDataSource() {
 
-        String url = "jdbc:mysql://192.168.3.45:3306/xilian168?characterEncoding=utf8&useSSL=false";
+        String url = "jdbc:mysql://192.168.3.92:3306/xilian168?characterEncoding=utf8&useSSL=false";
         String username = "root";
-        String pwd = "xl168";
+        String pwd = "";
         DruidPlugin druidPlugin = new DruidPlugin(url, username, pwd);
 //        DruidPlugin druidPlugin = Start.getDruidPlugin();
         druidPlugin.start();
@@ -47,8 +47,15 @@ public class _Generator {
 
         System.out.println("输出路径：" + baseModelOutputDir);
 
+        // model 所使用的包名
+        String modelPackageName = "com.choxsu.common.generator.entity";
+        // model 文件保存路径
+        String modelOutputDir = PathKit.getWebRootPath()
+                + "/src/main/java/com/choxsu/common/generator/entity";
+
+
         // 创建生成器
-        Generator gen = new Generator(getDataSource(), baseModelPackageName, baseModelOutputDir);
+        Generator gen = new Generator(getDataSource(), baseModelPackageName, baseModelOutputDir, modelPackageName, modelOutputDir);
 
         // 设置数据库方言
         gen.setDialect(new MysqlDialect());
