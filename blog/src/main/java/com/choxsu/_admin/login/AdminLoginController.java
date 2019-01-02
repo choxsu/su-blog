@@ -43,10 +43,8 @@ public class AdminLoginController extends Controller {
      */
     @Before(AdminLoginValidator.class)
     public void doLogin() {
-        String pModel = PropKit.get("hexModulus");
-        String exp = PropKit.get("hexPrivateExponent");
         String encript = getPara("encryptPwd");
-        RSAPrivateKey privateKey = RSAKit.getRSAPrivateKey(pModel, exp);
+        RSAPrivateKey privateKey = RSAKit.getRSAPrivateKey(PropKit.get("privateKey"));
         if (privateKey == null) {
             renderJson(Ret.fail().set("msg", "RSA私钥无效或不存在"));
             return;

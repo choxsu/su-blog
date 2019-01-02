@@ -1,6 +1,7 @@
 package com.choxsu.kit;
 
 
+import com.jfinal.kit.LogKit;
 import com.jfinal.kit.PropKit;
 import org.apache.commons.codec.binary.Base64;
 import sun.misc.BASE64Decoder;
@@ -210,6 +211,7 @@ public final class RSAKit {
             rsaPrivateKey = (RSAPrivateKey) keyFactory.generatePrivate(keySpec);
         } catch (Exception e) {
             e.printStackTrace();
+            LogKit.error(e.getMessage(), e);
         }
         return rsaPrivateKey;
 
