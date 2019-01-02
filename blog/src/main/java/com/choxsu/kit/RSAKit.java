@@ -1,7 +1,9 @@
 package com.choxsu.kit;
 
 
+import com.jfinal.kit.PropKit;
 import org.apache.commons.codec.binary.Base64;
+import sun.misc.BASE64Decoder;
 
 import javax.crypto.Cipher;
 import java.io.ByteArrayOutputStream;
@@ -9,10 +11,7 @@ import java.math.BigInteger;
 import java.security.*;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.RSAPrivateCrtKeySpec;
-import java.security.spec.RSAPrivateKeySpec;
-import java.security.spec.RSAPublicKeySpec;
+import java.security.spec.*;
 
 /**
  * RSA非对称加密辅助类
@@ -197,6 +196,26 @@ public final class RSAKit {
     }
 
     /**
+     * 通过字符串私钥key转换为RSAPrivateKey
+     * @param privateKey
+     * @return
+     */
+    public static RSAPrivateKey getRSAPrivateKey(String privateKey) {
+        byte[] keyBytes;
+        RSAPrivateKey rsaPrivateKey = null;
+        try {
+            keyBytes = (new BASE64Decoder()).decodeBuffer(privateKey);
+            PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+            rsaPrivateKey = (RSAPrivateKey) keyFactory.generatePrivate(keySpec);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rsaPrivateKey;
+
+    }
+
+    /**
      * 根据给定的系数和专用指数构造一个RSA专用的私钥对象。
      *
      * @param modulus         系数。
@@ -348,24 +367,21 @@ public final class RSAKit {
     public static void main(String[] args) {
         RSAKit.init();
         String source = "需要加密的数据";
-        System.out.println("RSAKit.publicModulus==" + RSAKit.publicModulus);
+       /* System.out.println("RSAKit.publicModulus==" + RSAKit.publicModulus);
         System.out.println("RSAKit.publicExponent==" + RSAKit.publicExponent);
         System.out.println("RSAKit.privateModulus==" + RSAKit.privateModulus);
         System.out.println("RSAKit.privateExponent==" + RSAKit.privateExponent);
-
+*/
         //公钥加密，私钥解密
         PublicKey publicKey = RSAKit.getRSAPublicKey(RSAKit.publicModulus, RSAKit.publicExponent);
-        System.out.println("公钥："+ Base64.encodeBase64String(publicKey.getEncoded()));
+        System.out.println("公钥：" + Base64.encodeBase64String(publicKey.getEncoded()));
         String encript = RSAKit.encryptString(publicKey, source);
-        System.out.println("加密后数据：" + encript);
+        //System.out.println("加密后数据：" + encript);
         PrivateKey privateKey = RSAKit.getRSAPrivateKey(RSAKit.privateModulus, RSAKit.privateExponent);
-        System.out.println("私钥:"+ Base64.encodeBase64String(privateKey.getEncoded()));
-        String newSource = RSAKit.decryptString(privateKey, encript);
-        System.out.println("解密后数据:" + newSource);
-
+        System.out.println("私钥：" + Base64.encodeBase64String(privateKey.getEncoded()));
+        //String newSource = RSAKit.decryptString(privateKey, encript);
+        //System.out.println("解密后数据:" + newSource);
     }
-
-
 
 
 }
