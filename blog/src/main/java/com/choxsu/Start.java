@@ -3,6 +3,7 @@ package com.choxsu;
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
 import com.choxsu._admin.auth.AdminAuthKit;
+import com.choxsu.quartz.QuartzManager;
 import com.choxsu.routes.AdminRoutes;
 import com.choxsu._admin.permission.PermissionDirective;
 import com.choxsu._admin.role.RoleDirective;
@@ -131,11 +132,14 @@ public class Start extends JFinalConfig {
     public void afterJFinalStart() {
         // 让 druid 允许在 sql 中使用 union
         wallFilter.getConfig().setSelectUnionCheck(false);
+        //加载定时任务数据库配置
+        new QuartzManager().initJob();
     }
 
     @Override
     public void beforeJFinalStop() {
         //停止之前执行
+        new QuartzManager().shutdown();
     }
 
 
