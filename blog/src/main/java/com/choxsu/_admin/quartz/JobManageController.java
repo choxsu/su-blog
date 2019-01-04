@@ -3,10 +3,8 @@ package com.choxsu._admin.quartz;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.quartz.QuartzManager;
 import com.jfinal.kit.LogKit;
-import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.IAtom;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.render.JsonRender;
@@ -14,22 +12,19 @@ import org.quartz.Job;
 
 public class JobManageController extends BaseController {
 
-    public void index() {
-        render("index.html");
-    }
-
     //获取任务信息
-    public void post() {
+    public void index() {
+
         int pageNum = getParaToInt("page", 1);
         int rows = getParaToInt("rows", 30);
         String whereSql = " where 1=1 ";
-
         pageNum = pageNum > 0 ? pageNum : 1;
         Page<Record> page = Db.paginate(pageNum, rows, "select * ",
                 " from  job_manager" + whereSql + "order by id desc");
-        setAttrs(buildPagination(page.getList(), page.getTotalRow()));
-        render(new JsonRender().forIE());
+        setAttr("page", page);
+        render("index.html");
     }
+
 
     //新增任务
     public void add() {
