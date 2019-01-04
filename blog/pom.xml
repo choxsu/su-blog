@@ -38,6 +38,7 @@
             <version>2017.5</version>
         </dependency>
 
+
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
@@ -123,6 +124,11 @@
             <version>2.5.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>4.4.0</version>
+        </dependency>
 
     </dependencies>
 
@@ -137,9 +143,6 @@
                     <source>1.8</source>
                     <target>1.8</target>
                     <encoding>UTF-8</encoding>
-                    <!-- java8 保留参数名编译参数 -->
-                    <compilerArgument>-parameters</compilerArgument>
-                    <compilerArguments><verbose /></compilerArguments>
                 </configuration>
             </plugin>
 
