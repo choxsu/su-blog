@@ -60,7 +60,7 @@ public class AdminLoginController extends Controller {
                 try {
                     EmailKit.sendEmail(account.getUserName(), "登陆styg.site后台成功提示", content, true);
                 } catch (Exception e) {
-                    LogKit.error(e.getMessage(), e);
+                    LogKit.error("登录成功发送邮件失败："+e.getMessage(), e);
                 }
             });
             String sessionId = ret.getStr(AdminLoginService.sessionIdName);
