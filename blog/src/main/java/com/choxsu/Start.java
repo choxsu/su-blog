@@ -142,7 +142,6 @@ public class Start extends JFinalConfig {
         new QuartzManager().shutdown();
     }
 
-
     public static void main(String[] args) {
         UndertowServer.start(Start.class);
     }

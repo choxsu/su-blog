@@ -1,0 +1,68 @@
+#@adminLayout()
+
+#define main()
+<ul class="breadcrumb">
+    <li><a href="/admin">首页</a></li>
+    <li class="active">Quartz任务管理</li>
+</ul>
+#perm("/admin/quartz/add")
+<div class="page-header">
+    <a class="btn btn-primary btn-sm" href="/admin/quartz/add">
+        <span class="fa fa-plus" aria-hidden="true">&nbsp;</span></span>创建
+    </a>
+</div>
+#end
+### 内容区域
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>任务名</th>
+            <th>组名</th>
+            <th>类名</th>
+            <th>定时表达式</th>
+            <th class="text-center">是否开启</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        #for(x : page.getList())
+        <tr>
+            <th scope="row">#(x.id)</th>
+            <td>#(x.name)</td>
+            <td>#(x.group)</td>
+            <td>#(x.clazz)</td>
+            <td>#(x.cron_expression)</td>
+            <td class="text-center">
+                <input #if(x.is_enabled=='Y') checked #end type="checkbox" class="mgc-switch mgc-tiny">
+            </td>
+            <td class="opt">
+                #perm("/admin/quartz/edit")
+                <a class="margin3" href="/admin/quartz/edit?id=#(x.id)&p=#(page.pageNumber)">
+                    <i class="fa fa-edit" title="修改"></i>
+                </a>
+                #end
+
+                #perm("/admin/quartz/delete")
+                <a class="margin3"
+                   data-delete
+                   data-title="#escape(x.name)"
+                   data-action="/admin/quartz/delete?id=#(x.id)">
+                    <i class="fa fa-trash" title="删除"></i>
+                </a>
+                #end
+            </td>
+        </tr>
+        #end
+        </tbody>
+    </table>
+    #@adminPaginate(page.pageNumber, page.totalPage, "/admin/quartz?p=")
+</div>
+<style>
+    .opt{
+        font-size: 16px;
+    }
+</style>
+#end
+

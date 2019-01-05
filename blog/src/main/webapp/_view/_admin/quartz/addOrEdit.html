@@ -1,0 +1,76 @@
+#@adminLayout()
+
+#define main()
+<ul class="breadcrumb">
+    <li><a href="/admin">首页</a></li>
+    <li><a href="/admin/quartz">Quartz任务管理</a></li>
+    <li class="active">#(job.id?? == null ? '创建' : '修改')</li>
+</ul>
+
+### 内容区域
+<form id="myArticleForm" class="col-md-10"
+      action="#(job.id?? == null ? '/admin/quartz/save' : '/admin/quartz/update')"
+      method="post">
+    <input type="hidden" name="id" value="#(job.id??)"/>
+
+    <div class="form-group">
+        <label for="name">任务名</label>
+        <input type="text" class="form-control" placeholder="请输入任务名" name="name" id="name" value="#(job.name??)">
+    </div>
+    <div class="form-group">
+        <label>组名</label>
+        <input type="text" class="form-control" placeholder="请输入组名" name="group" value="#(job.group??)">
+    </div>
+    <div class="form-group">
+        <label>类名</label>
+        <input type="text" class="form-control" placeholder="请输入类名" name="clazz" value="#(job.clazz??)">
+    </div>
+    <div class="form-group">
+        <label>定时表达式</label>
+        <input type="text" class="form-control" placeholder="请输入定时表达式" name="cron_expression" value="#(job.cron_expression??)">
+    </div>
+    <!--<div class="checkbox">
+        <label>
+            <input  type="checkbox" name="is_enabled" value="#(job.is_enabled??)">是否开启
+        </label>
+    </div>-->
+    <div class="form-group">
+        <input class="btn btn-primary" type="submit" value="提交"/>
+    </div>
+
+</form>
+
+<style type="text/css">
+    #myArticleForm {
+        width: 100%;
+        text-align: left;
+    }
+</style>
+<script type="text/javascript">
+
+    const Article = {
+        submitForm: function () {
+            $("#myArticleForm").ajaxForm({
+                dataType: "json"
+                , beforeSubmit: function (formData, jqForm, options) {
+                }
+                , success: function (ret) {
+                    if (ret.state === "ok") {
+                        location.href = "/admin/quartz?p=#(p ?? 1)";
+                    } else {
+                        ShowUtil.showFailMsg(ret.msg);
+                    }
+                }
+                , error: function (ret) {
+                    alert(ret.statusText);
+                }
+                , complete: function (ret) {
+                } 	      // 无论是 success 还是 error，最终都会被回调
+            });
+        }
+    };
+    $(document).ready(function () {
+        Article.submitForm();
+    });
+</script>
+#end

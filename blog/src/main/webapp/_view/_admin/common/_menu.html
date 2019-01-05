@@ -31,10 +31,17 @@
         #end
     </ul>
     <ul class="nav nav-sidebar">
+        #perm("/admin/sensitiveWord")
         <li><a href="/admin/sensitiveWord"><i class="fa fa-bars"></i>&nbsp;敏感字管理</a></li>
+        #end
         #perm("/admin/druid")
         <li><a href="/admin/druid"><i class="fa fa-bars"></i>&nbsp;Druid数据库监控</a></li>
         #end
+        #perm("/admin/enhancer")
         <li><a href="/admin/enhancer"><i class="fa fa-bars"></i>&nbsp;Enhancer缓存</a></li>
+        #end
+        #perm("/admin/quartz")
+        <li><a href="/admin/quartz"><i class="fa fa-bars"></i>&nbsp;Quartz任务管理</a></li>
+        #end
     </ul>
 </div>

@@ -13,12 +13,13 @@ import static org.quartz.TriggerBuilder.newTrigger;
 
 public class QuartzManager {
 
-    private Scheduler scheduler = null;
-
+    private static Scheduler scheduler = null;
 
     public QuartzManager() {
         try {
-            scheduler = new StdSchedulerFactory().getScheduler();
+            if (scheduler == null){
+                scheduler = new StdSchedulerFactory().getScheduler();
+            }
             LogKit.info("初始化调度器 ");
         } catch (SchedulerException ex) {
             LogKit.error("初始化调度器=> [失败]:" + ex.getLocalizedMessage());
@@ -48,7 +49,6 @@ public class QuartzManager {
             }
         }
         this.start();
-
     }
 
     //添加任务
@@ -60,7 +60,7 @@ public class QuartzManager {
             Trigger trg = newTrigger().withIdentity(name, group).withSchedule(CronScheduleBuilder.cronSchedule(cronExpression)).build();
             // 将作业添加到调度器
             scheduler.scheduleJob(job, trg);
-            System.out.println("创建作业=> [作业名称：" + name + " 作业组：" + group + "] ");
+            LogKit.info("创建作业=> [作业名称：" + name + " 作业组：" + group + "] ");
         } catch (SchedulerException e) {
             e.printStackTrace();
             LogKit.error("创建作业=> [作业名称：" + name + " 作业组：" + group + "]=> [失败]");
@@ -84,8 +84,10 @@ public class QuartzManager {
 
     public void start() {
         try {
-            scheduler.start();
-            LogKit.info("启动调度器 ");
+            if (!scheduler.isStarted()){
+                scheduler.start();
+                LogKit.info("启动调度器 ");
+            }
         } catch (SchedulerException e) {
             e.printStackTrace();
             LogKit.error("启动调度器=> [失败]");
@@ -94,8 +96,10 @@ public class QuartzManager {
 
     public void shutdown() {
         try {
-            scheduler.shutdown();
-            LogKit.info("停止调度器 ");
+            if (!scheduler.isShutdown()){
+                scheduler.shutdown();
+                LogKit.info("停止调度器 ");
+            }
         } catch (SchedulerException e) {
             e.printStackTrace();
             LogKit.error("停止调度器=> [失败]");
