@@ -22,12 +22,15 @@
 			#set(n = 0)
 			#for(mapItem : permissionMap)
 
-				#if(n % 2 == 0)<div class="row">#end
+				#if(n % 2 == 0)
+					<div class="row">
+				#end
+				#@printTable()
+				#set(n = n + 1)
 
-					#@printTable()
-					#set(n = n + 1)
-
-				#if(n % 2 == 0)</div>#end
+				#if(n % 2 == 0)
+					</div>
+				#end
 			#end
 		</div>
 
