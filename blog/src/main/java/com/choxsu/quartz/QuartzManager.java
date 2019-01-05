@@ -3,8 +3,6 @@ package com.choxsu.quartz;
 import com.jfinal.kit.LogKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
-import lombok.Getter;
-import lombok.Setter;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
@@ -13,8 +11,6 @@ import java.util.List;
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;
 
-@Getter
-@Setter
 public class QuartzManager {
 
     private Scheduler scheduler = null;
