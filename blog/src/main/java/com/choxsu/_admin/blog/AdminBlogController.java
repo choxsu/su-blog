@@ -1,12 +1,12 @@
 package com.choxsu._admin.blog;
 
-import com.choxsu._admin.index.IndexAdminController;
 import com.choxsu._admin.tag.AdminTagService;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.constant.CategoryEnum;
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.Blog;
 import com.choxsu.common.entity.BlogCategory;
+import com.choxsu.common.redis.RedisKey;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Inject;
 import com.jfinal.core.NotAction;
@@ -93,7 +93,7 @@ public class AdminBlogController extends BaseController {
         Integer id = getParaToInt("id");
         adminBlogService.DAO.deleteById(id);
         //缓存清除
-        Redis.use().del(IndexAdminController.INDEX_KEY_PREFIX + "blogProfile");
+        Redis.use().del(RedisKey.INDEX_KEY_PREFIX + "blogProfile");
         renderJson(Ret.ok().set("msg", "删除成功！"));
     }
 

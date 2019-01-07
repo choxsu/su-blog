@@ -1,10 +1,10 @@
 package com.choxsu._admin.blog;
 
-import com.choxsu._admin.index.IndexAdminController;
 import com.choxsu.common.base.BaseService;
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.Blog;
 import com.choxsu.common.interceptor.AuthCacheClearInterceptor;
+import com.choxsu.common.redis.RedisKey;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
@@ -62,7 +62,7 @@ public class AdminBlogService extends BaseService<Blog> {
             blog.setCreateAt(date);
             blog.save();
             //缓存清除
-            Redis.use().del(IndexAdminController.INDEX_KEY_PREFIX + "blogProfile");
+            Redis.use().del(RedisKey.INDEX_KEY_PREFIX + "blogProfile");
         }
         return Ret.ok();
     }

@@ -16,7 +16,6 @@ public class AuthCacheClearInterceptor implements Interceptor {
 		if (loginAccount == null || !loginAccount.isStatusOk()) {
 			return false;
 		}
-
 		String admin = "select accountId from account_role where accountId = ? limit 1";
 		Integer accountId = Db.queryInt(admin, loginAccount.getId());
 		return accountId != null;
