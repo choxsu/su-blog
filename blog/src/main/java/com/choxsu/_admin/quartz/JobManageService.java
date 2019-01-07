@@ -36,4 +36,14 @@ public class JobManageService {
     public Record findById(Integer id) {
         return Db.findById("job_manager", id);
     }
+
+    public Ret delete(Integer id) {
+        boolean job_manager = Db.deleteById("job_manager", id);
+        if (job_manager){
+            //TODO 停止任务
+
+            return Ret.ok().set("msg", "删除成功");
+        }
+        return Ret.fail().set("msg", "删除失败");
+    }
 }

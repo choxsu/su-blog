@@ -75,7 +75,9 @@ public class JobManageController extends BaseController {
     }
 
     public void delete() {
-
+        Integer id = getParaToInt("id");
+        Ret ret = jobManageService.delete(id);
+        renderJson(ret);
     }
     //启用关停
     public void start() {
