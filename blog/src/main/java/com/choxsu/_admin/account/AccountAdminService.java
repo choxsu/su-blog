@@ -2,6 +2,7 @@
 
 package com.choxsu._admin.account;
 
+import com.choxsu._admin.index.IndexAdminController;
 import com.choxsu.front.index.ArticleService;
 import com.choxsu.kit.ImageKit;
 import com.jfinal.aop.Inject;
@@ -17,6 +18,7 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.ehcache.CacheKit;
+import com.jfinal.plugin.redis.Redis;
 import com.jfinal.upload.UploadFile;
 
 import java.awt.image.BufferedImage;
@@ -192,6 +194,8 @@ public class AccountAdminService {
         account.setAvatar(Account.AVATAR_NO_AVATAR);  // 注册时设置默认头像
 
         if (account.save()) {
+            //缓存清除
+            Redis.use().del(IndexAdminController.INDEX_KEY_PREFIX + "accountProfile");
             return Ret.ok("msg", "添加成功！");
         } else {
             return Ret.fail("msg", "添加失败！");
@@ -230,6 +234,8 @@ public class AccountAdminService {
         }
         boolean b = dao.deleteById(id);
         if (b) {
+            //缓存清除
+            Redis.use().del(IndexAdminController.INDEX_KEY_PREFIX + "accountProfile");
             return Ret.ok().set("msg", "删除成功");
         }
         return Ret.fail().set("msg", "删除失败");

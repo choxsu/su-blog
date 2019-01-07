@@ -1,5 +1,6 @@
 package com.choxsu._admin.blog;
 
+import com.choxsu._admin.index.IndexAdminController;
 import com.choxsu.common.base.BaseService;
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.Blog;
@@ -8,6 +9,7 @@ import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.plugin.redis.Redis;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,6 +61,8 @@ public class AdminBlogService extends BaseService<Blog> {
         } else {
             blog.setCreateAt(date);
             blog.save();
+            //缓存清除
+            Redis.use().del(IndexAdminController.INDEX_KEY_PREFIX + "blogProfile");
         }
         return Ret.ok();
     }

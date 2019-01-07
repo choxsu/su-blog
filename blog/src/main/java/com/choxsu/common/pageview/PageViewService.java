@@ -1,12 +1,17 @@
 package com.choxsu.common.pageview;
 
+import com.choxsu._admin.index.IndexAdminController;
 import com.choxsu.common.entity.Visitor;
 import com.choxsu.kit.IpKit;
 import com.choxsu.front.index.ArticleService;
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.LogKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.ehcache.CacheKit;
+import com.jfinal.plugin.redis.Cache;
+import com.jfinal.plugin.redis.Redis;
+import com.jfinal.plugin.redis.RedisInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -86,6 +91,7 @@ public class PageViewService {
      */
     private void updatePvDataBase() {
         List urls = CacheKit.getKeys(cacheName);
+        Cache cache = Redis.use();
         List<Visitor> list = new ArrayList<>();
         for (Object urlKey : urls) {
             Visitor visitor = CacheKit.get(cacheName, urlKey.toString());
@@ -96,9 +102,11 @@ public class PageViewService {
             list.add(visitor);
             // 获取以后立即清除，因为获取后的值将累加到数据表中。或许放在 for 循环的最后一行为好
             CacheKit.remove(cacheName, key);
+            //清除掉Redis记录数
+            cache.del(IndexAdminController.INDEX_KEY_PREFIX + "visitorProfile");
         }
-        int[] ints = Db.batchSave(list, 100);
-        LogKit.info("请求记录保存成功记录数：" + ints.length);
+        Db.batchSave(list, 100);
+        //LogKit.info("请求记录保存成功记录数：" + ints.length);
 
     }
     /**

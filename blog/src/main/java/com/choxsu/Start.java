@@ -3,6 +3,7 @@ package com.choxsu;
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
 import com.choxsu._admin.auth.AdminAuthKit;
+import com.choxsu.common.redis.RedisClusterPlugin;
 import com.choxsu.quartz.QuartzManager;
 import com.choxsu.routes.AdminRoutes;
 import com.choxsu._admin.permission.PermissionDirective;
@@ -21,12 +22,21 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.cron4j.Cron4jPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
+import com.jfinal.plugin.ehcache.CacheKit;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
+import com.jfinal.plugin.redis.Cache;
+import com.jfinal.plugin.redis.Redis;
+import com.jfinal.plugin.redis.RedisPlugin;
+import com.jfinal.plugin.redis.serializer.JdkSerializer;
 import com.jfinal.server.undertow.UndertowServer;
 import com.jfinal.template.Engine;
 import com.jfinal.template.source.ClassPathSourceFactory;
+import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
+import redis.clients.jedis.HostAndPort;
 
 import java.sql.Connection;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author choxsu
@@ -38,8 +48,8 @@ public class Start extends JFinalConfig {
      * 先加载开发环境配置，再追加生产环境的少量配置覆盖掉开发环境配置
      */
     private static Prop p;
-
     private WallFilter wallFilter;
+    public static final String defaultName = "Redis";
 
     @Override
     public void configConstant(Constants me) {
@@ -103,6 +113,32 @@ public class Start extends JFinalConfig {
         me.add(new EhCachePlugin());
         //定时任务
         me.add(new Cron4jPlugin(p));
+        //Redis缓存
+        RedisPlugin redisPlugin = getRedisPlugin();
+        redisPlugin.setSerializer(new JdkSerializer());
+        me.add(redisPlugin);
+    }
+
+    private RedisPlugin getRedisPlugin() {
+        String host = p.get("redis.host");
+        int port = p.getInt("redis.port");
+        String password = p.get("redis.password").trim();
+        return new RedisPlugin(defaultName, host, port, 300000, password);
+    }
+
+    private void setJedisCluster(Plugins me) {
+        //配置集群节点
+        Set<HostAndPort> jedisClusterNode = new HashSet<>();
+        jedisClusterNode.add(new HostAndPort(p.get("redis.host"), p.getInt("redis.port")));
+        //配置连接池，最大连接数等...
+        GenericObjectPoolConfig poolConfig = new GenericObjectPoolConfig();
+        poolConfig.setLifo(true);
+        poolConfig.setBlockWhenExhausted(true);
+        // 创建插件对象replicas
+        //test 自定义的集合的名字  1212 密码 需要所有节点的密码一致  30000超时时间   6最多重定向次数
+        RedisClusterPlugin redisClusterPlugin = new RedisClusterPlugin("test", jedisClusterNode, p.get("redis.password"), 30000, 6,
+                poolConfig);
+        me.add(redisClusterPlugin);
     }
 
     @Override
@@ -133,13 +169,13 @@ public class Start extends JFinalConfig {
         // 让 druid 允许在 sql 中使用 union
         wallFilter.getConfig().setSelectUnionCheck(false);
         //加载定时任务数据库配置
-        new QuartzManager().initJob();
+//        new QuartzManager().initJob();
     }
 
     @Override
     public void beforeJFinalStop() {
         //停止之前执行
-        new QuartzManager().shutdown();
+//        new QuartzManager().shutdown();
     }
 
     public static void main(String[] args) {
