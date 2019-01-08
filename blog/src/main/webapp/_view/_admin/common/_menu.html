@@ -3,7 +3,12 @@
         <li><a href="/admin" home><i class="fa fa-home"></i>&nbsp;Dashboard</span></a></li>
     </ul>
 
-    <ul class="nav nav-sidebar">
+  <!--  <a href="#systemSetting" class="nav-header collapsed" data-toggle="collapse">
+        <i class="glyphicon glyphicon-cog"></i>
+        内容管理
+        <span class="pull-right glyphicon glyphicon-chevron-toggle"></span>
+    </a>-->
+    <ul id="systemSetting" class="nav nav-sidebar">
         #perm("/admin/blog")
         <li><a href="/admin/blog"><i class="fa fa-book"></i>&nbsp;文章管理</a></li>
         #end
@@ -44,4 +49,16 @@
         <li><a href="/admin/quartz"><i class="fa fa-bars"></i>&nbsp;Quartz任务管理</a></li>
         #end
     </ul>
+
+
+    <ul class="nav nav-sidebar">
+        #perm("/admin/uploadLog")
+        <li><a href="/admin/uploadLog"><i class="fa fa-bars"></i>&nbsp;图片上传记录</a></li>
+        #end
+        #perm("/admin/loginLog")
+        <li><a href="/admin/loginLog"><i class="fa fa-history"></i>&nbsp;后台登录日志</a></li>
+        #end
+    </ul>
+
+
 </div>

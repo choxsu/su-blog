@@ -3,8 +3,7 @@
 #define main()
 <ul class="breadcrumb">
     <li><a href="/admin">首页</a></li>
-    <li><a href="/admin/account">账户管理</a></li>
-    <li class="active">登录日志</li>
+    <li class="active">后台登录日志</li>
 </ul>
 ### 内容区域
 <div class="table-responsive">
@@ -30,7 +29,7 @@
         #end
         </tbody>
     </table>
-    #@adminPaginate(page.pageNumber, page.totalPage, "/admin/account/loginLog?id="+id+"&p=")
+    #@adminPaginate(page.pageNumber, page.totalPage, "/admin/loginLog?id="+id+"&p=")
 </div>
 #end
 

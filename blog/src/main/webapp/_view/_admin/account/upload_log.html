@@ -1,0 +1,37 @@
+#@adminLayout()
+
+#define main()
+<ul class="breadcrumb">
+    <li><a href="/admin">首页</a></li>
+    <li class="active">图片上传记录</li>
+</ul>
+### 内容区域
+<div class="table-responsive">
+    <table class="table table-hover table-striped ">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>用户名</th>
+            <th>src</th>
+            <th>图片名</th>
+            <th>类型</th>
+            <th>上传时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        #for(x : page.getList())
+        <tr>
+            <th scope="row">#(x.id)</th>
+            <th>#(x.username)</th>
+            <td>#(x.src)</td>
+            <td>#(x.name)</td>
+            <td>#(x.type)</td>
+            <td>#date(x.created)</td>
+        </tr>
+        #end
+        </tbody>
+    </table>
+    #@adminPaginate(page.pageNumber, page.totalPage, "/admin/uploadLog?id="+id+"&p=")
+</div>
+#end
+
