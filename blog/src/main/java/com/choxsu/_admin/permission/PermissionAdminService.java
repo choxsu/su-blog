@@ -1,18 +1,16 @@
 package com.choxsu._admin.permission;
 
-import com.choxsu._admin.index.IndexAdminController;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.entity.Permission;
+import com.choxsu.common.redis.RedisKey;
 import com.jfinal.core.Action;
 import com.jfinal.core.JFinal;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.IAtom;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.redis.Redis;
 
 import java.lang.reflect.Method;
-import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -92,7 +90,7 @@ public class PermissionAdminService {
 			return Ret.ok("msg", "权限已经是最新状态，无需更新");
 		} else {
 			//权限缓存清除
-			Redis.use().del(IndexAdminController.INDEX_KEY_PREFIX + "permissionProfile");
+			Redis.use().del(RedisKey.INDEX_KEY_PREFIX + "permissionProfile");
 			return Ret.ok("msg", "权限更新成功，共更新权限数 : " + counter);
 		}
 	}
@@ -121,7 +119,7 @@ public class PermissionAdminService {
 			return true;
 		  });
 		//权限缓存清除
-		Redis.use().del(IndexAdminController.INDEX_KEY_PREFIX + "permissionProfile");
+		Redis.use().del(RedisKey.INDEX_KEY_PREFIX + "permissionProfile");
 		return Ret.ok("msg", "权限删除成功");
 	}
 

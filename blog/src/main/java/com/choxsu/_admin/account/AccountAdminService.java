@@ -2,8 +2,7 @@
 
 package com.choxsu._admin.account;
 
-import com.choxsu._admin.index.IndexAdminController;
-import com.choxsu.front.index.ArticleService;
+import com.choxsu.common.redis.RedisKey;
 import com.choxsu.kit.ImageKit;
 import com.jfinal.aop.Inject;
 import com.choxsu.common.entity.Account;
@@ -17,7 +16,6 @@ import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
-import com.jfinal.plugin.ehcache.CacheKit;
 import com.jfinal.plugin.redis.Redis;
 import com.jfinal.upload.UploadFile;
 
@@ -195,7 +193,7 @@ public class AccountAdminService {
 
         if (account.save()) {
             //缓存清除
-            Redis.use().del(IndexAdminController.INDEX_KEY_PREFIX + "accountProfile");
+            Redis.use().del(RedisKey.INDEX_KEY_PREFIX + "accountProfile");
             return Ret.ok("msg", "添加成功！");
         } else {
             return Ret.fail("msg", "添加失败！");
@@ -235,7 +233,7 @@ public class AccountAdminService {
         boolean b = dao.deleteById(id);
         if (b) {
             //缓存清除
-            Redis.use().del(IndexAdminController.INDEX_KEY_PREFIX + "accountProfile");
+            Redis.use().del(RedisKey.INDEX_KEY_PREFIX + "accountProfile");
             return Ret.ok().set("msg", "删除成功");
         }
         return Ret.fail().set("msg", "删除失败");

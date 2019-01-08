@@ -6,6 +6,6 @@ public class DruidController extends BaseController {
 
 
     public void index(){
-
+        render("index.html");
     }
 }
