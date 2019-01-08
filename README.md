@@ -7,7 +7,13 @@
 ### 模块说明
   前台页面变更为极简的页面，没有多余的，纯极简，
   效果见[Chosu's blog](http://118.24.122.21/ "Chosu") ，
-  使用了Java语言来开发的，后端框架使用了JFinal 
+  使用了Java语言来开发的，后端框架使用了JFinal
+### 主要使用技术
+   - enhancer缓存
+   - redis 缓存
+   - cron4j、quartz
+   - commons-email
+   - hutool
 ### 开发环境：
 - Jdk8+
 - Mysql5.5+
