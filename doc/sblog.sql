@@ -161,16 +161,66 @@ INSERT INTO `blog_tag` VALUES (26, 'Redis', 0);
 -- ----------------------------
 DROP TABLE IF EXISTS `images`;
 CREATE TABLE `images`  (
-  `id` int(11) NOT NULL COMMENT '主键',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `account_id` int(11) NOT NULL COMMENT '上传者',
   `src` varchar(512) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '图片路径',
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '图片原始名称',
   `type` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '图片类型',
   `created` int(255) NOT NULL COMMENT '创建时间',
   `source` varchar(512) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '来源',
+  `file_size` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '文件大小',
+  `original_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '原始名称',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `account_id`(`account_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '图片上厂记录表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 68 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '图片上厂记录表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of images
+-- ----------------------------
+INSERT INTO `images` VALUES (27, 1, '/upload/img/article/0/1_20181222230313.jpeg', '1_20181222230313.jpeg', '.jpeg', 1545490993, '', '0', '1545490993541.jpeg');
+INSERT INTO `images` VALUES (28, 1, '/upload/img/article/0/1_20181222230334.jpeg', '1_20181222230334.jpeg', '.jpeg', 1545491014, '', '0', '1545491014660.jpeg');
+INSERT INTO `images` VALUES (29, 1, '/upload/img/article/0/1_20181222230548.jpeg', '1_20181222230548.jpeg', '.jpeg', 1545491148, '', '0', '1545491148014.jpeg');
+INSERT INTO `images` VALUES (30, 1, '/upload/img/article/0/1_20181222233320.jpeg', '1_20181222233320.jpeg', '.jpeg', 1545492800, '', '5594', '1545492800236.jpeg');
+INSERT INTO `images` VALUES (31, 1, '/upload/img/article/0/1_20181222233334.jpeg', '1_20181222233334.jpeg', '.jpeg', 1545492814, '', '5245', '1545492814226.jpeg');
+INSERT INTO `images` VALUES (32, 1, '/upload/img/article/0/1_20181222233451.jpeg', '1_20181222233451.jpeg', '.jpeg', 1545492891, '', '12210', '1545492891560.jpeg');
+INSERT INTO `images` VALUES (33, 1, '/upload/img/article/0/1_20181222233512.jpeg', '1_20181222233512.jpeg', '.jpeg', 1545492912, '', '23392', '1545492912496.jpeg');
+INSERT INTO `images` VALUES (34, 1, '/upload/img/article/0/1_20181222233525.jpeg', '1_20181222233525.jpeg', '.jpeg', 1545492925, '', '30477', '1545492925261.jpeg');
+INSERT INTO `images` VALUES (35, 1, '/upload/img/article/0/1_20181222233537.jpeg', '1_20181222233537.jpeg', '.jpeg', 1545492937, '', '20716', '1545492937326.jpeg');
+INSERT INTO `images` VALUES (36, 1, '/upload/img/article/0/1_20181222233548.jpeg', '1_20181222233548.jpeg', '.jpeg', 1545492948, '', '7279', '1545492947991.jpeg');
+INSERT INTO `images` VALUES (37, 1, '/upload/img/article/0/1_20181222233600.jpeg', '1_20181222233600.jpeg', '.jpeg', 1545492960, '', '9365', '1545492960530.jpeg');
+INSERT INTO `images` VALUES (38, 1, '/upload/img/article/0/1_20181222233630.jpeg', '1_20181222233630.jpeg', '.jpeg', 1545492990, '', '25817', '1545492990450.jpeg');
+INSERT INTO `images` VALUES (39, 1, '/upload/img/article/0/1_20181222233657.jpeg', '1_20181222233657.jpeg', '.jpeg', 1545493017, '', '15285', '1545493017959.jpeg');
+INSERT INTO `images` VALUES (40, 1, '/upload/img/article/0/1_20181222233718.jpeg', '1_20181222233718.jpeg', '.jpeg', 1545493038, '', '45331', '1545493038182.jpeg');
+INSERT INTO `images` VALUES (41, 1, '/upload/img/article/0/1_20181222233725.jpeg', '1_20181222233725.jpeg', '.jpeg', 1545493045, '', '15476', '1545493045869.jpeg');
+INSERT INTO `images` VALUES (42, 1, '/upload/img/article/0/1_20181222233729.jpeg', '1_20181222233729.jpeg', '.jpeg', 1545493049, '', '15476', '1545493049439.jpeg');
+INSERT INTO `images` VALUES (43, 1, '/upload/img/article/0/1_20181222234237.jpeg', '1_20181222234237.jpeg', '.jpeg', 1545493357, '', '14754', '1545493357388.jpeg');
+INSERT INTO `images` VALUES (44, 1, '/upload/img/article/0/1_20181222234305.jpeg', '1_20181222234305.jpeg', '.jpeg', 1545493385, '', '13566', '1545493385715.jpeg');
+INSERT INTO `images` VALUES (45, 1, '/upload/img/article/0/1_20181222234330.jpeg', '1_20181222234330.jpeg', '.jpeg', 1545493410, '', '47704', '1545493410781.jpeg');
+INSERT INTO `images` VALUES (46, 1, '/upload/img/article/0/1_20181222234343.jpeg', '1_20181222234343.jpeg', '.jpeg', 1545493423, '', '43783', '1545493423406.jpeg');
+INSERT INTO `images` VALUES (47, 1, '/upload/img/article/0/1_20181222235228.jpg', '1_20181222235228.jpg', '.jpg', 1545493948, '', '141735', 'c.jpg');
+INSERT INTO `images` VALUES (48, 1, '/upload/img/article/0/1_20181223000017.jpeg', '1_20181223000017.jpeg', '.jpeg', 1545494417, '', '64556', '1545494417439.jpeg');
+INSERT INTO `images` VALUES (49, 1, '/upload/img/article/0/1_20181223000024.jpeg', '1_20181223000024.jpeg', '.jpeg', 1545494424, '', '22179', '1545494424047.jpeg');
+INSERT INTO `images` VALUES (50, 1, '/upload/img/article/0/1_20181223000445.jpeg', '1_20181223000445.jpeg', '.jpeg', 1545494685, '', '133195', '1545494685501.jpeg');
+INSERT INTO `images` VALUES (51, 1, '/upload/img/article/0/1_20181223001002.png', '1_20181223001002.png', '.png', 1545495002, '', '55220', '1545495013080.png');
+INSERT INTO `images` VALUES (52, 1, '/upload/img/article/0/1_20181223001033.png', '1_20181223001033.png', '.png', 1545495033, '', '23413', '1545495043709.png');
+INSERT INTO `images` VALUES (53, 1, '/upload/img/article/0/1_20181223001045.png', '1_20181223001045.png', '.png', 1545495045, '', '26973', '1545495055992.png');
+INSERT INTO `images` VALUES (54, 1, '/upload/img/article/0/1_20181223001117.png', '1_20181223001117.png', '.png', 1545495077, '', '38897', '1545495087472.png');
+INSERT INTO `images` VALUES (55, 1, '/upload/img/article/0/1_20181223001128.png', '1_20181223001128.png', '.png', 1545495088, '', '42917', '1545495099248.png');
+INSERT INTO `images` VALUES (56, 1, '/upload/img/article/0/1_20181223001143.png', '1_20181223001143.png', '.png', 1545495103, '', '6732', '1545495113988.png');
+INSERT INTO `images` VALUES (57, 1, '/upload/img/article/0/1_20181223001151.png', '1_20181223001151.png', '.png', 1545495111, '', '40637', '1545495121962.png');
+INSERT INTO `images` VALUES (58, 1, '/upload/img/article/0/1_20181223001201.png', '1_20181223001201.png', '.png', 1545495121, '', '56626', '1545495131800.png');
+INSERT INTO `images` VALUES (59, 1, '/upload/img/article/0/1_20181223001221.png', '1_20181223001221.png', '.png', 1545495141, '', '43202', '1545495151667.png');
+INSERT INTO `images` VALUES (60, 1, '/upload/img/article/0/1_20181223001242.png', '1_20181223001242.png', '.png', 1545495162, '', '7300', '1545495173214.png');
+INSERT INTO `images` VALUES (61, 1, '/upload/img/article/0/1_20181223001302.png', '1_20181223001302.png', '.png', 1545495182, '', '3446', '1545495192700.png');
+INSERT INTO `images` VALUES (62, 1, '/upload/img/article/0/1_20181223001311.png', '1_20181223001311.png', '.png', 1545495191, '', '46768', '1545495202111.png');
+INSERT INTO `images` VALUES (63, 1, '/upload/img/article/0/1_20181223001329.png', '1_20181223001329.png', '.png', 1545495209, '', '21796', '1545495220132.png');
+INSERT INTO `images` VALUES (64, 1, '/upload/img/article/0/1_20181223001345.png', '1_20181223001345.png', '.png', 1545495225, '', '8270', '1545495235878.png');
+INSERT INTO `images` VALUES (65, 1, '/upload/img/article/0/1_20181223001400.png', '1_20181223001400.png', '.png', 1545495240, '', '21961', '1545495251020.png');
+INSERT INTO `images` VALUES (66, 1, '/upload/img/article/0/1_20181223001405.png', '1_20181223001405.png', '.png', 1545495245, '', '21961', '1545495255794.png');
+INSERT INTO `images` VALUES (67, 5, '0/5.jpg', '/upload/avatar/temp/1_1546938076816.jpg', '.jpg', 1546938080, '', '0', '/upload/avatar/temp/1_1546938076816.jpg');
+
+SET FOREIGN_KEY_CHECKS = 1;
+
 
 -- ----------------------------
 -- Table structure for login_log
