@@ -104,7 +104,7 @@ public class UploadService {
      * @param fileSize         文件大小
      * @param source           来源
      */
-    private void updateUploadImage(Integer accountId,
+    public void updateUploadImage(Integer accountId,
                                    String url,
                                    String name,
                                    String originalFileName,

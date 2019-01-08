@@ -9,6 +9,7 @@ import com.choxsu.kit.ImageKit;
 import com.choxsu.kit.IpKit;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Inject;
+import com.jfinal.core.ActionKey;
 import com.jfinal.core.NotAction;
 import com.jfinal.ext.interceptor.GET;
 import com.jfinal.ext.interceptor.POST;
@@ -195,13 +196,21 @@ public class AccountAdminController extends BaseController {
     }
 
 
+    @ActionKey("/admin/loginLog")
     public void loginLog() {
-        Integer id = getParaToInt("id");
-        keepPara("id");
-        Page<Record> page = srv.findLoginLog(id, getParaToInt("p", 1), getParaToInt("size", 10));
+        Page<Record> page = srv.findLoginLog(getParaToInt("p", 1), getParaToInt("size", 10));
         setAttr("page", page);
         render("login_log.html");
     }
 
+    /**
+     * 图片上传日志记录
+     */
+    @ActionKey("/admin/uploadLog")
+    public void uploadLog(){
+        Page<Record> page = srv.findUploadLog(getParaToInt("p", 1), getParaToInt("size", 10));
+        setAttr("page", page);
+        render("upload_log.html");
+    }
 
 }

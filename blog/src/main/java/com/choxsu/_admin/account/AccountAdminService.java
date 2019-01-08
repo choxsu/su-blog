@@ -2,8 +2,12 @@
 
 package com.choxsu._admin.account;
 
+import com.choxsu._admin.index.IndexAdminController;
 import com.choxsu.common.redis.RedisKey;
+import com.choxsu.common.upload.UploadService;
+import com.choxsu.front.index.ArticleService;
 import com.choxsu.kit.ImageKit;
+import com.choxsu.util.DateUtils;
 import com.jfinal.aop.Inject;
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.Role;
@@ -16,6 +20,7 @@ import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.plugin.ehcache.CacheKit;
 import com.jfinal.plugin.redis.Redis;
 import com.jfinal.upload.UploadFile;
 
@@ -296,7 +301,8 @@ public class AccountAdminService {
             bi = ImageKit.resize(bi, 200, 200);     // 将 size 变为 200 X 200，resize 不会变改分辨率
             deleteOldAvatarIfExists(absolutePathFileName[0]);
             ImageKit.save(bi, absolutePathFileName[0]);
-
+            //保存图片上传记录
+            UploadService.me.updateUploadImage(accountId, avatarUrl,relativePathFileName[0], avatarUrl, extName, "0", "");
             updateAccountAvatar(accountId, relativePathFileName[0]);
             AdminLoginService.me.reloadLoginAccount(loginAccount);
             return Ret.ok("msg", "头像更新成功，部分浏览器需要按 CTRL + F5 强制刷新看效果").set("url", relativePathFileName[0]);
@@ -345,7 +351,20 @@ public class AccountAdminService {
         Db.update("update account set avatar=? where id=? limit 1", relativePathFileName, accountId);
     }
 
-    public Page<Record> findLoginLog(Integer id, Integer p, Integer size) {
-        return Db.paginate(p, size, "SELECT l.*,a.userName,a.nickName", " FROM login_log l ,account a where l.accountId = a.id and accountId = ?", id);
+    public Page<Record> findLoginLog(Integer p, Integer size) {
+        return Db.paginate(p, size, "SELECT l.*,a.userName,a.nickName",
+                " FROM login_log l ,account a where l.accountId = a.id order by l.loginAt desc");
+    }
+
+    public Page<Record> findUploadLog(Integer p, Integer size) {
+        Page<Record> paginate = Db.paginate(p, size, "select * ", "from images order by id desc");
+        paginate.getList().forEach(record -> {
+            record.set("username", Db.queryStr("select userName from account where id = ?", record.getInt("account_id")));
+            Integer created = record.getInt("created");
+            long c = created.longValue() * 1000;
+            record.set("created", new Date(c));
+        });
+
+        return paginate;
     }
 }
