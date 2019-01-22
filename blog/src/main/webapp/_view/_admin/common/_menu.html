@@ -1,13 +1,14 @@
-<div class="col-sm-3 col-md-2 sidebar ">
-    <ul class="nav nav-sidebar">
-        <li><a href="/admin" home><i class="fa fa-home"></i>&nbsp;Dashboard</span></a></li>
-    </ul>
+<div class="col-sm-2 col-md-2 sidebar ">
+    <a href="/admin" class="main-menu" home="true" >
+        <i class="fa fa-home"></i>
+        &nbsp;Dashboard
+    </a>
 
-  <!--  <a href="#systemSetting" class="nav-header collapsed" data-toggle="collapse">
-        <i class="glyphicon glyphicon-cog"></i>
-        内容管理
-        <span class="pull-right glyphicon glyphicon-chevron-toggle"></span>
-    </a>-->
+    <a class="main-menu" home='false'>
+        <i class="fa fa-adn "></i>
+        &nbsp;内容管理
+        <i class="right-icon fa fa-angle-down fa-lg"></i>
+    </a>
     <ul id="systemSetting" class="nav nav-sidebar">
         #perm("/admin/blog")
         <li><a href="/admin/blog"><i class="fa fa-book"></i>&nbsp;文章管理</a></li>
@@ -18,6 +19,12 @@
         #end
 
     </ul>
+
+    <a class="main-menu" home='false'>
+        <i class="fa fa-user-circle"></i>
+        &nbsp;权限管理
+        <i class="right-icon fa fa-angle-down fa-lg"></i>
+    </a>
     <ul class="nav nav-sidebar">
         #perm("/admin/account")
         <li><a href="/admin/account"><i class="fa fa-users"></i>&nbsp;账户管理</a></li>
@@ -30,11 +37,13 @@
         #perm("/admin/permission")
         <li><a href="/admin/permission"><i class="fa fa-unlock-alt"></i>&nbsp;权限管理</a></li>
         #end
-
-        #perm("/admin/visitor")
-        <li><a href="/admin/visitor"><i class="fa fa-bars"></i>&nbsp;PV记录</a></li>
-        #end
     </ul>
+
+    <a class="main-menu" home='false'>
+        <i class="fa fa-server"></i>
+        &nbsp;系统管理
+        <i class="right-icon fa fa-angle-down fa-lg"></i>
+    </a>
     <ul class="nav nav-sidebar">
         #perm("/admin/sensitiveWord")
         <li><a href="/admin/sensitiveWord"><i class="fa fa-bars"></i>&nbsp;敏感字管理</a></li>
@@ -48,9 +57,16 @@
         #perm("/admin/quartz")
         <li><a href="/admin/quartz"><i class="fa fa-bars"></i>&nbsp;Quartz任务管理</a></li>
         #end
+        #perm("/admin/visitor")
+        <li><a href="/admin/visitor"><i class="fa fa-bars"></i>&nbsp;PV记录</a></li>
+        #end
     </ul>
 
-
+    <a class="main-menu" home='false'>
+        <i class="fa fa-history"></i>
+        &nbsp;日志管理
+        <i class="right-icon fa fa-angle-down fa-lg"></i>
+    </a>
     <ul class="nav nav-sidebar">
         #perm("/admin/uploadLog")
         <li><a href="/admin/uploadLog"><i class="fa fa-bars"></i>&nbsp;图片上传记录</a></li>

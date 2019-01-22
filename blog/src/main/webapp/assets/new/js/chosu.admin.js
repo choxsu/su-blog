@@ -34,7 +34,7 @@ var ShowUtil = {
         layer.msg(msg, {
                 shift: shift
                 , shade: 0.4
-                , time: 2000
+                , time: 3000
                 , offset: "140px"
                 , closeBtn: 1
                 , shadeClose: true
@@ -69,7 +69,7 @@ var Admin = {
         $(".nav-sidebar li a[href]").each(function (index, element) {
             var href = $(element).attr("href");
             if (pathname === '/admin' || pathname === '/admin/') {
-                $(".nav-sidebar li a[home]").parent().addClass("active");
+                $(".main-menu[home='true']").addClass("home-active");
                 return false;
             }
             if (href !== '/admin' && pathname.indexOf(href) >= 0) {
@@ -77,6 +77,7 @@ var Admin = {
                 currentMenu.parent().addClass("active");
                 return false;
             }
+            0
         })
     },
     sendPjax: function (url, container, extData) {
@@ -114,7 +115,7 @@ var Admin = {
             // , data: {	}
             , beforeSend: function () {
                 var type = typeof before;
-                if (type === 'function'){
+                if (type === 'function') {
                     before();
                 }
             }
@@ -129,7 +130,7 @@ var Admin = {
                 }
             }, complete: function () {
                 var type = typeof complete;
-                if (type === 'function'){
+                if (type === 'function') {
                     complete();
                 }
             }
@@ -146,10 +147,34 @@ var Menu = {
         event.preventDefault();	// 取代 return false 防止页面跳转
         var $this = $(this);
         var url = $this.attr("href");
+        var home = $this.attr("home");
+        if (home){
+            $(".nav-sidebar li").removeClass("active");
+            $this.addClass("home-active");
+        } else {
+            // 设置当前选中菜单样式
+            $(".nav-sidebar li").removeClass("active");
+            $(".main-menu").removeClass("home-active");
+            $this.parent().addClass("active");
+        }
         Admin.sendPjax(url, "#pjax-container");
-        // 设置当前选中菜单样式
-        $(".nav-sidebar li").removeClass("active");
-        $this.parent().addClass("active");
+
+    },
+    clickMainMenu: function (event) {
+        event.preventDefault();	// 取代 return false 防止页面跳转
+        var $this = $(this);
+        var subMenu = $this.next(".nav-sidebar");
+        console.log(subMenu);
+        $(subMenu).slideToggle("fast");
+
+        var i = $this.children(".right-icon");
+        if (i.hasClass("fa-angle-down")) {
+            i.removeClass("fa-angle-down");
+            i.addClass("fa-angle-up");
+        } else {
+            i.removeClass("fa-angle-up");
+            i.addClass("fa-angle-down");
+        }
     }
 };
 
@@ -192,18 +217,12 @@ var Magic = {
 };
 
 
-/**
- * 密码业务处理
- * @type {{showPage: PasswordMs.showPage}}
- */
-var PasswordMs = {
-    showPage: function () {
-        console.log("组件寻找中...")
-    }
-};
-
 $(document).ready(function () {
     Admin.nprogressStart();
+    // 绑定首页菜单事件
+    $(".main-menu[home='true']").bind("click", Menu.clickMenu);
+    // 绑定主菜单事件
+    $(".main-menu[home='false']").on("click", Menu.clickMainMenu);
     // 绑定首页菜单事件
     $(".nav-sidebar li a").bind("click", Menu.clickMenu);
     // table 操作栏按钮绑定 click 事件，动态添加的元素必须使用 $(...).on(...) 才能绑定
@@ -228,8 +247,4 @@ $(document).ready(function () {
 
     //选中当前菜单
     Admin.selectLeftTab();
-    //更改密码事件绑定
-    $(".update-password").bind("click", PasswordMs.showPage);
 });
-
-
