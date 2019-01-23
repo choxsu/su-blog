@@ -170,9 +170,9 @@ var Menu = {
         var i = $this.children(".right-icon");
         if (i.hasClass("fa-angle-down")) {
             i.removeClass("fa-angle-down");
-            i.addClass("fa-angle-up");
+            i.addClass("fa-angle-left");
         } else {
-            i.removeClass("fa-angle-up");
+            i.removeClass("fa-angle-left");
             i.addClass("fa-angle-down");
         }
     }
