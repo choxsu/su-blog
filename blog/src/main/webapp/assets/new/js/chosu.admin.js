@@ -164,9 +164,7 @@ var Menu = {
         event.preventDefault();	// 取代 return false 防止页面跳转
         var $this = $(this);
         var subMenu = $this.next(".nav-sidebar");
-        console.log(subMenu);
         $(subMenu).slideToggle("fast");
-
         var i = $this.children(".right-icon");
         if (i.hasClass("fa-angle-down")) {
             i.removeClass("fa-angle-down");
