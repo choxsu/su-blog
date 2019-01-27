@@ -2,9 +2,12 @@ package com.choxsu.common.interceptor;
 
 import com.choxsu._admin.login.AdminLoginService;
 import com.choxsu.common.entity.Account;
+import com.choxsu.common.redis.RedisKey;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.redis.Cache;
+import com.jfinal.plugin.redis.Redis;
 
 /**
  * 在 role 表中存在的 accountId 拥有清除前端 cache 的权限
@@ -12,21 +15,23 @@ import com.jfinal.plugin.activerecord.Db;
  */
 public class AuthCacheClearInterceptor implements Interceptor {
 
-	public static boolean isAdmin(Account loginAccount) {
-		if (loginAccount == null || !loginAccount.isStatusOk()) {
-			return false;
-		}
-		String admin = "select accountId from account_role where accountId = ? limit 1";
-		Integer accountId = Db.queryInt(admin, loginAccount.getId());
-		return accountId != null;
-	}
+    private static final Cache cache = Redis.use();
 
-	public void intercept(Invocation inv) {
-		Account loginAccount = inv.getController().getAttr(AdminLoginService.loginAccountCacheName);
-		if (isAdmin(loginAccount)) {
-			inv.invoke();
-		} else {
-			inv.getController().renderError(404);
-		}
-	}
+    public static boolean isAdmin(Account loginAccount) {
+        if (loginAccount == null || !loginAccount.isStatusOk()) {
+            return false;
+        }
+        String admin = "select accountId from account_role where accountId = ? limit 1";
+        Integer accountId = Db.queryInt(admin, loginAccount.getId());
+        return accountId != null;
+    }
+
+    public void intercept(Invocation inv) {
+        Account loginAccount = inv.getController().getAttr(AdminLoginService.loginAccountCacheName);
+        if (isAdmin(loginAccount)) {
+            inv.invoke();
+        } else {
+            inv.getController().renderError(404);
+        }
+    }
 }
