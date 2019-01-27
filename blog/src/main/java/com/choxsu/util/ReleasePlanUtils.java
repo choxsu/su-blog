@@ -77,6 +77,11 @@ public class ReleasePlanUtils {
     }
 
     private int getTime(String currDate) {
+        Date parse = checkAndGet(currDate);
+        return (int) (parse.getTime() / 1000);
+    }
+
+    private static Date checkAndGet(String currDate) {
         if (StrKit.isBlank(currDate)) {
             throw new NullPointerException("传入日期不能为空");
         }
@@ -86,7 +91,7 @@ public class ReleasePlanUtils {
         } catch (ParseException e) {
             throw new RuntimeException(e.getMessage());
         }
-        return (int) (parse.getTime() / 1000);
+        return parse;
     }
 
     /**
@@ -108,22 +113,12 @@ public class ReleasePlanUtils {
      * @return
      */
     private static String addOneDate(String currDate) {
-        if (StrKit.isBlank(currDate)) {
-            throw new NullPointerException("传入日期不能为空");
-        }
-        Date parse;
-        try {
-            parse = sdf.parse(currDate);
-
-        } catch (ParseException e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        Date parse = checkAndGet(currDate);
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(parse);
         calendar.add(Calendar.DATE, 1);
         parse = calendar.getTime();
         return sdf.format(parse);
-
     }
 
 }
