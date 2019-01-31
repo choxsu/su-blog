@@ -29,9 +29,9 @@ public class _Generator {
      */
     public static DataSource getDataSource() {
 
-        String url = "jdbc:mysql://192.168.3.92:3306/xilian168?characterEncoding=utf8&useSSL=false";
+        String url = "jdbc:mysql://127.0.0.1:3306/blog?characterEncoding=utf8&useSSL=false";
         String username = "root";
-        String pwd = "";
+        String pwd = "root";
         DruidPlugin druidPlugin = new DruidPlugin(url, username, pwd);
 //        DruidPlugin druidPlugin = Start.getDruidPlugin();
         druidPlugin.start();
@@ -59,7 +59,6 @@ public class _Generator {
 
         // 设置数据库方言
         gen.setDialect(new MysqlDialect());
-
         //设置Mapping生成的文文件名
         gen.setMappingKitClassName("_MappingKit");
 
@@ -67,10 +66,8 @@ public class _Generator {
          * 设置 BaseModel 是否生成链式 setter 方法
          */
         gen.setGenerateChainSetter(false);
-
         //设置自定义表生成
-
-        gen.setMetaBuilder(new _MetaBuilder(getDataSource()));
+        //gen.setMetaBuilder(new _MetaBuilder(getDataSource()));
         // 添加不需要生成的表名
         for (String table : excludedTable) {
             gen.addExcludedTable(table);
@@ -79,9 +76,10 @@ public class _Generator {
         gen.setGenerateDaoInModel(false);
         // 设置是否生成字典文件
         gen.setGenerateDataDictionary(false);
-
         // 设置需要被移除的表名前缀用于生成modelName。例如表名 "osc_user"，移除前缀 "osc_"后生成的model名为 "User"而非 OscUser
 //        gen.setRemovedTableNamePrefixes("sm_");
+        //生成数据库备注
+        gen.setGenerateRemarks(true);
         // 生成
         gen.generate();
     }

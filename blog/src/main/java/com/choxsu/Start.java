@@ -161,18 +161,14 @@ public class Start extends JFinalConfig {
     }
 
     @Override
-    public void afterJFinalStart() {
+    public void onStart() {
         // 让 druid 允许在 sql 中使用 union
         wallFilter.getConfig().setSelectUnionCheck(false);
-        //加载定时任务数据库配置
-//        new QuartzManager().initJob();
     }
 
+
     @Override
-    public void beforeJFinalStop() {
-        //停止之前执行
-//        new QuartzManager().shutdown();
-    }
+    public void onStop() { }
 
     public static void main(String[] args) {
         UndertowServer.start(Start.class);
