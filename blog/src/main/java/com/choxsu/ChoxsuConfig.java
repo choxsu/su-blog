@@ -53,7 +53,6 @@ public class ChoxsuConfig extends JFinalConfig {
         me.setDevMode(p.getBoolean("devMode", false));
         me.setJsonFactory(MixedJsonFactory.me());
         me.setInjectDependency(true);
-
     }
 
     // 先加载开发环境配置，再追加生产环境的少量配置覆盖掉开发环境配置
@@ -68,6 +67,7 @@ public class ChoxsuConfig extends JFinalConfig {
         me.add(new FrontRoutes());
         me.add(new AdminRoutes());
         me.add(new ApiRoutes());
+        me.setMappingSuperClass(true);
     }
 
     @Override
