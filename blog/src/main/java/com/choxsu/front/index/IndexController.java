@@ -21,7 +21,7 @@ public class IndexController extends BaseController {
     /**
      * 简历下载
      */
-    @ActionKey("/resume/download")
+    @ActionKey("resume/download")
     public void resumeDownload(){
         String webRootPath = PathKit.getWebRootPath();
         String path = "assets/interview/";
