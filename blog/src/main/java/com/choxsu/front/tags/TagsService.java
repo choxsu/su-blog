@@ -1,6 +1,6 @@
 package com.choxsu.front.tags;
 
-import com.choxsu.front.index.ArticleService;
+import com.choxsu.front.article.ArticleService;
 import com.jfinal.aop.Inject;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;

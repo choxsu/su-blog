@@ -59,7 +59,7 @@ public class Start extends JFinalConfig {
     // 先加载开发环境配置，再追加生产环境的少量配置覆盖掉开发环境配置
     static void loadConfig() {
         if (p == null) {
-            p = PropKit.use("chosu-blog-config-dev.properties").appendIfExists("chosu-blog-config-pro.properties");
+            p = PropKit.use("config-dev.txt").appendIfExists("config-pro.txt");
         }
     }
 

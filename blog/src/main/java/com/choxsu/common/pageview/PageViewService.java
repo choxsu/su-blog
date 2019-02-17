@@ -3,7 +3,7 @@ package com.choxsu.common.pageview;
 import com.choxsu.common.entity.Visitor;
 import com.choxsu.common.redis.RedisKey;
 import com.choxsu.kit.IpKit;
-import com.choxsu.front.index.ArticleService;
+import com.choxsu.front.article.ArticleService;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.ehcache.CacheKit;

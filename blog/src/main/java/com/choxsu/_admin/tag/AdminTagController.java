@@ -2,7 +2,7 @@ package com.choxsu._admin.tag;
 
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.entity.BlogTag;
-import com.choxsu.front.index.ArticleService;
+import com.choxsu.front.article.ArticleService;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Inject;
 import com.jfinal.kit.Ret;

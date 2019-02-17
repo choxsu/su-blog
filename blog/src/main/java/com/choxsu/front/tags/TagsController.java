@@ -21,6 +21,6 @@ public class TagsController extends BaseController {
         Integer pageNumber = getParaToInt("p", 1);
         Page<Record> page = tagsService.findBlogByTagId(pageNumber, 10, tagId);
         setAttr("page", page);
-        render("blog/index.html");
+        render("index.html");
     }
 }

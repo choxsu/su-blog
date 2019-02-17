@@ -1,4 +1,4 @@
-package com.choxsu.front.index;
+package com.choxsu.front.article;
 
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.pageview.AddClickInterceptor;
@@ -21,7 +21,7 @@ public class ArticleController extends BaseController {
         int page = getParaToInt("p", 1);
         Page<Record> blogPage = articleService.findArticles(page, 10, null);
         setAttr("page", blogPage);
-        render("blog/index.html");
+        render("index.html");
     }
 
     @Before(AddClickInterceptor.class)
@@ -29,7 +29,7 @@ public class ArticleController extends BaseController {
         Record record = articleService.findBlog(getParaToInt());
         if (record != null) {
             setAttr("blog", record);
-            render("blog/detail.html");
+            render("detail.html");
         } else {
             renderError(404);
         }

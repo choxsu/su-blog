@@ -1,7 +1,7 @@
 package com.choxsu.api.blog;
 
 import com.choxsu.common.base.BaseController;
-import com.choxsu.front.index.ArticleService;
+import com.choxsu.front.article.ArticleService;
 import com.jfinal.aop.Inject;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;

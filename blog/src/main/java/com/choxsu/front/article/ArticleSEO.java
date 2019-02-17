@@ -1,4 +1,4 @@
-package com.choxsu.front.index;
+package com.choxsu.front.article;
 
 import com.choxsu.common.interceptor.BaseSeoInterceptor;
 import com.jfinal.core.Controller;
