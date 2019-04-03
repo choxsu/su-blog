@@ -11,7 +11,8 @@
   
 ### 后台截图（仅供参考）
 #### 后台首页
-![doc/image/index.jpg]()  
+![/doc/image/index.jpg](/doc/image/index.jpg)
+  
 ### 主要使用技术
    - enhancer缓存
    - redis 缓存
