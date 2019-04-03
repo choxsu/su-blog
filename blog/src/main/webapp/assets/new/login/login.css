@@ -13,6 +13,13 @@ body {
     margin-top: -100px;
 }
 
+.captcha {
+    position: relative;
+    top: -43px;
+    right: -92px;
+    z-index: 100;
+}
+
 .form-signin {
     width: 100%;
     max-width: 330px;
