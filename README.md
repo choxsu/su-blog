@@ -8,6 +8,10 @@
   前台页面变更为极简的页面，没有多余的，纯极简，
   效果见[Chosu's blog](http://www.styg.site/ "Chosu") ，
   使用了Java语言来开发的，后端框架使用了JFinal
+  
+### 后台截图（仅供参考）
+#### 后台首页
+![doc/image/index.jpg]()  
 ### 主要使用技术
    - enhancer缓存
    - redis 缓存
