@@ -6,7 +6,7 @@
   基于JFinal编写的博客系统及后台完善的权限系统
 ### 模块说明
   前台页面变更为极简的页面，没有多余的，纯极简，
-  效果见[Chosu's blog](http://47.104.210.207/article "Chosu") ，
+  效果见[Choxsu's blog](http://47.104.210.207/article "Choxsu") ，
   使用了Java语言来开发的，后端框架使用了JFinal
 ### markdown编辑器
 使用editormd实现，`实现了自定义粘贴上传图片`  
