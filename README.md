@@ -1,12 +1,12 @@
 ### 前言
   此版本的前端UI即将重写设计布局，
   旧版UI移步分支 
-  [v1](https://gitee.com/choxsu/sblog/tree/v1) 和 [v2](https://gitee.com/choxsu/sblog/tree/v2)
+  [v1](https://gitee.com/choxsu/choxsu/tree/v1) 和 [v2](https://gitee.com/choxsu/choxsu/tree/v2)
 ### 项目介绍
   基于JFinal编写的博客系统及后台完善的权限系统
 ### 模块说明
   前台页面变更为极简的页面，没有多余的，纯极简，
-  效果见[Chosu's blog](http://www.styg.site/ "Chosu") ，
+  效果见[Chosu's blog](http://47.104.210.207/ "Chosu") ，
   使用了Java语言来开发的，后端框架使用了JFinal
 ### markdown编辑器
 使用editormd实现，`实现了自定义粘贴上传图片`  
@@ -39,7 +39,7 @@
 - Jdk8+
 - Mysql5.5+
 ### 后台管理
-后台演示地址：[www.styg.site/login](http://www.styg.site/login)
+后台演示地址：[47.104.210.207/login](http://47.104.210.207/login)
 
 账号：test@test.com    密码：123456
 
