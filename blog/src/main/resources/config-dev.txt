@@ -10,7 +10,7 @@ password=root
 ### Redis配置
 redis.host=127.0.0.1
 redis.port=6379
-redis.password=choxsu-redis-pwd
+redis.password=
 
 ### ES配置信息
 elasticsearch_hosts=127.0.0.1:9300,127.0.0.1:9301
