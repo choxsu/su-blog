@@ -12,14 +12,14 @@ import java.io.File;
  */
 public class IndexController extends BaseController {
 
+    public static final String interviewName = "苏小秋_JAVA开发工程师_3年.docx";
+
     /**
      * 网站首页
      */
     public void index() {
         render("index.html");
     }
-
-    public static final String interviewName = "苏小秋_JAVA开发工程师_3年.docx";
 
     /**
      * 简历下载
