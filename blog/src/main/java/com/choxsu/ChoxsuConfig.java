@@ -18,6 +18,7 @@ import com.jfinal.config.*;
 import com.jfinal.json.MixedJsonFactory;
 import com.jfinal.kit.Prop;
 import com.jfinal.kit.PropKit;
+import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.cron4j.Cron4jPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
@@ -119,6 +120,9 @@ public class ChoxsuConfig extends JFinalConfig {
         String host = p.get("redis.host");
         int port = p.getInt("redis.port");
         String password = p.get("redis.password").trim();
+        if (StrKit.isBlank(password)) {
+            return new RedisPlugin(defaultName, host, port, 300000);
+        }
         return new RedisPlugin(defaultName, host, port, 300000, password);
     }
 
