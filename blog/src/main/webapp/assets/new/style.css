@@ -215,36 +215,41 @@ template {
 }
 
 /* 头部 */
+.navbar {
+    padding: 0;
+    height: 3rem;
+}
+
 .header {
     background-color: #f8f9fa;
     z-index: 100;
 }
 
 
-@media (min-width: 576px) {
-    .header .header-nav {
-        width: 510px;
+@media (min-width: 768px) {
+    .header .container {
+        width: 738px;
     }
 }
 
-@media (min-width: 768px) {
-    .header .header-nav {
-        width: 690px;
-    }
-}
 
 @media (min-width: 992px) {
-    .header .header-nav {
-        width: 930px;
+    .header .container {
+        width: 962px;
     }
 }
 
 @media (min-width: 1200px) {
-    .header .header-nav {
-        width: 1110px;
+    .header .container {
+        width: 1170px;
     }
 }
 
+@media (min-width: 1360px) {
+    .header .container {
+        width: 1330px;
+    }
+}
 
 .header .header-logo {
     display: inline-block;
@@ -267,9 +272,9 @@ template {
     top: 2px;
 }
 
-.header .navbar {
-    padding: 0;
-    height: 3rem;
+
+.header .navbar-nav a {
+    font-size: 0.9rem;
 }
 
 .header .search {
@@ -328,10 +333,6 @@ template {
         height: 88px;
     }
 
-    .header .header-nav {
-        text-align: center
-    }
-
     .header .header-links {
         display: block;
         float: none;
@@ -346,6 +347,12 @@ template {
         margin-right: 0
     }
 
+}
+
+@media all and (max-width: 575px) {
+    .header {
+        height: 88px;
+    }
 }
 
 /* 导航栏 响应式 代码 begin */
@@ -373,32 +380,38 @@ template {
     padding: 0;
 }
 
-.article .article-list li a {
-    transition: all .3s;
-}
-
 .article .article-list .article-list-item {
-    margin: 10px;
+    margin: 15px 0;
 }
 
 .article .article-list .article-list-item a{
     color: #555555;
 }
 .article .article-list .article-list-item a:hover{
-    color: #555555;
+    color: #3391d1;
 }
 
 /*文章部分  end*/
 
-.footer {
-    display: block;
-    padding-top: 35px;
-    margin-bottom: 85px;
+/*
+right
+*/
+.main-right {}
+
+.main-right img{
+    max-width: 100%;
+    vertical-align: middle;
+    border: 0;
+}
+
+.main-right .adv {
+    margin-top: 8px;
 }
 
 .footer p {
-    font-size: 15px;
-    color: #ada8a8
+    font-size: 14px;
+    color: #ada8a8;
+    line-height: 40px;
 }
 
 .footer a {

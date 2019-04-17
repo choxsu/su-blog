@@ -1,8 +1,12 @@
 package com.choxsu.front.index;
 
 import com.choxsu.common.base.BaseController;
+import com.choxsu.front.article.ArticleService;
+import com.jfinal.aop.Inject;
 import com.jfinal.core.ActionKey;
 import com.jfinal.kit.PathKit;
+import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 
 import java.io.File;
 
@@ -12,12 +16,18 @@ import java.io.File;
  */
 public class IndexController extends BaseController {
 
+    @Inject
+    ArticleService articleService;
+
     public static final String interviewName = "苏小秋_JAVA开发工程师_3年.docx";
 
     /**
      * 网站首页
      */
     public void index() {
+        int page = getParaToInt("p", 1);
+        Page<Record> blogPage = articleService.findArticles(page, 10, null);
+        setAttr("page", blogPage);
         render("index.html");
     }
 
