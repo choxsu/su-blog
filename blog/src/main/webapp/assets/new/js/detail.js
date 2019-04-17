@@ -49,7 +49,7 @@ var Detail = {
             var imgElement = img[i];
             var zooming = new Zooming({
                 scaleBase: 1,
-                preloadImage: true,
+                preloadImage: false,
                 bgColor: '#f7f7f7'
             });
             zooming.listen(imgElement);
