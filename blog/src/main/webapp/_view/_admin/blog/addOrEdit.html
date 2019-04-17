@@ -80,6 +80,8 @@
             this.editor = editormd("#(com.choxsu._admin.blog.AdminBlogController::MARKED_ID)", {
                 width: "100%",
                 height: 700,
+                atLink: false,
+                emailLink: false,
                 markdown: $('#tx').text(),
                 path: '/assets/editor_md/lib/',
                 toolbarIcons: function () {

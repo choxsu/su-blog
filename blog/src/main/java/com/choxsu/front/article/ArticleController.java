@@ -18,10 +18,7 @@ public class ArticleController extends BaseController {
     ArticleService articleService;
 
     public void index() {
-        int page = getParaToInt("p", 1);
-        Page<Record> blogPage = articleService.findArticles(page, 10, null);
-        setAttr("page", blogPage);
-        render("index.html");
+       renderError(404);
     }
 
     @Before(AddClickInterceptor.class)

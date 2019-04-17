@@ -21,27 +21,19 @@
 <main>
     <nav class="navbar navbar-expand-sm navbar-light bg-light header">
         <div class="container">
-            <a href="/article" class="navbar-brand header-logo" title="Choxsu">SSS</a>
+            <a href="/" class="navbar-brand header-logo" title="Choxsu">ChoxSu</a>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/article">首页</a>
+                    <a class="nav-link" href="/">首页</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/article/14">关于</a>
                 </li>
-
                 <li class="nav-item" style="display: none">
                     <a class="nav-link" target="_blank" href="/resume/download">简历下载</a>
                 </li>
             </ul>
-            <ul class="navbar-nav search">
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Search"
-                           aria-label="Search">
-                </form>
-            </ul>
             <ul class="navbar-nav header-links">
-                <a href="/login/qqLogin"><img src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"></a>
                 <li>
                     <a href="https://gitee.com/choxsu" class="gitee" title="上码云看看" rel="gitee Choxsu"
                        target="_blank">
@@ -56,11 +48,20 @@
                     </a>
                 </li>
             </ul>
+            <ul class="navbar-nav search">
+                <form class="form-inline my-2 my-lg-0" action="/search">
+                    <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Search" name="keyword"
+                           aria-label="Search">
+                </form>
+            </ul>
+            <ul class="navbar-nav header-links qq-login">
+                <a href="/login/qqLogin"><img src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"></a>
+            </ul>
         </div>
     </nav>
     <div class="main container">
         <div class="row">
-            <div class="col-lg-9 col-md-9 main-left article">
+            <div class="col-lg-9 col-md-9 article">
                 #@main()
             </div>
             <div class="col-lg-3 col-md-3 main-right">

@@ -1,10 +1,10 @@
 #@layout()
 #define main()
 #define css()
-<link rel="stylesheet" href="/assets/editor_md/css/editormd.preview.css">
 <link rel="stylesheet" href="/assets/editor_md/css/editormd.min.css" media="all">
+<link rel="stylesheet" href="/assets/editor_md/css/editormd.preview.css">
 #end
-<article class="article">
+<div class="article">
     <header class="article-header">
         <div class="title">#(blog.title)</div>
         <!--<p>#(blog.title)</p>-->
@@ -17,12 +17,10 @@
                         阅读: #(blog.clickCount)
                         </span>
             <span class="article-list-divider">-</span>
-            <div class="article-list-tags">
-                <a href="javascrpt:;">#(blog.tagName)</a>
-            </div>
+            <a href="javascrpt:;">#(blog.tagName)</a>
         </div>
     </header>
-    <div id="content-id" class="article-content">
+    <div id="content-id" class="article-content markdown-body editormd-preview-container" previewcontainer="true">
         #(blog.content)
     </div>
     <div class="article-share">
@@ -48,14 +46,10 @@
     </div>-->
 
     <noscript>Please enable JavaScript to view the comments.</noscript>
-</article>
+</div>
 <div class="return-top" title="返回顶部"><img src="/assets/new/images/top.png"></div>
 #define js()
 <script src="/assets/new/js/zooming.min.js"></script>
 <script src="/assets/new/js/detail.js"></script>
-<!--<script src="/assets/new/js/jquery.min-v1.11.3.js"></script>
-<script src="/assets/editor_md/lib/marked.min.js"></script>
-<script src="/assets/editor_md/lib/prettify.min.js"></script>
-<script src="/assets/editor_md/editormd.min.js"></script>-->
 #end
 #end

@@ -50,7 +50,7 @@ var Detail = {
             var zooming = new Zooming({
                 scaleBase: 1,
                 preloadImage: true,
-                bgColor: 'rgb(205, 255, 255)'
+                bgColor: '#f7f7f7'
             });
             zooming.listen(imgElement);
         }

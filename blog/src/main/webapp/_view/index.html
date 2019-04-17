@@ -4,23 +4,15 @@
     <ul class="article-list">
         #for(r : page.list)
         <li class="article-list-item">
-            <a href="/article/#(r.id)"
-               title="#(r.title)">
-                <div class="title">
-                    #(r.title)
-                </div>
+            <a href="/user/1" class="avatar">
+                <img src="/assets/new/images/gitee.png" />
             </a>
-            <div class="">
-                <span class="">
-                    #date(r.createAt, "yyyy-MM-dd hh:mm")
-                </span>
-                <span class="article-list-divider">-</span>
-                <span class="article-list-minutes">
-                    浏览: #(r.clickCount)
-                </span>
-                <span class="article-list-divider">-</span>
-                <a href="/article/tag/#(r.tagId)">#(r.tagName)</a>
-            </div>
+            <span>
+                <a href="/article/#(r.id)">#(r.title)</a>
+            </span>
+            <span class="right">
+                #date(r.createAt, "yyyy-MM-dd hh:mm")
+            </span>
         </li>
         #end
     </ul>

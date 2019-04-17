@@ -7,6 +7,7 @@ html {
 
 body {
     margin: 0;
+    background-color: #f7f7f7 !important;
 }
 
 h1 {
@@ -279,6 +280,11 @@ template {
 
 .header .search {
     margin-right: 10px;
+    margin-left: 10px;
+}
+
+.header .qq-login {
+    margin-right: 10px;
 }
 
 .header .header-links li {
@@ -321,6 +327,7 @@ template {
     min-height: 100%;
     padding: 10px 8px 120px;
 }
+
 
 .main .main-right {
     width: 100%;
@@ -372,6 +379,7 @@ template {
 
 /*文章部分  begin*/
 .article {
+    background-color: white;
 }
 
 .article .article-list {
@@ -382,12 +390,42 @@ template {
 
 .article .article-list .article-list-item {
     margin: 15px 0;
+    display: block;
+    position: relative;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 2em;
+    border-bottom: 1px solid #f0f0f0;
 }
 
-.article .article-list .article-list-item a{
+
+.article .article-list .article-list-item .avatar {
+    margin-right: 5px;
+}
+.article .article-list .article-list-item .avatar img{
+    width: 40px;
+    height: 40px;
+}
+.article .article-list .article-list-item .reply {
+    color: #bb8fc0;
+}
+.article .article-list .article-list-item .r-c{
+    width: 65px;
+    display: inline-block;
+    text-align: center;
+}
+.article .article-list .article-list-item .clickCount {
+    color: #6c757d;
+}
+.article .article-list .article-list-item .right {
+    float: right;
+}
+
+.article .article-list .article-list-item a {
     color: #555555;
 }
-.article .article-list .article-list-item a:hover{
+
+.article .article-list .article-list-item a:hover {
     color: #3391d1;
 }
 
@@ -396,9 +434,10 @@ template {
 /*
 right
 */
-.main-right {}
+.main-right {
+}
 
-.main-right img{
+.main-right img {
     max-width: 100%;
     vertical-align: middle;
     border: 0;
@@ -411,7 +450,6 @@ right
 .footer p {
     font-size: 14px;
     color: #ada8a8;
-    line-height: 40px;
 }
 
 .footer a {
