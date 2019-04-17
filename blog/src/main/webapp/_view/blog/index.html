@@ -10,18 +10,16 @@
                     #(r.title)
                 </div>
             </a>
-            <div class="article-list-footer">
-                        <span class="article-list-date">
-                        #date(r.createAt, "yyyy-MM-dd hh:mm")
-                        </span>
+            <div class="">
+                <span class="">
+                    #date(r.createAt, "yyyy-MM-dd hh:mm")
+                </span>
                 <span class="article-list-divider">-</span>
                 <span class="article-list-minutes">
-                            阅读: #(r.clickCount)
-                        </span>
+                    浏览: #(r.clickCount)
+                </span>
                 <span class="article-list-divider">-</span>
-                <div class="article-list-tags">
-                    <a href="/article/tag/#(r.tagId)">#(r.tagName)</a>
-                </div>
+                <a href="/article/tag/#(r.tagId)">#(r.tagName)</a>
             </div>
         </li>
         #end

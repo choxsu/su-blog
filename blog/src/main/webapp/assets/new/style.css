@@ -22,15 +22,6 @@ hr {
 }
 
 
-a {
-    background-color: transparent;
-    -webkit-text-decoration-skip: objects
-}
-
-a:active, a:hover {
-    outline-width: 0
-}
-
 abbr[title] {
     border-bottom: none;
     text-decoration: underline;
@@ -356,6 +347,7 @@ template {
     }
 
 }
+
 /* 导航栏 响应式 代码 begin */
 @media all and (max-width: 768px) {
     .header .search {
@@ -368,23 +360,35 @@ template {
         margin-right: 0 !important;
     }
 }
+
 /* 导航栏 响应式 代码 end */
 
-a {
-    color: #615b5b;
-    text-decoration: underline;
-    -webkit-transition: color .2s linear;
-    transition: color .2s linear
+/*文章部分  begin*/
+.article {
 }
 
-a:hover, a:active {
-    color: #393636
+.article .article-list {
+    list-style: none;
+    margin-top: 20px;
+    padding: 0;
 }
 
-a:focus {
-    color: #393636;
-    outline: none
+.article .article-list li a {
+    transition: all .3s;
 }
+
+.article .article-list .article-list-item {
+    margin: 10px;
+}
+
+.article .article-list .article-list-item a{
+    color: #555555;
+}
+.article .article-list .article-list-item a:hover{
+    color: #555555;
+}
+
+/*文章部分  end*/
 
 .footer {
     display: block;

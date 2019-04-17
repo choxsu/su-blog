@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.choxsu</groupId>
-    <artifactId>chosu-blog</artifactId>
+    <artifactId>Choxsu-blog</artifactId>
     <packaging>pom</packaging>
     <version>1.0</version>
     <modules>
@@ -34,7 +34,7 @@
     </repositories>
 
     <build>
-        <finalName>chosu-blog</finalName>
+        <finalName>Choxsu-blog</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

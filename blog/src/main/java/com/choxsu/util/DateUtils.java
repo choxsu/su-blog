@@ -95,7 +95,7 @@ public class DateUtils {
      *            需要格式化的时间对象
      *
      * 2014年5月5日 下午12:00:00
-     * chosu choxsu@gmail.com
+     * Choxsu choxsu@gmail.com
      * @return 转化结果
      */
     public static String format(Date date) {
@@ -111,7 +111,7 @@ public class DateUtils {
      *            定义格式的字符串
      *
      * 2014年5月5日 下午12:00:00
-     * chosu choxsu@gmail.com
+     * Choxsu choxsu@gmail.com
      * @return 转化结果
      */
     public static String format(Date date, String regex) {
@@ -135,7 +135,7 @@ public class DateUtils {
      * @param time
      *
      * 2014年5月5日 下午12:00:00
-     * chosu choxsu@gmail.com
+     * Choxsu choxsu@gmail.com
      * @return
      */
     public static Date parseByAll(String time) {
@@ -187,7 +187,7 @@ public class DateUtils {
      * @param source
      *
      * 2014年5月5日 下午12:00:00
-     * chosu choxsu@gmail.com
+     * Choxsu choxsu@gmail.com
      * @return 解析结果
      */
     public static Date parse(String source) {
@@ -204,7 +204,7 @@ public class DateUtils {
      * @param source
      *
      * 2014年5月5日 下午12:00:00
-     * chosu choxsu@gmail.com
+     * Choxsu choxsu@gmail.com
      * @return 解析结果
      */
     public static Date parse(String source, String regex) {
@@ -220,7 +220,7 @@ public class DateUtils {
      * 取得当前时间的Date对象 ;
      *
      * 2014年5月5日 下午12:00:00
-     * chosu choxsu@gmail.com
+     * Choxsu choxsu@gmail.com
      * @return
      */
     public static Date getNowDate() {
@@ -231,7 +231,7 @@ public class DateUtils {
      * 获取当前时间字符串
      *
      * 2014年5月5日 下午12:00:00
-     * chosu choxsu@gmail.com
+     * Choxsu choxsu@gmail.com
      * @return
      */
     public static String getNow() {
@@ -242,7 +242,7 @@ public class DateUtils {
      * 获取当前时间字符串
      *
      * 2014年7月4日 下午11:47:10
-     * chosu choxsu@gmail.com
+     * Choxsu choxsu@gmail.com
      * @param regex 格式表达式
      * @return
      */

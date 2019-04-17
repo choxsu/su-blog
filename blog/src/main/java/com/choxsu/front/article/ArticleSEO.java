@@ -8,9 +8,9 @@ public class ArticleSEO extends BaseSeoInterceptor {
 
     @Override
     public void indexSeo(Controller c) {
-        setSeoTitle(c, "Chosu | Java Developer");
-        setSeoKeywords(c, "Chosu,Java,JFinal,前端,HTML,后台,后端,数据库,mysql,vue,nodeJs");
-        setSeoDescr(c, "Chosu极简博客,技术文章分享,带你学会更多的Java技术");
+        setSeoTitle(c, "Choxsu | Java Developer");
+        setSeoKeywords(c, "Choxsu,Java,JFinal,前端,HTML,后台,后端,数据库,mysql,vue,nodeJs");
+        setSeoDescr(c, "Choxsu极简博客,技术文章分享,带你学会更多的Java技术");
     }
 
     @Override
