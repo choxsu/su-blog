@@ -12,6 +12,9 @@ import java.io.File;
  */
 public class IndexController extends BaseController {
 
+    /**
+     * 网站首页
+     */
     public void index() {
         render("index.html");
     }
