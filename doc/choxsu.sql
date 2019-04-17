@@ -3,15 +3,15 @@
 
  Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 50721
+ Source Server Version : 50723
  Source Host           : localhost:3306
  Source Schema         : choxsu
 
  Target Server Type    : MySQL
- Target Server Version : 50721
+ Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 22/12/2018 17:55:21
+ Date: 17/04/2019 11:06:40
 */
 
 SET NAMES utf8mb4;
@@ -33,7 +33,7 @@ CREATE TABLE `account`  (
   `avatar` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `likeCount` int(11) NOT NULL DEFAULT 0 COMMENT '被赞次数',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '账户表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of account
@@ -42,6 +42,21 @@ INSERT INTO `account` VALUES (1, 'ChoxSu', 'choxsu@gmail.com', 'f3f7f982d422ba1e
 INSERT INTO `account` VALUES (2, '管理员', 'admin@styg.site', 'f3f7f982d422ba1e3569170091584211bd333d378951548712440065832fe613', '8wCSdUV6EJBvPg9zDkphts9JAHFNyO6t', 1, '2018-04-19 10:19:11', '175.12.244.105', '0/1.jpg', 0);
 INSERT INTO `account` VALUES (3, 'test', 'test@test.com', 'f3f7f982d422ba1e3569170091584211bd333d378951548712440065832fe613', 'RS_xQw8fhclJqZU2iDPYqa8EYyF9T6pc', 1, '2018-09-27 12:04:25', '183.64.28.18', 'x.jpg', 0);
 INSERT INTO `account` VALUES (4, 'test1', 'test1@test.com', 'b7cf9ab8832c2caeee7753efd1e70787b0fd72f17539f2e730e58ba01063b5ca', 'CR3yZ3xuDO2EB4jiEtj4HhwY0tpuq_-y', 1, '2018-12-21 22:11:14', '0:0:0:0:0:0:0:1', 'x.jpg', 0);
+
+-- ----------------------------
+-- Table structure for account_open
+-- ----------------------------
+DROP TABLE IF EXISTS `account_open`;
+CREATE TABLE `account_open`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `accountId` int(11) NOT NULL COMMENT '账户ID',
+  `openType` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '第三方类型，比如qq、weibo',
+  `openId` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '代表用户唯一身份的ID',
+  `accessToken` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '调用接口需要用到的token，比如利用accessToken发表微博等，如果只是对接登录的话，这个其实没啥用',
+  `expiredTime` bigint(20) NULL DEFAULT NULL COMMENT '授权过期时间，第三方登录授权都是有过期时间的，比如3个月之后，这里存放毫秒数，过期的毫秒数',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `accountIdAndOpenId`(`accountId`, `openId`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '账户-登录第三方表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for account_role
@@ -219,8 +234,20 @@ INSERT INTO `images` VALUES (65, 1, '/upload/img/article/0/1_20181223001400.png'
 INSERT INTO `images` VALUES (66, 1, '/upload/img/article/0/1_20181223001405.png', '1_20181223001405.png', '.png', 1545495245, '', '21961', '1545495255794.png');
 INSERT INTO `images` VALUES (67, 5, '0/5.jpg', '/upload/avatar/temp/1_1546938076816.jpg', '.jpg', 1546938080, '', '0', '/upload/avatar/temp/1_1546938076816.jpg');
 
-SET FOREIGN_KEY_CHECKS = 1;
-
+-- ----------------------------
+-- Table structure for job_manager
+-- ----------------------------
+DROP TABLE IF EXISTS `job_manager`;
+CREATE TABLE `job_manager`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '任务名',
+  `group` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '组名',
+  `clazz` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '类名',
+  `cron_expression` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '定时表达式',
+  `is_enabled` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'N' COMMENT '是否开启',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `name`(`name`, `group`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for login_log
@@ -626,16 +653,3 @@ INSERT INTO `visitor` VALUES (3013, '183.64.28.18', 'http://blog.styg.site/login
 INSERT INTO `visitor` VALUES (3014, '183.64.28.18', 'http://blog.styg.site/login/captcha', 'GET', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.117 Safari/537.36', '2018-06-14 17:44:18');
 
 SET FOREIGN_KEY_CHECKS = 1;
-
-
-DROP TABLE IF EXISTS `job_manager`;
-CREATE TABLE `job_manager` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL DEFAULT '' COMMENT '任务名',
-  `group` varchar(50) NOT NULL DEFAULT '' COMMENT '组名',
-  `clazz` varchar(50) NOT NULL DEFAULT '' COMMENT '类名',
-  `cron_expression` varchar(50) NOT NULL DEFAULT '' COMMENT '定时表达式',
-  `is_enabled` char(1) NOT NULL DEFAULT 'N' COMMENT '是否开启',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`,`group`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
