@@ -1,7 +1,8 @@
 ### 文章列表
 #sql("list")
-	SELECT
+SELECT
 	b.id,
+	b.accountId,
 	b.title,
 	LEFT ( b.content, 50 ) AS content,
 	b.createAt,
