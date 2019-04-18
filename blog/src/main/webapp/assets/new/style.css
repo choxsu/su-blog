@@ -403,8 +403,8 @@ template {
     margin-right: 5px;
 }
 .article .article-list .article-list-item .avatar img{
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
 }
 .article .article-list .article-list-item .reply {
     color: #bb8fc0;
@@ -428,6 +428,16 @@ template {
 .article .article-list .article-list-item a:hover {
     color: #3391d1;
 }
+
+.article .article-detail {
+    margin: 8px 20px;
+    border-bottom: 1px solid #c5b8b8;
+}
+.article .article-detail .title {
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
 
 /*文章部分  end*/
 
@@ -460,7 +470,7 @@ right
     display: none;
     position: fixed;
     right: 20px;
-    bottom: 100px;
+    bottom: 30px;
     cursor: pointer;
 }
 
