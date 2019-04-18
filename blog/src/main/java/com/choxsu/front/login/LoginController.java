@@ -1,11 +1,11 @@
 
-package com.choxsu._admin.login;
+package com.choxsu.front.login;
 
 import com.choxsu.common.entity.Account;
+import com.choxsu.common.render.MyCaptchaRender;
 import com.choxsu.kit.EmailKit;
 import com.choxsu.kit.IpKit;
 import com.choxsu.kit.RSAKit;
-import com.choxsu.common.render.MyCaptchaRender;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
 import com.jfinal.aop.Inject;
@@ -23,10 +23,10 @@ import java.util.concurrent.Executors;
 /**
  * 登录控制器
  */
-public class AdminLoginController extends Controller {
+public class LoginController extends Controller {
 
     @Inject
-    AdminLoginService srv;
+    LoginService srv;
 
     private static ExecutorService executorService = Executors.newSingleThreadExecutor();
 
@@ -41,7 +41,7 @@ public class AdminLoginController extends Controller {
     /**
      * 登录
      */
-    @Before(AdminLoginValidator.class)
+    @Before(LoginValidator.class)
     public void doLogin() {
         String encript = getPara("encryptPwd");
         RSAPrivateKey privateKey = RSAKit.getRSAPrivateKey(PropKit.get("privateKey"));
@@ -54,7 +54,7 @@ public class AdminLoginController extends Controller {
         String loginIp = IpKit.getRealIp(getRequest());
         Ret ret = srv.login(getPara("userName"), password, keepLogin, loginIp);
         if (ret.isOk()) {
-            Account account = (Account) ret.get(AdminLoginService.loginAccountCacheName);
+            Account account = (Account) ret.get(LoginService.loginAccountCacheName);
             String content = "在 " + new Date() + "登陆 Choxsu博客社区后台成功 <br/> 登陆ip:" + IpKit.getRealIp(this.getRequest()) + "<br/> 如果非本人登录，请及时联系超级管理员";
             executorService.execute(() -> {
                 try {
@@ -63,10 +63,10 @@ public class AdminLoginController extends Controller {
                     LogKit.error("登录成功发送邮件失败："+e.getMessage(), e);
                 }
             });
-            String sessionId = ret.getStr(AdminLoginService.sessionIdName);
+            String sessionId = ret.getStr(LoginService.sessionIdName);
             int maxAgeInSeconds = ret.getInt("maxAgeInSeconds");
-            setCookie(AdminLoginService.sessionIdName, sessionId, maxAgeInSeconds, true);
-            setAttr(AdminLoginService.loginAccountCacheName, ret.get(AdminLoginService.loginAccountCacheName));
+            setCookie(LoginService.sessionIdName, sessionId, maxAgeInSeconds, true);
+            setAttr(LoginService.loginAccountCacheName, ret.get(LoginService.loginAccountCacheName));
             ret.set("returnUrl", getPara("returnUrl", "/admin"));    // 如果 returnUrl 存在则跳过去，否则跳去首页
         }
         renderJson(ret);
@@ -78,8 +78,8 @@ public class AdminLoginController extends Controller {
     @Clear
     @ActionKey("/logout")
     public void logout() {
-        srv.logout(getCookie(AdminLoginService.sessionIdName));
-        removeCookie(AdminLoginService.sessionIdName);
+        srv.logout(getCookie(LoginService.sessionIdName));
+        removeCookie(LoginService.sessionIdName);
         redirect("/login");
     }
 

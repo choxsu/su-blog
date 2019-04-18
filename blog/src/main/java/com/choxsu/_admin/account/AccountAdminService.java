@@ -9,7 +9,7 @@ import com.jfinal.aop.Inject;
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.Role;
 import com.choxsu.common.entity.Session;
-import com.choxsu._admin.login.AdminLoginService;
+import com.choxsu.front.login.LoginService;
 import com.jfinal.kit.HashKit;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.Ret;
@@ -31,7 +31,7 @@ import java.util.List;
 public class AccountAdminService {
 
     @Inject
-    AdminLoginService adminLoginService;
+    LoginService loginService;
 
     private Account dao = new Account().dao();
 
@@ -80,7 +80,7 @@ public class AccountAdminService {
         account.keep("id", "nickName");
         account.update();
         if (account.getId().equals(loginAccount.getId())) {
-            AdminLoginService.me.reloadLoginAccount(loginAccount);
+            LoginService.me.reloadLoginAccount(loginAccount);
         }
         return Ret.ok("msg", "账户更新成功");
     }
@@ -99,7 +99,7 @@ public class AccountAdminService {
         List<Session> sessionList = Session.dao.find("select * from session where accountId = ?", lockedAccountId);
         if (sessionList != null) {
             for (Session session : sessionList) {            // 处理多客户端同时登录后的多 session 记录
-                adminLoginService.logout(session.getId());    // 清除登录 cache，强制退出
+                loginService.logout(session.getId());    // 清除登录 cache，强制退出
             }
         }
 
@@ -300,7 +300,7 @@ public class AccountAdminService {
             //保存图片上传记录
             UploadService.me.updateUploadImage(accountId, avatarUrl,relativePathFileName[0], avatarUrl, extName, "0", "");
             updateAccountAvatar(accountId, relativePathFileName[0]);
-            AdminLoginService.me.reloadLoginAccount(loginAccount);
+            LoginService.me.reloadLoginAccount(loginAccount);
             return Ret.ok("msg", "头像更新成功，部分浏览器需要按 CTRL + F5 强制刷新看效果").set("url", relativePathFileName[0]);
         } catch (Exception e) {
             return Ret.fail("msg", "头像更新失败：" + e.getMessage());

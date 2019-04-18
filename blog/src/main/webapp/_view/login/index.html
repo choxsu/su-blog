@@ -1,0 +1,119 @@
+#@layout()
+#set(seoTitle = "Choxsu后台登录")
+#define main()
+
+#define css()
+
+#end
+<form id="login_form" class="form-signin" action="/login/doLogin?returnUrl=#(returnUrl)" method="post">
+    <img class="mb-4" src="/images/c.jpg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">请登录</h1>
+    <div class="form-group">
+        <input type="email" name="userName" class="form-control" placeholder="请输入邮箱" required>
+        <small id="emailHelp" class="form-text text-muted">我们永远不会和其他人分享你的电子邮件.</small>
+    </div>
+    <div class="form-group">
+        <input type="password"
+               id="_password"
+               onchange="setEncPwd(this)"
+               onkeyup="setEncPwd(this)"
+               name="password" class="form-control" placeholder="请输入密码" required>
+        <input id="_encryptPwd" type="hidden" name="encryptPwd"/>
+    </div>
+    <div class="form-group">
+        <input class="form-control"
+               name="captcha" placeholder="验证码" maxlength="4"
+               type="text" autocomplete="off" required>
+        <img title="点击刷新" class="J_codeimg captcha" src="/login/captcha" onclick="updateCaptcha();">
+    </div>
+    <button id="login_submit" type="submit" class="btn btn-primary" data-loading-text="登录中...">登录</button>
+</form>
+#define js()
+<script type="text/javascript" src="/assets/new/js/jquery.min-v1.11.3.js"></script>
+<script type="text/javascript" src="/assets/new/js/jquery.form.min.js"></script>
+<script type="text/javascript" src="/assets/new/js/layer/layer.js"></script>
+<script type="text/javascript" src="/assets/new/js/jsencrypt.min.js"></script>
+<script type="text/javascript" src="/assets/bootstrap-4.1.3/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+    //加密公私
+    var publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDeniVaKAmFtYLYlkY2u8+r3Uzpxy6A/oNZLSLGVKQZpgwtosHzsQ93KB+i4JFmRvq6Ud9xEilqWb3NUvG6zvJIdemX7WiM9cc/+T7GeLEwIrZJPgmqn7vGHkwA+3FWiXA+H/NpJIOp7VFiAKXtv919h1OcwoS9lsyfpB1CMPiwEQIDAQAB";
+
+    /* $("#login_form").submit(function () {
+         setPassToBlank();
+     });*/
+
+    function setPassToBlank() {
+        $("#_password").val('');
+    }
+
+    $(document).ready(function () {
+        $("#login_form").ajaxForm({
+            dataType: "json"
+            , success: function (ret) {
+                // 业务层验证成功
+                if (ret.state === "ok") {
+                    setTimeout(function () {
+                        location.href = ret.returnUrl;
+                    }, 100);
+                    return;
+                }
+
+                // 业务层验证失败
+                if (ret.state === "fail") {
+                    layer.msg(ret.msg, {
+                            shift: 6
+                            , shade: 0.3
+                            , time: 2500
+                            , offset: "165px"
+                            , closeBtn: 1
+                            , shadeClose: true
+                        }, function () {
+                            updateCaptcha();
+                        }
+                    );
+                    return;
+                }
+                // Validator 层验证失败
+                if (ret.userNameMsg) {
+                    layer.msg(ret.userNameMsg);
+                    return;
+                }
+                if (ret.passwordMsg) {
+                    layer.msg(ret.passwordMsg);
+                    return;
+                }
+                if (ret.captchaMsg) {
+                    layer.msg(ret.captchaMsg);
+                    updateCaptcha();    // captcha 被验证过以后会立即失效，更新之
+                }
+            }
+            , error: function (ret) {
+            }              // ret.status != 200 时回调
+            , complete: function (ret) {
+                setPassToBlank();
+                $('#login_submit').button('reset')
+            }       // 无论是 success 还是 error，最终都会被回调
+            , beforeSubmit: function () {
+                $('#login_submit').button('loading')
+            }
+        });
+    });
+
+    function updateCaptcha() {
+        $(".J_codeimg").attr("src", "/login/captcha?v=" + Math.random());
+        $("#captchaInput").val("");
+    }
+
+    function setEncPwd($this) {
+        var $1 = $($this);
+        var words = $1.val();
+        var crypt = new JSEncrypt();
+        crypt.setPublicKey(publicKey);
+        var enc = crypt.encrypt(words);
+        $("#_encryptPwd").val(enc);
+    }
+
+</script>
+#end
+#end

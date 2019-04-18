@@ -2,7 +2,7 @@
 
 package com.choxsu.kit;
 
-import com.choxsu._admin.login.AdminLoginService;
+import com.choxsu.front.login.LoginService;
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.interceptor.AuthCacheClearInterceptor;
 import com.jfinal.plugin.druid.DruidStatViewHandler;
@@ -27,9 +27,9 @@ public class DruidKit {
 
     public static DruidStatViewHandler getDruidStatViewHandler() {
         return new DruidStatViewHandler("/assets/druid", request -> {
-            String sessionId = getCookie(request, AdminLoginService.sessionIdName);
+            String sessionId = getCookie(request, LoginService.sessionIdName);
             if (sessionId != null) {
-                Account loginAccount = AdminLoginService.me.getLoginAccountWithSessionId(sessionId);
+                Account loginAccount = LoginService.me.getLoginAccountWithSessionId(sessionId);
                 return AuthCacheClearInterceptor.isAdmin(loginAccount);
             }
             return false;

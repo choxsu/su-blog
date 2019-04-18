@@ -1,6 +1,6 @@
 
 
-package com.choxsu._admin.login;
+package com.choxsu.front.login;
 
 import com.choxsu.common.authcode.AuthCodeService;
 import com.choxsu.common.entity.Account;
@@ -19,9 +19,9 @@ import java.util.Date;
 /**
  * 登录业务
  */
-public class AdminLoginService {
+public class LoginService {
 
-    public static final AdminLoginService me = new AdminLoginService();
+    public static final LoginService me = new LoginService();
 
     private Account accountDao = new Account().dao();
 

@@ -1,6 +1,6 @@
 
 
-package com.choxsu._admin.login;
+package com.choxsu.front.login;
 
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
@@ -8,7 +8,7 @@ import com.jfinal.validate.Validator;
 /**
  * ajax 登录参数验证
  */
-public class AdminLoginValidator extends Validator {
+public class LoginValidator extends Validator {
 
 	protected void validate(Controller c) {
 		setShortCircuit(true);

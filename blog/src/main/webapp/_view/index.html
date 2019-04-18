@@ -1,6 +1,6 @@
 #@layout()
 #define main()
-<div>
+<div class="col-lg-9 col-md-9 article">
     <ul class="article-list">
         #for(r : page.list)
         <li class="article-list-item">
@@ -17,6 +17,7 @@
         #end
     </ul>
 </div>
+#include("/_view/common/_sidebar.html")
 <div class="article-page">
     #@paginate(page.pageNumber, page.totalPage, "/article")
 </div>

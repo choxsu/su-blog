@@ -5,16 +5,15 @@ package com.choxsu.routes;
 import com.choxsu._admin.account.AccountAdminController;
 import com.choxsu._admin.auth.AdminAuthInterceptor;
 import com.choxsu._admin.blog.AdminBlogController;
-import com.choxsu._admin.enhancer.EnhancerAdminController;
-import com.choxsu._admin.quartz.JobManageController;
-import com.choxsu._admin.sensitive_word.SensitiveWordAdminController;
-import com.choxsu._admin.tag.AdminTagController;
 import com.choxsu._admin.common.PjaxInterceptor;
 import com.choxsu._admin.druid.DruidController;
+import com.choxsu._admin.enhancer.EnhancerAdminController;
 import com.choxsu._admin.index.IndexAdminController;
-import com.choxsu._admin.login.AdminLoginController;
 import com.choxsu._admin.permission.PermissionAdminController;
+import com.choxsu._admin.quartz.JobManageController;
 import com.choxsu._admin.role.RoleAdminController;
+import com.choxsu._admin.sensitive_word.SensitiveWordAdminController;
+import com.choxsu._admin.tag.AdminTagController;
 import com.choxsu._admin.visitor.VisitorAdminController;
 import com.choxsu.common.upload.UploadController;
 import com.jfinal.config.Routes;
@@ -36,8 +35,6 @@ public class AdminRoutes extends Routes {
         addInterceptor(new PjaxInterceptor());
 
         setBaseViewPath("/_view/_admin");
-
-        add("/login", AdminLoginController.class, "/login");
 
         add("/admin", IndexAdminController.class, "/index");
         add("/admin/blog", AdminBlogController.class, "/blog");

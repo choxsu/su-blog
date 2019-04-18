@@ -26,6 +26,9 @@ qq.appId=
 qq.appKey=
 qq.callback=
 
+### shortUrl
+short.url.appKey=3520097100
+
 ### 非对称加密配置 参考RSAKit类中的main方法生成公钥和私钥,私钥在此配置，公钥配置在blog/src/main/webapp/_view/_admin/login/index.html的js中
 privateKey=MIIBNwIBADANBgkqhkiG9w0BAQEFAASCASEwggEdAgEAAoGBAN6eJVooCYW1gtiWRja7z6vdTOnHLoD+g1ktIsZUpBmmDC2iwfOxD3coH6LgkWZG+rpR33ESKWpZvc1S8brO8kh16ZftaIz1xz/5PsZ4sTAitkk+Caqfu8YeTAD7cVaJcD4f82kkg6ntUWIApe2/3X2HU5zChL2WzJ+kHUIw+LARAgEAAoGBANigMZ66iRGYoDvcd3S5a4tFLJvsm98gS3ZSip1OLeVbhExALdXR/UepPqfDORm6hi8ajoC7+Jspup17UgjDalSx813VZz6PwpVoCM5PpOKJbk+lk7H4kjv15zNBUNdzeotkNi0bOJGo0BBFyjPZm5qlMq29XKBoHYwkyoDcA/bVAgEAAgEAAgEAAgEAAgEA
 
