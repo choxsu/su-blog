@@ -3,31 +3,34 @@
 #define main()
 
 #define css()
-
+    <link href="/assets/new/login/login.css" rel="stylesheet" type="text/css">
 #end
-<form id="login_form" class="form-signin" action="/login/doLogin?returnUrl=#(returnUrl)" method="post">
-    <img class="mb-4" src="/images/c.jpg" alt="" width="72" height="72">
-    <h1 class="h3 mb-3 font-weight-normal">请登录</h1>
-    <div class="form-group">
-        <input type="email" name="userName" class="form-control" placeholder="请输入邮箱" required>
-        <small id="emailHelp" class="form-text text-muted">我们永远不会和其他人分享你的电子邮件.</small>
-    </div>
-    <div class="form-group">
-        <input type="password"
-               id="_password"
-               onchange="setEncPwd(this)"
-               onkeyup="setEncPwd(this)"
-               name="password" class="form-control" placeholder="请输入密码" required>
-        <input id="_encryptPwd" type="hidden" name="encryptPwd"/>
-    </div>
-    <div class="form-group">
-        <input class="form-control"
-               name="captcha" placeholder="验证码" maxlength="4"
-               type="text" autocomplete="off" required>
-        <img title="点击刷新" class="J_codeimg captcha" src="/login/captcha" onclick="updateCaptcha();">
-    </div>
-    <button id="login_submit" type="submit" class="btn btn-primary" data-loading-text="登录中...">登录</button>
-</form>
+<div class="col-lg-12 col-md-12 login">
+    <form id="login_form" class="form-signin" action="/login/doLogin?returnUrl=#(returnUrl)" method="post">
+        <h1 class="h3 mb-3 font-weight-normal text-center">请登录</h1>
+        <div class="form-group">
+            <input type="email" name="userName" class="form-control" placeholder="请输入邮箱" required>
+            <small id="emailHelp" class="form-text text-muted">我们永远不会和其他人分享你的电子邮件.</small>
+        </div>
+        <div class="form-group">
+            <input type="password"
+                   id="_password"
+                   onchange="setEncPwd(this)"
+                   onkeyup="setEncPwd(this)"
+                   name="password" class="form-control" placeholder="请输入密码" required>
+            <input id="_encryptPwd" type="hidden" name="encryptPwd"/>
+        </div>
+        <div class="form-group">
+            <input class="form-control"
+                   name="captcha" placeholder="验证码" maxlength="4"
+                   type="text" autocomplete="off" required>
+            <img title="点击刷新" class="J_codeimg captcha" src="/login/captcha" onclick="updateCaptcha();">
+        </div>
+        <div class="text-right action-btn">
+            <button id="login_submit" type="submit" class="btn btn-primary" data-loading-text="登录中...">登录</button>
+        </div>
+    </form>
+</div>
 #define js()
 <script type="text/javascript" src="/assets/new/js/jquery.min-v1.11.3.js"></script>
 <script type="text/javascript" src="/assets/new/js/jquery.form.min.js"></script>

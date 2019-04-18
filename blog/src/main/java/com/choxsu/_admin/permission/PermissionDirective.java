@@ -1,7 +1,7 @@
 package com.choxsu._admin.permission;
 
 import com.choxsu._admin.auth.AdminAuthService;
-import com.choxsu._admin.login.AdminLoginService;
+import com.choxsu.front.login.LoginService;
 import com.choxsu.common.entity.Account;
 import com.jfinal.aop.Enhancer;
 import com.jfinal.template.Directive;
@@ -27,7 +27,7 @@ public class PermissionDirective extends Directive {
     AdminAuthService adminAuthService = Enhancer.enhance(AdminAuthService.class);
 
     public void exec(Env env, Scope scope, Writer writer) {
-        Account account = (Account)scope.getRootData().get(AdminLoginService.loginAccountCacheName);
+        Account account = (Account)scope.getRootData().get(LoginService.loginAccountCacheName);
         if (account != null && account.isStatusOk()) {
             // 如果是超级管理员，或者拥有指定的权限则放行
             if (adminAuthService.isSuperAdmin(account.getId()) ||

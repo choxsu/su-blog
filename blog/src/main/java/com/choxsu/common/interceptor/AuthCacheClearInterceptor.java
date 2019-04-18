@@ -1,8 +1,7 @@
 package com.choxsu.common.interceptor;
 
-import com.choxsu._admin.login.AdminLoginService;
 import com.choxsu.common.entity.Account;
-import com.choxsu.common.redis.RedisKey;
+import com.choxsu.front.login.LoginService;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.plugin.activerecord.Db;
@@ -27,7 +26,7 @@ public class AuthCacheClearInterceptor implements Interceptor {
     }
 
     public void intercept(Invocation inv) {
-        Account loginAccount = inv.getController().getAttr(AdminLoginService.loginAccountCacheName);
+        Account loginAccount = inv.getController().getAttr(LoginService.loginAccountCacheName);
         if (isAdmin(loginAccount)) {
             inv.invoke();
         } else {

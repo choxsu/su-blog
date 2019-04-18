@@ -1,7 +1,7 @@
 package com.choxsu._admin.auth;
 
 import com.choxsu.common.entity.Account;
-import com.choxsu._admin.login.AdminLoginService;
+import com.choxsu.front.login.LoginService;
 import com.jfinal.aop.Inject;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
@@ -30,7 +30,7 @@ public class AdminAuthInterceptor implements Interceptor {
 
     @Override
     public void intercept(Invocation inv) {
-        Account loginAccount = inv.getController().getAttr(AdminLoginService.loginAccountCacheName);
+        Account loginAccount = inv.getController().getAttr(LoginService.loginAccountCacheName);
         if (loginAccount != null && loginAccount.isStatusOk()) {
             // 传递给 sharedObject、sharedMethod 扩展使用
             threadLocal.set(loginAccount);
