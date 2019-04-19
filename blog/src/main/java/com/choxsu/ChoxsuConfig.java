@@ -44,7 +44,7 @@ public class ChoxsuConfig extends JFinalConfig {
     /**
      * 先加载开发环境配置，再追加生产环境的少量配置覆盖掉开发环境配置
      */
-    private static Prop p;
+    public static Prop p;
     private WallFilter wallFilter;
     public static final String defaultName = "Redis";
 
@@ -59,7 +59,7 @@ public class ChoxsuConfig extends JFinalConfig {
     // 先加载开发环境配置，再追加生产环境的少量配置覆盖掉开发环境配置
     static void loadConfig() {
         if (p == null) {
-            p = PropKit.use("config-dev.txt").appendIfExists("config-pro.txt");
+            p = PropKit.use("config-dev.properties").appendIfExists("config-pro.properties");
         }
     }
 

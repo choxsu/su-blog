@@ -17,6 +17,7 @@ public class _MappingKit {
 
     public static void mapping(ActiveRecordPlugin arp) {
         arp.addMapping(Account.tableName, "id", Account.class);
+        arp.addMapping("account_open", "id", AccountOpen.class);
         // Composite Primary Key order: accountId,roleId
         arp.addMapping(AccountRole.tableName, "accountId,roleId", AccountRole.class);
         arp.addMapping(Blog.tableName, "id", Blog.class);

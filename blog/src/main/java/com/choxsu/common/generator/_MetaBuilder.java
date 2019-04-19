@@ -12,7 +12,7 @@ import java.util.Arrays;
  */
 public class _MetaBuilder extends MetaBuilder {
 
-    String[] noFilterTables = new String[]{"blog"};
+    String[] noFilterTables = new String[]{"account_open"};
     String[] filterTables = new String[]{};
     //new String[]{"gift_free_merchant", "gift_free_store", "gift_free_merchant_record", "orders", "order_opt_time", "gift_users", "exp_operation_rules", "sm_merchant_store_shop_payaccount_adjustlog"};
 

@@ -3,6 +3,7 @@ package com.choxsu.front.login;
 
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.render.MyCaptchaRender;
+import com.choxsu.front.login.entity.QQVo;
 import com.choxsu.kit.EmailKit;
 import com.choxsu.kit.IpKit;
 import com.choxsu.kit.RSAKit;
@@ -11,9 +12,7 @@ import com.jfinal.aop.Clear;
 import com.jfinal.aop.Inject;
 import com.jfinal.core.ActionKey;
 import com.jfinal.core.Controller;
-import com.jfinal.kit.LogKit;
-import com.jfinal.kit.PropKit;
-import com.jfinal.kit.Ret;
+import com.jfinal.kit.*;
 
 import java.security.interfaces.RSAPrivateKey;
 import java.util.Date;
@@ -28,6 +27,7 @@ public class LoginController extends Controller {
     @Inject
     LoginService srv;
 
+
     private static ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     /**
@@ -36,6 +36,30 @@ public class LoginController extends Controller {
     public void index() {
         keepPara("returnUrl");  // 保持住 returnUrl 这个参数，以便在登录成功后跳转到该参数指向的页面
         render("index.html");
+    }
+
+    /**
+     * 打开qq登陆页面
+     */
+    public void qqLogin() {
+        redirect(srv.getAuthUrl());
+    }
+
+    /**
+     * qq登陆回调 http://styg.site/login/qqCallback
+     * code=11BBC527B8885683FA4F6AD3F4D9713B&state=ok
+     */
+    public void qqCallback() {
+        Ret ret = srv.qqCallback(get("code"), IpKit.getRealIp(getRequest()));
+        if (ret.isOk()) {
+            String sessionId = ret.getStr(LoginService.sessionIdName);
+            int maxAgeInSeconds = ret.getInt("maxAgeInSeconds");
+            setCookie(LoginService.sessionIdName, sessionId, maxAgeInSeconds, true);
+            setAttr(LoginService.loginAccountCacheName, ret.get(LoginService.loginAccountCacheName));
+            redirect(getPara("returnUrl", "/"));
+            return;
+        }
+        renderHtml("qq登陆授权失败，<a href=\"/login/qqLogin\">请重试</a>");
     }
 
     /**
@@ -60,7 +84,7 @@ public class LoginController extends Controller {
                 try {
                     EmailKit.sendEmail(account.getUserName(), "登陆styg.site后台成功提示", content, true);
                 } catch (Exception e) {
-                    LogKit.error("登录成功发送邮件失败："+e.getMessage(), e);
+                    LogKit.error("登录成功发送邮件失败：" + e.getMessage(), e);
                 }
             });
             String sessionId = ret.getStr(LoginService.sessionIdName);

@@ -29,7 +29,7 @@ public class _Generator {
      */
     public static DataSource getDataSource() {
 
-        String url = "jdbc:mysql://127.0.0.1:3306/blog?characterEncoding=utf8&useSSL=false";
+        String url = "jdbc:mysql://127.0.0.1:3306/choxsu?characterEncoding=utf8&useSSL=false";
         String username = "root";
         String pwd = "root";
         DruidPlugin druidPlugin = new DruidPlugin(url, username, pwd);
@@ -67,7 +67,7 @@ public class _Generator {
          */
         gen.setGenerateChainSetter(false);
         //设置自定义表生成
-        //gen.setMetaBuilder(new _MetaBuilder(getDataSource()));
+        gen.setMetaBuilder(new _MetaBuilder(getDataSource()));
         // 添加不需要生成的表名
         for (String table : excludedTable) {
             gen.addExcludedTable(table);

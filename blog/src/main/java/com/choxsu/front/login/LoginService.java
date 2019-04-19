@@ -4,14 +4,24 @@ package com.choxsu.front.login;
 
 import com.choxsu.common.authcode.AuthCodeService;
 import com.choxsu.common.entity.Account;
+import com.choxsu.common.entity.AccountOpen;
 import com.choxsu.common.entity.AuthCode;
 import com.choxsu.common.entity.Session;
+import com.choxsu.front.login.entity.QQUserInfo;
+import com.choxsu.front.login.entity.QQVo;
+import com.choxsu.front.login.entity.Token;
+import com.choxsu.front.login.kit.QQKit;
 import com.choxsu.kit.EmailKit;
+import com.choxsu.kit.IpKit;
+import com.jfinal.aop.Before;
+import com.jfinal.aop.Inject;
 import com.jfinal.kit.HashKit;
+import com.jfinal.kit.HttpKit;
 import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.plugin.activerecord.tx.Tx;
 import com.jfinal.plugin.ehcache.CacheKit;
 
 import java.util.Date;
@@ -19,11 +29,16 @@ import java.util.Date;
 /**
  * 登录业务
  */
+@Before(Tx.class)
 public class LoginService {
+
+    @Inject
+    QQVo qqVo;
 
     public static final LoginService me = new LoginService();
 
     private Account accountDao = new Account().dao();
+    private AccountOpen accountOpenDao = new AccountOpen().dao();
 
     // 存放登录用户的 cacheName
     public static final String loginAccountCacheName = "loginAccount";
@@ -59,6 +74,19 @@ public class LoginService {
         long liveSeconds = keepLogin ? 15 * 24 * 60 * 60 : 7 * 24 * 60 * 60;
         // 传递给控制层的 cookie
         int maxAgeInSeconds = (int) (keepLogin ? liveSeconds : -1);
+        return loginAction(liveSeconds, loginAccount, loginIp, maxAgeInSeconds);
+    }
+
+    /**
+     * 登陆后的处理
+     *
+     * @param liveSeconds     存活毫秒数
+     * @param loginAccount    登陆账户
+     * @param loginIp         ip
+     * @param maxAgeInSeconds 存活秒数
+     * @return
+     */
+    private Ret loginAction(long liveSeconds, Account loginAccount, String loginIp, Integer maxAgeInSeconds) {
         // expireAt 用于设置 session 的过期时间点，需要转换成毫秒
         long expireAt = System.currentTimeMillis() + (liveSeconds * 1000);
         // 保存登录 session 到数据库
@@ -76,11 +104,12 @@ public class LoginService {
         CacheKit.put(loginAccountCacheName, sessionId, loginAccount);
 
         createLoginLog(loginAccount.getId(), loginIp);
-
         return Ret.ok(sessionIdName, sessionId)
                 .set(loginAccountCacheName, loginAccount)
                 .set("maxAgeInSeconds", maxAgeInSeconds);   // 用于设置 cookie 的最大存活时间
+
     }
+
 
     public Account getLoginAccountWithSessionId(String sessionId) {
         return CacheKit.get(loginAccountCacheName, sessionId);
@@ -205,5 +234,63 @@ public class LoginService {
         // 其它节点发现数据不存在会自动去数据库读取，所以未来可能就是在 AccountService.getById(int id)的方法引入缓存就好
         // 所有用到 account 对象的地方都从这里去取
         CacheKit.put(loginAccountCacheName, sessionId, loginAccount);
+    }
+
+    Ret qqCallback(String code, String ip) {
+        String result = QQKit.getToken(code, qqVo);
+        Token token = QQKit.tokenHandler(result);
+        if (token == null) {
+            return Ret.fail();
+        }
+        String openId = QQKit.getOpenId(token.getAccessToken());
+        if (openId == null) {
+            return Ret.fail();
+        }
+        QQUserInfo userInfo = QQKit.getUserInfo(token.getAccessToken(), openId, qqVo.getAppId());
+        if (userInfo == null) {
+            return Ret.fail();
+        }
+        // 登陆成功，保存数据, 先查询是否已经登陆过
+        AccountOpen accountOpen = accountOpenDao.findFirst("select * from account_open where openId = ? limit 1", openId);
+        Account account;
+        if (accountOpen != null) {
+            account = accountDao.findById(accountOpen.getAccountId());
+            accountOpen.setAccessToken(token.getAccessToken());
+            accountOpen.setExpiredTime((long) token.getExpiresIn());
+            accountOpen.update();
+        } else {
+            account = new Account();
+            account.setAvatar(userInfo.getFigureurl_qq_1());
+            account.setCreateAt(new Date());
+            account.setIp(ip);
+            account.setLikeCount(0);
+            account.setNickName(userInfo.getNickname());
+            account.setUserName("");
+            account.setPassword("");
+            account.setSalt("");
+            account.setStatus(Account.STATUS_OK);
+            account.save();
+            accountOpen = new AccountOpen();
+            accountOpen.setAccessToken(token.getAccessToken());
+            accountOpen.setOpenId(openId);
+            accountOpen.setAccountId(account.getId());
+            accountOpen.setExpiredTime((long) token.getExpiresIn());
+            accountOpen.setOpenType(AccountOpen.OPEN_TYPE_QQ);
+            accountOpen.save();
+        }
+
+        long liveSeconds = 7 * 24 * 60 * 60;
+        // 传递给控制层的 cookie
+        int maxAgeInSeconds = (int) liveSeconds;
+        return loginAction(liveSeconds, account, ip, maxAgeInSeconds);
+    }
+
+    /**
+     * 获取qq登陆页面
+     *
+     * @return
+     */
+    public String getAuthUrl() {
+        return QQKit.getAuthUrl(qqVo);
     }
 }
