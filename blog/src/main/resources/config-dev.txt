@@ -22,7 +22,7 @@ username=choxsu@163.com
 emailPass=----------
 
 ### QQ登录
-qq.appId=
+qq.appId=101572832
 qq.appKey=
 qq.callback=
 

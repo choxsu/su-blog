@@ -56,7 +56,7 @@
             </ul>
             <ul class="navbar-nav header-links qq-login">
                 <!-- href="/login/qqLogin" -->
-                <a href="/login"><img src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"></a>
+                <a href="javascript:;" onclick="qqLogin()" ><img src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"></a>
             </ul>
         </div>
     </nav>
@@ -72,6 +72,22 @@
     </div>
 </main>
 </body>
+<script >
+    function openWindow(url, width, height) {
+        width = width || 600;
+        height = height || 400;
+        var left = (window.screen.width - width) / 2;
+        var top = (window.screen.height - height) / 2;
+        window.open(url, "_blank", "toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, left="+left+", top="+top+", width="+width+", height="+height);
+    }
+
+    function qqLogin() {
+        var qqAppId = '101568421'; // 上面申请得到的appid
+        var qqAuthPath = 'http://styg.site/login/qqCallback'; // 前面设置的回调地址
+        var state = '123'; // 防止CSRF攻击的随机参数，必传，登录成功之后会回传，最好后台自己生成然后校验合法性
+        openWindow(`https://graph.qq.com/oauth2.0/authorize?response_type=token&client_id=${qqAppId}&redirect_uri=${encodeURIComponent(qqAuthPath)}&state=${state}`);
+    }
+</script>
 ### 模板函数安全调用，找到 js() 模板函数则调用，找不到则直接跳过
 ### 适合于部分页面在 layout.html 提供的 js 文件之外，还需额外添加 js 资源的应用场景
 #@js?()
