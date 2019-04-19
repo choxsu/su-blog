@@ -316,9 +316,12 @@ template {
     margin-top: -4px;
 }
 
-
 .header .header-links li a:hover svg {
     fill: #121111
+}
+
+.nickname{
+    font-weight: 800;
 }
 
 /* main start */

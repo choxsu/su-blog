@@ -25,7 +25,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href="/">首页</a>
@@ -61,14 +61,14 @@
                 #if(loginAccount)
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="javascript:;" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img style="height: 30px;width: 30px;border-radius: 50%;" src="#(loginAccount.avatar)">
-                            #(loginAccount.nickName)
+                            <span class="nickname">#(loginAccount.nickName)</span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">退出</a>
+                            <a class="dropdown-item" href="/my">个人中心</a>
+                            <a class="dropdown-item" href="/my/article">我的文章</a>
+                            <a class="dropdown-item" href="/logout">退出</a>
                         </div>
                     </li>
                 </ul>
@@ -92,6 +92,8 @@
     </div>
 </main>
 </body>
+<script src="/assets/new/js/jquery.min-v1.11.3.js"></script>
+<script src="/assets/bootstrap-4.1.3/js/bootstrap.min.js"></script>
 ### 模板函数安全调用，找到 js() 模板函数则调用，找不到则直接跳过
 ### 适合于部分页面在 layout.html 提供的 js 文件之外，还需额外添加 js 资源的应用场景
 #@js?()
