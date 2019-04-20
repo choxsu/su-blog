@@ -190,8 +190,8 @@ public class AccountAdminService {
         account.setStatus(Account.STATUS_OK);
         account.setCreateAt(new Date());
         account.setIp(ip);
+        account.setIsThird(Account.NOT_THIRD_LOGIN);
         account.setAvatar(Account.AVATAR_NO_AVATAR);  // 注册时设置默认头像
-
         if (account.save()) {
             //缓存清除
             Redis.use().del(RedisKey.INDEX_KEY_PREFIX + "accountProfile");

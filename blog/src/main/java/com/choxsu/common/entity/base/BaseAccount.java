@@ -12,195 +12,158 @@ public abstract class BaseAccount<M extends BaseAccount<M>> extends Model<M> {
 
     public static final String tableName = "account";
 
-    /**
-     * 该字段暂无注释
-     */
-    private String id = "id";
-    /**
-     * 该字段暂无注释
-     */
-    private String nickName = "nickName";
-    /**
-     * 该字段暂无注释
-     */
-    private String userName = "userName";
-    /**
-     * 该字段暂无注释
-     */
-    private String password = "password";
-    /**
-     * 该字段暂无注释
-     */
-    private String salt = "salt";
-    /**
-     * 该字段暂无注释
-     */
-    private String status = "status";
-    /**
-     * 该字段暂无注释
-     */
-    private String createAt = "createAt";
-    /**
-     * 该字段暂无注释
-     */
-    private String ip = "ip";
-    /**
-     * 该字段暂无注释
-     */
-    private String avatar = "avatar";
-    /**
-     * 被赞次数
-     */
-    private String likeCount = "likeCount";
-
-
-    /**
-     * 该字段暂无注释
-     */
-	public void setId(Integer id) {
-		set(this.id, id);
+	/**
+	 * ID
+	 */
+	public void setId(java.lang.Integer id) {
+		set("id", id);
 	}
 
-    /**
-     * 该字段暂无注释
-     */
-	public Integer getId() {
-		return getInt(id);
+	/**
+	 * ID
+	 */
+	public java.lang.Integer getId() {
+		return getInt("id");
 	}
 
-
-    /**
-     * 该字段暂无注释
-     */
-	public void setNickName(String nickName) {
-		set(this.nickName, nickName);
+	/**
+	 * 昵称
+	 */
+	public void setNickName(java.lang.String nickName) {
+		set("nickName", nickName);
 	}
 
-    /**
-     * 该字段暂无注释
-     */
-	public String getNickName() {
-		return getStr(nickName);
+	/**
+	 * 昵称
+	 */
+	public java.lang.String getNickName() {
+		return getStr("nickName");
 	}
 
-
-    /**
-     * 该字段暂无注释
-     */
-	public void setUserName(String userName) {
-		set(this.userName, userName);
+	/**
+	 * 用户名
+	 */
+	public void setUserName(java.lang.String userName) {
+		set("userName", userName);
 	}
 
-    /**
-     * 该字段暂无注释
-     */
-	public String getUserName() {
-		return getStr(userName);
+	/**
+	 * 用户名
+	 */
+	public java.lang.String getUserName() {
+		return getStr("userName");
 	}
 
-
-    /**
-     * 该字段暂无注释
-     */
-	public void setPassword(String password) {
-		set(this.password, password);
+	/**
+	 * 密码
+	 */
+	public void setPassword(java.lang.String password) {
+		set("password", password);
 	}
 
-    /**
-     * 该字段暂无注释
-     */
-	public String getPassword() {
-		return getStr(password);
+	/**
+	 * 密码
+	 */
+	public java.lang.String getPassword() {
+		return getStr("password");
 	}
 
-
-    /**
-     * 该字段暂无注释
-     */
-	public void setSalt(String salt) {
-		set(this.salt, salt);
+	/**
+	 * 盐
+	 */
+	public void setSalt(java.lang.String salt) {
+		set("salt", salt);
 	}
 
-    /**
-     * 该字段暂无注释
-     */
-	public String getSalt() {
-		return getStr(salt);
+	/**
+	 * 盐
+	 */
+	public java.lang.String getSalt() {
+		return getStr("salt");
 	}
 
-
-    /**
-     * 该字段暂无注释
-     */
-	public void setStatus(Integer status) {
-		set(this.status, status);
+	/**
+	 * 状态 -1 锁定账号，无法做任何事情 0-注册、未激活 1-正常、已激活
+	 */
+	public void setStatus(java.lang.Integer status) {
+		set("status", status);
 	}
 
-    /**
-     * 该字段暂无注释
-     */
-	public Integer getStatus() {
-		return getInt(status);
+	/**
+	 * 状态 -1 锁定账号，无法做任何事情 0-注册、未激活 1-正常、已激活
+	 */
+	public java.lang.Integer getStatus() {
+		return getInt("status");
 	}
 
-
-    /**
-     * 该字段暂无注释
-     */
+	/**
+	 * 创建时间
+	 */
 	public void setCreateAt(java.util.Date createAt) {
-		set(this.createAt, createAt);
+		set("createAt", createAt);
 	}
 
-    /**
-     * 该字段暂无注释
-     */
+	/**
+	 * 创建时间
+	 */
 	public java.util.Date getCreateAt() {
-		return get(createAt);
+		return get("createAt");
 	}
 
-
-    /**
-     * 该字段暂无注释
-     */
-	public void setIp(String ip) {
-		set(this.ip, ip);
+	/**
+	 * 注册IP
+	 */
+	public void setIp(java.lang.String ip) {
+		set("ip", ip);
 	}
 
-    /**
-     * 该字段暂无注释
-     */
-	public String getIp() {
-		return getStr(ip);
+	/**
+	 * 注册IP
+	 */
+	public java.lang.String getIp() {
+		return getStr("ip");
 	}
 
-
-    /**
-     * 该字段暂无注释
-     */
-	public void setAvatar(String avatar) {
-		set(this.avatar, avatar);
+	/**
+	 * 头像
+	 */
+	public void setAvatar(java.lang.String avatar) {
+		set("avatar", avatar);
 	}
 
-    /**
-     * 该字段暂无注释
-     */
-	public String getAvatar() {
-		return getStr(avatar);
+	/**
+	 * 头像
+	 */
+	public java.lang.String getAvatar() {
+		return getStr("avatar");
 	}
 
-
-    /**
-     * set被赞次数
-     */
-	public void setLikeCount(Integer likeCount) {
-		set(this.likeCount, likeCount);
+	/**
+	 * 被赞次数
+	 */
+	public void setLikeCount(java.lang.Integer likeCount) {
+		set("likeCount", likeCount);
 	}
 
-    /**
-     * get被赞次数
-     */
-	public Integer getLikeCount() {
-		return getInt(likeCount);
+	/**
+	 * 被赞次数
+	 */
+	public java.lang.Integer getLikeCount() {
+		return getInt("likeCount");
+	}
+
+	/**
+	 * 是否第三方登陆 0-否 1-是
+	 */
+	public void setIsThird(java.lang.Integer isThird) {
+		set("isThird", isThird);
+	}
+
+	/**
+	 * 是否第三方登陆 0-否 1-是
+	 */
+	public java.lang.Integer getIsThird() {
+		return getInt("isThird");
 	}
 
 }

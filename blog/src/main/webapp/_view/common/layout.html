@@ -62,7 +62,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="javascript:;" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img style="height: 30px;width: 30px;border-radius: 50%;" src="#(loginAccount.avatar)">
+                            <img style="height: 30px;width: 30px;border-radius: 50%;" src="#(loginAccount.isThird == 1 ? '' : '/upload/avatar/')#(loginAccount.avatar)">
                             <span class="nickname">#(loginAccount.nickName)</span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -73,8 +73,9 @@
                     </li>
                 </ul>
                 #else
-                <ul class="navbar-nav header-links qq-login">
-                    <a href="/login/qqLogin"><img src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"></a>
+                <ul class="navbar-nav header-links login">
+                    <a class="btn btn-outline-info btn-sm" href="/login" >登录</a>
+                    <a class="btn btn-outline-info btn-sm" href="/login" >注册</a>
                 </ul>
                 #end
             </div>

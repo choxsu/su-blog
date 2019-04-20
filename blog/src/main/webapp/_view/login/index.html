@@ -9,7 +9,7 @@
     <form id="login_form" class="form-signin" action="/login/doLogin?returnUrl=#(returnUrl)" method="post">
         <h1 class="h3 mb-3 font-weight-normal text-center">请登录</h1>
         <div class="form-group">
-            <input type="email" name="userName" class="form-control" placeholder="请输入邮箱" required>
+            <input type="email" name="userName" class="form-control" placeholder="请输入您的邮箱" required>
             <small id="emailHelp" class="form-text text-muted">我们永远不会和其他人分享你的电子邮件.</small>
         </div>
         <div class="form-group">
@@ -17,7 +17,7 @@
                    id="_password"
                    onchange="setEncPwd(this)"
                    onkeyup="setEncPwd(this)"
-                   name="password" class="form-control" placeholder="请输入密码" required>
+                   name="password" class="form-control" placeholder="请输入您的密码" required>
             <input id="_encryptPwd" type="hidden" name="encryptPwd"/>
         </div>
         <div class="form-group">
@@ -26,8 +26,12 @@
                    type="text" autocomplete="off" required>
             <img title="点击刷新" class="J_codeimg captcha" src="/login/captcha" onclick="updateCaptcha();">
         </div>
-        <div class="text-right action-btn">
-            <button id="login_submit" type="submit" class="btn btn-primary" data-loading-text="登录中...">登录</button>
+        <div class="third-login">
+            <span >社交账号登陆：</span>
+            <a href="/login/qqLogin"><img src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"></a>
+        </div>
+        <div class="action-btn">
+            <button id="login_submit" type="submit" class="btn btn-primary btn-block" data-loading-text="登录中...">登录</button>
         </div>
     </form>
 </div>

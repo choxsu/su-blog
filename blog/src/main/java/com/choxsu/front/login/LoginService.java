@@ -269,6 +269,7 @@ public class LoginService {
             account.setPassword("");
             account.setSalt("");
             account.setStatus(Account.STATUS_OK);
+            account.setIsThird(Account.IS_THIRD_LOGIN);
             account.save();
             accountOpen = new AccountOpen();
             accountOpen.setAccessToken(token.getAccessToken());
