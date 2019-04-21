@@ -1,5 +1,6 @@
 package com.choxsu.front.tags;
 
+import com.choxsu.common.entity.Blog;
 import com.choxsu.front.article.ArticleService;
 import com.jfinal.aop.Inject;
 import com.jfinal.plugin.activerecord.Db;
@@ -30,7 +31,7 @@ public class TagsService {
      * @param pageSize     每页条数
      * @return
      */
-    public Page<Record> findBlogByTagId(Integer pageNumber,Integer pageSize, Integer tagId) {
+    public Page<Blog> findBlogByTagId(Integer pageNumber, Integer pageSize, Integer tagId) {
         return articleService.findArticles(pageNumber, pageSize, tagId);
     }
 }

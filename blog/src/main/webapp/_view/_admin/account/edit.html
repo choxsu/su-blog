@@ -11,7 +11,12 @@
     <input type="hidden" name="account.id" value="#(account.id)"/>
     <div class="form-group">
         <label>头像</label>
-        <img class="avatar" title="点我修改头像" alt="#(account.avatar)" src="/upload/avatar/#(account.avatar)">
+        <img class="avatar" title="点我修改头像" alt="#(account.avatar)"
+             #if(account.isThird == 1)
+                src="#(account.avatar)"
+             #else
+                src="/upload/avatar/#(account.avatar)"
+             #end >
         <input type="file" id="selectAvatar" accept="image/*" class="hidden">
     </div>
     <div class="form-group">

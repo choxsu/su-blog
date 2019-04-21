@@ -1,6 +1,7 @@
 package com.choxsu.front.tags;
 
 import com.choxsu.common.base.BaseController;
+import com.choxsu.common.entity.Blog;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Inject;
 import com.jfinal.plugin.activerecord.Page;
@@ -19,7 +20,7 @@ public class TagsController extends BaseController {
     public void index() {
         Integer tagId = getParaToInt();
         Integer pageNumber = getParaToInt("p", 1);
-        Page<Record> page = tagsService.findBlogByTagId(pageNumber, 10, tagId);
+        Page<Blog> page = tagsService.findBlogByTagId(pageNumber, 10, tagId);
         setAttr("page", page);
         render("index.html");
     }

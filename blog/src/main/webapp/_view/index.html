@@ -5,7 +5,7 @@
         #for(r : page.list)
         <li class="article-list-item">
             <a href="/user/#(r.accountId)" class="avatar">
-                <img src="/assets/new/images/gitee.png" />
+                <img src="#(r.isThird == 1 ? '': '/upload/avatar/')#(r.avatar)" />
             </a>
             <span>
                 <a href="/article/#(r.id)">#(r.title)</a>
@@ -19,6 +19,6 @@
 </div>
 #include("/_view/common/_sidebar.html")
 <div class="article-page">
-    #@paginate(page.pageNumber, page.totalPage, "/article")
+    #@paginate(page.pageNumber, page.totalPage, "/")
 </div>
 #end

@@ -1,6 +1,7 @@
 package com.choxsu.api.blog;
 
 import com.choxsu.common.base.BaseController;
+import com.choxsu.common.entity.Blog;
 import com.choxsu.front.article.ArticleService;
 import com.jfinal.aop.Inject;
 import com.jfinal.plugin.activerecord.Page;
@@ -23,7 +24,7 @@ public class ApiBlogController extends BaseController {
     public void list() {
         Integer page = getParaToInt("page", 1);
         Integer size = getParaToInt("size", 20);
-        Page<Record> pageResult = articleService.findArticles(page, size, null);
+        Page<Blog> pageResult = articleService.findArticles(page, size, null);
         renderJson(success(pageResult.getList()));
     }
 
