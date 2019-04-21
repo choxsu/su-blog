@@ -16,9 +16,9 @@
         </li>
         #end
     </ul>
+    <div class="article-page">
+        #@paginate(page.pageNumber, page.totalPage, "/")
+    </div>
 </div>
 #include("/_view/common/_sidebar.html")
-<div class="article-page">
-    #@paginate(page.pageNumber, page.totalPage, "/")
-</div>
 #end

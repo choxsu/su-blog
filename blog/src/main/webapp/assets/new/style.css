@@ -290,7 +290,6 @@ template {
 .header .header-links li {
     display: inline-block;
     margin-left: 20px;
-    vertical-align: middle
 }
 
 .header .header-links li:first-child {
@@ -439,6 +438,16 @@ template {
 .article .article-detail .title {
     font-weight: 500;
     font-size: 1.2rem;
+}
+
+.article .article-page {
+    display: block;
+    margin: 10px 0;
+    padding: 8px 0;
+    text-align: center;
+}
+.article .article-page a{
+
 }
 
 
