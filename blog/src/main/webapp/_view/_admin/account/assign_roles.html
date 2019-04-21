@@ -11,7 +11,11 @@
 	<div class="jfa-content" id="jfa-content">
 
 		<div class="jfa-account-info margin-top-30">
-			<img src="/upload/avatar/#(account.avatar)">
+			<img #if(account.isThird == 1)
+				 src="#(account.avatar)"
+				 #else
+				 src="/upload/avatar/#(account.avatar)"
+				 #end >
 			<span>#(account.nickName)</span>
 		</div>
 
