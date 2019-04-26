@@ -56,7 +56,7 @@ public class LoginController extends Controller {
             redirect(getPara("returnUrl", "/"));
             return;
         }
-        renderHtml("qq登陆授权失败，<a href=\"/login/qqLogin\">请重试</a>");
+        render("authFailed.html");
     }
 
     private void setLoginInfo(Ret ret) {
