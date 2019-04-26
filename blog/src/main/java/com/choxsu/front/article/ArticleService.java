@@ -45,6 +45,9 @@ public class ArticleService {
     private void setAvatar(Page<Blog> paginate) {
         for (Blog blog : paginate.getList()) {
             Account account = accountDao.findById(blog.getAccountId());
+            if (account == null) {
+                continue;
+            }
             blog.put("avatar", account.getAvatar());
             blog.put("isThird", account.getIsThird());
         }
