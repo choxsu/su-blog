@@ -86,7 +86,8 @@ public class LoginController extends Controller {
             String content = "在 " + new Date() + "登陆 Choxsu博客社区后台成功 <br/> 登陆ip:" + IpKit.getRealIp(this.getRequest()) + "<br/> 如果非本人登录，请及时联系超级管理员";
             executorService.execute(() -> {
                 try {
-                    EmailKit.sendEmail(account.getUserName(), "登陆styg.site后台成功提示", content, true);
+                    String email = account.getUserName().equals("test@test.com") ? "2283546325@qq.com" : account.getUserName();
+                    EmailKit.sendEmail(email, "登陆styg.site后台成功提示", content, true);
                 } catch (Exception e) {
                     LogKit.error("登录成功发送邮件失败：" + e.getMessage(), e);
                 }
