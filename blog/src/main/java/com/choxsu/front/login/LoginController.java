@@ -52,14 +52,18 @@ public class LoginController extends Controller {
     public void qqCallback() {
         Ret ret = srv.qqCallback(get("code"), IpKit.getRealIp(getRequest()));
         if (ret.isOk()) {
-            String sessionId = ret.getStr(LoginService.sessionIdName);
-            int maxAgeInSeconds = ret.getInt("maxAgeInSeconds");
-            setCookie(LoginService.sessionIdName, sessionId, maxAgeInSeconds, true);
-            setAttr(LoginService.loginAccountCacheName, ret.get(LoginService.loginAccountCacheName));
+            setLoginInfo(ret);
             redirect(getPara("returnUrl", "/"));
             return;
         }
         renderHtml("qq登陆授权失败，<a href=\"/login/qqLogin\">请重试</a>");
+    }
+
+    private void setLoginInfo(Ret ret) {
+        String sessionId = ret.getStr(LoginService.sessionIdName);
+        int maxAgeInSeconds = ret.getInt("maxAgeInSeconds");
+        setCookie(LoginService.sessionIdName, sessionId, maxAgeInSeconds, true);
+        setAttr(LoginService.loginAccountCacheName, ret.get(LoginService.loginAccountCacheName));
     }
 
     /**
@@ -87,10 +91,7 @@ public class LoginController extends Controller {
                     LogKit.error("登录成功发送邮件失败：" + e.getMessage(), e);
                 }
             });
-            String sessionId = ret.getStr(LoginService.sessionIdName);
-            int maxAgeInSeconds = ret.getInt("maxAgeInSeconds");
-            setCookie(LoginService.sessionIdName, sessionId, maxAgeInSeconds, true);
-            setAttr(LoginService.loginAccountCacheName, ret.get(LoginService.loginAccountCacheName));
+            setLoginInfo(ret);
             ret.set("returnUrl", getPara("returnUrl", "/"));    // 如果 returnUrl 存在则跳过去，否则跳去首页
         }
         renderJson(ret);
