@@ -11,6 +11,7 @@ import com.choxsu.common.interceptor.LoginSessionInterceptor;
 import com.choxsu.common.pageview.VisitorInterceptor;
 import com.choxsu.common.redis.RedisClusterPlugin;
 import com.choxsu.kit.DruidKit;
+import com.choxsu.redis.serializer.MyRedisSerializer;
 import com.choxsu.routes.AdminRoutes;
 import com.choxsu.routes.ApiRoutes;
 import com.choxsu.routes.FrontRoutes;
@@ -24,6 +25,7 @@ import com.jfinal.plugin.cron4j.Cron4jPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.plugin.redis.RedisPlugin;
+import com.jfinal.plugin.redis.serializer.FstSerializer;
 import com.jfinal.plugin.redis.serializer.JdkSerializer;
 import com.jfinal.server.undertow.UndertowServer;
 import com.jfinal.template.Engine;
@@ -112,7 +114,7 @@ public class ChoxsuConfig extends JFinalConfig {
         me.add(new Cron4jPlugin(p));
         //Redis缓存
         RedisPlugin redisPlugin = getRedisPlugin();
-        redisPlugin.setSerializer(new JdkSerializer());
+        redisPlugin.setSerializer(new MyRedisSerializer());
         me.add(redisPlugin);
     }
 
