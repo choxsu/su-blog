@@ -17,19 +17,19 @@
         <label for="name">标题</label>
         <input type="text" class="form-control" placeholder="请输入标题" name="blog.title" id="name" value="#(blog.title??)">
     </div>
-<!--    <div class="form-group">
-        <label for="name">分类</label>
-        <select name="blog.category" class="form-control">
-            <option value="">请选择</option>
-            #for(x:categoryList)
-            #if(x.name == blog.category??)
-            <option value="#(x.name)" selected>#(x.name)</option>
-            #else
-            <option value="#(x.name)">#(x.name)</option>
-            #end
-            #end
-        </select>
-    </div>-->
+    <!--    <div class="form-group">
+            <label for="name">分类</label>
+            <select name="blog.category" class="form-control">
+                <option value="">请选择</option>
+                #for(x:categoryList)
+                #if(x.name == blog.category??)
+                <option value="#(x.name)" selected>#(x.name)</option>
+                #else
+                <option value="#(x.name)">#(x.name)</option>
+                #end
+                #end
+            </select>
+        </div>-->
     <div class="form-group">
         <label for="name">标签</label>
         <select name="blog.tag_id" class="form-control">
@@ -83,13 +83,16 @@
                 atLink: false,
                 emailLink: false,
                 markdown: $('#tx').text(),
+                placeholder: '开始写你的文章',
+                // 代码折叠
+                codeFold: true,
                 path: '/assets/editor_md/lib/',
                 toolbarIcons: function () {
-                    return ["undo", "redo", "|", "bold", "hr", "|", "italic",
-                        "quote", "uppercase", "list-ul", "list-ol", "hr", "image", "code",
-                        "code-block",
-                        "table", "datetime", "html-entities", "pagebreak", "search", "image",
-                        "||", "watch", "preview"]
+                    return ["undo", "redo", "|",
+                        "bold", "del", "italic", "quote", "uppercase", "lowercase", "|",
+                        "h1", "h2", "h3", "h4", "h5", "h6", "|",
+                        "list-ul", "list-ol", "hr", "image", "|",
+                        "watch", "preview"]
                 },
                 autoHeight: false,
                 tex: false,                   // 开启科学公式TeX语言支持，默认关闭
@@ -106,8 +109,7 @@
         submitForm: function () {
             $("#myArticleForm").ajaxForm({
                 dataType: "json"
-                , beforeSubmit: function (formData, jqForm, options) {
-                }
+                , beforeSubmit: function (formData, jqForm, options) { }
                 , success: function (ret) {
                     if (ret.state === "ok") {
                         location.href = "/admin/blog?p=#(p ?? 1)";
@@ -122,77 +124,80 @@
                 } 	      // 无论是 success 还是 error，最终都会被回调
             });
         },
-        ImageLrz: function (reader, fileSuffix) {
-            //前端压缩
-            lrz(reader.result, {width: 1080}).then(function (res) {
-                var index;
-                $.ajax({
-                    url: "/admin/upload/base64ImgUpload",
-                    type: 'post',
-                    data: {
-                        "base64Image": res.base64,
-                        "imageName": new Date().getTime() + "." + fileSuffix
-                    },
-                    contentType: 'application/x-www-form-urlencoded;charest=UTF-8',
-                    beforeSend: function (XHR) {
-                        //加载上传条
-                        index = layer.load(1); //换了种风格
-                    },
-                    success: function (data) {
-                        data = JSON.parse(data);
-                        if (data.success === 1) {
-                            var url = '![' + data.original + '](' + data.url + ')';
-                            Article.editor.insertValue(url);
-                        } else {
-                            alert(data.message)
-                        }
-                    },
-                    complete: function (XHR, TS) {
-                        //结束上传条
-                        layer.close(index);
+        ImageUpload: function (reader, fileSuffix) {
+            var base64Image = reader.result;
+            //前端压缩，取消图片压缩
+            // lrz(reader.result, {width: 1080}).then(function (res) {
+            var index;
+            $.ajax({
+                url: "/admin/upload/base64ImgUpload",
+                type: 'post',
+                data: {
+                    "base64Image": base64Image,
+                    "imageName": new Date().getTime() + "." + fileSuffix
+                },
+                contentType: 'application/x-www-form-urlencoded;charest=UTF-8',
+                beforeSend: function (XHR) {
+                    //加载上传条
+                    index = layer.load(1); //换了种风格
+                },
+                success: function (data) {
+                    data = JSON.parse(data);
+                    if (data.success === 1) {
+                        var url = '![' + data.original + '](' + data.url + ')';
+                        Article.editor.insertValue(url);
+                    } else {
+                        alert(data.message)
                     }
-                })
-            });
+                },
+                complete: function (XHR, TS) {
+                    //结束上传条
+                    layer.close(index);
+                }
+            })
+            // });
         }
     };
+    var eventMethod = {
+        paste: function (event) {
+            var clipboardData = event.clipboardData;
+            var items, item, types;
+            if (clipboardData) {
+                items = clipboardData.items;
+                if (!items) {
+                    return;
+                }
+                // 保存在剪贴板中的数据类型
+                types = clipboardData.types || [];
+                for (var i = 0; i < types.length; i++) {
+                    if (types[i] === 'Files') {
+                        item = items[i];
+                        break;
+                    }
+                }
+                // 判断是否为图片数据
+                if (item && item.kind === 'file' && item.type.match(/^image\//i)) {
+                    var strings = item.type.split("/");
+                    var fileSuffix = strings[1];
+                    // 读取该图片
+                    var file = item.getAsFile();
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = function () {
+                        Article.ImageUpload(reader, fileSuffix)
+                    }
+                }
+            }
+        }
+    };
+
     $(document).ready(function () {
         Article.md();
         Article.submitForm();
     });
 
-    function paste(event) {
-        var clipboardData = event.clipboardData;
-        var items, item, types;
-        if (clipboardData) {
-            items = clipboardData.items;
-            if (!items) {
-                return;
-            }
-            // 保存在剪贴板中的数据类型
-            types = clipboardData.types || [];
-            for (var i = 0; i < types.length; i++) {
-                if (types[i] === 'Files') {
-                    item = items[i];
-                    break;
-                }
-            }
-            // 判断是否为图片数据
-            if (item && item.kind === 'file' && item.type.match(/^image\//i)) {
-                var strings = item.type.split("/");
-                var fileSuffix = strings[1];
-                // 读取该图片
-                var file = item.getAsFile();
-                var reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = function () {
-                    Article.ImageLrz(reader, fileSuffix)
-                }
-            }
-        }
-    }
-
     document.addEventListener('paste', function (event) {
-        paste(event);
+        eventMethod.paste(event);
     })
 </script>
 #end
