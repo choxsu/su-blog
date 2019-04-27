@@ -9,17 +9,15 @@
         <div class="title">#(blog.title)</div>
         <!--<p>#(blog.title)</p>-->
         <div class="article-list-footer">
-            <span class="article-list-minutes">
-                        0 / #(blog.clickCount)
-                        </span>
-            <span class="article-list-divider">- #(blog.tagName)</span>
-            <span class="article-list-divider">-</span>
-            <span class="article-list-date">
-            #date(blog.createAt, "yyyy-MM-dd hh:mm")
-            </span>
+            <li>发表于#date(blog.createAt, "yyyy-MM-dd hh:mm")</li>
+            <li>作者 #(blog.author)</li>
+            <li>#(blog.clickCount)次阅读</li>
+            <li>0条评论</li>
+            <li>标签-#(blog.tagName)</li>
         </div>
     </div>
-    <div id="content_id" class="markdown-body">
+    <div class="clear" style=" border-bottom: 1px solid #c5b8b8;"></div>
+    <div id="content_id" class="content markdown-body">
         #(blog.content)
     </div>
     <div class="article-share">

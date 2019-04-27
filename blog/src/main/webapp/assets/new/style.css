@@ -319,7 +319,7 @@ template {
     fill: #121111
 }
 
-.nickname{
+.nickname {
     font-weight: 800;
 }
 
@@ -404,21 +404,26 @@ template {
 .article .article-list .article-list-item .avatar {
     margin-right: 5px;
 }
-.article .article-list .article-list-item .avatar img{
+
+.article .article-list .article-list-item .avatar img {
     width: 30px;
     height: 30px;
 }
+
 .article .article-list .article-list-item .reply {
     color: #bb8fc0;
 }
-.article .article-list .article-list-item .r-c{
+
+.article .article-list .article-list-item .r-c {
     width: 65px;
     display: inline-block;
     text-align: center;
 }
+
 .article .article-list .article-list-item .clickCount {
     color: #6c757d;
 }
+
 .article .article-list .article-list-item .right {
     float: right;
 }
@@ -432,12 +437,23 @@ template {
 }
 
 .article .article-detail {
-    margin: 8px 20px;
-    border-bottom: 1px solid #c5b8b8;
+    margin: 8px 0;
 }
+
 .article .article-detail .title {
-    font-weight: 500;
+    font-weight: 800;
     font-size: 1.2rem;
+}
+
+.article .article-detail .article-list-footer li {
+    font-size: 12px;
+    float: left;
+    margin: 5px 12px 2px 0;
+    color: #3c0f23;
+}
+
+.article .content {
+    margin-top: 15px;
 }
 
 .article .article-page {
@@ -446,7 +462,8 @@ template {
     padding: 8px 0;
     text-align: center;
 }
-.article .article-page a{
+
+.article .article-page a {
 
 }
 
@@ -493,4 +510,9 @@ right
     border-radius: 4px;
     background: #fff;
     opacity: .8
+}
+
+.clear {
+    clear: both;
+    float: none;
 }
