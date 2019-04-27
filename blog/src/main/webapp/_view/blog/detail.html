@@ -10,6 +10,9 @@
         <!--<p>#(blog.title)</p>-->
         <div class="article-list-footer">
             <li>发表于#date(blog.createAt, "yyyy-MM-dd hh:mm")</li>
+            #if(blog.updateAt != null)
+                <li>更新于#date(blog.updateAt, "yyyy-MM-dd hh:mm")</li>
+            #end
             <li>作者 #(blog.author)</li>
             <li>#(blog.clickCount)次阅读</li>
             <li>0条评论</li>
