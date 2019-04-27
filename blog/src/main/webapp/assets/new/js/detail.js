@@ -44,7 +44,7 @@ var Detail = {
     },
     // 图片放大处理
     zooming: function () {
-        var img = document.getElementById("content-id").getElementsByTagName("img");
+        var img = document.getElementById("content_id").getElementsByTagName("img");
         for (var i = 0; i < img.length; i++) {
             var imgElement = img[i];
             var zooming = new Zooming({
