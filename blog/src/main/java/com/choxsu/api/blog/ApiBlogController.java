@@ -32,7 +32,7 @@ public class ApiBlogController extends BaseController {
      * 博客detail
      */
     public void index() {
-        Record blog = articleService.findBlog(getParaToInt());
+        Blog blog = articleService.findBlog(getParaToInt());
         if (blog == null){
             renderJson(success());
             return;

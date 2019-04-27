@@ -59,8 +59,8 @@ public class ArticleService {
      * @param id
      * @return
      */
-    public Record findBlog(Integer id) {
-        Record blog = Db.findById("blog", id);
+    public Blog findBlog(Integer id) {
+        Blog blog = blogDao.findById(id);
         if (blog == null) {
             return null;
         }
@@ -71,13 +71,20 @@ public class ArticleService {
     /**
      * 封装tag名称
      *
-     * @param s
+     * @param blog
      */
-    public void doTagNameSet(Record s) {
-        assert s != null;
-        Record record = Db.findById("blog_tag", s.get("tag_id"));
-        if (record == null) return;
+    public void doTagNameSet(Blog blog) {
+        assert blog != null;
+        Record record = Db.findById("blog_tag", blog.get("tag_id"));
+        if (record == null) {
+            return;
+        }
         String name = record.getStr("name");
-        s.set("tagName", name);
+        blog.setTagName(name);
+        Account account = accountDao.findById(blog.getAccountId());
+        if (account == null) {
+            return;
+        }
+        blog.setAuthor(account.getNickName());
     }
 }

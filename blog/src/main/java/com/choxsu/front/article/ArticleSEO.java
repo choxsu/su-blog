@@ -1,5 +1,6 @@
 package com.choxsu.front.article;
 
+import com.choxsu.common.entity.Blog;
 import com.choxsu.common.interceptor.BaseSeoInterceptor;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Record;
@@ -15,8 +16,8 @@ public class ArticleSEO extends BaseSeoInterceptor {
 
     @Override
     public void detailSeo(Controller c) {
-        Record record = c.getAttr("blog");
-        String title = record.get("title");
+        Blog blog = c.getAttr("blog");
+        String title = blog.getTitle();
         setSeoTitle(c, title);
         setSeoKeywords(c, title);
         setSeoDescr(c, title);

@@ -1,6 +1,7 @@
 package com.choxsu.front.article;
 
 import com.choxsu.common.base.BaseController;
+import com.choxsu.common.entity.Blog;
 import com.choxsu.common.pageview.AddClickInterceptor;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Inject;
@@ -23,7 +24,7 @@ public class ArticleController extends BaseController {
 
     @Before(AddClickInterceptor.class)
     public void detail() {
-        Record record = articleService.findBlog(getParaToInt());
+        Blog record = articleService.findBlog(getParaToInt());
         if (record != null) {
             setAttr("blog", record);
             render("detail.html");
