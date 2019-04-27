@@ -7,7 +7,7 @@ html {
 
 body {
     margin: 0;
-    background-color: #f7f7f7 !important;
+    background-color: #dcdcdc !important;
 }
 
 h1 {
@@ -222,7 +222,7 @@ template {
 }
 
 .header {
-    background-color: #f8f9fa;
+    background-color: #3863fa;
     z-index: 100;
 }
 
