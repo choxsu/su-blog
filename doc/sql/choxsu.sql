@@ -39,11 +39,7 @@ CREATE TABLE `account`  (
 -- ----------------------------
 -- Records of account
 -- ----------------------------
-INSERT INTO `account` VALUES (1, 'ChoxSu', 'choxsu@gmail.com', '0578028539a72c0bff4ea80510ad79548a89534c03ed376682de1ed457669f9e', '8wCSdUV6EJBvPg9zDkphts9JAHFNyO6t', 1, '2018-04-18 09:00:19', '175.12.244.105', '0/1.jpg', 0, 0);
-INSERT INTO `account` VALUES (2, '管理员', 'admin@styg.site', '0578028539a72c0bff4ea80510ad79548a89534c03ed376682de1ed457669f9e', '8wCSdUV6EJBvPg9zDkphts9JAHFNyO6t', 1, '2018-04-19 10:19:11', '175.12.244.105', '0/1.jpg', 0, 0);
 INSERT INTO `account` VALUES (3, 'test', 'test@test.com', 'bd7c6d0e95221c2caf4afabce53ff2e59524377ae91939562f2a73f41128d076', 'RS_xQw8fhclJqZU2iDPYqa8EYyF9T6pc', 1, '2018-09-27 12:04:25', '183.64.28.18', '0/1.jpg', 0, 0);
-INSERT INTO `account` VALUES (4, '2283546325', '2283546325@qq.com', '0330b6f6333b1604c50b9b220dbaedf36d950da05fe7015d11363b7d169633a4', 'L0CDX05Ei_IQ2ip7oEroePws4UB_VhHH', 1, '2018-12-24 22:56:22', '106.87.5.176', '0/1.jpg', 0, 0);
-INSERT INTO `account` VALUES (5, 'ChoxSu', '', '', '', 1, '2019-04-26 18:30:28', '113.206.204.108', 'http://thirdqq.qlogo.cn/g?b=oidb&k=xicaTlW45aV3cfeTh6fa8LA&s=40', 0, 1);
 
 -- ----------------------------
 -- Table structure for account_open
