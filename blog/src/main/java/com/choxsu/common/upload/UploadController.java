@@ -63,7 +63,7 @@ public class UploadController extends BaseController {
 
 
     /**
-     * base64图片上传
+     * 编辑器base64图片粘贴上传
      */
     public void base64ImgUpload() {
 
