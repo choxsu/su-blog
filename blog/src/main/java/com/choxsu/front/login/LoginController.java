@@ -7,6 +7,7 @@ import com.choxsu.front.login.entity.QQVo;
 import com.choxsu.kit.EmailKit;
 import com.choxsu.kit.IpKit;
 import com.choxsu.kit.RSAKit;
+import com.choxsu.util.DateUtils;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
 import com.jfinal.aop.Inject;
@@ -15,6 +16,7 @@ import com.jfinal.core.Controller;
 import com.jfinal.kit.*;
 
 import java.security.interfaces.RSAPrivateKey;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -83,11 +85,15 @@ public class LoginController extends Controller {
         Ret ret = srv.login(getPara("userName"), password, keepLogin, loginIp);
         if (ret.isOk()) {
             Account account = (Account) ret.get(LoginService.loginAccountCacheName);
-            String content = "在 " + new Date() + "登陆 Choxsu博客社区后台成功 <br/> 登陆ip:" + IpKit.getRealIp(this.getRequest()) + "<br/> 如果非本人登录，请及时联系超级管理员";
+            StringBuffer content = new StringBuffer("在 ");
+            content.append(DateUtils.format(new Date(), DateUtils.DEFAULT_REGEX_YYYY_MM_DD_HH_MIN_SS));
+            content.append("登陆choxsu博客社区成功 <br/> 登陆ip:");
+            content.append(IpKit.getRealIp(this.getRequest()));
+            content.append("<br/> 如果非本人登录，请及时联系超级管理员");
             executorService.execute(() -> {
                 try {
                     String email = account.getUserName().equals("test@test.com") ? "2283546325@qq.com" : account.getUserName();
-                    EmailKit.sendEmail(email, "登陆到"+ getRequest().getServerName() +"成功提示", content, true);
+                    EmailKit.sendEmail(email, "登陆到" + getRequest().getServerName() + "成功提示", content.toString(), true);
                 } catch (Exception e) {
                     LogKit.error("登录成功发送邮件失败：" + e.getMessage(), e);
                 }
