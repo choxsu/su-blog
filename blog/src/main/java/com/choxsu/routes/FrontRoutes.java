@@ -5,6 +5,7 @@ package com.choxsu.routes;
 import com.choxsu.front.article.ArticleController;
 import com.choxsu.front.index.IndexController;
 import com.choxsu.front.login.LoginController;
+import com.choxsu.front.my.MyController;
 import com.choxsu.front.tags.TagsController;
 import com.jfinal.config.Routes;
 
@@ -23,6 +24,10 @@ public class FrontRoutes extends Routes {
         add("/login", LoginController.class, "/login");
         add("/article", ArticleController.class, "/blog");
         add("/article/tag", TagsController.class, "/blog");
+
+        /*↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓个人中心↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓*/
+        add("/my", MyController.class, "/my");
+        /*↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑个人中心↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑*/
     }
 
 }
