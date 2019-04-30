@@ -171,7 +171,7 @@ public class LoginService {
 
         String title = "JFinal 密码找回邮件";
         String content = "在浏览器地址栏里输入并访问下面链接即可重置密码：\n\n"
-                + " http://www.jfinal.com/login/retrievePassword?authCode="
+                + " https://www.choxsu.cn/login/retrievePassword?authCode="
                 + authCode;
 
         String toEmail = account.getStr("userName");

@@ -87,7 +87,7 @@ public class LoginController extends Controller {
             executorService.execute(() -> {
                 try {
                     String email = account.getUserName().equals("test@test.com") ? "2283546325@qq.com" : account.getUserName();
-                    EmailKit.sendEmail(email, "登陆styg.site后台成功提示", content, true);
+                    EmailKit.sendEmail(email, "登陆到"+ getRequest().getServerName() +"成功提示", content, true);
                 } catch (Exception e) {
                     LogKit.error("登录成功发送邮件失败：" + e.getMessage(), e);
                 }
