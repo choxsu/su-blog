@@ -120,10 +120,13 @@ public class ChoxsuConfig extends JFinalConfig {
         String host = p.get("redis.host");
         int port = p.getInt("redis.port");
         String password = p.get("redis.password").trim();
+        RedisPlugin redisPlugin;
         if (StrKit.isBlank(password)) {
-            return new RedisPlugin(defaultName, host, port, 300000);
+            redisPlugin = new RedisPlugin(defaultName, host, port, 300000);
+        } else {
+            redisPlugin = new RedisPlugin(defaultName, host, port, 300000, password);
         }
-        return new RedisPlugin(defaultName, host, port, 300000, password);
+        return redisPlugin;
     }
 
     private void setJedisCluster(Plugins me) {
@@ -172,7 +175,8 @@ public class ChoxsuConfig extends JFinalConfig {
 
 
     @Override
-    public void onStop() { }
+    public void onStop() {
+    }
 
     public static void main(String[] args) {
         UndertowServer.start(ChoxsuConfig.class);
