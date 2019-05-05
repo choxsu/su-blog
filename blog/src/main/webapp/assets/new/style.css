@@ -278,12 +278,8 @@ template {
     font-size: 0.9rem;
 }
 
-.header .search {
-    margin-right: 10px;
-    margin-left: 10px;
-}
-
 .header .login {
+    margin-left: 20px;
     margin-right: 10px;
 }
 
