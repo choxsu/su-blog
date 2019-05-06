@@ -97,4 +97,14 @@ public class BaseController extends Controller {
         return ResultModel.fail(msg, data);
     }
 
+    @NotAction
+    protected int getDefaultInt(Integer value, Integer defaultValue){
+        return value == null ? defaultValue : value;
+    }
+
+    @NotAction
+    protected String getDefaultStr(String value, String defaultValue){
+        return value == null ? defaultValue : value;
+    }
+
 }

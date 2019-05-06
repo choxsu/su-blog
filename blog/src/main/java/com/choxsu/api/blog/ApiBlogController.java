@@ -21,9 +21,9 @@ public class ApiBlogController extends BaseController {
     /**
      * 首页博客list
      */
-    public void list() {
-        Integer page = getParaToInt("page", 1);
-        Integer size = getParaToInt("size", 20);
+    public void list(Integer page, Integer size) {
+        page = getDefaultInt(page, 1);
+        size = getDefaultInt(size, 10);
         Page<Blog> pageResult = articleService.findArticles(page, size, null);
         renderJson(success(pageResult.getList()));
     }
