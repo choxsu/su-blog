@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 05/05/2019 17:28:08
+ Date: 08/05/2019 18:14:32
 */
 
 SET NAMES utf8mb4;
@@ -224,11 +224,14 @@ CREATE TABLE `news_feed`  (
 DROP TABLE IF EXISTS `permission`;
 CREATE TABLE `permission`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parentId` int(11) NOT NULL DEFAULT -1 COMMENT '父节点 默认-1',
+  `key` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '唯一权限标识',
   `actionKey` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
   `controller` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
-  `remark` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 134 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+  `remark` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `name`(`key`) USING BTREE COMMENT '唯一权限标识'
+) ENGINE = InnoDB AUTO_INCREMENT = 134 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '权限资源表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for refer_me
@@ -344,7 +347,7 @@ CREATE TABLE `visitor`  (
   `client` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   `requestTime` datetime(0) NULL DEFAULT NULL COMMENT '请求时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10323 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 10324 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Procedure structure for pre_test
