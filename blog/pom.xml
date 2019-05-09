@@ -18,6 +18,11 @@
     </repositories>
 
     <dependencies>
+        <dependency>
+            <groupId>com.jfinal</groupId>
+            <artifactId>jfinal-undertow</artifactId>
+            <version>1.6</version>
+        </dependency>
 
         <dependency>
             <groupId>com.jfinal</groupId>
@@ -25,11 +30,6 @@
             <version>3.8</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.jfinal</groupId>
-            <artifactId>jfinal-undertow</artifactId>
-            <version>1.6</version>
-        </dependency>
 
         <dependency>
             <groupId>com.jfinal</groupId>
