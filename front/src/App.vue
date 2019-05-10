@@ -1,5 +1,12 @@
 <template>
     <div id="app">
+        <h3>bootstrap测试</h3>
+        <div class="content-wrap ">
+            <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button><br/>
+            <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</button><br/>
+            <button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button><br/>
+            <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="right" title="Tooltip on right">Tooltip on right</button><br/>
+        </div>
         <div>
             <a-button type="primary">按钮</a-button>
         </div>
@@ -25,13 +32,9 @@
 </template>
 
 <script>
-    import HelloWorld from './components/HelloWorld.vue'
 
     export default {
-        name: 'app',
-        components: {
-            HelloWorld
-        }
+        name: 'app'
     }
 </script>
 
