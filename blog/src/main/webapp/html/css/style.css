@@ -1,0 +1,45 @@
+html, body, .warp {
+    height: 100% !important;
+}
+
+
+/* choxsu-style */
+.choxsu-navbar {
+    border-bottom: 1px solid #a6a7a9;
+}
+
+.choxsu-content {
+    margin-top:2rem
+}
+
+
+.choxsu-footer {
+    font-size: 0.8rem;
+    padding: 1.2rem 0;
+    background-color: #fbfbfb;
+}
+
+.choxsu-footer p {
+    /*text-align: center;*/
+    margin-bottom: 0;
+}
+
+/* choxsu-style */
+
+
+/* bootstrap update*/
+.navbar-light .navbar-nav .nav-link {
+    color: #353232cf;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: rgba(174, 21, 191, 0.81);
+}
+
+.navbar-light .navbar-nav .active {
+    color: #ae15bf !important;
+}
+
+/* bootstrap update*/
+
+
