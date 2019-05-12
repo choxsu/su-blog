@@ -1,5 +1,11 @@
-html, body, .warp {
+html, body, .choxsu-body {
     height: 100% !important;
+}
+
+.choxsu-p-over {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 
@@ -9,9 +15,8 @@ html, body, .warp {
 }
 
 .choxsu-content {
-    margin-top:2rem
+    margin-top: 2rem
 }
-
 
 .choxsu-footer {
     font-size: 0.8rem;
@@ -28,16 +33,39 @@ html, body, .warp {
 
 
 /* bootstrap update*/
-.navbar-light .navbar-nav .nav-link {
+.choxsu-body .navbar-light .navbar-nav .nav-link {
     color: #353232cf;
 }
 
-.navbar-light .navbar-nav .nav-link:hover {
+.choxsu-body .navbar-light .navbar-nav .nav-link:hover {
     color: rgba(174, 21, 191, 0.81);
 }
 
-.navbar-light .navbar-nav .active {
+.choxsu-body .navbar-light .navbar-nav .active {
     color: #ae15bf !important;
+}
+
+.choxsu-body .list-group .list-group-item {
+    border: 0 !important;
+    padding: .75rem 0;
+}
+
+.choxsu-body .card {
+    border: 0 !important;
+}
+
+.choxsu-body .card .card-header {
+    padding: .5rem 0;
+    background: none;
+}
+
+.choxsu-body .card .card-header span {
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.6rem;
+}
+
+.choxsu-right-list .list-group-item {
+    padding: .75rem 0;
 }
 
 /* bootstrap update*/
