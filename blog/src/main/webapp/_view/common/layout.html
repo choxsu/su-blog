@@ -52,20 +52,22 @@
                 <ul class="navbar-nav ml-auto">
                     #if(!loginAccount)
                     <li class="nav-item">
-                        <a class="nav-link" href="#">登录</a>
+                        <a class="nav-link" href="/login">登录</a>
                     </li>
                     #else
                     <li class="nav-item dropdown">
-                         <a class="nav-link dropdown-toggle" href="javascript:;" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                             <img style="height: 30px;width: 30px;border-radius: 50%;" src="#(loginAccount.isThird == 1 ? '' : '/upload/avatar/')#(loginAccount.avatar)">
-                             <span class="nickname">#(loginAccount.nickName)choxsu</span>
-                         </a>
-                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                             <a class="dropdown-item" href="/my">个人中心</a>
-                             <a class="dropdown-item" href="/my/article">我的文章</a>
-                             <a class="dropdown-item" href="/logout">退出</a>
-                         </div>
-                     </li>
+                        <a class="nav-link dropdown-toggle" href="javascript:;" id="navbarDropdown"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img style="height: 30px;width: 30px;border-radius: 50%;"
+                                 src="#(loginAccount.isThird == 1 ? '' : '/upload/avatar/')#(loginAccount.avatar)">
+                            <span class="nickname">#(loginAccount.nickName)</span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/my">个人中心</a>
+                            <a class="dropdown-item" href="/my/article">我的文章</a>
+                            <a class="dropdown-item" href="/logout">退出</a>
+                        </div>
+                    </li>
                     #end
                 </ul>
             </div>
