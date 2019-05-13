@@ -16,3 +16,5 @@ out/
 *.class
 blog.log
 /blog/target/
+/blog/src/main/webapp/upload/
+/log/
