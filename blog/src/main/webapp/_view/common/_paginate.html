@@ -15,29 +15,32 @@
 		#setLocal(endPage = totalPage)
 	#end
 
-
-	### 当前页大于1
-	#if(currentPage > 1)
-		<a class="btn btn-outline-primary btn-sm" href="#(link)?p=#(currentPage - 1)#(append)">上一页</a>
-	#end
-	### 当前页减3大于1
-	#if(currentPage - 3 > 1)
-		<a class="btn btn-outline-primary btn-sm" href="#(link)?p=1#(append)">1</a>
-	#end
-
-	#for(i : [startPage..endPage])
-		#if(currentPage == i)
-			<a class="btn btn-outline-primary btn-sm" href="javascript:void(0);" style="background: #007bff;color: #ffffff;">#(i)</a>
-		#else
-			<a class="btn btn-outline-primary btn-sm" href="#(link)?p=#(i)#(append)">#(i)</a>
+	<nav class="choxsu-pagination justify-content-center d-flex">
+		<ul class="pagination">
+		### 当前页大于1
+		#if(currentPage > 1)
+			<li class="page-item"><a class="page-link" href="#(link)?p=#(currentPage - 1)#(append)" title="上一页"> < </a></li>
 		#end
-	#end
-	### 当前页加3小于总页数
-	#if(currentPage + 3 < totalPage)
-		<a class="btn btn-outline-primary btn-sm" href="#(link)?p=#(totalPage)#(append)">#(totalPage)</a>
-	#end
-	### 当前页小于总页数
-	#if(currentPage < totalPage)
-		<a class="btn btn-outline-primary btn-sm" href="#(link)?p=#(currentPage + 1)#(append)" >下一页</a>
-	#end
+		### 当前页减3大于1
+		#if(currentPage - 3 > 1)
+			<li class="page-item"><a class="page-link" href="#(link)?p=1#(append)">1</a></li>
+		#end
+
+		#for(i : [startPage..endPage])
+			#if(currentPage == i)
+				<li class="page-item active disabled"><a class="page-link" href="javascript:void(0);">#(i)</a></li>
+			#else
+				<li class="page-item"><a class="page-link" href="#(link)?p=#(i)#(append)">#(i)</a></li>
+			#end
+		#end
+		### 当前页加3小于总页数
+		#if(currentPage + 3 < totalPage)
+			<li class="page-item"><a class="page-link" href="#(link)?p=#(totalPage)#(append)">#(totalPage)</a></li>
+		#end
+		### 当前页小于总页数
+		#if(currentPage < totalPage)
+			<li class="page-item"><a class="page-link" href="#(link)?p=#(currentPage + 1)#(append)" title="下一页"> > </a></li>
+		#end
+		</ul>
+	</nav>
 #end

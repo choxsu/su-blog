@@ -26,7 +26,7 @@ public class IndexController extends BaseController {
      */
     public void index() {
         int page = getParaToInt("p", 1);
-        Page<Blog> blogPage = articleService.findArticles(page, 15, null);
+        Page<Blog> blogPage = articleService.findArticles(page, 5, null);
         setAttr("page", blogPage);
         render("index.html");
     }
