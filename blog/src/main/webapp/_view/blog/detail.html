@@ -5,22 +5,21 @@
 <link rel="stylesheet" href="/assets/editor_md/css/editormd.preview.css">
 #end
 <div class="col-sm-8">
-    <div class="article-detail">
+    <div class="choxsu-article-detail">
         <div class="title">#(blog.title)</div>
         <!--<p>#(blog.title)</p>-->
-        <div class="article-list-footer">
-            <li>发表于#date(blog.createAt, "yyyy-MM-dd hh:mm")</li>
-            #if(blog.updateAt != null)
-            <li>更新于#date(blog.updateAt, "yyyy-MM-dd hh:mm")</li>
-            #end
-            <li>作者 #(blog.author)</li>
-            <li>#(blog.clickCount)次阅读</li>
-            <li>0条评论</li>
-            <li>标签-#(blog.tagName)</li>
+        <div class="choxsu-article-footer">
+            <p>
+                *发表于#date(blog.createAt, "yyyy-MM-dd hh:mm")
+                #if(blog.updateAt != null)
+                &nbsp;&nbsp;*更新于#date(blog.updateAt, "yyyy-MM-dd hh:mm")
+                #end
+                &nbsp;&nbsp;*作者 #(blog.author) &nbsp;&nbsp;*#(blog.clickCount)次阅读 &nbsp;&nbsp;*#(blog.tagName)
+            </p>
         </div>
     </div>
-    <div class="clear" style=" border-bottom: 1px solid #c5b8b8;"></div>
-    <div id="content_id" class="content markdown-body">
+    <!--editormd-html-preview-->
+    <div id="content_id" class="choxsu-content markdown-body">
         #(blog.content)
     </div>
 </div>
@@ -39,9 +38,9 @@
     </div>
 </div>
 <noscript>Please enable JavaScript to view the comments.</noscript>-->
-<div class="return-top" title="返回顶部"><img style="width: 30px;height: 30px;position: fixed; right: 2rem; bottom: 2rem;" src="/assets/new/images/top.png"></div>
+<div class="choxsu-return-top" title="返回顶部"><img style="width: 30px;height: 30px;position: fixed; right: 2rem; bottom: 2rem;" src="/assets/new/images/top.png"></div>
 #define js()
-<script src="/assets/new/js/zooming.min.js"></script>
-<script src="/assets/new/js/detail.js"></script>
+<script src="/assets/choxsu/js/zooming.min.js"></script>
+<script src="/assets/choxsu/js/detail.js"></script>
 #end
 #end

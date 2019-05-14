@@ -72,6 +72,35 @@ html, body, .choxsu-body {
     color: #0e0e0e;
 }
 
+.choxsu-article-detail {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #c5b8b8;
+}
+
+.choxsu-article-detail .title{
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+.choxsu-article-footer {
+    font-size: 0.8rem;
+    list-style: none;
+}
+
+.choxsu-article-footer p {
+    margin-bottom: 0 !important;
+}
+
+.choxsu-return-top {
+    display: none;
+    position: fixed;
+    right: 20px;
+    bottom: 30px;
+    cursor: pointer;
+}
+.choxsu-content h1 {
+    //font-size: 2rem !important;
+}
 /* choxsu-style */
 
 
