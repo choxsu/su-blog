@@ -38,7 +38,7 @@ import java.util.Set;
 /**
  * @author choxsu
  */
-public class ChoxsuConfig extends JFinalConfig {
+public class ChoxsuApplication extends JFinalConfig {
 
 
     /**
@@ -179,7 +179,7 @@ public class ChoxsuConfig extends JFinalConfig {
     }
 
     public static void main(String[] args) {
-        UndertowServer.start(ChoxsuConfig.class);
+        UndertowServer.start(ChoxsuApplication.class);
     }
 
 
