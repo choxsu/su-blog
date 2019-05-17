@@ -1,3 +1,11 @@
+html,body {
+    height: 100%;
+}
+
+.choxsu-body {
+    height: 100%;
+}
+
 .choxsu-p-over {
     overflow: hidden;
     white-space: nowrap;
