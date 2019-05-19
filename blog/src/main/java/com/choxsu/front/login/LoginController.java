@@ -11,6 +11,7 @@ import com.choxsu.util.DateUtils;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
 import com.jfinal.aop.Inject;
+import com.jfinal.captcha.CaptchaRender;
 import com.jfinal.core.ActionKey;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.*;
@@ -126,6 +127,11 @@ public class LoginController extends Controller {
      * 发送找回密码邮件
      */
     public void sendRetrievePasswordEmail() {
+        boolean validateCaptcha = CaptchaRender.validate(getCookie(MyCaptchaRender.fpCaptchaName), get("captcha"));
+        if (!validateCaptcha) {
+            renderJson(Ret.fail("msg", "验证码输入不正确！"));
+            return;
+        }
         Ret ret = srv.sendRetrievePasswordAuthEmail(get("email"));
         renderJson(ret);
     }
@@ -150,10 +156,17 @@ public class LoginController extends Controller {
     }
 
     /**
-     * 获取验证码
+     * 获取登录验证码
      */
     public void captcha() {
         render(new MyCaptchaRender());
+    }
+
+    /**
+     * 获取重设密码验证码
+     */
+    public void fpCaptcha() {
+        render(new MyCaptchaRender(MyCaptchaRender.fpCaptchaName));
     }
 }
 

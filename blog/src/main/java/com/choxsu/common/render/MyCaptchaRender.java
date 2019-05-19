@@ -19,7 +19,25 @@ import java.io.IOException;
  */
 public class MyCaptchaRender extends CaptchaRender {
 
-    private static final String captchaName = "_choxsu_captcha";
+    /**
+     * 忘记密码缓存名称
+     */
+    public static final String fpCaptchaName  = "_fp_choxsu_captcha";
+
+    /**
+     * 自定义默认缓存名称
+     */
+    public static final String captchaNameDefault = "_choxsu_captcha";
+
+    private String captchaName;
+
+    public MyCaptchaRender() {
+        this.captchaName = captchaNameDefault;
+    }
+
+    public MyCaptchaRender(String captchaName) {
+        this.captchaName = captchaName;
+    }
 
     /**
      * 生成验证码
