@@ -10,6 +10,7 @@ public class ChoxsuApplication {
 
 
     public static void main(String[] args) {
+
         UndertowServer.create(ChoxsuConfig.class).start();
     }
 
