@@ -7,6 +7,7 @@ import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.AccountOpen;
 import com.choxsu.common.entity.AuthCode;
 import com.choxsu.common.entity.Session;
+import com.choxsu.config.ChoxsuConfig;
 import com.choxsu.front.login.entity.QQUserInfo;
 import com.choxsu.front.login.entity.QQVo;
 import com.choxsu.front.register.RegEntity;
@@ -169,9 +170,11 @@ public class LoginService {
         String authCode = AuthCodeService.me.createRetrievePasswordAuthCode(account.getId());
 
         String title = "Choxsu 密码找回邮件";
-        String content = "在浏览器地址栏里输入并访问下面链接即可重置密码：\n\n"
-                + " https://choxsu.cn/login/retrievePassword?authCode="
-                + authCode;
+        String url = "https://choxsu.cn";
+        if (ChoxsuConfig.isDev()) {
+            url = "localhost:1013";
+        }
+        String content = String.format("在浏览器地址栏里输入并访问下面链接即可重置密码：\n\n%s/login/retrievePassword?authCode=%s", url, authCode);
 
         String toEmail = account.getStr("userName");
         try {

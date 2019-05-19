@@ -179,4 +179,10 @@ public class ChoxsuConfig extends JFinalConfig {
     @Override
     public void onStop() {
     }
+
+    public static boolean isDev() {
+        String s = p.get("environment", "dev");
+        return "dev".equalsIgnoreCase(s);
+    }
+
 }
