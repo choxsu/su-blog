@@ -1,19 +1,31 @@
 #@layout()
-#set(seoTitle = "Choxsu-忘记密码")
+#set(seoTitle = "Choxsu后台登录")
 #define main()
 
 #define css()
-<link href="/assets/choxsu/login/forget_password.css" rel="stylesheet" type="text/css">
+<link href="/assets/choxsu/login/register.css" rel="stylesheet" type="text/css">
 #end
-<div class="offset-sm-2 col-sm-8 forget_password">
+<div class="offset-sm-2 col-sm-8 register">
     <div class="login-header">
-        <p class="text-center text-muted font-size-14">
-            <span class="text-main">重设密码</span>
+        <p class="text-center text-muted font-size-12">
+            <span class="text-main">注册</span>
         </p>
     </div>
-    <form id="login_form" class="form-signin" action="/login/sendRetrievePasswordEmail" method="post">
+    <form id="register_form" class="form-signin" action="/register/doRegister" method="post">
         <div class="form-group row">
-            <input type="email" name="email" class="form-control" placeholder="请输入您的邮箱" required>
+            <input type="text" name="nickname" class="form-control" placeholder="昵称" required>
+        </div>
+        <div class="form-group row">
+            <input type="email" name="userName" class="form-control" placeholder="邮箱" required>
+            <small id="emailHelp" class="form-text text-muted font-size-12">我们永远不会和其他人分享你的电子邮件.</small>
+        </div>
+        <div class="form-group row">
+            <input type="password"
+                   name="password" class="form-control" placeholder="密码" required>
+        </div>
+        <div class="form-group row">
+            <input type="password"
+                   name="passwordAgain" class="form-control" placeholder="确认密码" required>
         </div>
         <div class="form-group row">
             <input class="form-control"
@@ -23,9 +35,8 @@
         </div>
         <div class="form-group action-btn row">
             <p>
-                <button id="forget_password_submit" type="submit" class="btn btn-primary" data-loading-text="发送中...">
-                    发送重设密码链接
-                </button>
+                <button id="register_submit" type="submit" class="btn btn-primary" data-loading-text="注册中...">注册</button>
+                <a href="/login" class="font-size-12 text-main">直接登录</a>
             </p>
         </div>
     </form>
@@ -34,8 +45,9 @@
 <script type="text/javascript" src="/assets/new/js/jquery.form.min.js"></script>
 <script type="text/javascript" src="/assets/new/js/layer/layer.js"></script>
 <script type="text/javascript">
+
     $(document).ready(function () {
-        $("#login_form").ajaxForm({
+        $("#register_form").ajaxForm({
             dataType: "json"
             , success: function (ret) {
                 // 业务层验证成功
@@ -68,12 +80,8 @@
                     return;
                 }
                 // Validator 层验证失败
-                if (ret.userNameMsg) {
-                    layer.msg(ret.userNameMsg);
-                    return;
-                }
-                if (ret.passwordMsg) {
-                    layer.msg(ret.passwordMsg);
+                if (ret.msg) {
+                    layer.msg(ret.msg);
                     return;
                 }
                 if (ret.captchaMsg) {
@@ -84,10 +92,10 @@
             , error: function (ret) {
             }              // ret.status != 200 时回调
             , complete: function (ret) {
-                $('#forget_password_submit').button('reset')
+                $('#register_submit').button('reset')
             }       // 无论是 success 还是 error，最终都会被回调
             , beforeSubmit: function () {
-                $('#forget_password_submit').button('loading')
+                $('#register_submit').button('loading')
             }
         });
     });

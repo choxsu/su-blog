@@ -40,13 +40,7 @@ public class AccountSaveUpdateValidator extends Validator {
         validateString("account.nickName", 1, 19, "msg", "昵称不能超过19个字");
 
         String nickName = c.getPara("account.nickName").trim();
-        if (nickName.contains("@") || nickName.contains("＠")) { // 全角半角都要判断
-            addError("msg", "昵称不能包含 \"@\" 字符");
-        }
-        if (nickName.contains(" ") || nickName.contains("　")) {
-            addError("msg", "昵称不能包含空格");
-        }
-        Ret ret = AccountSaveUpdateValidator.validateNickName(nickName);
+        Ret ret = validateNickName(nickName);
         if (ret.isFail()) {
             addError("msg", ret.getStr("msg"));
         }
@@ -84,6 +78,13 @@ public class AccountSaveUpdateValidator extends Validator {
     public static Ret validateNickName(String nickName) {
         if (StrKit.isBlank(nickName)) {
             return Ret.fail("msg", "昵称不能为空");
+        }
+
+        if (nickName.contains("@") || nickName.contains("＠")) { // 全角半角都要判断
+            return Ret.fail("msg", "昵称不能包含 \"@\" 字符");
+        }
+        if (nickName.contains(" ") || nickName.contains("　")) {
+            return Ret.fail("msg", "昵称不能包含空格");
         }
 
         // 放开了 _-.  三个字符的限制

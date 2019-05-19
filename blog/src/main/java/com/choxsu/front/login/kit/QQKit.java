@@ -15,9 +15,6 @@ import com.jfinal.plugin.redis.Redis;
  */
 public class QQKit {
 
-    private static Cache cache = Redis.use();
-    public static final String KEY_P = "qq:login:token:";
-
     public static String getToken(String code, QQVo qqVo) {
         StringBuilder url = new StringBuilder();
         url.append("https://graph.qq.com/oauth2.0/token?");

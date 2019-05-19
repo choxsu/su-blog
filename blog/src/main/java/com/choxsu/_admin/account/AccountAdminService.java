@@ -156,7 +156,7 @@ public class AccountAdminService {
         }
     }
 
-    public Ret save(String userName, String password, String nickName, String ip) {
+    public Ret save(String userName, String password, String nickName, String ip, boolean isRegister) {
         if (StrKit.isBlank(userName) || StrKit.isBlank(password) || StrKit.isBlank(nickName)) {
             return Ret.fail("msg", "邮箱、密码或昵称不能为空");
         }
@@ -194,10 +194,9 @@ public class AccountAdminService {
         account.setAvatar(Account.AVATAR_NO_AVATAR);  // 注册时设置默认头像
         if (account.save()) {
             //缓存清除
-            Redis.use().del(RedisKey.INDEX_KEY_PREFIX + "accountProfile");
-            return Ret.ok("msg", "添加成功！");
+            return Ret.ok("msg", isRegister ? "注册成功" : "添加成功！");
         } else {
-            return Ret.fail("msg", "添加失败！");
+            return Ret.fail("msg", isRegister ? "注册失败" : "添加失败！");
         }
 
     }
@@ -234,7 +233,6 @@ public class AccountAdminService {
         boolean b = dao.deleteById(id);
         if (b) {
             //缓存清除
-            Redis.use().del(RedisKey.INDEX_KEY_PREFIX + "accountProfile");
             return Ret.ok().set("msg", "删除成功");
         }
         return Ret.fail().set("msg", "删除失败");

@@ -14,8 +14,6 @@ import com.jfinal.plugin.redis.Redis;
  */
 public class AuthCacheClearInterceptor implements Interceptor {
 
-    private static final Cache cache = Redis.use();
-
     public static boolean isAdmin(Account loginAccount) {
         if (loginAccount == null || !loginAccount.isStatusOk()) {
             return false;

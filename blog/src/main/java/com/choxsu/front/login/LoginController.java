@@ -3,7 +3,6 @@ package com.choxsu.front.login;
 
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.render.MyCaptchaRender;
-import com.choxsu.front.login.entity.QQVo;
 import com.choxsu.kit.EmailKit;
 import com.choxsu.kit.IpKit;
 import com.choxsu.kit.RSAKit;
@@ -11,13 +10,13 @@ import com.choxsu.util.DateUtils;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
 import com.jfinal.aop.Inject;
-import com.jfinal.captcha.CaptchaRender;
 import com.jfinal.core.ActionKey;
 import com.jfinal.core.Controller;
-import com.jfinal.kit.*;
+import com.jfinal.kit.LogKit;
+import com.jfinal.kit.PropKit;
+import com.jfinal.kit.Ret;
 
 import java.security.interfaces.RSAPrivateKey;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -127,7 +126,7 @@ public class LoginController extends Controller {
      * 发送找回密码邮件
      */
     public void sendRetrievePasswordEmail() {
-        boolean validateCaptcha = CaptchaRender.validate(getCookie(MyCaptchaRender.fpCaptchaName), get("captcha"));
+        boolean validateCaptcha = validateCaptcha("captcha");
         if (!validateCaptcha) {
             renderJson(Ret.fail("msg", "验证码输入不正确！"));
             return;
@@ -162,11 +161,5 @@ public class LoginController extends Controller {
         render(new MyCaptchaRender());
     }
 
-    /**
-     * 获取重设密码验证码
-     */
-    public void fpCaptcha() {
-        render(new MyCaptchaRender(MyCaptchaRender.fpCaptchaName));
-    }
 }
 

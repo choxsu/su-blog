@@ -93,7 +93,6 @@ public class AdminBlogController extends BaseController {
         Integer id = getParaToInt("id");
         adminBlogService.DAO.deleteById(id);
         //缓存清除
-        Redis.use().del(RedisKey.INDEX_KEY_PREFIX + "blogProfile");
         renderJson(Ret.ok().set("msg", "删除成功！"));
     }
 

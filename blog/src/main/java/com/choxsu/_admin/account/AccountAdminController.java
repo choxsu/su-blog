@@ -47,7 +47,7 @@ public class AccountAdminController extends BaseController {
     @Before(AccountSaveUpdateValidator.class)
     public void save() {
         Account account = getBean(Account.class);
-        Ret ret = srv.save(account.getUserName(), account.getPassword(), account.getNickName(), IpKit.getRealIp(getRequest()));
+        Ret ret = srv.save(account.getUserName(), account.getPassword(), account.getNickName(), IpKit.getRealIp(getRequest()), false);
         renderJson(ret);
     }
 

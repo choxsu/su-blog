@@ -88,7 +88,6 @@ public class PageViewService {
      */
     private void updatePvDataBase() {
         List urls = CacheKit.getKeys(cacheName);
-        Cache cache = Redis.use();
         List<Visitor> list = new ArrayList<>();
         for (Object urlKey : urls) {
             Visitor visitor = CacheKit.get(cacheName, urlKey.toString());
@@ -99,8 +98,6 @@ public class PageViewService {
             list.add(visitor);
             // 获取以后立即清除，因为获取后的值将累加到数据表中。或许放在 for 循环的最后一行为好
             CacheKit.remove(cacheName, key);
-            //清除掉Redis记录数
-            cache.del(RedisKey.INDEX_KEY_PREFIX + "visitorProfile");
         }
         Db.batchSave(list, 100);
         //LogKit.info("请求记录保存成功记录数：" + ints.length);

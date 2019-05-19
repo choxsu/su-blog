@@ -61,8 +61,6 @@ public class AdminBlogService extends BaseService<Blog> {
         } else {
             blog.setCreateAt(date);
             blog.save();
-            //缓存清除
-            Redis.use().del(RedisKey.INDEX_KEY_PREFIX + "blogProfile");
         }
         return Ret.ok();
     }

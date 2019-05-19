@@ -89,8 +89,6 @@ public class PermissionAdminService {
 		if (counter == 0) {
 			return Ret.ok("msg", "权限已经是最新状态，无需更新");
 		} else {
-			//权限缓存清除
-			Redis.use().del(RedisKey.INDEX_KEY_PREFIX + "permissionProfile");
 			return Ret.ok("msg", "权限更新成功，共更新权限数 : " + counter);
 		}
 	}
@@ -118,8 +116,6 @@ public class PermissionAdminService {
 			dao.deleteById(permissionId);
 			return true;
 		  });
-		//权限缓存清除
-		Redis.use().del(RedisKey.INDEX_KEY_PREFIX + "permissionProfile");
 		return Ret.ok("msg", "权限删除成功");
 	}
 

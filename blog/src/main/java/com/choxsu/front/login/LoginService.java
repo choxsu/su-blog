@@ -9,14 +9,13 @@ import com.choxsu.common.entity.AuthCode;
 import com.choxsu.common.entity.Session;
 import com.choxsu.front.login.entity.QQUserInfo;
 import com.choxsu.front.login.entity.QQVo;
+import com.choxsu.front.register.RegEntity;
 import com.choxsu.front.login.entity.Token;
 import com.choxsu.front.login.kit.QQKit;
 import com.choxsu.kit.EmailKit;
-import com.choxsu.kit.IpKit;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Inject;
 import com.jfinal.kit.HashKit;
-import com.jfinal.kit.HttpKit;
 import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
@@ -293,5 +292,10 @@ public class LoginService {
      */
     public String getAuthUrl() {
         return QQKit.getAuthUrl(qqVo);
+    }
+
+    public Ret register(RegEntity regModel) {
+
+        return Ret.ok();
     }
 }
