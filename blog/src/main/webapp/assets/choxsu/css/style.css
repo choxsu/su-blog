@@ -1,6 +1,19 @@
-html,body {
+html, body {
     height: 100%;
 }
+
+.text-main {
+    color: #ae15bf;
+}
+
+.font-size-12 {
+    font-size: .75rem;
+}
+
+.font-size-14 {
+    font-size: .875rem;
+}
+
 
 .choxsu-body {
     height: 100%;
@@ -35,8 +48,6 @@ html,body {
         min-height: auto;
     }
 }
-
-
 
 .choxsu-content {
     margin-top: 2rem
@@ -89,7 +100,7 @@ html,body {
     border-bottom: 1px solid #c5b8b8;
 }
 
-.choxsu-article-detail .title{
+.choxsu-article-detail .title {
     font-size: 1.6rem;
     font-weight: 600;
 }
@@ -110,15 +121,29 @@ html,body {
     bottom: 30px;
     cursor: pointer;
 }
-.choxsu-content h1 {
-    //font-size: 2rem !important;
+
+.choxsu-return-top img {
+    width: 30px;
+    height: 30px;
+    position: fixed;
+    right: 2rem;
+    bottom: 4rem;
 }
+
+.choxsu-content h1 {
+/ / font-size: 2 rem !important;
+}
+
 /* choxsu-style */
 
 
 /* bootstrap update*/
 .choxsu-body .navbar-light .navbar-nav .nav-link {
     color: #353232cf;
+}
+
+.choxsu-navbar .navbar-nav .nav-link {
+    font-weight: 500;
 }
 
 .choxsu-body .navbar-light .navbar-nav .nav-link:hover {
@@ -155,7 +180,8 @@ html,body {
 .choxsu-pagination {
 
 }
-.pagination .page-item{
+
+.pagination .page-item {
     border: none;
     margin: 0 0.01rem;
 }
@@ -168,20 +194,22 @@ html,body {
     padding: .5rem .75rem;
     line-height: 1.25;
 }
-.page-item.active .page-link{
+
+.page-item.active .page-link {
     background-color: #ae15bf !important;
-    color: #fff ;
-    border-radius: 2px;
-}
-.page-item.active .page-link:hover{
-    background-color: #ae15bf !important;
-    color: #fff ;
+    color: #fff;
     border-radius: 2px;
 }
 
-.page-item .page-link:hover{
+.page-item.active .page-link:hover {
+    background-color: #ae15bf !important;
+    color: #fff;
+    border-radius: 2px;
+}
+
+.page-item .page-link:hover {
     background-color: #4d2e50 !important;
-    color: #fff ;
+    color: #fff;
     border-radius: 2px;
 }
 
@@ -192,5 +220,43 @@ html,body {
 }
 
 /* bootstrap update*/
+
+
+/*###########################按钮##########################*/
+.btn-primary {
+    color: #fff;
+    background-color: #ae15bf;
+    border-color: #ae15bf;
+}
+
+.btn-primary:hover,.btn-primary:focus {
+    color: #fff;
+    background-color: #8f199c;
+    border-color: #8f199c;
+}
+.btn-primary:active {
+    color: #fff;
+    background-color: #ae15bf;
+    border-color: #ae15bf;
+}
+.btn-primary.disabled, .btn-primary:disabled {
+    color: #fff;
+    background-color: #ae15bf;
+    border-color: #ae15bf;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #ae15bf;
+    border-color: #ae15bf;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 61, 253, 0.5);
+}
+/*###########################按钮##########################*/
+
 
 
