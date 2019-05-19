@@ -19,6 +19,8 @@ import java.io.IOException;
  */
 public class MyCaptchaRender extends CaptchaRender {
 
+    private static final String captchaName = "_choxsu_captcha";
+
     /**
      * 生成验证码
      */

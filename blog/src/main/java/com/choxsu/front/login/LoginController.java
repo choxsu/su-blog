@@ -55,7 +55,7 @@ public class LoginController extends Controller {
         Ret ret = srv.qqCallback(get("code"), IpKit.getRealIp(getRequest()));
         if (ret.isOk()) {
             setLoginInfo(ret);
-            redirect(getPara("returnUrl", "/"));
+            redirect(get("returnUrl", "/"));
             return;
         }
         render("authFailed.html");
@@ -73,7 +73,7 @@ public class LoginController extends Controller {
      */
     @Before(LoginValidator.class)
     public void doLogin() {
-        String encript = getPara("encryptPwd");
+        String encript = get("encryptPwd");
         RSAPrivateKey privateKey = RSAKit.getRSAPrivateKey(PropKit.get("privateKey"));
         if (privateKey == null) {
             renderJson(Ret.fail().set("msg", "RSA私钥无效或不存在"));
@@ -82,7 +82,7 @@ public class LoginController extends Controller {
         String password = RSAKit.decryptString(privateKey, encript);
         boolean keepLogin = getParaToBoolean("keepLogin", false);
         String loginIp = IpKit.getRealIp(getRequest());
-        Ret ret = srv.login(getPara("userName"), password, keepLogin, loginIp);
+        Ret ret = srv.login(get("userName"), password, keepLogin, loginIp);
         if (ret.isOk()) {
             Account account = (Account) ret.get(LoginService.loginAccountCacheName);
             StringBuffer content = new StringBuffer("在 ");
@@ -99,7 +99,7 @@ public class LoginController extends Controller {
                 }
             });
             setLoginInfo(ret);
-            ret.set("returnUrl", getPara("returnUrl", "/"));    // 如果 returnUrl 存在则跳过去，否则跳去首页
+            ret.set("returnUrl", get("returnUrl", "/"));    // 如果 returnUrl 存在则跳过去，否则跳去首页
         }
         renderJson(ret);
     }
@@ -126,7 +126,7 @@ public class LoginController extends Controller {
      * 发送找回密码邮件
      */
     public void sendRetrievePasswordEmail() {
-        Ret ret = srv.sendRetrievePasswordAuthEmail(getPara("email"));
+        Ret ret = srv.sendRetrievePasswordAuthEmail(get("email"));
         renderJson(ret);
     }
 
@@ -145,7 +145,7 @@ public class LoginController extends Controller {
      * 2：有效则更新密码
      */
     public void doRetrievePassword() {
-        Ret ret = srv.retrievePassword(getPara("authCode"), getPara("newPassword"));
+        Ret ret = srv.retrievePassword(get("authCode"), get("newPassword"));
         renderJson(ret);
     }
 

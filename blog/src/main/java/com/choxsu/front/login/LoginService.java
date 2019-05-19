@@ -169,9 +169,9 @@ public class LoginService {
 
         String authCode = AuthCodeService.me.createRetrievePasswordAuthCode(account.getId());
 
-        String title = "JFinal 密码找回邮件";
+        String title = "Choxsu 密码找回邮件";
         String content = "在浏览器地址栏里输入并访问下面链接即可重置密码：\n\n"
-                + " https://www.choxsu.cn/login/retrievePassword?authCode="
+                + " https://choxsu.cn/login/retrievePassword?authCode="
                 + authCode;
 
         String toEmail = account.getStr("userName");
@@ -179,7 +179,7 @@ public class LoginService {
             EmailKit.sendEmail(toEmail, title, content, false);
             return Ret.ok("msg", "密码找回邮件已发送至邮箱，请收取邮件并重置密码");
         } catch (Exception e) {
-            return Ret.fail("msg", "密码找回邮件发送失败，可能是邮件服务器出现故障，请去JFinal官方QQ群留言给群主");
+            return Ret.fail("msg", "密码找回邮件发送失败，可能是邮件服务器出现故障，请联系choxsu@163.com");
         }
     }
 
