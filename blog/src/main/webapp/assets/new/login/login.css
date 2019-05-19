@@ -12,11 +12,18 @@
 
 .form-signin .captcha {
     position: relative;
-    top: -43px;
-    right: -256px;
+    top: -2.7rem;
+    left: 16rem;
     z-index: 100;
     float: left;
     border-radius: 8px;
+}
+
+@media screen and (max-width: 430px) {
+    .form-signin .captcha {
+        position: initial;
+        margin-top: .5rem;
+    }
 }
 
 .form-signin .third-login {
