@@ -117,7 +117,6 @@ public class LoginService {
 
 
     public Account getLoginAccountWithSessionId(String sessionId) {
-//        return CacheKit.get(loginAccountCacheName, sessionId);
         return Redis.use().get(sessionId);
     }
 
@@ -145,7 +144,6 @@ public class LoginService {
             loginAccount.removeSensitiveInfo();                                 // 移除 password 与 salt 属性值
             loginAccount.put("sessionId", sessionId);                          // 保存一份 sessionId 到 loginAccount 备用
             Redis.use().setex(sessionId, (int) LIVE_SECONDS, loginAccount);
-//            CacheKit.put(loginAccountCacheName, sessionId, loginAccount);
             createLoginLog(loginAccount.getId(), loginIp);
             return loginAccount;
         }
