@@ -22,7 +22,6 @@ import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
-import com.jfinal.plugin.ehcache.CacheKit;
 import com.jfinal.plugin.redis.Redis;
 
 import java.util.Date;
@@ -48,6 +47,11 @@ public class LoginService {
     public static final String sessionIdName = "jfinalId";
 
     /**
+     * session存活时间秒数
+     */
+    public static final long LIVE_SECONDS = 24 * 60 * 60;
+
+    /**
      * 登录成功返回 sessionId 与 loginAccount，否则返回一个 msg
      */
     public Ret login(String userName, String password, boolean keepLogin, String loginIp) {
@@ -71,10 +75,10 @@ public class LoginService {
             return Ret.fail("msg", "用户名或密码不正确");
         }
 
-        // 如果用户勾选保持登录，暂定过期时间为 15 天，否则为 7 天，单位为秒
-        long liveSeconds = keepLogin ? 15 * 24 * 60 * 60 : 7 * 24 * 60 * 60;
+        // 如果用户勾选保持登录，暂定过期时间为 3 天，否则为 1 天，单位为秒
+        long liveSeconds = keepLogin ? 3 * 24 * 60 * 60 : LIVE_SECONDS;
         // 传递给控制层的 cookie
-        int maxAgeInSeconds = (int) (keepLogin ? liveSeconds : -1);
+        int maxAgeInSeconds = (int) liveSeconds;
         return loginAction(liveSeconds, loginAccount, loginIp, maxAgeInSeconds);
     }
 
@@ -102,7 +106,6 @@ public class LoginService {
 
         loginAccount.removeSensitiveInfo();                                 // 移除 password 与 salt 属性值
         loginAccount.put("sessionId", sessionId);                          // 保存一份 sessionId 到 loginAccount 备用
-//        CacheKit.put(loginAccountCacheName, sessionId, loginAccount);
         Redis.use().setex(sessionId, maxAgeInSeconds, loginAccount);
 
         createLoginLog(loginAccount.getId(), loginIp);
@@ -141,7 +144,7 @@ public class LoginService {
         if (loginAccount != null && loginAccount.isStatusOk()) {
             loginAccount.removeSensitiveInfo();                                 // 移除 password 与 salt 属性值
             loginAccount.put("sessionId", sessionId);                          // 保存一份 sessionId 到 loginAccount 备用
-            Redis.use().setex(sessionId, 24 * 60 * 60, loginAccount);
+            Redis.use().setex(sessionId, (int) LIVE_SECONDS, loginAccount);
 //            CacheKit.put(loginAccountCacheName, sessionId, loginAccount);
             createLoginLog(loginAccount.getId(), loginIp);
             return loginAccount;
@@ -238,9 +241,15 @@ public class LoginService {
         // 将来可能把 account 用 id : obj 的形式放缓存，更新缓存只需要 CacheKit.remove("account", id) 就可以了，
         // 其它节点发现数据不存在会自动去数据库读取，所以未来可能就是在 AccountService.getById(int id)的方法引入缓存就好
         // 所有用到 account 对象的地方都从这里去取
-        Redis.use().setex(sessionId, 24 * 60 * 60 , loginAccount);
+        Redis.use().setex(sessionId, (int) LIVE_SECONDS, loginAccount);
     }
 
+    /**
+     * QQ登录回调处理
+     * @param code
+     * @param ip
+     * @return
+     */
     Ret qqCallback(String code, String ip) {
         String result = QQKit.getToken(code, qqVo);
         Token token = QQKit.tokenHandler(result);
@@ -285,7 +294,7 @@ public class LoginService {
             accountOpen.save();
         }
 
-        long liveSeconds = 7 * 24 * 60 * 60;
+        long liveSeconds = LIVE_SECONDS;
         // 传递给控制层的 cookie
         int maxAgeInSeconds = (int) liveSeconds;
         return loginAction(liveSeconds, account, ip, maxAgeInSeconds);
