@@ -2,6 +2,7 @@
 
 package com.choxsu._admin.index;
 
+import com.choxsu._admin.permission.Remark;
 import com.choxsu.common.base.BaseController;
 import com.jfinal.aop.Inject;
 import com.jfinal.kit.Ret;
@@ -15,6 +16,7 @@ public class IndexAdminController extends BaseController {
     @Inject
     IndexAdminService srv;
 
+    @Remark("后台首页")
     public void index() {
 
         Ret accountProfile = srv.getAccountProfile();

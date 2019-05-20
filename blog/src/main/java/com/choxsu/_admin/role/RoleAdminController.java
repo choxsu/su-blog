@@ -3,6 +3,7 @@
 package com.choxsu._admin.role;
 
 import com.choxsu._admin.permission.PermissionAdminService;
+import com.choxsu._admin.permission.Remark;
 import com.jfinal.aop.Inject;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.entity.Permission;
@@ -25,16 +26,19 @@ public class RoleAdminController extends BaseController {
 	PermissionAdminService permissionAdminService;
 
 
+	@Remark("角色管理首页")
 	public void index() {
 		Page<Role> rolePage = srv.paginate(getParaToInt("p", 1));
 		setAttr("rolePage", rolePage);
 		render("index.html");
 	}
 
+	@Remark("角色添加页面")
 	public void add() {
 		render("add.html");
 	}
 
+	@Remark("角色保存")
 	@Before(RoleAdminValidator.class)
 	public void save() {
 		Role role = getBean(Role.class);
@@ -42,6 +46,7 @@ public class RoleAdminController extends BaseController {
 		renderJson(ret);
 	}
 
+	@Remark("角色编辑页面")
 	public void edit() {
 		keepPara("p");
 		Role role = srv.findById(getParaToInt("id"));
@@ -52,6 +57,7 @@ public class RoleAdminController extends BaseController {
 	/**
 	 * 提交修改
 	 */
+	@Remark("角色更新")
 	@Before(RoleAdminValidator.class)
 	public void update() {
 		Role role = getBean(Role.class);
@@ -59,6 +65,7 @@ public class RoleAdminController extends BaseController {
 		renderJson(ret);
 	}
 
+	@Remark("角色删除")
 	public void delete() {
 		Ret ret = srv.delete(getParaToInt("id"));
 		renderJson(ret);
@@ -68,6 +75,7 @@ public class RoleAdminController extends BaseController {
 	/**
 	 * 分配权限
 	 */
+	@Remark("角色分配权限页面")
 	public void assignPermissions() {
 		Role role = srv.findById(getParaToInt("id"));
 		List<Permission> permissionList = permissionAdminService.getAllPermissions();
@@ -82,6 +90,7 @@ public class RoleAdminController extends BaseController {
 	/**
 	 * 添加权限
 	 */
+	@Remark("角色权限增加")
 	public void addPermission() {
 		Ret ret = srv.addPermission(getParaToInt("roleId"), getParaToInt("permissionId"));
 		renderJson(ret);
@@ -90,6 +99,7 @@ public class RoleAdminController extends BaseController {
 	/**
 	 * 删除权限
 	 */
+	@Remark("角色权限删除")
 	public void deletePermission() {
 		Ret ret = srv.deletePermission(getParaToInt("roleId"), getParaToInt("permissionId"));
 		renderJson(ret);

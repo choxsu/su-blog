@@ -1,6 +1,7 @@
 
 package com.choxsu._admin.account;
 
+import com.choxsu._admin.permission.Remark;
 import com.choxsu._admin.role.RoleAdminService;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.entity.Account;
@@ -32,18 +33,20 @@ public class AccountAdminController extends BaseController {
     @Inject
     RoleAdminService roleAdminService;
 
+    @Remark("账户首页")
     public void index() {
         Page<Account> accountPage = srv.paginate(getParaToInt("p", 1));
         setAttr("accountPage", accountPage);
         render("index.html");
     }
 
-
+    @Remark("账户添加页面")
     public void add() {
         keepPara("p");
         render("add.html");
     }
 
+    @Remark("账户保存")
     @Before(AccountSaveUpdateValidator.class)
     public void save() {
         Account account = getBean(Account.class);
@@ -51,12 +54,13 @@ public class AccountAdminController extends BaseController {
         renderJson(ret);
     }
 
+    @Remark("账户删除")
     public void del() {
         Ret ret = srv.delete(getParaToInt("id"));
         renderJson(ret);
     }
 
-
+    @Remark("账户编辑页面")
     public void edit() {
         keepPara("p");
         Account account = srv.findById(getParaToInt("id"));
@@ -67,6 +71,7 @@ public class AccountAdminController extends BaseController {
     /**
      * 提交修改
      */
+    @Remark("账户更新")
     @Before(AccountSaveUpdateValidator.class)
     public void update() {
         Account account = getBean(Account.class);
@@ -78,6 +83,7 @@ public class AccountAdminController extends BaseController {
     /**
      * 账户锁定
      */
+    @Remark("账户锁定")
     public void lock() {
         Ret ret = srv.lock(getLoginAccountId(), getParaToInt("id"));
         renderJson(ret);
@@ -86,6 +92,7 @@ public class AccountAdminController extends BaseController {
     /**
      * 账户解锁
      */
+    @Remark("账户解锁")
     public void unlock() {
         Ret ret = srv.unlock(getParaToInt("id"));
         renderJson(ret);
@@ -94,6 +101,7 @@ public class AccountAdminController extends BaseController {
     /**
      * 分配角色
      */
+    @Remark("账户分配角色页面")
     public void assignRoles() {
         Account account = srv.findById(getParaToInt("id"));
         List<Role> roleList = roleAdminService.getAllRoles();
@@ -107,6 +115,7 @@ public class AccountAdminController extends BaseController {
     /**
      * 添加角色
      */
+    @Remark("账户角色添加")
     public void addRole() {
         Ret ret = srv.addRole(getParaToInt("accountId"), getParaToInt("roleId"));
         renderJson(ret);
@@ -115,6 +124,7 @@ public class AccountAdminController extends BaseController {
     /**
      * 删除角色
      */
+    @Remark("账户角色删除")
     public void deleteRole() {
         Ret ret = srv.deleteRole(getParaToInt("accountId"), getParaToInt("roleId"));
         renderJson(ret);
@@ -127,6 +137,7 @@ public class AccountAdminController extends BaseController {
      * <p>
      * 该功能便于查看后台都有哪些账户被分配了角色，在对账户误操作分配了角色时，也便于取消角色分配
      */
+    @Remark("显示后台管理员账户首页")
     public void showAdminList() {
         List<Record> adminList = srv.getAdminList();
         setAttr("adminList", adminList);
@@ -136,6 +147,7 @@ public class AccountAdminController extends BaseController {
     /**
      * 上传用户图片，为裁切头像做准备
      */
+    @Remark("账户头像裁剪")
     public void uploadAvatar() {
         UploadFile uf = null;
         try {
@@ -167,6 +179,7 @@ public class AccountAdminController extends BaseController {
     /**
      * 保存 jcrop 裁切区域为用户头像
      */
+    @Remark("账户头像保存")
     @Before(POST.class)
     public void saveAvatar() {
         String avatarUrl = getSessionAttr("avatarUrl");
@@ -182,6 +195,7 @@ public class AccountAdminController extends BaseController {
     /**
      * 删除存放在临时目录的文件
      */
+    @Remark("删除存放临时目录的图片文件")
     public void delTemFile() {
         //String avatarUrl = getPara("avatarUrl");
         String avatarUrl = getSessionAttr("avatarUrl");
@@ -196,6 +210,7 @@ public class AccountAdminController extends BaseController {
     }
 
 
+    @Remark("账户登录日志首页")
     @ActionKey("/admin/loginLog")
     public void loginLog() {
         Page<Record> page = srv.findLoginLog(getParaToInt("p", 1), getParaToInt("size", 10));
@@ -206,6 +221,7 @@ public class AccountAdminController extends BaseController {
     /**
      * 图片上传日志记录
      */
+    @Remark("图片上传日志记录首页")
     @ActionKey("/admin/uploadLog")
     public void uploadLog(){
         Page<Record> page = srv.findUploadLog(getParaToInt("p", 1), getParaToInt("size", 10));

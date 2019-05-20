@@ -1,5 +1,6 @@
 package com.choxsu._admin.blog;
 
+import com.choxsu._admin.permission.Remark;
 import com.choxsu._admin.tag.AdminTagService;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.constant.CategoryEnum;
@@ -30,6 +31,7 @@ public class AdminBlogController extends BaseController {
     @Inject
     AdminTagService tagService;
 
+    @Remark("文章首页")
     public void index() {
         Account loginAccount = getLoginAccount();
         Integer p = getParaToInt("p", 1);
@@ -39,6 +41,7 @@ public class AdminBlogController extends BaseController {
         render("index.html");
     }
 
+    @Remark("文章添加页面")
     public void add() {
         commonInfo();
         render("addOrEdit.html");
@@ -57,6 +60,7 @@ public class AdminBlogController extends BaseController {
         setAttr("tagList", tagService.findAll());
     }
 
+    @Remark("文章保存")
     @Before(BlogValid.class)
     public void save() {
         Blog blog = getParaToSet();
@@ -75,6 +79,7 @@ public class AdminBlogController extends BaseController {
         return blog;
     }
 
+    @Remark("文章编辑页面")
     public void edit() {
         keepPara("p");
         commonInfo();
@@ -82,6 +87,7 @@ public class AdminBlogController extends BaseController {
         render("addOrEdit.html");
     }
 
+    @Remark("文章更新")
     @Before(BlogValid.class)
     public void update() {
         Blog blog = getParaToSet();
@@ -89,10 +95,10 @@ public class AdminBlogController extends BaseController {
         renderJson(ret);
     }
 
+    @Remark("文章删除")
     public void delete() {
         Integer id = getParaToInt("id");
         adminBlogService.DAO.deleteById(id);
-        //缓存清除
         renderJson(Ret.ok().set("msg", "删除成功！"));
     }
 

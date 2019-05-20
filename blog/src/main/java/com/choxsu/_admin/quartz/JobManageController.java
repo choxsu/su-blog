@@ -1,5 +1,6 @@
 package com.choxsu._admin.quartz;
 
+import com.choxsu._admin.permission.Remark;
 import com.choxsu.common.base.BaseController;
 import com.choxsu.quartz.QuartzManager;
 import com.jfinal.aop.Before;
@@ -20,6 +21,7 @@ public class JobManageController extends BaseController {
     JobManageService jobManageService;
 
     //获取任务信息
+    @Remark("定时任务管理首页")
     public void index() {
         int page = getParaToInt("p", 1);
         int size = getParaToInt("size", 10);
@@ -27,12 +29,13 @@ public class JobManageController extends BaseController {
         setAttr("page", pageRecord);
         render("index.html");
     }
-
+    @Remark("定时任务添加页面")
     public void add() {
         render("addOrEdit.html");
     }
 
     //新增任务
+    @Remark("定时任务保存")
     @Before(JobManageValid.class)
     public void save() {
         String name = getPara("name");
@@ -47,7 +50,7 @@ public class JobManageController extends BaseController {
         Ret ret = jobManageService.saveOrUpdate(r);
         renderJson(ret);
     }
-
+    @Remark("定时任务编辑页面")
     public void edit() {
         Record record = jobManageService.findById(getParaToInt("id"));
         setAttr("job", record);
@@ -57,6 +60,7 @@ public class JobManageController extends BaseController {
     /**
      * 更新任务
      */
+    @Remark("定时任务更新")
     @Before(JobManageValid.class)
     public void update() {
         String id = getPara("id");
@@ -73,13 +77,14 @@ public class JobManageController extends BaseController {
         Ret ret = jobManageService.saveOrUpdate(r);
         renderJson(ret);
     }
-
+    @Remark("定时任务删除")
     public void delete() {
         Integer id = getParaToInt("id");
         Ret ret = jobManageService.delete(id);
         renderJson(ret);
     }
     //启用关停
+    @Remark("定时任务开始")
     public void start() {
         try {
             final String id = getPara("id");
@@ -127,6 +132,7 @@ public class JobManageController extends BaseController {
         renderJson(success());
     }
 
+    @Remark("定时任务详情")
     public void get() {
         Record r = null;
         try {
