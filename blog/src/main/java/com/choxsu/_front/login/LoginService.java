@@ -1,6 +1,6 @@
 
 
-package com.choxsu.front.login;
+package com.choxsu._front.login;
 
 import com.choxsu.common.authcode.AuthCodeService;
 import com.choxsu.common.entity.Account;
@@ -8,11 +8,11 @@ import com.choxsu.common.entity.AccountOpen;
 import com.choxsu.common.entity.AuthCode;
 import com.choxsu.common.entity.Session;
 import com.choxsu.config.ChoxsuConfig;
-import com.choxsu.front.login.entity.QQUserInfo;
-import com.choxsu.front.login.entity.QQVo;
-import com.choxsu.front.login.entity.Token;
-import com.choxsu.front.login.kit.QQKit;
-import com.choxsu.front.register.RegEntity;
+import com.choxsu._front.login.entity.QQUserInfo;
+import com.choxsu._front.login.entity.QQVo;
+import com.choxsu._front.login.entity.Token;
+import com.choxsu._front.login.kit.QQKit;
+import com.choxsu._front.register.RegEntity;
 import com.choxsu.kit.EmailKit;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Inject;

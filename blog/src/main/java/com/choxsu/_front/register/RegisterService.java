@@ -1,4 +1,4 @@
-package com.choxsu.front.register;
+package com.choxsu._front.register;
 
 import com.choxsu._admin.account.AccountAdminService;
 import com.jfinal.aop.Inject;

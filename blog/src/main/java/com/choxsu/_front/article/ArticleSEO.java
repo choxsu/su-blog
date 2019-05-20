@@ -1,9 +1,8 @@
-package com.choxsu.front.article;
+package com.choxsu._front.article;
 
 import com.choxsu.common.entity.Blog;
 import com.choxsu.common.interceptor.BaseSeoInterceptor;
 import com.jfinal.core.Controller;
-import com.jfinal.plugin.activerecord.Record;
 
 public class ArticleSEO extends BaseSeoInterceptor {
 

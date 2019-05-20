@@ -1,7 +1,7 @@
 package com.choxsu.common.base;
 
 import com.choxsu.common.entity.Account;
-import com.choxsu.front.login.LoginService;
+import com.choxsu._front.login.LoginService;
 import com.choxsu.common.result.ResultModel;
 import com.jfinal.core.Controller;
 import com.jfinal.core.NotAction;

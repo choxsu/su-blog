@@ -1,4 +1,4 @@
-package com.choxsu.front.register;
+package com.choxsu._front.register;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

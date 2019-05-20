@@ -1,4 +1,4 @@
-package com.choxsu.front.tags;
+package com.choxsu._front.tags;
 
 import com.choxsu.common.interceptor.BaseSeoInterceptor;
 import com.jfinal.core.Controller;

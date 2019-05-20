@@ -1,5 +1,5 @@
 
-package com.choxsu.front.login;
+package com.choxsu._front.login;
 
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.render.MyCaptchaRender;

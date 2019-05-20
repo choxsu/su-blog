@@ -2,12 +2,12 @@
 
 package com.choxsu.routes;
 
-import com.choxsu.front.article.ArticleController;
-import com.choxsu.front.index.IndexController;
-import com.choxsu.front.login.LoginController;
-import com.choxsu.front.my.MyController;
-import com.choxsu.front.register.RegisterController;
-import com.choxsu.front.tags.TagsController;
+import com.choxsu._front.article.ArticleController;
+import com.choxsu._front.index.IndexController;
+import com.choxsu._front.login.LoginController;
+import com.choxsu._front.my.MyController;
+import com.choxsu._front.register.RegisterController;
+import com.choxsu._front.tags.TagsController;
 import com.jfinal.config.Routes;
 
 /**

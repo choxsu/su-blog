@@ -1,11 +1,10 @@
-package com.choxsu.front.tags;
+package com.choxsu._front.tags;
 
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.entity.Blog;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Inject;
 import com.jfinal.plugin.activerecord.Page;
-import com.jfinal.plugin.activerecord.Record;
 
 /**
  * @author chox su

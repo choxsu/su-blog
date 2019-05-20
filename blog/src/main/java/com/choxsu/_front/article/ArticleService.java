@@ -1,4 +1,4 @@
-package com.choxsu.front.article;
+package com.choxsu._front.article;
 
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.Blog;

@@ -1,5 +1,5 @@
 
-package com.choxsu.front.register;
+package com.choxsu._front.register;
 
 import com.choxsu.kit.IpKit;
 import com.jfinal.aop.Before;
@@ -7,9 +7,6 @@ import com.jfinal.aop.Inject;
 import com.jfinal.core.Controller;
 import com.jfinal.core.paragetter.Para;
 import com.jfinal.kit.Ret;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * 登录控制器

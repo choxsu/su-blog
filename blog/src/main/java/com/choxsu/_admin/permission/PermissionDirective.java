@@ -1,10 +1,9 @@
 package com.choxsu._admin.permission;
 
 import com.choxsu._admin.auth.AdminAuthService;
-import com.choxsu.front.login.LoginService;
+import com.choxsu._front.login.LoginService;
 import com.choxsu.common.entity.Account;
 import com.jfinal.aop.Aop;
-import com.jfinal.aop.Inject;
 import com.jfinal.template.Directive;
 import com.jfinal.template.Env;
 import com.jfinal.template.io.Writer;

@@ -2,10 +2,9 @@ package com.choxsu.api.blog;
 
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.entity.Blog;
-import com.choxsu.front.article.ArticleService;
+import com.choxsu._front.article.ArticleService;
 import com.jfinal.aop.Inject;
 import com.jfinal.plugin.activerecord.Page;
-import com.jfinal.plugin.activerecord.Record;
 import lombok.extern.slf4j.Slf4j;
 
 /**

@@ -1,9 +1,7 @@
 
 
-package com.choxsu.front.login;
+package com.choxsu._front.login;
 
-import com.choxsu.common.render.MyCaptchaRender;
-import com.jfinal.captcha.CaptchaRender;
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
 

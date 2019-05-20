@@ -2,7 +2,7 @@
 
 package com.choxsu.kit;
 
-import com.choxsu.front.login.LoginService;
+import com.choxsu._front.login.LoginService;
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.interceptor.AuthCacheClearInterceptor;
 import com.jfinal.plugin.druid.DruidStatViewHandler;

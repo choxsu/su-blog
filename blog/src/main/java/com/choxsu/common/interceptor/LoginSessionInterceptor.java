@@ -3,7 +3,7 @@
 package com.choxsu.common.interceptor;
 
 import com.choxsu.common.entity.Account;
-import com.choxsu.front.login.LoginService;
+import com.choxsu._front.login.LoginService;
 import com.choxsu.kit.IpKit;
 import com.jfinal.aop.Inject;
 import com.jfinal.aop.Interceptor;

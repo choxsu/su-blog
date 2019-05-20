@@ -1,8 +1,8 @@
-package com.choxsu.front.index;
+package com.choxsu._front.index;
 
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.entity.Blog;
-import com.choxsu.front.article.ArticleService;
+import com.choxsu._front.article.ArticleService;
 import com.jfinal.aop.Inject;
 import com.jfinal.core.ActionKey;
 import com.jfinal.kit.PathKit;

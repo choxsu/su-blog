@@ -1,4 +1,4 @@
-package com.choxsu.front.my;
+package com.choxsu._front.my;
 
 import com.choxsu.common.base.BaseController;
 

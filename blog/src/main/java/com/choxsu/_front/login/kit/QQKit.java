@@ -1,14 +1,12 @@
-package com.choxsu.front.login.kit;
+package com.choxsu._front.login.kit;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.choxsu.front.login.entity.QQVo;
-import com.choxsu.front.login.entity.Token;
-import com.choxsu.front.login.entity.QQUserInfo;
+import com.choxsu._front.login.entity.QQVo;
+import com.choxsu._front.login.entity.Token;
+import com.choxsu._front.login.entity.QQUserInfo;
 import com.jfinal.kit.HttpKit;
 import com.jfinal.kit.StrKit;
-import com.jfinal.plugin.redis.Cache;
-import com.jfinal.plugin.redis.Redis;
 
 /**
  * @author choxsu

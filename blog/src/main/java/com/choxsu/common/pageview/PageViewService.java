@@ -1,14 +1,11 @@
 package com.choxsu.common.pageview;
 
 import com.choxsu.common.entity.Visitor;
-import com.choxsu.common.redis.RedisKey;
 import com.choxsu.kit.IpKit;
-import com.choxsu.front.article.ArticleService;
+import com.choxsu._front.article.ArticleService;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.ehcache.CacheKit;
-import com.jfinal.plugin.redis.Cache;
-import com.jfinal.plugin.redis.Redis;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;

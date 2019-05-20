@@ -1,12 +1,10 @@
 package com.choxsu.common.interceptor;
 
 import com.choxsu.common.entity.Account;
-import com.choxsu.front.login.LoginService;
+import com.choxsu._front.login.LoginService;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.redis.Cache;
-import com.jfinal.plugin.redis.Redis;
 
 /**
  * 在 role 表中存在的 accountId 拥有清除前端 cache 的权限

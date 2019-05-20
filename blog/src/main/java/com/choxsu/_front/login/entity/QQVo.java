@@ -1,4 +1,4 @@
-package com.choxsu.front.login.entity;
+package com.choxsu._front.login.entity;
 
 import com.choxsu.config.ChoxsuConfig;
 import lombok.Getter;
