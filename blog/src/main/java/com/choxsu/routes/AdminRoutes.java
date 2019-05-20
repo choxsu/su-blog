@@ -7,7 +7,6 @@ import com.choxsu._admin.auth.AdminAuthInterceptor;
 import com.choxsu._admin.blog.AdminBlogController;
 import com.choxsu._admin.common.PjaxInterceptor;
 import com.choxsu._admin.druid.DruidController;
-import com.choxsu._admin.enhancer.EnhancerAdminController;
 import com.choxsu._admin.index.IndexAdminController;
 import com.choxsu._admin.permission.PermissionAdminController;
 import com.choxsu._admin.quartz.JobManageController;
@@ -45,7 +44,6 @@ public class AdminRoutes extends Routes {
         add("/admin/visitor", VisitorAdminController.class, "/visitor");
         add("/admin/druid", DruidController.class, "/druid");
         add("/admin/sensitiveWord", SensitiveWordAdminController.class, "/sensitive_word");
-        add("/admin/enhancer", EnhancerAdminController.class, "/enhancer");
         //图片上传
         add("/admin/upload", UploadController.class);
         add("/admin/quartz", JobManageController.class, "/quartz");
