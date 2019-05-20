@@ -19,8 +19,6 @@ public class RegisterController extends Controller {
     @Inject
     RegisterService registerService;
 
-    private static ExecutorService executorService = Executors.newSingleThreadExecutor();
-
     /**
      * 到注册页面
      */
