@@ -10,9 +10,9 @@ import com.choxsu.common.entity.Session;
 import com.choxsu.config.ChoxsuConfig;
 import com.choxsu.front.login.entity.QQUserInfo;
 import com.choxsu.front.login.entity.QQVo;
-import com.choxsu.front.register.RegEntity;
 import com.choxsu.front.login.entity.Token;
 import com.choxsu.front.login.kit.QQKit;
+import com.choxsu.front.register.RegEntity;
 import com.choxsu.kit.EmailKit;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Inject;
@@ -23,6 +23,7 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.jfinal.plugin.ehcache.CacheKit;
+import com.jfinal.plugin.redis.Redis;
 
 import java.util.Date;
 
@@ -101,7 +102,8 @@ public class LoginService {
 
         loginAccount.removeSensitiveInfo();                                 // 移除 password 与 salt 属性值
         loginAccount.put("sessionId", sessionId);                          // 保存一份 sessionId 到 loginAccount 备用
-        CacheKit.put(loginAccountCacheName, sessionId, loginAccount);
+//        CacheKit.put(loginAccountCacheName, sessionId, loginAccount);
+        Redis.use().setex(sessionId, maxAgeInSeconds, loginAccount);
 
         createLoginLog(loginAccount.getId(), loginIp);
         return Ret.ok(sessionIdName, sessionId)
@@ -112,7 +114,8 @@ public class LoginService {
 
 
     public Account getLoginAccountWithSessionId(String sessionId) {
-        return CacheKit.get(loginAccountCacheName, sessionId);
+//        return CacheKit.get(loginAccountCacheName, sessionId);
+        return Redis.use().get(sessionId);
     }
 
     /**
@@ -138,8 +141,8 @@ public class LoginService {
         if (loginAccount != null && loginAccount.isStatusOk()) {
             loginAccount.removeSensitiveInfo();                                 // 移除 password 与 salt 属性值
             loginAccount.put("sessionId", sessionId);                          // 保存一份 sessionId 到 loginAccount 备用
-            CacheKit.put(loginAccountCacheName, sessionId, loginAccount);
-
+            Redis.use().setex(sessionId, 24 * 60 * 60, loginAccount);
+//            CacheKit.put(loginAccountCacheName, sessionId, loginAccount);
             createLoginLog(loginAccount.getId(), loginIp);
             return loginAccount;
         }
@@ -217,7 +220,7 @@ public class LoginService {
      */
     public void logout(String sessionId) {
         if (sessionId != null) {
-            CacheKit.remove(loginAccountCacheName, sessionId);
+            Redis.use().del(sessionId);
             Session.dao.deleteById(sessionId);
         }
     }
@@ -235,7 +238,7 @@ public class LoginService {
         // 将来可能把 account 用 id : obj 的形式放缓存，更新缓存只需要 CacheKit.remove("account", id) 就可以了，
         // 其它节点发现数据不存在会自动去数据库读取，所以未来可能就是在 AccountService.getById(int id)的方法引入缓存就好
         // 所有用到 account 对象的地方都从这里去取
-        CacheKit.put(loginAccountCacheName, sessionId, loginAccount);
+        Redis.use().setex(sessionId, 24 * 60 * 60 , loginAccount);
     }
 
     Ret qqCallback(String code, String ip) {
