@@ -13,11 +13,8 @@ import com.jfinal.plugin.activerecord.SqlPara;
  */
 public class ArticleService {
 
-    public static ArticleService me = new ArticleService();
-
     private Blog blogDao = new Blog().dao();
     private Account accountDao = new Account().dao();
-
 
     public static void addClick(Object id) {
         Db.update("UPDATE blog set clickCount = clickCount + 1 WHERE id = ?", id);

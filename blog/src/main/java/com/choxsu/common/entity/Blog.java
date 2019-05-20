@@ -2,13 +2,16 @@ package com.choxsu.common.entity;
 
 import com.choxsu.common.entity.base.BaseBlog;
 import com.choxsu.common.safe.JsoupFilter;
-import lombok.Data;
+import lombok.*;
 
 /**
  * @author choxsu
  */
-@SuppressWarnings("serial")
+@EqualsAndHashCode(callSuper = true)
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Blog extends BaseBlog<Blog> {
 
     public static final String defaultTag = "Java";

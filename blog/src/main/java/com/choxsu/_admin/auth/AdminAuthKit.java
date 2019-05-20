@@ -2,7 +2,7 @@ package com.choxsu._admin.auth;
 
 
 import com.choxsu.common.entity.Account;
-import com.jfinal.aop.Enhancer;
+import com.jfinal.aop.Inject;
 
 /**
  * 权限管理的 shared method 扩展
@@ -25,7 +25,8 @@ import com.jfinal.aop.Enhancer;
  */
 public class AdminAuthKit {
 
-    AdminAuthService adminAuthService = Enhancer.enhance(AdminAuthService.class);
+    @Inject
+    AdminAuthService adminAuthService;
 
     /**
      * 当前账号是否拥有某些角色
