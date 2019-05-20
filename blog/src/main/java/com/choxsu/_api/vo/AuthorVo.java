@@ -1,4 +1,4 @@
-package com.choxsu.api.vo;
+package com.choxsu._api.vo;
 
 import lombok.Getter;
 import lombok.Setter;

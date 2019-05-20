@@ -1,4 +1,4 @@
-package com.choxsu.api.blog;
+package com.choxsu._api.blog;
 
 import com.choxsu.common.base.BaseController;
 import com.choxsu.common.entity.Blog;
