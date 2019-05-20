@@ -3,6 +3,7 @@ package com.choxsu._admin.permission;
 import com.choxsu._admin.auth.AdminAuthService;
 import com.choxsu.front.login.LoginService;
 import com.choxsu.common.entity.Account;
+import com.jfinal.aop.Aop;
 import com.jfinal.aop.Inject;
 import com.jfinal.template.Directive;
 import com.jfinal.template.Env;
@@ -24,8 +25,7 @@ import com.jfinal.template.stat.Scope;
  */
 public class PermissionDirective extends Directive {
 
-    @Inject
-    AdminAuthService adminAuthService;
+    static AdminAuthService adminAuthService = Aop.get(AdminAuthService.class);
 
     public void exec(Env env, Scope scope, Writer writer) {
         Account account = (Account)scope.getRootData().get(LoginService.loginAccountCacheName);

@@ -3,6 +3,7 @@ package com.choxsu._admin.role;
 import com.choxsu._admin.auth.AdminAuthService;
 import com.choxsu.common.entity.Account;
 import com.choxsu.front.login.LoginService;
+import com.jfinal.aop.Aop;
 import com.jfinal.aop.Inject;
 import com.jfinal.template.Directive;
 import com.jfinal.template.Env;
@@ -20,8 +21,7 @@ import com.jfinal.template.stat.Scope;
  */
 public class RoleDirective extends Directive {
 
-    @Inject
-    AdminAuthService adminAuthService;
+    static AdminAuthService adminAuthService = Aop.get(AdminAuthService.class);;
 
     @Override
     public void exec(Env env, Scope scope, Writer writer) {
