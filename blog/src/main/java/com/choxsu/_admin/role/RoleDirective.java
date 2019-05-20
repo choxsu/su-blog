@@ -21,7 +21,7 @@ import com.jfinal.template.stat.Scope;
  */
 public class RoleDirective extends Directive {
 
-    static AdminAuthService adminAuthService = Aop.get(AdminAuthService.class);;
+    static AdminAuthService adminAuthService = Aop.get(AdminAuthService.class);
 
     @Override
     public void exec(Env env, Scope scope, Writer writer) {
