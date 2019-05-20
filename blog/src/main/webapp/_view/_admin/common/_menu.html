@@ -37,23 +37,19 @@
         #perm("/admin/permission")
         <li><a href="/admin/permission"><i class="fa fa-unlock-alt"></i>&nbsp;权限管理</a></li>
         #end
-    </ul>
 
-    <a class="main-menu" home='false'>
-        <i class="fa fa-server"></i>
-        &nbsp;系统管理
-        <i class="right-icon fa fa-angle-down fa-lg"></i>
-    </a>
-    <ul class="nav nav-sidebar">
         #perm("/admin/sensitiveWord")
         <li><a href="/admin/sensitiveWord"><i class="fa fa-bars"></i>&nbsp;敏感字管理</a></li>
         #end
+
         #perm("/admin/druid")
         <li><a href="/admin/druid"><i class="fa fa-bars"></i>&nbsp;Druid数据库监控</a></li>
         #end
+
         #perm("/admin/quartz")
         <li><a href="/admin/quartz"><i class="fa fa-bars"></i>&nbsp;Quartz任务管理</a></li>
         #end
+
         #perm("/admin/visitor")
         <li><a href="/admin/visitor"><i class="fa fa-bars"></i>&nbsp;PV记录</a></li>
         #end
