@@ -40,7 +40,8 @@ html, body {
 /* choxsu-style */
 .choxsu-navbar {
     border-bottom: 1px solid #a6a7a9;
-    min-height: 57px;
+    min-height: 3.562rem;
+
 }
 
 @media only screen and (max-width: 575px) {
