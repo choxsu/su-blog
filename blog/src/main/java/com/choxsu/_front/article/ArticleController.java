@@ -30,9 +30,4 @@ public class ArticleController extends BaseController {
             renderError(404);
         }
     }
-
-    @ActionKey("/feed")
-    public void feed() {
-        renderXml("feed.xml");
-    }
 }
