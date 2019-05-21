@@ -14,9 +14,13 @@ html, body {
     font-size: .875rem;
 }
 
-
 .choxsu-body {
     height: 100%;
+}
+@media only screen and (max-width: 500px) {
+    .choxsu-body {
+        height: auto;
+    }
 }
 
 .choxsu-p-over {
