@@ -159,13 +159,25 @@ html, body {
     color: #ae15bf !important;
 }
 
-.choxsu-body .list-group .list-group-item {
-    border: 0 !important;
-    padding: .75rem 0;
+.choxsu-sidebar-card{
+
 }
+
+.choxsu-sidebar-card .title-wrapper{
+    border-bottom: 1px solid rgba(51, 51, 51, 0.47);
+    margin-bottom: .5rem;
+}
+
+.choxsu-sidebar-card .title-wrapper .title{
+    font-size: 1rem;
+    border-bottom: 2px solid #333;
+    padding-bottom: .125rem;
+}
+
 
 .choxsu-body .card {
     border: 0 !important;
+    margin-bottom: 1rem;
 }
 
 .choxsu-body .card .card-header {
@@ -176,10 +188,6 @@ html, body {
 .choxsu-body .card .card-header span {
     border-bottom: 1px solid #333;
     padding-bottom: 0.6rem;
-}
-
-.choxsu-right-list .list-group-item {
-    padding: .75rem 0;
 }
 
 .choxsu-pagination {
