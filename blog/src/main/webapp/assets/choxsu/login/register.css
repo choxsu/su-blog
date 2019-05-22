@@ -61,6 +61,9 @@
     padding: 0;
     margin-left: -0.937rem;
 }
+.action-btn button{
+    height: 2.5rem;
+}
 
 .action-btn a:hover,.action-btn a:focus {
     color: #ae15bf;
