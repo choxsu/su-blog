@@ -1,6 +1,6 @@
 package com.choxsu.common.base;
 
-import com.choxsu.kit.ClassKits;
+import com.choxsu.utils.kit.ClassKits;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Page;

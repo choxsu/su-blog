@@ -14,7 +14,7 @@
 
 package com.choxsu._admin.account;
 
-import com.choxsu.kit.SensitiveWordsKit;
+import com.choxsu.utils.kit.SensitiveWordsKit;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;

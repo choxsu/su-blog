@@ -13,7 +13,7 @@ import com.choxsu._front.login.entity.QQVo;
 import com.choxsu._front.login.entity.Token;
 import com.choxsu._front.login.kit.QQKit;
 import com.choxsu._front.register.RegEntity;
-import com.choxsu.kit.EmailKit;
+import com.choxsu.utils.kit.EmailKit;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Inject;
 import com.jfinal.kit.HashKit;

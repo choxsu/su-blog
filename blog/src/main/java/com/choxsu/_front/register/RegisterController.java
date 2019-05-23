@@ -1,7 +1,7 @@
 
 package com.choxsu._front.register;
 
-import com.choxsu.kit.IpKit;
+import com.choxsu.utils.kit.IpKit;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Inject;
 import com.jfinal.core.Controller;

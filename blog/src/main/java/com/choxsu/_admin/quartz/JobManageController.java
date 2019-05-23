@@ -2,16 +2,14 @@ package com.choxsu._admin.quartz;
 
 import com.choxsu._admin.permission.Remark;
 import com.choxsu.common.base.BaseController;
-import com.choxsu.quartz.QuartzManager;
+import com.choxsu.common.quartz.QuartzManager;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Inject;
 import com.jfinal.kit.LogKit;
 import com.jfinal.kit.Ret;
-import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
-import com.jfinal.render.JsonRender;
 import org.quartz.Job;
 
 public class JobManageController extends BaseController {

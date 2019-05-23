@@ -15,8 +15,8 @@
 package com.choxsu.common.upload;
 
 import com.choxsu.common.entity.Account;
-import com.choxsu.kit.ImageKit;
-import com.choxsu.util.DateUtils;
+import com.choxsu.utils.kit.ImageKit;
+import com.choxsu.utils.util.DateUtils;
 import com.jfinal.core.JFinal;
 import com.jfinal.kit.LogKit;
 import com.jfinal.kit.PathKit;

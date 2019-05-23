@@ -1,8 +1,7 @@
 package com.choxsu._admin.blog;
 
-import com.choxsu.kit.SensitiveWordsKit;
+import com.choxsu.utils.kit.SensitiveWordsKit;
 import com.jfinal.aop.Aop;
-import com.jfinal.aop.Inject;
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
 

@@ -4,7 +4,7 @@ import com.choxsu.common.base.BaseService;
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.SensitiveWords;
 import com.choxsu.common.interceptor.AuthCacheClearInterceptor;
-import com.choxsu.kit.PinyinKit;
+import com.choxsu.utils.kit.PinyinKit;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;

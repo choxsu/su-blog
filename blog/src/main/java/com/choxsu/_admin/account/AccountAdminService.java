@@ -3,7 +3,7 @@
 package com.choxsu._admin.account;
 
 import com.choxsu.common.upload.UploadService;
-import com.choxsu.kit.ImageKit;
+import com.choxsu.utils.kit.ImageKit;
 import com.jfinal.aop.Inject;
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.Role;

@@ -1,7 +1,7 @@
 package com.choxsu._front.register;
 
 import com.choxsu._admin.account.AccountSaveUpdateValidator;
-import com.choxsu.kit.SensitiveWordsKit;
+import com.choxsu.utils.kit.SensitiveWordsKit;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.Ret;
 import com.jfinal.validate.Validator;

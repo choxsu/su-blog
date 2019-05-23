@@ -3,10 +3,10 @@ package com.choxsu._front.login;
 
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.render.MyCaptchaRender;
-import com.choxsu.kit.EmailKit;
-import com.choxsu.kit.IpKit;
-import com.choxsu.kit.RSAKit;
-import com.choxsu.util.DateUtils;
+import com.choxsu.utils.kit.EmailKit;
+import com.choxsu.utils.kit.IpKit;
+import com.choxsu.utils.kit.RSAKit;
+import com.choxsu.utils.util.DateUtils;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Clear;
 import com.jfinal.aop.Inject;

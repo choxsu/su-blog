@@ -4,7 +4,7 @@ package com.choxsu.common.interceptor;
 
 import com.choxsu.common.entity.Account;
 import com.choxsu._front.login.LoginService;
-import com.choxsu.kit.IpKit;
+import com.choxsu.utils.kit.IpKit;
 import com.jfinal.aop.Inject;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
