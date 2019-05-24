@@ -25,6 +25,11 @@ public class Blog extends BaseBlog<Blog> {
      */
     private String tagName;
 
+    /**
+     * 允许评论
+     */
+    private Boolean allowComments = true;
+
     @Override
     protected void filter(int filterBy) {
         JsoupFilter.filterArticle(this);
