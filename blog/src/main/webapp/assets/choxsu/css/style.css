@@ -18,6 +18,11 @@ button:focus{
     font-size: .875rem;
 }
 
+.clear {
+    clear : both;
+    float : none;
+}
+
 .choxsu-body {
     height: 100%;
 }
