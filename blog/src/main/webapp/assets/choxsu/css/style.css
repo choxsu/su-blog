@@ -239,24 +239,29 @@ html, body {
 .navbar-light .navbar-toggler {
     border: none;
 }
-
-.navbar-toggler:hover, .navbar-toggler:focus {
+.navbar-light .navbar-toggler:hover,.navbar-light .navbar-toggler:focus {
     text-decoration: none;
     border: none;
 }
 
-.navbar-toggler:active {
+.navbar-light .navbar-toggler:link ,.navbar-light .navbar-toggler:visited   {
     text-decoration: none;
     border: none;
 }
+
+.navbar-light .navbar-toggler:active {
+    text-decoration: none;
+    border: none;
+}
+
 
 .navbar-toggler {
     padding: .25rem .75rem;
     font-size: 1.25rem;
     line-height: 1;
     background-color: transparent;
-    border: 1px solid transparent;
-    border-radius: .25rem;
+    border: 0;
+    border-radius: 0;
 }
 
 
