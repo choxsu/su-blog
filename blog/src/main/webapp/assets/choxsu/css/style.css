@@ -68,7 +68,8 @@ button:focus{
 }
 
 .choxsu-content {
-    margin-top: 2rem
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .choxsu-footer {
@@ -150,6 +151,19 @@ button:focus{
 
 .choxsu-content h1 {
     /*font-size: 2rem !important;*/
+}
+
+.choxsu-comments{
+
+}
+
+.choxsu-comments .title{
+    font-size: 1rem;
+}
+
+.choxsu-comments textarea{
+    min-height: 5rem;
+    max-height: 12.5rem;
 }
 
 /* choxsu-style */
