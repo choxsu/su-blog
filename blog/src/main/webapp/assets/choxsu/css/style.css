@@ -1,6 +1,10 @@
 html, body {
     height: 100%;
 }
+/*解决button在点击时出现的边框的方法||||在chrome浏览器下，button按钮在点击时，会出现橙色的边框*/
+button:focus{
+    outline:0;
+}
 
 .text-main {
     color: #ae15bf;
@@ -239,22 +243,6 @@ html, body {
 .navbar-light .navbar-toggler {
     border: none;
 }
-.navbar-light .navbar-toggler:hover,.navbar-light .navbar-toggler:focus {
-    text-decoration: none;
-    border: none;
-}
-
-.navbar-light .navbar-toggler:link ,.navbar-light .navbar-toggler:visited   {
-    text-decoration: none;
-    border: none;
-}
-
-.navbar-light .navbar-toggler:active {
-    text-decoration: none;
-    border: none;
-}
-
-
 .navbar-toggler {
     padding: .25rem .75rem;
     font-size: 1.25rem;
@@ -262,6 +250,20 @@ html, body {
     background-color: transparent;
     border: 0;
     border-radius: 0;
+}
+.navbar-toggler:hover,.navbar-toggler:focus {
+    text-decoration: none;
+    border: none;
+}
+
+.navbar-toggler:link ,.navbar-toggler:visited   {
+    text-decoration: none;
+    border: none;
+}
+
+.navbar-toggler:active {
+    text-decoration: none;
+    border: none;
 }
 
 
