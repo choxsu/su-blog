@@ -28,7 +28,7 @@
             <div class="comments-list mb-3">
                 #for(x : replyPage.list)
                 <div class="comments-item row">
-                    <a href="/user/#(x.accountId)" class="choxsu-logo choxsu-avatar mt-1" target="_blank">
+                    <a href="javascript:void(0);" class="choxsu-logo choxsu-avatar mt-1" target="_blank">
                         #if(x.isThird == 1)
                         <img src="#(x.avatar)" />
                         #else
@@ -37,9 +37,8 @@
                     </a>
                     <div class="col content">
                         <p class="mb-0">
-                            <b class="">
-                                <a href="/user/#(x.accountId)" target="_blank">#(x.nickName)</a>
-                            </b>
+                            ### href="/user/#(x.accountId)"
+                            <b><a href="javascript:void(0);" target="_blank">#(x.nickName)</a></b>
                             <span class="choxsu-time pull-right">#date(x.createTime, "yyyy-MM-dd HH:mm")</span>
                         </p>
                         <div class="choxsu-content text-left">

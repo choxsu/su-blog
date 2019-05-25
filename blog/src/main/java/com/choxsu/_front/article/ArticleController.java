@@ -44,7 +44,7 @@ public class ArticleController extends BaseController {
     /**
      * 回复
      */
-    public void saveReply() {
+    public void saveReply(Integer articleId) {
         if (notLogin()) {
             renderJson(Ret.fail("msg", "登录后才可以评论").set("toLogin", true));
             return;
@@ -60,20 +60,17 @@ public class ArticleController extends BaseController {
             return;
         }
         // 防止xss攻击
-        replyContent = JsoupFilter.getBasic(replyContent);
+        replyContent = JsoupFilter.getSimpleHtml(replyContent);
         if (SensitiveWordsKit.checkSensitiveWord(replyContent) != null) {
             renderJson(Ret.fail("msg", "回复内容不能包含敏感词"));
             return;
         }
-
-        Ret ret = articleService.saveReply(getInt("articleId"), getLoginAccountId(), replyContent);
-
+        Ret ret = articleService.saveReply(articleId, getLoginAccountId(), replyContent);
         // 注入 nickName 与 avatar 便于 renderToString 生成 replyItem html 片段
         Account loginAccount = getLoginAccount();
         ret.set("loginAccount", loginAccount);
         // 用模板引擎生成 HTML 片段 replyItem
         String replyItem = renderToString("_reply_item.html", ret);
-
         ret.set("replyItem", replyItem);
         renderJson(ret);
     }

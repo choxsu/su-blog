@@ -1,13 +1,12 @@
 #-- 用户渲染 ajax reply 所需要的追加到列表最后的 item  --#
 <div class="comments-item row">
-	<a href="/user/#(loginAccount.id)" class="choxsu-logo choxsu-avatar mt-1" target="_blank">
+	<a href="javascript:void(0);" class="choxsu-logo choxsu-avatar mt-1" target="_blank">
 		<img src="/upload/avatar/#(loginAccount.avatar)">
 	</a>
 	<div class="col content">
 		<p class="mb-0">
-			<b class="">
-				<a href="/user/#(loginAccount.id)" target="_blank">#(loginAccount.nickName)</a>
-			</b>
+			### href="/user/#(loginAccount.id)"
+			<b><a href="javascript:void(0);" target="_blank">#(loginAccount.nickName)</a></b>
 			<span class="choxsu-time pull-right">#date(reply.createTime, "yyyy-MM-dd HH:mm")</span>
 		</p>
 		<div class="choxsu-content text-left">

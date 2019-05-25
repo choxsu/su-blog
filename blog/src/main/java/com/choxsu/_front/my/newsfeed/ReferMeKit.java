@@ -53,11 +53,15 @@ public class ReferMeKit {
 
 			Account account = accountSrv.getByNickName(nickName, "id");
 			if (account != null) {
-				ret.append("<a href=\"/user/").append(account.getId())
+				/*ret.append("<a href=\"/user/").append(account.getId())
 						.append("\" target=\"_blank\" class=\"at-me\">")
-						.append("@").append(nickName).append("</a>");
-				ret.append(matcher.group(2));
+						.append("@").append(nickName).append("</a>");*/
 
+				ret.append("<a href=\"javascript:void(0);").append("\" target=\"_blank\" class=\"at-me\">")
+						.append("@").append(nickName).append("</a>");
+
+
+				ret.append(matcher.group(2));
 				if ( !referAccounts.contains(account.getId()) ) {
 					referAccounts.add(account.getId());
 				}
