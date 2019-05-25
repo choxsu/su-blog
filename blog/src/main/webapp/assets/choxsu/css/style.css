@@ -412,5 +412,11 @@ a:active {
 
 /*###########################按钮##########################*/
 
+.ypy a{
+    text-decoration: none;
+}
 
-
+.ypy img{
+    height: 2rem;
+    width: auto;
+}
