@@ -106,6 +106,14 @@ public class ArticleService {
     }
 
     public Ret saveReply(Integer articleId, int accountId, String replyContent) {
+        Blog blog = blogDao.findById(articleId);
+        if (blog == null) {
+            return Ret.fail("msg", "该文章不存在哦，不能发起评论哦");
+        }
+        Boolean allowComments = blog.getAllowComments();
+        if (allowComments == null || !allowComments) {
+            return Ret.fail("msg", "该文章暂未开启评论或已经关闭评论");
+        }
         BlogReply reply = new BlogReply();
         reply.setBlogId(articleId);
         reply.setAccountId(accountId);

@@ -1,15 +1,12 @@
 package com.choxsu._admin.blog;
 
-import com.choxsu.common.base.BaseService;
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.Blog;
 import com.choxsu.common.interceptor.AuthCacheClearInterceptor;
-import com.choxsu.common.redis.RedisKey;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
-import com.jfinal.plugin.redis.Redis;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,8 +16,9 @@ import java.util.List;
  * @author chox su
  * @date 2018/6/12 22:05
  */
-public class AdminBlogService extends BaseService<Blog> {
+public class AdminBlogService {
 
+    private Blog blogDao = new Blog().dao();
 
     public Page<Blog> list(Integer p, Integer pageSize, Account loginAccount) {
 
@@ -31,23 +29,19 @@ public class AdminBlogService extends BaseService<Blog> {
             sql += "and accountId = ? ";
             list.add(loginAccount.getId());
         }
-        Page<Blog> paginate = DAO.paginate(p, pageSize, "select * ", sql, list.toArray());
-        for (Blog blog : paginate.getList()) {
-            blog.put("tagName", getTagStr(blog));
-        }
+        Page<Blog> paginate = blogDao.paginate(p, pageSize, "select * ", sql, list.toArray());
+        paginate.getList().forEach(this::setTagNameAndAuthor);
         return paginate;
     }
 
-    private String getTagStr(Blog blog) {
+    private void setTagNameAndAuthor(Blog blog) {
         if (blog == null) {
-            return null;
+            return;
         }
-        return Db.queryStr("select name from blog_tag where id = ?", blog.getTagId());
-    }
-
-    @Override
-    public String getTableName() {
-        return Blog.tableName;
+        String tagName = Db.queryStr("select `name` from blog_tag where id = ?", blog.getTagId());
+        blog.setTagName(tagName);
+        String nickName = Db.queryStr("SELECT nickName FROM `account` WHERE id = ?", blog.getAccountId());
+        blog.setAuthor(nickName);
     }
 
     public Ret saveOrUpdateArticle(Blog blog) {
@@ -78,16 +72,51 @@ public class AdminBlogService extends BaseService<Blog> {
         if (id == null) {
             return b;
         }
-        Record record = Db.findById(getTableName(), id);
-        if (record == null) {
+        Blog blog = blogDao.findById(id);
+        if (blog == null) {
             return b;
         }
-        String oldTitle = record.getStr("title");
+        String oldTitle = blog.getTitle();
         if (oldTitle != null && oldTitle.equals(title)) {
             return false;
         } else {
             return b;
         }
 
+    }
+
+    public Blog findById(Integer id) {
+        return blogDao.findById(id);
+    }
+
+    public void deleteById(Integer id) {
+        Blog blog = findById(id);
+        if (blog == null) return;
+        blog.setIsDelete(1);
+        blog.keep("id", "isDelete");
+        blog.update();
+    }
+
+    public Ret allowComments(Integer id) {
+        return updateAllowComments(id, true);
+    }
+
+    public Ret unAllowComments(Integer id) {
+        return updateAllowComments(id, false);
+    }
+
+    private Ret updateAllowComments(Integer id, boolean isAllowComments) {
+        Blog blog = blogDao.findById(id);
+        if (blog == null) {
+            return Ret.fail("msg", "文章不存在哦");
+        }
+        blog.setAllowComments(isAllowComments);
+        boolean update = blog.update();
+        return update ? Ret.ok("msg", "操作成功") : Ret.fail("msg", "操作失败");
+    }
+
+    public Ret oneKeyAllowComments() {
+        Db.update("update blog set allowComments = 1 where isDelete = 0");
+        return Ret.ok("msg", "一键开启评论成功");
     }
 }

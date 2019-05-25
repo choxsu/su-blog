@@ -83,7 +83,7 @@ public class AdminBlogController extends BaseController {
     public void edit() {
         keepPara("p");
         commonInfo();
-        setAttr("blog", adminBlogService.DAO.findById(getParaToInt("id")));
+        setAttr("blog", adminBlogService.findById(getParaToInt("id")));
         render("addOrEdit.html");
     }
 
@@ -98,8 +98,27 @@ public class AdminBlogController extends BaseController {
     @Remark("文章删除")
     public void delete() {
         Integer id = getParaToInt("id");
-        adminBlogService.DAO.deleteById(id);
+        adminBlogService.deleteById(id);
         renderJson(Ret.ok().set("msg", "删除成功！"));
+    }
+
+    @Remark("开启评论")
+    public void allowComments(Integer id){
+        Ret ret = adminBlogService.allowComments(id);
+        renderJson(ret);
+    }
+
+
+    @Remark("关闭评论")
+    public void unAllowComments(Integer id){
+        Ret ret = adminBlogService.unAllowComments(id);
+        renderJson(ret);
+    }
+
+    @Remark("一键开启评论")
+    public void oneKeyAllowComments(){
+        Ret ret = adminBlogService.oneKeyAllowComments();
+        renderJson(ret);
     }
 
 }

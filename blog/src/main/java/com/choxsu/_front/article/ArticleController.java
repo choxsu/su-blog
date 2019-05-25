@@ -66,6 +66,10 @@ public class ArticleController extends BaseController {
             return;
         }
         Ret ret = articleService.saveReply(articleId, getLoginAccountId(), replyContent);
+        if (ret.isFail()){
+            renderJson(ret);
+            return;
+        }
         // 注入 nickName 与 avatar 便于 renderToString 生成 replyItem html 片段
         Account loginAccount = getLoginAccount();
         ret.set("loginAccount", loginAccount);
