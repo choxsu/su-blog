@@ -50,7 +50,7 @@
                                     <i class="fa fa-trash"></i>&nbsp;删除
                                 </a>
                                 #end
-                                <a href="#replyContent" onclick="atAndReply('#(loginAccount.nickName)');">
+                                <a href="#replyContent" onclick="atAndReply('#(x.nickName)');">
                                     <i class="fa fa-mail-reply"></i>&nbsp;回复
                                 </a>
                             </div>
@@ -59,16 +59,16 @@
                 </div>
                 #end
             </div>
-            <form class="form-group-sm">
+            <div class="form-group">
                 <div class="mb-3">
                     <label for="replyContent">说点什么</label>
-                    <textarea class="form-control " name="replyContent" id="replyContent" required></textarea>
+                    <textarea class="form-control" id="replyContent" rows="3"></textarea>
                 </div>
                 <div class="text-right">
                     <button id="submit_btn" class="btn btn-primary" title="按 Ctrl + Enter 发送">发布评论</button>
                     <img id="submit_loading" class="choxsu-reply-loading" src="/assets/choxsu/image/loading-2.gif">
                 </div>
-            </form>
+            </div>
         </div>
         #set(append="#choxsu-comments")
         #@paginate(replyPage.pageNumber, replyPage.totalPage, "/article/" + blog.id)
@@ -89,12 +89,10 @@
             };
 
             $("#submit_btn").bind("click", function (e) {
-                e.preventDefault();
                 reply("/article/saveReply", "#(blog.id)", map);
             });
 
             $("#replyContent").bind("keydown", function (e) {
-                e.preventDefault();
                 if ((e.ctrlKey || e.metaKey) && e.keyCode === 13) {    // ctrl + 回车发送消息
                     reply("/article/saveReply", "#(blog.id)", map);   // $("#submit_btn").trigger("click");   // 简写 $("#submit_btn").click();
                 }
