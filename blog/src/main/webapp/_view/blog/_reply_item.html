@@ -1,0 +1,26 @@
+#-- 用户渲染 ajax reply 所需要的追加到列表最后的 item  --#
+<div class="comments-item row">
+	<a href="/user/#(loginAccount.id)" class="choxsu-logo choxsu-avatar mt-1" target="_blank">
+		<img src="/upload/avatar/#(loginAccount.avatar)">
+	</a>
+	<div class="col content">
+		<p class="mb-0">
+			<b class="">
+				<a href="/user/#(loginAccount.id)" target="_blank">#(loginAccount.nickName)</a>
+			</b>
+			<span class="choxsu-time pull-right">#date(reply.createTime, "yyyy-MM-dd HH:mm")</span>
+		</p>
+		<div class="choxsu-content text-left">
+			#(reply.content)
+			<div class="choxsu-reply float-right">
+				<a href="javascript:void(0);"
+				   onclick="deleteReply(this, '/article/deleteReply?id=#(reply.id)');">
+					<i class="fa fa-trash"></i>&nbsp;删除
+				</a>
+				<a href="#replyContent" onclick="atAndReply('#(loginAccount.nickName)');">
+					<i class="fa fa-mail-reply"></i>&nbsp;回复
+				</a>
+			</div>
+		</div>
+	</div>
+</div>

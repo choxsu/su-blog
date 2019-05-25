@@ -1,9 +1,22 @@
 html, body {
     height: 100%;
 }
+
 /*解决button在点击时出现的边框的方法||||在chrome浏览器下，button按钮在点击时，会出现橙色的边框*/
-button:focus{
-    outline:0;
+button:focus {
+    outline: 0;
+}
+
+a {
+    color: #ae15bf;
+}
+
+a:hover, a:focus {
+    color: #ae15bf;
+}
+
+a:active {
+    color: #ae15bf;
 }
 
 .text-main {
@@ -19,17 +32,18 @@ button:focus{
 }
 
 .clear {
-    clear : both;
-    float : none;
+    clear: both;
+    float: none;
 }
 
-.clear-right{
+.clear-right {
     clear: right;
 }
 
 .choxsu-body {
     height: 100%;
 }
+
 @media only screen and (max-width: 500px) {
     .choxsu-body {
         height: auto;
@@ -157,39 +171,75 @@ button:focus{
     /*font-size: 2rem !important;*/
 }
 
-.choxsu-comments{
+.choxsu-comments {
 
 }
 
-.choxsu-comments .title{
+.choxsu-comments a {
+    color: #353232cf;
+}
+
+.choxsu-comments a:hover, .choxsu-comments a:focus {
+    color: #b62fc5;
+}
+
+.choxsu-comments .comments-item {
+    border-bottom: 1px dashed #b62fc5;
+    padding-bottom: 1rem;
+    /*ml-0 mt-3*/
+    margin-left: 0;
+    margin-top: 1rem;
+    margin-right: 0;
+}
+.comments-item .content{
+    padding: 0 .5rem;
+}
+
+
+.choxsu-comments .choxsu-time {
+    margin-right: .1rem;
+}
+
+.choxsu-comments .title {
     font-size: 1.25rem;
     font-weight: 500;
 }
 
-.choxsu-comments textarea{
+.choxsu-comments textarea {
     min-height: 5rem;
     max-height: 12.5rem;
 }
 
-.pl{
-
-}
-.pl ul{
-    padding: 0 1rem 0 2.5rem;
-    line-height: 1.625rem;
-}
-.pl .tx{
-    float: left;
+.choxsu-comments .choxsu-content {
+    font-size: 16px;
+    margin-top: 4px !important;
+    line-height: 28px;
+    word-wrap: break-word;
+    word-break: break-all;
+    margin-bottom: 0px;
 }
 
-.pl .mata{
-
+.choxsu-reply a {
+    font-size: .875rem;
 }
 
-.tx img{
-    height: 2rem;
-    width: 2rem;
+.choxsu-avatar {
+    height: 2.5rem;
+    width: 2.5rem;
 }
+
+.choxsu-avatar img {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.choxsu-reply-loading{
+    height: 2.5rem;
+    width: 2.5rem;
+    display: none;
+}
+
 /* choxsu-style */
 
 
@@ -210,16 +260,24 @@ button:focus{
     color: #ae15bf !important;
 }
 
-.choxsu-sidebar-card{
+.choxsu-sidebar-card {
 
 }
 
-.choxsu-sidebar-card .title-wrapper{
+.choxsu-sidebar-card a {
+    color: #0c0101d4;
+}
+
+.choxsu-sidebar-card a:hover, .choxsu-sidebar-card a:focus {
+    color: #b62fc5;
+}
+
+.choxsu-sidebar-card .title-wrapper {
     border-bottom: 1px solid rgba(51, 51, 51, 0.47);
     margin-bottom: .5rem;
 }
 
-.choxsu-sidebar-card .title-wrapper .title{
+.choxsu-sidebar-card .title-wrapper .title {
     font-size: 1rem;
     border-bottom: 2px solid #333;
     padding-bottom: .125rem;
@@ -286,6 +344,7 @@ button:focus{
 .navbar-light .navbar-toggler {
     border: none;
 }
+
 .navbar-toggler {
     padding: .25rem .75rem;
     font-size: 1.25rem;
@@ -294,12 +353,13 @@ button:focus{
     border: 0;
     border-radius: 0;
 }
-.navbar-toggler:hover,.navbar-toggler:focus {
+
+.navbar-toggler:hover, .navbar-toggler:focus {
     text-decoration: none;
     border: none;
 }
 
-.navbar-toggler:link ,.navbar-toggler:visited   {
+.navbar-toggler:link, .navbar-toggler:visited {
     text-decoration: none;
     border: none;
 }
@@ -320,16 +380,18 @@ button:focus{
     border-color: #ae15bf;
 }
 
-.btn-primary:hover,.btn-primary:focus {
+.btn-primary:hover, .btn-primary:focus {
     color: #fff;
     background-color: #8f199c;
     border-color: #8f199c;
 }
+
 .btn-primary:active {
     color: #fff;
     background-color: #ae15bf;
     border-color: #ae15bf;
 }
+
 .btn-primary.disabled, .btn-primary:disabled {
     color: #fff;
     background-color: #ae15bf;
@@ -347,6 +409,7 @@ button:focus{
 .show > .btn-primary.dropdown-toggle:focus {
     box-shadow: 0 0 0 0.2rem rgba(255, 61, 253, 0.5);
 }
+
 /*###########################按钮##########################*/
 
 

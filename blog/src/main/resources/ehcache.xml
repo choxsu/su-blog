@@ -43,4 +43,12 @@
            timeToLiveSeconds="60"
            overflowToDisk="false"
            diskPersistent="false"/>
+
+    <cache name="newsFeedPage"
+           maxEntriesLocalHeap="90000"
+           eternal="false"
+           timeToIdleSeconds="60"
+           timeToLiveSeconds="60"
+           overflowToDisk="false"
+           diskPersistent="false"/>
 </ehcache>

@@ -32,6 +32,11 @@ public class _MappingKit {
 
         arp.addMapping(AuthCode.tableName, "id", AuthCode.class);
         arp.addMapping(Session.tableName, "id", Session.class);
+
+        arp.addMapping("blog_reply", "id", BlogReply.class);
+        arp.addMapping("news_feed", "id", NewsFeed.class);
+        arp.addMapping("refer_me", "id", ReferMe.class);
+        arp.addMapping("remind", "accountId", Remind.class);
     }
 }
 

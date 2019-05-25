@@ -1,17 +1,28 @@
 package com.choxsu._front.article;
 
+import com.choxsu._front.my.newsfeed.NewsFeedService;
+import com.choxsu._front.my.newsfeed.ReferMeKit;
 import com.choxsu.common.entity.Account;
 import com.choxsu.common.entity.Blog;
+import com.choxsu.common.entity.BlogReply;
+import com.jfinal.aop.Inject;
 import com.jfinal.kit.Kv;
+import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.SqlPara;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  * @author choxsu
  */
 public class ArticleService {
+
+    @Inject
+    NewsFeedService newsFeedSrv;
 
     private Blog blogDao = new Blog().dao();
     private Account accountDao = new Account().dao();
@@ -83,5 +94,27 @@ public class ArticleService {
             return;
         }
         blog.setAuthor(account.getNickName());
+    }
+
+    public void deleteReplyById(int accountId, int replyId) {
+        Db.tx(() -> {
+            // 先删除 news_feed
+            newsFeedSrv.deleteByShareReplyId(replyId);
+            // 再删除 share_reply
+            return Db.update("delete from blog_reply where accountId=? and id=?", accountId, replyId) > 0;
+        });
+    }
+
+    public Ret saveReply(Integer articleId, int accountId, String replyContent) {
+        BlogReply reply = new BlogReply();
+        reply.setBlogId(articleId);
+        reply.setAccountId(accountId);
+        reply.setContent(replyContent);
+        reply.setCreateTime(new Date());
+        List<Integer> referAccounts = ReferMeKit.buildAtMeLink(reply);
+        reply.save();
+        // 添加分享回复动态消息
+        newsFeedSrv.createShareReplyNewsFeed(accountId, reply, referAccounts);
+        return Ret.ok("reply", reply);
     }
 }
