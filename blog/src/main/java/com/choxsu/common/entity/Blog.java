@@ -15,6 +15,7 @@ import lombok.*;
 public class Blog extends BaseBlog<Blog> {
 
     public static final String defaultTag = "Java";
+    public static String tableName = "blog";
 
     /**
      * 作者
@@ -24,11 +25,6 @@ public class Blog extends BaseBlog<Blog> {
      * 标签名称
      */
     private String tagName;
-
-    /**
-     * 允许评论
-     */
-    private Boolean allowComments = true;
 
     @Override
     protected void filter(int filterBy) {

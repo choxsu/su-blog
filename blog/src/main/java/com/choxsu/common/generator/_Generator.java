@@ -29,7 +29,7 @@ public class _Generator {
      */
     public static DataSource getDataSource() {
 
-        String url = "jdbc:mysql://127.0.0.1:3306/choxsu?characterEncoding=utf8&useSSL=false";
+        String url = "jdbc:mysql://127.0.0.1:3306/choxsu?characterEncoding=utf8&useSSL=false&tinyInt1isBit=true";
         String username = "root";
         String pwd = "root";
         DruidPlugin druidPlugin = new DruidPlugin(url, username, pwd);
