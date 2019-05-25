@@ -32,7 +32,8 @@
     SELECT
         ar.*,
         a.nickName,
-        a.avatar
+        a.avatar,
+        a.isThird
     FROM
         blog_reply ar
         INNER JOIN account a ON ar.accountId = a.id
