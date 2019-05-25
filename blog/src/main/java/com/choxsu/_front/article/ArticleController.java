@@ -30,11 +30,11 @@ public class ArticleController extends BaseController {
     }
 
     @Before(AddClickInterceptor.class)
-    public void detail(@Para(value = "",defaultValue = "1") Integer p) {
+    public void detail() {
         Blog article = articleService.findBlog(getParaToInt());
         if (article != null) {
             setAttr("blog", article);
-            setAttr("replyPage", articleReplySrv.getReplyPage(article.getId(), p));
+            setAttr("replyPage", articleReplySrv.getReplyPage(article.getId(), getInt("p", 1)));
             render("detail.html");
         } else {
             renderError(404);
