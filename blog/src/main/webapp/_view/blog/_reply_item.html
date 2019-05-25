@@ -1,7 +1,7 @@
 #-- 用户渲染 ajax reply 所需要的追加到列表最后的 item  --#
 <div class="comments-item row">
 	<a href="javascript:void(0);" class="choxsu-logo choxsu-avatar mt-1" target="_blank">
-		#if(x.isThird?? == 1)
+		#if(loginAccount.isThird == 1)
 		<img src="#(loginAccount.avatar)" />
 		#else
 		<img src="/upload/avatar/#(loginAccount.avatar)" />
