@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/assets/editor_md/css/editormd.min.css" media="all">
 <link rel="stylesheet" href="/assets/editor_md/css/editormd.preview.css">
 #end
-<div class="col-sm-8 mb-3">
+<div class="col-lg-8 mb-3">
     <div class="choxsu-article-detail">
         <div class="title">#(blog.title)</div>
         <!--<p>#(blog.title)</p>-->
@@ -23,45 +23,81 @@
         #(blog.content)
     </div>
     #if(blog.allowComments??)
-    <div id="choxsu-comments" class="choxsu-comments">
-        <p class="title">评论</p>
-        <div class="comments-list">
-            <div class="pl">
-                <div class="tx">
-                    <a href="http://www.jq22.com/mem941136">
-                        <img src="/upload/avatar/default.png">
+        <div id="choxsu-comments" class="choxsu-comments mb-3">
+            <p class="title mb-0">评论</p>
+            <div class="comments-list mb-3">
+                #for(x : replyPage.list)
+                <div class="comments-item row">
+                    <a href="javascript:void(0);" class="choxsu-logo choxsu-avatar mt-1" target="_blank">
+                        #if(x.isThird == 1)
+                        <img src="#(x.avatar)" />
+                        #else
+                        <img src="/upload/avatar/#(x.avatar)" />
+                        #end
                     </a>
+                    <div class="col content">
+                        <p class="mb-0">
+                            ### href="/user/#(x.accountId)"
+                            <b><a href="javascript:void(0);" target="_blank">#(x.nickName)</a></b>
+                            <span class="choxsu-time pull-right">#date(x.createTime, "yyyy-MM-dd HH:mm")</span>
+                        </p>
+                        <div class="choxsu-content text-left">
+                            #(x.content)
+                            <div class="choxsu-reply float-right">
+                                #if(loginAccount && loginAccount.id == x.accountId)
+                                <a href="javascript:void(0);"
+                                   onclick="deleteReply(this, '/article/deleteReply?id=#(x.id)');">
+                                    <i class="fa fa-trash"></i>&nbsp;删除
+                                </a>
+                                #end
+                                <a href="#replyContent" onclick="atAndReply('#(x.nickName)');">
+                                    <i class="fa fa-mail-reply"></i>&nbsp;回复
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <ul class="mata">
-                    <div class="float-left">清清</div>
-                    <div class="float-right"><span class="z13">2018/10/22 16:07:57</span></div>
-                    <div class="clear-right"></div>
-                </ul>
-                <ul class="plul">
-                    <p>markssfasfdasfsafs,fjasdfldasjfldsnfas,fldjsfldasfjls</p>
-                    <a class="float-right" name="62061">回复</a>
-                    <div class="clear-right"></div>
-                </ul>
+                #end
+            </div>
+            <div class="form-group">
+                <div class="mb-3">
+                    <label for="replyContent">说点什么</label>
+                    <textarea class="form-control" id="replyContent" rows="3"></textarea>
+                </div>
+                <div class="text-right">
+                    <button id="submit_btn" class="btn btn-primary" title="按 Ctrl + Enter 发送">发布评论</button>
+                    <img id="submit_loading" class="choxsu-reply-loading" src="/assets/choxsu/image/loading-2.gif">
+                </div>
             </div>
         </div>
-        <form class="form-group-sm">
-            <div class="mb-3">
-                <textarea class="form-control " id="validationTextarea" placeholder="文明社会，理性评论。" required></textarea>
-                <div class="invalid-feedback">
-                    请输入您的评论内容哦
-                </div>
-            </div>
-            <div class="text-right">
-                <button class="btn btn-primary">发布评论</button>
-            </div>
-        </form>
-    </div>
+        #set(append="#choxsu-comments")
+        #@paginate(replyPage.pageNumber, replyPage.totalPage, "/article/" + blog.id)
     #end
 </div>
 #include("/_view/common/_sidebar.html")
 <div class="choxsu-return-top" title="返回顶部"><img src="/assets/new/images/top.png"></div>
-#define js()
-<script src="/assets/choxsu/js/zooming.min.js"></script>
-<script src="/assets/choxsu/js/detail.js"></script>
-#end
+    #define js()
+    <script src="/assets/layer/v3.1.1/layer.js"></script>
+    <script src="/assets/choxsu/js/zooming.min.js"></script>
+    <script src="/assets/choxsu/js/detail.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var map = {
+                isLoading: false
+                , submit_btn: $("#submit_btn")
+                , submit_loading: $("#submit_loading")
+            };
+
+            $("#submit_btn").bind("click", function (e) {
+                reply("/article/saveReply", "#(blog.id)", map);
+            });
+
+            $("#replyContent").bind("keydown", function (e) {
+                if ((e.ctrlKey || e.metaKey) && e.keyCode === 13) {    // ctrl + 回车发送消息
+                    reply("/article/saveReply", "#(blog.id)", map);   // $("#submit_btn").trigger("click");   // 简写 $("#submit_btn").click();
+                }
+            });
+        });
+    </script>
+    #end
 #end

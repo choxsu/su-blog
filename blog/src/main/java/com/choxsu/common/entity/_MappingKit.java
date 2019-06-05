@@ -20,7 +20,7 @@ public class _MappingKit {
         arp.addMapping("account_open", "id", AccountOpen.class);
         // Composite Primary Key order: accountId,roleId
         arp.addMapping(AccountRole.tableName, "accountId,roleId", AccountRole.class);
-        arp.addMapping(Blog.tableName, "id", Blog.class);
+        arp.addMapping("blog", "id", Blog.class);
         arp.addMapping(BlogCategory.tableName, "id", BlogCategory.class);
         arp.addMapping(BlogTag.tableName, "id", BlogTag.class);
         arp.addMapping(Permission.tableName, "id", Permission.class);
@@ -32,6 +32,11 @@ public class _MappingKit {
 
         arp.addMapping(AuthCode.tableName, "id", AuthCode.class);
         arp.addMapping(Session.tableName, "id", Session.class);
+
+        arp.addMapping("blog_reply", "id", BlogReply.class);
+        arp.addMapping("news_feed", "id", NewsFeed.class);
+        arp.addMapping("refer_me", "id", ReferMe.class);
+        arp.addMapping("remind", "accountId", Remind.class);
     }
 }
 
