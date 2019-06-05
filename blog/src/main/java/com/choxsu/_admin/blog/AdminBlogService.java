@@ -45,11 +45,6 @@ public class AdminBlogService extends BaseService<Blog> {
         return Db.queryStr("select name from blog_tag where id = ?", blog.getTagId());
     }
 
-    @Override
-    public String getTableName() {
-        return Blog.tableName;
-    }
-
     public Ret saveOrUpdateArticle(Blog blog) {
         if (blog == null) {
             return Ret.fail().set("msg", "参数不存在");
@@ -78,7 +73,7 @@ public class AdminBlogService extends BaseService<Blog> {
         if (id == null) {
             return b;
         }
-        Record record = Db.findById(getTableName(), id);
+        Record record = Db.findById(tableName, id);
         if (record == null) {
             return b;
         }

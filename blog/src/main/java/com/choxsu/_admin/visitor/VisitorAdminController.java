@@ -17,8 +17,9 @@ public class VisitorAdminController extends BaseController {
 
     @Remark("PV管理首页")
     public void index() {
-        Page<Visitor> visitorPage = visitorAdminService
-                .paginateOrderBy(getParaToInt("p", 1),
+        Page<Visitor> visitorPage =
+                visitorAdminService.paginateOrderBy(
+                        getParaToInt("p", 1),
                         getParaToInt("size", 15),
                         "*, method as md",
                         "requestTime",

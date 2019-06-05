@@ -140,8 +140,4 @@ public class ApiBlogService extends BaseService<Blog> {
         return null;
     }
 
-    @Override
-    public String getTableName() {
-        return Blog.tableName;
-    }
 }

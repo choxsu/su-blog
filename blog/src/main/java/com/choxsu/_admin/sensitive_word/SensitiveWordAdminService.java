@@ -17,11 +17,6 @@ import java.util.List;
  */
 public class SensitiveWordAdminService extends BaseService<SensitiveWords> {
 
-    @Override
-    public String getTableName() {
-        return SensitiveWords.tableName;
-    }
-
     public Page<SensitiveWords> list(Integer p, Integer size) {
         return paginate(p, size);
     }
@@ -78,7 +73,7 @@ public class SensitiveWordAdminService extends BaseService<SensitiveWords> {
         if (word == null) {
             return false;
         }
-        Long r = Db.queryLong("select count(0) from sensitive_words where word = ? and id != ?", word.trim(), id);
+        Long r = Db.queryLong("select count(0) from "+ tableName +" where word = ? and id != ?", word.trim(), id);
         return r > 0;
     }
 
@@ -94,7 +89,7 @@ public class SensitiveWordAdminService extends BaseService<SensitiveWords> {
         if (!admin) {
             return Ret.fail().set("msg", "只有管理员才有操作权限");
         }
-        List<SensitiveWords> sensitiveWords = DAO.find("select * from " + getTableName() + " where word_pinyin = '' ");
+        List<SensitiveWords> sensitiveWords = DAO.find("select * from " + tableName + " where word_pinyin = '' ");
         if (sensitiveWords.size() > 0) {
             for (SensitiveWords sensitiveWord : sensitiveWords) {
                 sensitiveWord.setWordPinyin(PinyinKit.hanyuToPinyin(sensitiveWord.getWord(), true, true));
