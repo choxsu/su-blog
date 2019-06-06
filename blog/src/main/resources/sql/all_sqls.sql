@@ -10,6 +10,10 @@
   #include("article.sql")
 #end
 
+#namespace("reply")
+  #include("reply.sql")
+#end
+
 #namespace("admin.auth")
   #include("admin_auth.sql")
 #end

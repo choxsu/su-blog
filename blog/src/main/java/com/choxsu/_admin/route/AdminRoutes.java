@@ -10,6 +10,7 @@ import com.choxsu._admin.druid.DruidController;
 import com.choxsu._admin.index.IndexAdminController;
 import com.choxsu._admin.permission.PermissionAdminController;
 import com.choxsu._admin.quartz.JobManageController;
+import com.choxsu._admin.reply.ReplyController;
 import com.choxsu._admin.role.RoleAdminController;
 import com.choxsu._admin.sensitive_word.SensitiveWordAdminController;
 import com.choxsu._admin.tag.AdminTagController;
@@ -47,6 +48,8 @@ public class AdminRoutes extends Routes {
         //图片上传
         add("/admin/upload", UploadController.class);
         add("/admin/quartz", JobManageController.class, "/quartz");
+        // 评论管理
+        add("/admin/reply", ReplyController.class, "/reply");
     }
 }
 
