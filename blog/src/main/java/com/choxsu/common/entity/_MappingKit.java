@@ -37,6 +37,8 @@ public class _MappingKit {
         arp.addMapping("news_feed", "id", NewsFeed.class);
         arp.addMapping("refer_me", "id", ReferMe.class);
         arp.addMapping("remind", "accountId", Remind.class);
+
+        arp.addMapping("ip_repository", "id", IpRepository.class);
     }
 }
 
