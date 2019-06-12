@@ -2,6 +2,10 @@
 
 package com.choxsu.utils.kit;
 
+import com.alibaba.fastjson.JSONObject;
+import com.choxsu.common.pageview.AddressVo;
+import com.jfinal.kit.HttpKit;
+
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -12,6 +16,8 @@ import java.util.Enumeration;
  * IpKit 获取 ip 地址的工具类
  */
 public class IpKit {
+
+	private static final String addrUrl = "http://ip.taobao.com/service/getIpInfo.php?ip=[ip地址字串]";
 	
 	public static String getRealIp(HttpServletRequest request) {
 		String ip = request.getHeader("x-forwarded-for");
@@ -66,6 +72,23 @@ public class IpKit {
 			return localip;
 		}
 	}
+
+
+	public static AddressVo getAddress(String ip){
+		String url = addrUrl.replace("[ip地址字串]", ip);
+		String addressJson = HttpKit.get(url);
+		JSONObject jsonObject = JSONObject.parseObject(addressJson);
+		if (jsonObject.getInteger("code") == 0) {
+			JSONObject data = jsonObject.getJSONObject("data");
+			String country = data.getString("country");
+			String city = data.getString("city");
+			String region = data.getString("region");
+			String isp = data.getString("isp");
+			return AddressVo.builder().address(country + "/" + city + "/" + region + "["+ isp +"]").addressJson(addressJson).build();
+		}
+		return AddressVo.builder().address("XX").addressJson("{}").build();
+	}
+
 }
 
 

@@ -28,7 +28,7 @@ public class _MappingKit {
         // Composite Primary Key order: permissionId,roleId
         arp.addMapping(RolePermission.tableName, "permissionId,roleId", RolePermission.class);
         arp.addMapping(SensitiveWords.tableName, "id", SensitiveWords.class);
-        arp.addMapping(Visitor.tableName, "id", Visitor.class);
+        arp.addMapping("visitor", "id", Visitor.class);
 
         arp.addMapping(AuthCode.tableName, "id", AuthCode.class);
         arp.addMapping(Session.tableName, "id", Session.class);

@@ -39,6 +39,9 @@ public class PageViewService {
         }
         visitor = new Visitor();
         visitor.setIp(ip);
+        AddressVo address = IpKit.getAddress(ip);
+        visitor.setAddress(address.getAddress());
+        visitor.setAddressJson(address.getAddressJson());
         visitor.setUrl(url);
         visitor.setClient(userAgent);
         visitor.setMethod(method);
