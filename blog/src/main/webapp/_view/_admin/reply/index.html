@@ -21,7 +21,9 @@
         #for(r : pageResult.list)
          <tr>
              <td>#(r.id)</td>
-             <td>#(r.title)</td>
+             <td>
+                 <a href="/article/#(r.blogId)" target="_blank">#(r.title)</a>
+             </td>
              <td>#(r.nickName)</td>
              <td>#(r.content)</td>
              <td>#date(r.createTime,'yyyy-MM-dd HH:mm')</td>
