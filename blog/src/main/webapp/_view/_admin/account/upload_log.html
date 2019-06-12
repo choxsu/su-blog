@@ -12,6 +12,7 @@
         <tr>
             <th>ID</th>
             <th>用户名</th>
+            <th>图片预览</th>
             <th>src</th>
             <th>图片名</th>
             <th>类型</th>
@@ -23,6 +24,9 @@
         <tr>
             <th scope="row">#(x.id)</th>
             <th>#(x.username)</th>
+            <td>
+                <a href="javascript:void(0);" onclick="showImg(this)" data-src="#(x.src)" data-alt="#(x.name)" >点击查看</a>
+            </td>
             <td>#(x.src)</td>
             <td>#(x.name)</td>
             <td>#(x.type)</td>
@@ -33,5 +37,19 @@
     </table>
     #@adminPaginate(page.pageNumber, page.totalPage, "/admin/uploadLog?id="+id+"&p=")
 </div>
+<script>
+    var origin = location.origin;
+    function showImg(a) {
+        var src = $(a).attr("data-src");
+        var alt = $(a).attr("data-alt");
+        layer.open({
+            type: 1,
+            title: alt,
+            shadeClose: true,
+            skin: 'layui-layer', //加上边框
+            content: '<img src="'+ origin + src +'" alt="'+ alt +'"/>'
+        });
+    }
+</script>
 #end
 

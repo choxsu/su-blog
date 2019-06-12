@@ -30,7 +30,7 @@ public class VisitorInterceptor implements Interceptor {
 
     private void toCache(Controller c) {
         //将用户访问信息保存到数据库
-        pageViewService.processPageView(c);
+        new Thread(() -> pageViewService.processPageView(c)).start();
     }
 
 }
