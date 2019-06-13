@@ -35,7 +35,7 @@
         #end
         </tbody>
     </table>
-    #@adminPaginate(page.pageNumber, page.totalPage, "/admin/uploadLog?id="+id+"&p=")
+    #@adminPaginate(page.totalRow, page.pageNumber, page.totalPage, "/admin/uploadLog?id="+id+"&p=")
 </div>
 <script>
     var origin = location.origin;

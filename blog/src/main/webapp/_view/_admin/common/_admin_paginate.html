@@ -1,6 +1,6 @@
 ### 分页模板函数，三个参数含义分别为：当前页、总页数，分页前方的链接
 ### 具体用法在 jfinal-club 中有很多
-#define adminPaginate(currentPage, totalPage, link)
+#define adminPaginate(total, currentPage, totalPage, link)
 #if(totalPage < 2 || currentPage > totalPage)
 	#return
 #end
@@ -16,6 +16,7 @@
 #end
 <nav data-pjax aria-label="Page navigation" class="text-center">
 	<ul class="pagination">
+		<li><a href="javascript:;">总条数：#(total)</a> </li>
 	#if(currentPage > 1)
 		<li><a href="#(link)#(currentPage - 1)#(append)">&lt;</a></li>
 	#end
