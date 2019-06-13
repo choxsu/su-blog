@@ -25,7 +25,7 @@
             <th scope="row">#(x.id)</th>
             <th>#(x.username)</th>
             <td>
-                <a href="javascript:void(0);" onclick="showImg(this)" data-src="#(x.src)" data-alt="#(x.name)" >点击查看</a>
+                <a href="javascript:void(0);" onclick="showImg(this)" data-src="#(x.src)" data-alt="#(x.name)">点击查看</a>
             </td>
             <td>#(x.src)</td>
             <td>#(x.name)</td>
@@ -39,15 +39,23 @@
 </div>
 <script>
     var origin = location.origin;
+
     function showImg(a) {
         var src = $(a).attr("data-src");
         var alt = $(a).attr("data-alt");
-        layer.open({
-            type: 1,
-            title: alt,
-            shadeClose: true,
-            skin: 'layui-layer', //加上边框
-            content: '<img src="'+ origin + src +'" alt="'+ alt +'"/>'
+
+        var all_src = origin + src;
+        var json = {
+            "data": [   //相册包含的图片，数组格式
+                {
+                    "alt": alt,
+                    "src": all_src //原图地址
+                }
+            ]
+        };
+        layer.photos({
+            photos: json
+            , anim: 0 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
         });
     }
 </script>

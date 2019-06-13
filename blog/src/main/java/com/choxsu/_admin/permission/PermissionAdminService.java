@@ -149,7 +149,7 @@ public class PermissionAdminService {
 
             String[] urlPara = new String[1];
             Action action = JFinal.me().getAction(actionKey, urlPara);
-            if (!actionKey.equals(action.getActionKey())) {
+            if (action == null || !actionKey.equals(action.getActionKey())) {
                 p.put("removed", true);
                 ret = true;
             }
