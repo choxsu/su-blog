@@ -68,7 +68,6 @@ public class AdminBlogController extends BaseController {
         renderJson(ret);
     }
 
-    @NotAction
     private Blog getParaToSet() {
         Blog blog = getModel(Blog.class, "blog");
         String html = getPara(MARKED_ID + "-html-code");

@@ -44,7 +44,7 @@ public class AdminBlogService {
         blog.setAuthor(nickName);
     }
 
-    public Ret saveOrUpdateArticle(Blog blog) {
+    Ret saveOrUpdateArticle(Blog blog) {
         if (blog == null) {
             return Ret.fail().set("msg", "参数不存在");
         }
