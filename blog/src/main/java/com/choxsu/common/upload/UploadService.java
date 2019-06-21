@@ -249,13 +249,11 @@ public class UploadService {
             }
         }
         //String parameterName, String uploadPath, String filesystemName, String originalFileName, String contentType
-        UploadFile uploadFile =
-                new UploadFile("base64Image",
-                        path,
-                        originalFileName,
-                        originalFileName,
-                        contentType);
 
-        return uploadFile;
+        return new UploadFile("base64Image",
+                path,
+                originalFileName,
+                originalFileName,
+                contentType);
     }
 }
