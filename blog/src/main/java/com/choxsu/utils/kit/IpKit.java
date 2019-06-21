@@ -89,7 +89,7 @@ public class IpKit {
         String url = addrUrl.replace("[ip地址字串]", ip);
         String addressJson = HttpKit.get(url);
         JSONObject jsonObject = JSONObject.parseObject(addressJson);
-        if (jsonObject.getInteger("code") == 0) {
+        if (jsonObject != null && jsonObject.getInteger("code") == 0) {
             JSONObject data = jsonObject.getJSONObject("data");
             String country = data.getString("country");
             String city = data.getString("city");

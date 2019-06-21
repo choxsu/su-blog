@@ -5,6 +5,8 @@ package com.choxsu._admin.route;
 import com.choxsu._admin.account.AccountAdminController;
 import com.choxsu._admin.auth.AdminAuthInterceptor;
 import com.choxsu._admin.blog.AdminBlogController;
+import com.choxsu._admin.code.CodeConfigController;
+import com.choxsu._admin.code.CodeController;
 import com.choxsu._admin.common.PjaxInterceptor;
 import com.choxsu._admin.druid.DruidController;
 import com.choxsu._admin.index.IndexAdminController;
@@ -50,6 +52,9 @@ public class AdminRoutes extends Routes {
         add("/admin/quartz", JobManageController.class, "/quartz");
         // 评论管理
         add("/admin/reply", ReplyController.class, "/reply");
+
+        add("/admin/codeConfig", CodeConfigController.class, "/code");
+        add("/admin/code", CodeController.class, "/code");
     }
 }
 
