@@ -53,7 +53,7 @@
             <td>#date(x.uTime)</td>
             <td>
                 #permission("/admin/code/gen")
-                <a class="btn btn-primary btn-sm" gen-code data-title="#(x.tableName)" data-action="/admin/code/gen?tables=#(x.tableName)">
+                <a class="btn btn-primary btn-sm" href="/admin/code/gen?tables=#(x.tableName)">
                     生成代码
                 </a>
                 #end
