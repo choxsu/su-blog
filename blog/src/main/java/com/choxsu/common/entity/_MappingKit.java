@@ -39,6 +39,7 @@ public class _MappingKit {
         arp.addMapping("remind", "accountId", Remind.class);
 
         arp.addMapping("ip_repository", "id", IpRepository.class);
+        arp.addMapping("code_config", "id", CodeConfig.class);
     }
 }
 

@@ -5,10 +5,26 @@
     <li class="active">代码生成</li>
 </ul>
 
-<div class="page-header">
-    <a class="btn btn-primary btn-sm" href="/admin/code/gen">
-        <span class="fa fa-plus" aria-hidden="true">&nbsp;</span>生成代码
-    </a>
+<div class="row mb-2">
+    <div class="col-md-8">
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="exampleInputName2">表名</label>
+                <input type="text" name="name" class="form-control" id="exampleInputName2" placeholder="表名">
+            </div>
+            <div class="form-group ml-1">
+                <label for="exampleInputEmail2">备注</label>
+                <input type="text" name="remark" class="form-control" id="exampleInputEmail2" placeholder="表备注">
+            </div>
+            <button type="submit" class="btn btn-primary ml-1">检索</button>
+            <button type="reset" class="btn btn-default">重置</button>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <a class="btn btn-primary btn-sm" href="/admin/code/gen">
+            生成代码
+        </a>
+    </div>
 </div>
 
 <div class="table-responsive">
@@ -36,12 +52,9 @@
             <td>#date(x.cTime)</td>
             <td>#date(x.uTime)</td>
             <td>
-                #permission("/admin/blog/delete")
-                <a class="margin3"
-                   data-delete
-                   data-title="#escape(x.title)"
-                   data-action="/admin/blog/delete?id=#(x.id)">
-                    <i class="fa fa-trash" title="删除"></i>
+                #permission("/admin/code/gen")
+                <a class="btn btn-primary btn-sm" gen-code data-title="#(x.tableName)" data-action="/admin/code/gen?tables=#(x.tableName)">
+                    生成代码
                 </a>
                 #end
             </td>
@@ -49,8 +62,24 @@
         #end
         </tbody>
     </table>
-    #@adminPaginate(pageResult.totalRow, pageResult.pageNumber, pageResult.totalPage, "/admin/code?p=")
+    #@adminPaginate(pageResult.totalRow,
+    pageResult.pageNumber,
+    pageResult.totalPage,
+    "/admin/code?name="+ (name == null ? '' : name) +"&remark=" + (remark == null ? '' : remark) + "&p=")
 </div>
 
-
+<script>
+    var THIS = {
+        genCode: function (event) {
+            event.preventDefault();
+            var $this = $(this);
+            var action = $this.attr("data-action");
+            var tableName = $this.attr("data-title");
+            Admin.confirmAjaxAction("确定生成【" + tableName + "】表?", action);
+        }
+    };
+    $(document).ready(function () {
+        $('#pjax-container').on("click", "a[gen-code]", THIS.genCode);
+    });
+</script>
 #end
