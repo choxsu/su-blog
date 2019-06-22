@@ -1,5 +1,6 @@
 package com.choxsu._admin.code;
 
+import com.choxsu.common.base.BaseService;
 import com.choxsu.common.entity.CodeConfig;
 import com.choxsu.utils.kit.SnowFlakeKit;
 import com.choxsu.utils.kit.ZipFilesKit;
@@ -20,6 +21,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.zip.ZipOutputStream;
@@ -31,6 +33,29 @@ public class CodeService {
     private final String path = PathKit.getWebRootPath() + "/" + codeDir;
     private final String baseDir = "zipFile/";
     private final String zipPath = PathKit.getWebRootPath() + "/" + baseDir;
+
+    public List<Record> getAllTables() {
+        String database;
+        try {
+            Connection connection = DbKit.getConfig().getDataSource().getConnection();
+            database = connection.getCatalog();
+        } catch (SQLException e) {
+            return new ArrayList<>();
+        }
+
+        StringBuilder sql = new StringBuilder("SELECT ");
+        sql.append("\tTABLE_SCHEMA AS databaseName,\n");
+        sql.append("\tTABLE_NAME AS tableName,\n");
+        sql.append("\t`ENGINE` AS engineName,\n");
+        sql.append("\tTABLE_ROWS AS rows,\n");
+        sql.append("\tCREATE_TIME AS cTime,\n");
+        sql.append("\tUPDATE_TIME AS uTime,\n");
+        sql.append("\tTABLE_COMMENT AS remark \n ");
+        sql.append("FROM information_schema.TABLES WHERE TABLE_SCHEMA= ?");
+        List<Object> list = new LinkedList<>();
+        list.add(database);
+        return Db.find(sql.toString(), list.toArray());
+    }
 
     public Page<Record> getTables(int p, int size, String tableName, String remark) {
         String database;
@@ -62,13 +87,13 @@ public class CodeService {
         return Db.paginate(p, size, select, from.toString(), list.toArray());
     }
 
-    Ret genValid(List<String> list, List<CodeConfig> codeConfigs){
+    Ret genValid(List<String> list, List<CodeConfig> codeConfigs) {
         if (list.size() == 0) {
-            return Ret.fail("msg","选择要生成的表");
+            return Ret.fail("msg", "选择要生成的表");
         }
         CodeConfig codeConfig = codeConfigDao.findById(1);
         if (codeConfig == null) {
-            return Ret.fail("msg","请初始化生成配置");
+            return Ret.fail("msg", "请初始化生成配置");
         }
         codeConfigs.add(codeConfig);
         return null;

@@ -7,8 +7,11 @@ import com.choxsu.utils.kit.ZipFilesKit;
 import com.jfinal.aop.Inject;
 import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;
+import com.jfinal.plugin.activerecord.DbKit;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.plugin.activerecord.TableMapping;
+import com.jfinal.plugin.activerecord.generator.MetaBuilder;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CodeController extends BaseController {
 
@@ -38,11 +42,19 @@ public class CodeController extends BaseController {
 
     @Remark("代码生成")
     public void gen() {
-        String tables = get("tables");
+        Boolean isAll = getBoolean("isAll", false);
         List<String> list = new ArrayList<>();
-        if (StrKit.notBlank(tables)) {
-            String[] tablesArr = tables.split(",");
-            list = Arrays.asList(tablesArr);
+        if (isAll) {
+            List<Record> allTables = codeService.getAllTables();
+            for (Record record : allTables) {
+                list.add(record.getStr("tableName"));
+            }
+        } else {
+            String tables = get("tables");
+            if (StrKit.notBlank(tables)) {
+                String[] tablesArr = tables.split(",");
+                list = Arrays.asList(tablesArr);
+            }
         }
         List<CodeConfig> codeConfigs = new ArrayList<>();
         Ret ret = codeService.genValid(list, codeConfigs);
