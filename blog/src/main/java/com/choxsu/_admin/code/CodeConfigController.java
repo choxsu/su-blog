@@ -4,5 +4,8 @@ import com.choxsu.common.base.BaseController;
 
 public class CodeConfigController extends BaseController {
 
+    public void index(){
+        render("index_config.html");
+    }
 
 }

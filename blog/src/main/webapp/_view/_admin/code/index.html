@@ -1,0 +1,56 @@
+#@adminLayout()
+#define main()
+<ul class="breadcrumb">
+    <li><a href="/admin">首页</a></li>
+    <li class="active">代码生成</li>
+</ul>
+
+<div class="page-header">
+    <a class="btn btn-primary btn-sm" href="/admin/code/gen">
+        <span class="fa fa-plus" aria-hidden="true">&nbsp;</span>生成代码
+    </a>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th>表名</th>
+            <th>数据库名</th>
+            <th>数据行数</th>
+            <th>数据库引擎</th>
+            <th>备注</th>
+            <th>创建时间</th>
+            <th>更新时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        #for(x : pageResult.getList())
+        <tr>
+            <th scope="row">#(x.tableName)</th>
+            <td>#(x.databaseName)</td>
+            <td>#(x.rows)</td>
+            <td>#(x.engineName)</td>
+            <td>#(x.remark??)</td>
+            <td>#date(x.cTime)</td>
+            <td>#date(x.uTime)</td>
+            <td>
+                #permission("/admin/blog/delete")
+                <a class="margin3"
+                   data-delete
+                   data-title="#escape(x.title)"
+                   data-action="/admin/blog/delete?id=#(x.id)">
+                    <i class="fa fa-trash" title="删除"></i>
+                </a>
+                #end
+            </td>
+        </tr>
+        #end
+        </tbody>
+    </table>
+    #@adminPaginate(pageResult.totalRow, pageResult.pageNumber, pageResult.totalPage, "/admin/code?p=")
+</div>
+
+
+#end
