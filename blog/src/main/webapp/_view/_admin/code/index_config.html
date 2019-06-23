@@ -1,4 +1,107 @@
 #@adminLayout()
 #define main()
-    代码生成配置
+<ul class="breadcrumb">
+    <li><a href="/admin">首页</a></li>
+    <li class="active">生成配置</li>
+</ul>
+<form id="myArticleForm" action="/admin/codeConfig/update" method="post">
+    <input type="hidden" name="id" value="#(codeConfig.id??)">
+    <div class="form-group">
+        <label>作者</label>
+        <input type="text" class="form-control w-50" name="author" placeholder="作者" value="#(codeConfig.author??)">
+    </div>
+    <div class="form-group">
+        <label>基础包名</label>
+        <input type="text" class="form-control w-50" name="basePackage" placeholder="eg:com.choxsu.common"
+               value="#(codeConfig.basePackage??)">
+    </div>
+    <div class="form-group">
+        <label>实体包名</label>
+        <input type="text" class="form-control w-50" name="entityPackage" placeholder="eg:entity"
+               value="#(codeConfig.entityPackage??)">
+    </div>
+    <div class="form-group">
+        <label>实体基础包</label>
+        <input type="text" class="form-control w-50" name="entityBasePackage" placeholder="eg:entity.base"
+               value="#(codeConfig.entityBasePackage??)">
+    </div>
+    <div class="form-group">
+        <label>是否去除前缀</label>
+        <div class="w-50">
+            <label class="radio-inline">
+                <input type="radio" #if(codeConfig.isClearPrefix??) checked #end name="isClearPrefix" value="1">是
+            </label>
+            <label class="radio-inline">
+                <input type="radio" #if(!codeConfig.isClearPrefix??) checked #end name="isClearPrefix" value="0">否
+            </label>
+        </div>
+    </div>
+    <div class="form-group" id="prefix_id">
+        <label>前缀</label>
+        <input type="text" class="form-control w-50" name="prefix" placeholder="eg:tb_ or t_ "
+               value="#(codeConfig.prefix??)">
+    </div>
+    <div class="form-group">
+        <label>BaseModel是否生成链式setter方法</label>
+        <div class="w-50">
+            <label class="radio-inline">
+                <input type="radio" #if(codeConfig.isGenerateChainSetter??) checked #end name="isGenerateChainSetter"
+                       value="1">是
+            </label>
+            <label class="radio-inline">
+                <input type="radio" #if(!codeConfig.isGenerateChainSetter??) checked #end name="isGenerateChainSetter"
+                       value="0">否
+            </label>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">更新配置</button>
+</form>
+<script>
+    var THIS = {
+        init: function () {
+            var ck = "#(codeConfig.isClearPrefix??)";
+            THIS.doShow(ck === 'true');
+        },
+        isShowPrefix: function () {
+            var $this = $(this);
+            THIS.doShow($this.val() === "1");
+        },
+        doShow: function (isShow) {
+            if (isShow) {
+                $("#prefix_id").show();
+            } else {
+                $("#prefix_id").hide();
+            }
+        }
+    };
+    $(function () {
+        THIS.init();
+        $("input[ name='isClearPrefix' ]").bind("click", THIS.isShowPrefix);
+        $("#myArticleForm").ajaxForm({
+            dataType: "json"
+            , beforeSubmit: function (formData, jqForm, options) {
+            }
+            , success: function (ret) {
+                if (ret.state === "ok") {
+                    layer.msg(ret.msg, {
+                        shift: 6
+                        , shade: 0.4
+                        , time: 2000
+                        , closeBtn: 1
+                        , shadeClose: true
+                    }, function () {
+                        location.href = "/admin/codeConfig";
+                    });
+                } else {
+                    ShowUtil.showFailMsg(ret.msg);
+                }
+            }
+            , error: function (ret) {
+                alert(ret.statusText);
+            }
+            , complete: function (ret) {
+            } 	      // 无论是 success 还是 error，最终都会被回调
+        });
+    });
+</script>
 #end
