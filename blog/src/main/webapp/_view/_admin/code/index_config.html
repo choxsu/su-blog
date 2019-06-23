@@ -6,10 +6,12 @@
 </ul>
 <form id="myArticleForm" action="/admin/codeConfig/update" method="post">
     <input type="hidden" name="id" value="#(codeConfig.id??)">
+    #if(1 == 2)
     <div class="form-group">
         <label>作者</label>
         <input type="text" class="form-control w-50" name="author" placeholder="作者" value="#(codeConfig.author??)">
     </div>
+    #end
     <div class="form-group">
         <label>基础包名</label>
         <input type="text" class="form-control w-50" name="basePackage" placeholder="eg:com.choxsu.common"
@@ -36,7 +38,7 @@
             </label>
         </div>
     </div>
-    <div class="form-group" id="prefix_id">
+    <div class="form-group" id="prefix_id" style="display: none;">
         <label>前缀</label>
         <input type="text" class="form-control w-50" name="prefix" placeholder="eg:tb_ or t_ "
                value="#(codeConfig.prefix??)">
