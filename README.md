@@ -42,6 +42,6 @@
 后台演示地址：[choxsu.cn/login](https://choxsu.cn/login)
 
 账号：test@test.com    密码：123456
-登录成功后在浏览器输入 `https://choxsu.cn/admin` 直接访问
+登录成功后在浏览器输入 https://choxsu.cn/admin 直接访问
 
 
