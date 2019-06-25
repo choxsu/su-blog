@@ -14,6 +14,7 @@ import java.util.Date;
 
 /**
  * 邮件发送工具类
+ * @author choxsu
  */
 public class EmailKit {
 

@@ -10,6 +10,7 @@ import com.jfinal.kit.Ret;
 
 /**
  * 登录控制器
+ * @author choxsu
  */
 public class RegisterController extends Controller {
 

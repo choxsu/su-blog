@@ -8,7 +8,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 类实例创建者创建者
- * Created by michael on 17/3/21.
+ *
+ * @author michael
+ * @date 17/3/21
  */
 public class ClassKits {
 

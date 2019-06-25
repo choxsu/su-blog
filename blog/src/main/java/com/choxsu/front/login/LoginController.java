@@ -22,6 +22,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
+ * @author choxsu
  * 登录控制器
  */
 public class LoginController extends Controller {
@@ -36,7 +37,8 @@ public class LoginController extends Controller {
      * 显示登录界面
      */
     public void index() {
-        keepPara("returnUrl");  // 保持住 returnUrl 这个参数，以便在登录成功后跳转到该参数指向的页面
+        // 保持住 returnUrl 这个参数，以便在登录成功后跳转到该参数指向的页面
+        keepPara("returnUrl");
         render("index.html");
     }
 
@@ -92,14 +94,15 @@ public class LoginController extends Controller {
             content.append("<br/> 如果非本人登录，请及时联系超级管理员");
             executorService.execute(() -> {
                 try {
-                    String email = account.getUserName().equals("test@test.com") ? "2283546325@qq.com" : account.getUserName();
+                    String email = "test@test.com".equalsIgnoreCase(account.getUserName()) ? "2283546325@qq.com" : account.getUserName();
                     EmailKit.sendEmail(email, "登陆到" + getRequest().getServerName() + "成功提示", content.toString(), true);
                 } catch (Exception e) {
                     LogKit.error("登录成功发送邮件失败：" + e.getMessage(), e);
                 }
             });
             setLoginInfo(ret);
-            ret.set("returnUrl", get("returnUrl", "/"));    // 如果 returnUrl 存在则跳过去，否则跳去首页
+            // 如果 returnUrl 存在则跳过去，否则跳去首页
+            ret.set("returnUrl", get("returnUrl", "/"));
         }
         renderJson(ret);
     }

@@ -17,6 +17,7 @@ import java.io.IOException;
 
 /**
  * ImageKit 图片高保真缩放与裁剪，不依赖于任何第三方库
+ * @author choxsu
  */
 public class ImageKit {
 

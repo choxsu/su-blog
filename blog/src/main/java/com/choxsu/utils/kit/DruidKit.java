@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
  * 正确的目录下面
  * <p>
  * 具体到该配置中的 url 为 "/assets/druid"，那么相关静态资源需要解压到该目录之下
+ * @author choxsu
  */
 public class DruidKit {
 

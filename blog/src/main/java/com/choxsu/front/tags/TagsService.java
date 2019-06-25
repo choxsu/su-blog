@@ -14,7 +14,7 @@ import com.jfinal.plugin.activerecord.Record;
 public class TagsService {
 
     @Inject
-    ArticleService articleService;// = Enhancer.enhance(ArticleService.class);
+    ArticleService articleService;
     /**
      * 查询通过id
      * @param tagId

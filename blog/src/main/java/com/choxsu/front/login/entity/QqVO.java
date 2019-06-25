@@ -9,7 +9,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class QQVo {
+public class QqVO {
 
     private String appId = ChoxsuConfig.p.get("qq.appId");
     private String appKey = ChoxsuConfig.p.get("qq.appKey");

@@ -4,6 +4,9 @@ import com.choxsu.common.entity.Blog;
 import com.choxsu.common.interceptor.BaseSeoInterceptor;
 import com.jfinal.core.Controller;
 
+/**
+ * @author choxsu
+ */
 public class ArticleSEO extends BaseSeoInterceptor {
 
     @Override

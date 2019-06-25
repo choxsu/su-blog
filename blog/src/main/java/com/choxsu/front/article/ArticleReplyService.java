@@ -3,6 +3,9 @@ package com.choxsu.front.article;
 import com.choxsu.common.entity.BlogReply;
 import com.jfinal.plugin.activerecord.Page;
 
+/**
+ * @author choxsu
+ */
 public class ArticleReplyService {
 
     private BlogReply blogReplyDao = new BlogReply().dao();

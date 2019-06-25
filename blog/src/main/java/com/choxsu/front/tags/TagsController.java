@@ -10,7 +10,7 @@ import com.jfinal.plugin.activerecord.Page;
  * @author chox su
  * @date 2018/01/06 16:44
  */
-@Before(TagsSEO.class)
+@Before(TagsSeo.class)
 public class TagsController extends BaseController {
 
     @Inject

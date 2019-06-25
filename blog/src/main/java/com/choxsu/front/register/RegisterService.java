@@ -4,6 +4,9 @@ import com.choxsu.admin.account.AccountAdminService;
 import com.jfinal.aop.Inject;
 import com.jfinal.kit.Ret;
 
+/**
+ * @author choxsu
+ */
 public class RegisterService {
 
     @Inject

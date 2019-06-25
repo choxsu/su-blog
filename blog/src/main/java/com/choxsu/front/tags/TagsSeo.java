@@ -5,7 +5,10 @@ import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 
-public class TagsSEO extends BaseSeoInterceptor {
+/**
+ * @author choxsu
+ */
+public class TagsSeo extends BaseSeoInterceptor {
 
     @Override
     public void indexSeo(Controller c) {

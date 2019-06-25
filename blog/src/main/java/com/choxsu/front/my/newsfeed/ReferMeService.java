@@ -17,6 +17,7 @@ import java.util.List;
 
 /**
  * 提到我业务，分为 @我 以及评论/回复我
+ * @author choxsu
  */
 public class ReferMeService {
 

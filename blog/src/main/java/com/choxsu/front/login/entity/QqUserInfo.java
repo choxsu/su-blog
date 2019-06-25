@@ -6,7 +6,7 @@ import lombok.Data;
  * @author choxsu
  */
 @Data
-public class QQUserInfo {
+public class QqUserInfo {
 
     private String nickname;
 

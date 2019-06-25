@@ -5,6 +5,9 @@ import java.text.ParseException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+/**
+ * @author choxsu
+ */
 public class ZipFilesKit {
 
     public static void compress(File f, String baseDir, ZipOutputStream zos) {
@@ -70,7 +73,6 @@ public class ZipFilesKit {
     }
 
     public static void main(String[] args) throws ParseException {
-
         String sourceFilePath = "C:\\Users\\22835\\IdeaProjects\\choxsu\\blog\\src\\main\\webapp\\gen";
         String outFilePath = "C:\\Users\\22835\\Desktop\\genFile";
         File sourceDir = new File(sourceFilePath);
@@ -83,12 +85,13 @@ public class ZipFilesKit {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } finally {
-            if (zos != null)
+            if (zos != null) {
                 try {
                     zos.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
         }
     }
 

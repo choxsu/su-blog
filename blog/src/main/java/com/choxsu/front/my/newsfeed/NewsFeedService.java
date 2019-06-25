@@ -17,6 +17,7 @@ import java.util.List;
 
 /**
  * news feed 业务
+ * @author choxsu
  */
 public class NewsFeedService {
 

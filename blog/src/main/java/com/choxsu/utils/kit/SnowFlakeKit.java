@@ -1,5 +1,8 @@
 package com.choxsu.utils.kit;
 
+/**
+ * @author choxsu
+ */
 public class SnowFlakeKit {
 
     /**
@@ -10,9 +13,12 @@ public class SnowFlakeKit {
     /**
      * 每一部分占用的位数
      */
-    private final static long SEQUENCE_BIT = 12; //序列号占用的位数
-    private final static long MACHINE_BIT = 5;  //机器标识占用的位数
-    private final static long DATACENTER_BIT = 5;//数据中心占用的位数
+    //序列号占用的位数
+    private final static long SEQUENCE_BIT = 12;
+    //机器标识占用的位数
+    private final static long MACHINE_BIT = 5;
+    //数据中心占用的位数
+    private final static long DATACENTER_BIT = 5;
 
     /**
      * 每一部分的最大值：先进行左移运算，再同-1进行异或运算；异或：相同位置相同结果为0，不同结果为1
@@ -51,10 +57,18 @@ public class SnowFlakeKit {
      */
     private final static long TIMESTMP_LEFT = DATACENTER_LEFT + DATACENTER_BIT;
 
-    private static long datacenterId;  //数据中心
-    private static long machineId;    //机器标识
-    private static long sequence = 0L; //序列号
-    private static long lastStmp = -1L;//上一次时间戳
+    /**
+     * 数据中心
+     */
+    private static long datacenterId;
+    /**
+     * 机器标识
+     */
+    private static long machineId;
+    //序列号
+    private static long sequence = 0L;
+    //上一次时间戳
+    private static long lastStmp = -1L;
 
     /**
      * 此处无参构造私有，同时没有给出有参构造，在于避免以下两点问题：
@@ -90,13 +104,17 @@ public class SnowFlakeKit {
             //不同毫秒内，序列号置为0
             sequence = 0L;
         }
-        /** 当前时间戳存档记录，用于下次产生id时对比是否为相同时间戳 */
+        // 当前时间戳存档记录，用于下次产生id时对比是否为相同时间戳
         lastStmp = currStmp;
 
-        return (currStmp - START_STMP) << TIMESTMP_LEFT //时间戳部分
-                | datacenterId << DATACENTER_LEFT      //数据中心部分
-                | machineId << MACHINE_LEFT            //机器标识部分
-                | sequence;                            //序列号部分
+        //时间戳部分
+        //数据中心部分
+        //机器标识部分
+        //序列号部分
+        return (currStmp - START_STMP) << TIMESTMP_LEFT
+                | datacenterId << DATACENTER_LEFT
+                | machineId << MACHINE_LEFT
+                | sequence;
     }
 
     private static long getNextMill() {

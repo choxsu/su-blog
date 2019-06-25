@@ -8,10 +8,10 @@ import com.choxsu.common.entity.AccountOpen;
 import com.choxsu.common.entity.AuthCode;
 import com.choxsu.common.entity.Session;
 import com.choxsu.config.ChoxsuConfig;
-import com.choxsu.front.login.entity.QQUserInfo;
-import com.choxsu.front.login.entity.QQVo;
+import com.choxsu.front.login.entity.QqUserInfo;
+import com.choxsu.front.login.entity.QqVO;
 import com.choxsu.front.login.entity.Token;
-import com.choxsu.front.login.kit.QQKit;
+import com.choxsu.front.login.kit.QqKit;
 import com.choxsu.front.register.RegEntity;
 import com.choxsu.utils.kit.EmailKit;
 import com.jfinal.aop.Before;
@@ -27,13 +27,14 @@ import com.jfinal.plugin.redis.Redis;
 import java.util.Date;
 
 /**
+ * @author choxsu
  * 登录业务
  */
 @Before(Tx.class)
 public class LoginService {
 
     @Inject
-    QQVo qqVo;
+    QqVO qqVo;
 
     public static final LoginService me = new LoginService();
 
@@ -249,16 +250,16 @@ public class LoginService {
      * @return
      */
     Ret qqCallback(String code, String ip) {
-        String result = QQKit.getToken(code, qqVo);
-        Token token = QQKit.tokenHandler(result);
+        String result = QqKit.getToken(code, qqVo);
+        Token token = QqKit.tokenHandler(result);
         if (token == null) {
             return Ret.fail();
         }
-        String openId = QQKit.getOpenId(token.getAccessToken());
+        String openId = QqKit.getOpenId(token.getAccessToken());
         if (openId == null) {
             return Ret.fail();
         }
-        QQUserInfo userInfo = QQKit.getUserInfo(token.getAccessToken(), openId, qqVo.getAppId());
+        QqUserInfo userInfo = QqKit.getUserInfo(token.getAccessToken(), openId, qqVo.getAppId());
         if (userInfo == null) {
             return Ret.fail();
         }
@@ -304,7 +305,7 @@ public class LoginService {
      * @return
      */
     public String getAuthUrl() {
-        return QQKit.getAuthUrl(qqVo);
+        return QqKit.getAuthUrl(qqVo);
     }
 
     public Ret register(RegEntity regModel) {

@@ -12,6 +12,7 @@ import com.jfinal.plugin.ehcache.CacheKit;
  * accountId   int(11)    主键，对应到用户账号 id
  * referMe      int(11)    at 我的消息条数
  * message     int(11)    私信消息条数，暂时不用
+ * @author choxsu
  */
 public class RemindService {
 
