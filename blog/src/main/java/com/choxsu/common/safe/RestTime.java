@@ -1,6 +1,6 @@
 package com.choxsu.common.safe;
 
-import com.choxsu._front.login.LoginService;
+import com.choxsu.front.login.LoginService;
 import com.choxsu.common.entity.Account;
 import com.choxsu.config.ChoxsuConfig;
 import com.jfinal.aop.Interceptor;

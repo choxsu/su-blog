@@ -1,7 +1,7 @@
 package com.choxsu.common.interceptor;
 
 import com.choxsu.common.entity.Account;
-import com.choxsu._front.login.LoginService;
+import com.choxsu.front.login.LoginService;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.plugin.activerecord.Db;

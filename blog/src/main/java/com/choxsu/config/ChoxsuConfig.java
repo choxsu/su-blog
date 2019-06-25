@@ -2,18 +2,18 @@ package com.choxsu.config;
 
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallFilter;
-import com.choxsu._admin.auth.AdminAuthKit;
-import com.choxsu._admin.permission.PermissionDirective;
-import com.choxsu._admin.role.RoleDirective;
+import com.choxsu.admin.auth.AdminAuthKit;
+import com.choxsu.admin.permission.PermissionDirective;
+import com.choxsu.admin.role.RoleDirective;
 import com.choxsu.common.entity._MappingKit;
 import com.choxsu.common.handler.UrlSeoHandler;
 import com.choxsu.common.interceptor.LoginSessionInterceptor;
 import com.choxsu.common.pageview.VisitorInterceptor;
 import com.choxsu.common.redis.RedisClusterPlugin;
 import com.choxsu.utils.kit.DruidKit;
-import com.choxsu._admin.route.AdminRoutes;
-import com.choxsu._api.route.ApiRoutes;
-import com.choxsu._front.route.FrontRoutes;
+import com.choxsu.admin.route.AdminRoutes;
+import com.choxsu.api.route.ApiRoutes;
+import com.choxsu.front.route.FrontRoutes;
 import com.jfinal.config.*;
 import com.jfinal.json.MixedJsonFactory;
 import com.jfinal.kit.Prop;
@@ -53,8 +53,8 @@ public class ChoxsuConfig extends JFinalConfig {
         me.setDevMode(p.getBoolean("devMode", false));
         me.setJsonFactory(MixedJsonFactory.me());
         me.setInjectDependency(true);
-        me.setError404View("/_view/error/404.html");
-        me.setError500View("/_view/error/500.html");
+        me.setError404View("/view/error/404.html");
+        me.setError500View("/view/error/500.html");
     }
 
     // 先加载开发环境配置，再追加生产环境的少量配置覆盖掉开发环境配置
@@ -75,8 +75,8 @@ public class ChoxsuConfig extends JFinalConfig {
     @Override
     public void configEngine(Engine me) {
         me.setDevMode(p.getBoolean("engineDevMode", false));
-        me.addSharedFunction("/_view/common/layout.html");
-        me.addSharedFunction("/_view/common/_paginate.html");
+        me.addSharedFunction("/view/common/layout.html");
+        me.addSharedFunction("/view/common/_paginate.html");
 
         me.addDirective("role", RoleDirective.class);
         me.addDirective("permission", PermissionDirective.class);
@@ -85,8 +85,8 @@ public class ChoxsuConfig extends JFinalConfig {
         // 添加角色、权限 shared method
         me.addSharedMethod(AdminAuthKit.class);
 
-        me.addSharedFunction("/_view/_admin/common/__admin_layout.html");
-        me.addSharedFunction("/_view/_admin/common/_admin_paginate.html");
+        me.addSharedFunction("/view/admin/common/_admin_layout.html");
+        me.addSharedFunction("/view/admin/common/_admin_paginate.html");
     }
 
     @Override
